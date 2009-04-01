@@ -22,7 +22,7 @@ if (!defined('IP_ROOT_PATH')) define('IP_ROOT_PATH', './');
 if (!defined('PHP_EXT')) define('PHP_EXT', substr(strrchr(__FILE__, '.'), 1));
 include(IP_ROOT_PATH . 'common.' . PHP_EXT);
 include(IP_ROOT_PATH . ACTIVITY_MOD_PATH . 'includes/functions_amod_plus.' . PHP_EXT);
-
+@include_once(IP_ROOT_PATH . ACTIVITY_MOD_PATH . 'includes/functions_amod_includes_functions.' . PHP_EXT);
 
 if($board_config['use_rewards_mod'])
 {

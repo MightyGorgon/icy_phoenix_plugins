@@ -199,7 +199,7 @@
 <tr>
 	<td class="row2 row-center" colspan="2">
 		<span class="gentblsmall">{L_INSTRUCTIONS_INFO}</span><br />
-		<textarea rows="10" cols="100%" wrap="virtual" name="game_instructions" class="post">{GAME_INSTRUCTIONS}</textarea>
+		<textarea rows="10" cols="100%" name="game_instructions" class="post">{GAME_INSTRUCTIONS}</textarea>
 	</td>
 </tr>
 

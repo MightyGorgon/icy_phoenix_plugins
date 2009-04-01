@@ -48,7 +48,7 @@ function copyright()
 	&nbsp;<img src=\"$img_link\" border=\"0\" />&nbsp; Games ban system.<br />
 	&nbsp;<img src=\"$img_link\" border=\"0\" />&nbsp; &amp; much much more.
 	<br />\n"
-	. "<br /><center>[ <a href=\"http://phpbb-amod.com/activity.php\" target=\"new\">Official Demo Board</a> | <a href=\"http://www.phpbb.com/phpBB/viewtopic.php?t=203074&postdays=0&postorder=asc&start=0\" target=\"new\">phpBB Topic</a> | <a href=\"javascript:void(0)\" onClick=javascript:self.close()>Close</a> ]<br /><br /><b>Games Links</b><br />[ <a href=\"http://phpbb-amod.com/downloads.php\" target=\"new\">phpBB Amod Games</a> ]</center>"
+	. "<br /><center>[ <a href=\"http://phpbb-amod.com/activity.php\" target=\"new\">Official Demo Board</a> | <a href=\"http://www.phpbb.com/phpBB/viewtopic.php?t=203074&postdays=0&postorder=asc&start=0\" target=\"new\">phpBB Topic</a> | <a href=\"javascript:void(0)\" onclick=javascript:self.close()>Close</a> ]<br /><br /><b>Games Links</b><br />[ <a href=\"http://phpbb-amod.com/downloads.php\" target=\"new\">phpBB Amod Games</a> ]</center>"
 	. "<br /><center><b>Awards</b><br /><img src=\"$img2\" border=\"0\">"
 	. "</font>\n"
 	. "</body>\n"
