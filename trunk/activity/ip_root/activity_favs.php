@@ -365,7 +365,7 @@ init_userprefs($userdata);
 				'DESC' => $fav_game_desc,
 				'INFO' => $lang['info'],
 				'LINK' => GameArrayLink($fav_game_id, $fav_game_parent, $fav_game_popup, $fav_win_width, $fav_win_height, 1, $games_data[$j]['game_links']),
-				'STATS' => append_sid('javascript:Trophy_Popup(\'activity_popup.' . PHP_EXT . '?mode=info&amp;g='. $fav_game_id .'\', \'New_Window\', \'400\', \'380\', \'yes\')'),
+				'STATS' => append_sid('javascript:popup_open(\'activity_popup.' . PHP_EXT . '?mode=info&amp;g='. $fav_game_id .'\', \'New_Window\', \'400\', \'380\', \'yes\')'),
 				'DASH' => $dash,
 				'LIST' => $highscore_link
 				)
@@ -384,7 +384,7 @@ init_userprefs($userdata);
 
 /* Give credit where credit is due. */
 ?>
-	<script language="JavaScript">
+	<script type="text/javascript">
 	function copyright()
 		{
 		var popurl = ACTIVITY_MOD_PATH . 'includes/functions_amod_plusC.php'

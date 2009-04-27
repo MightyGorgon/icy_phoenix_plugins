@@ -109,7 +109,7 @@ $game_type = $game_info['game_type'];
 
 if ($userdata['user_level'] == ADMIN)
 {
-	$proper_name = '<a href="javascript:Trophy_Popup(\'' . ADM . 'admin_activity.' . PHP_EXT . '?mode=edit_games&amp;action=edit&amp;game=' . $game_info['game_id'] . '&amp;sid=' . $userdata['session_id'] . '\', \'New_Window\', \'550\', \'300\', \'yes\')" class="nav">' . $game_info['proper_name'] . '</a>';
+	$proper_name = '<a href="javascript:popup_open(\'' . ADM . 'admin_activity.' . PHP_EXT . '?mode=edit_games&amp;action=edit&amp;game=' . $game_info['game_id'] . '&amp;sid=' . $userdata['session_id'] . '\', \'New_Window\', \'550\', \'300\', \'yes\')" class="nav">' . $game_info['proper_name'] . '</a>';
 }
 else
 {

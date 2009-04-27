@@ -218,14 +218,14 @@ if (!defined('IN_ICYPHOENIX'))
 				$r = $db->sql_query($q);
 
 				echo
-				'<script language="JavaScript">
+				'<script type="text/javascript">
 				self.location.href=\'activity.' . PHP_EXT . '?mode=game&amp;id=' . $game_id . '&parent=true\';
 				</script>';
 					}
 				else
 					{
 				echo
-				'<script language="JavaScript">
+				'<script type="text/javascript">
 				self.location.href=\'activity.' . PHP_EXT . '\';
 				</script>';
 					}
@@ -276,14 +276,14 @@ if (!defined('IN_ICYPHOENIX'))
 				$r = $db->sql_query($q);
 
 				echo
-				'<script language="JavaScript">
+				'<script type="text/javascript">
 				self.location.href=\'activity.' . PHP_EXT . '?mode=game&amp;id=' . $game_id .'&parent=true\';
 				</script>';
 					}
 				else
 					{
 				echo
-				'<script language="JavaScript">
+				'<script type="text/javascript">
 				self.location.href=\'activity.' . PHP_EXT . '\';
 				</script>';
 					}
@@ -473,7 +473,7 @@ $template->pparse('body');
 
 /* Give credit where credit is due. */
 echo ('
-<script language="JavaScript">
+<script type="text/javascript">
 function copyright()
 {
 	var popurl = \'' . ACTIVITY_MOD_PATH . 'includes/functions_amod_plusC.' . PHP_EXT . '\'

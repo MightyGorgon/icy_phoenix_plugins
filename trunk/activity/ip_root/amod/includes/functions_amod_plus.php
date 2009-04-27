@@ -1077,17 +1077,17 @@ function send_challenge_pm($dest_user, $subject, $message)
 		if ( ($parent) && ($switch == '1') )
 			$link .= '<b></b>&nbsp;<a href="'. append_sid('activity.' . PHP_EXT . '?mode=game&amp;id='. $id .'&parent=true') .'" class="nav">'. $lang['same_window'] .'</a><br />';
 		if ( ($popup) && ($switch == '1') )
-			$link .= '<b></b>&nbsp;<a class="nav" href="javascript:Gk_PopTart(\'activity.' . PHP_EXT . '?mode=game&amp;id='. $id .'&amp;sid=' . $userdata['session_id'] .'\', \'New_Window\', \''. $win_width .'\', \''. $win_height .'\', \'no\')" onclick="blur()">'. $lang['new_window'] .'</a>';
+			$link .= '<b></b>&nbsp;<a class="nav" href="javascript:popup_open(\'activity.' . PHP_EXT . '?mode=game&amp;id='. $id .'&amp;sid=' . $userdata['session_id'] .'\', \'New_Window\', \''. $win_width .'\', \''. $win_height .'\', \'no\')" onclick="blur()">'. $lang['new_window'] .'</a>';
 		if ( ($parent) && ($switch == '2') )
 			$link = '<a href="'. append_sid('activity.' . PHP_EXT . '?mode=game&amp;id='. $id .'&amp;parent=true') .'" class="nav">';
 		if ( ($popup) && ($switch == '2') )
-			$link = '<a class="nav" href="javascript:Gk_PopTart(\'activity.' . PHP_EXT . '?mode=game&amp;id='. $id .'&amp;sid=' . $userdata['session_id'] .'\', \'New_Window\', \''. $win_width .'\', \''. $win_height .'\', \'no\')" onclick="blur()">';
+			$link = '<a class="nav" href="javascript:popup_open(\'activity.' . PHP_EXT . '?mode=game&amp;id='. $id .'&amp;sid=' . $userdata['session_id'] .'\', \'New_Window\', \''. $win_width .'\', \''. $win_height .'\', \'no\')" onclick="blur()">';
 		if ( ($popup) && ($parent) && ($switch == '2') )
 			$link = '<a href="'. append_sid('activity.' . PHP_EXT . '?mode=game&amp;id='. $id .'&amp;parent=true') .'" class="nav">';
 		if ( ($parent) && ($switch[0] == 3) )
 			$link = '<a href="'. append_sid('activity.' . PHP_EXT . '?mode=game&amp;id='. $id .'&amp;parent=true') .'" class="nav">'. $switch[1] .'</a>';
 		if ( ($popup) && ($switch[0] == 3) )
-			$link = '<a class="nav" href="javascript:Gk_PopTart(\'activity.' . PHP_EXT . '?mode=game&amp;id='. $id .'&amp;sid=' . $userdata['session_id'] .'\', \'New_Window\', \''. $win_width .'\', \''. $win_height .'\', \'no\')" onclick="blur()">'. $switch[1] .'</a>';
+			$link = '<a class="nav" href="javascript:popup_open(\'activity.' . PHP_EXT . '?mode=game&amp;id='. $id .'&amp;sid=' . $userdata['session_id'] .'\', \'New_Window\', \''. $win_width .'\', \''. $win_height .'\', \'no\')" onclick="blur()">'. $switch[1] .'</a>';
 		if ( ($popup) && ($parent) && ($switch[0] == 3) )
 			$link = '<a href="'. append_sid('activity.' . PHP_EXT . '?mode=game&amp;id='. $id .'&amp;parent=true') .'" class="nav">'. $switch[1] .'</a>';
 
@@ -1118,7 +1118,7 @@ function send_challenge_pm($dest_user, $subject, $message)
 		}
 		else
 		{
-			$link = str_replace($one, '<a href="javascript:Gk_PopTart(\'' . $page . PHP_EXT . '?mode=game&amp;id=' . $id . '&amp;sid=' . $userdata['session_id'] .'\', \'New_Window\', \''. $width .'\', \''. $height .'\', \'no\')" class="nav">'. $two .'</a>', $three);
+			$link = str_replace($one, '<a href="javascript:popup_open(\'' . $page . PHP_EXT . '?mode=game&amp;id=' . $id . '&amp;sid=' . $userdata['session_id'] .'\', \'New_Window\', \''. $width .'\', \''. $height .'\', \'no\')" class="nav">'. $two .'</a>', $three);
 		}
 
 		$any_links = explode(';', $links);
@@ -1263,7 +1263,7 @@ function send_challenge_pm($dest_user, $subject, $message)
 
 		#==== Output Trophies
 		if ( ($board_config['ina_show_view_topic']) && ($user_trophies > 0) && ($user_id != ANONYMOUS) )
-			$trophies = "<a href=\"javascript:Trophy_Popup('activity_trophy_popup." . PHP_EXT . "?user=" . $user_id . '&amp;sid=' . $userdata['session_id'] ."','New_Window','400','380','yes')\" onclick=\"blur()\">" . $lang['Trohpy'] . "</a>:&nbsp;&nbsp;" . $user_trophies;
+			$trophies = "<a href=\"javascript:popup_open('activity_trophy_popup." . PHP_EXT . "?user=" . $user_id . '&amp;sid=' . $userdata['session_id'] ."','New_Window','400','380','yes')\" onclick=\"blur()\">" . $lang['Trohpy'] . "</a>:&nbsp;&nbsp;" . $user_trophies;
 
 		#==== Output Character Link
 		if ( ($board_config['ina_char_show_viewtopic']) && ($user_char) && ($user_id != ANONYMOUS) )

@@ -142,7 +142,7 @@ for ($x = 0; $x < $games_c; $x++)
 			}
 			else
 			{
-				$rating_submit = '<a href="' . append_sid('javascript:Trophy_Popup(\'activity_popup.' . PHP_EXT . '?mode=rate&game=' . $games_data[$x]['game_id'] . '\', \'New_Window\', \'450\', \'300\', \'yes\')') . '">' . $lang['game_rating_submit'] . '</a>';
+				$rating_submit = '<a href="' . append_sid('javascript:popup_open(\'activity_popup.' . PHP_EXT . '?mode=rate&game=' . $games_data[$x]['game_id'] . '\', \'New_Window\', \'450\', \'300\', \'yes\')') . '">' . $lang['game_rating_submit'] . '</a>';
 			}
 		}
 	}
@@ -167,7 +167,7 @@ for ($x = 0; $x < $games_c; $x++)
 		$rating_votes_cast = str_replace('%V%', $lang['no_votes_cast'], $lang['game_rating_votes']);
 		$game_rating_image = '<img src="./' . ACTIVITY_MOD_PATH . 'activity_game_ratings/' . $game_rating . '.gif" alt="'. $game_rating . '" />';
 		$rating_title = $game_proper . "'s " . $lang['game_rating_title'];
-		$rating_submit = '<a href="'. append_sid('javascript:Trophy_Popup(\'activity_popup.' . PHP_EXT . '?mode=rate&amp;game=' . $games_data[$x]['game_id'] . '\', \'New_Window\', \'450\', \'300\', \'yes\')') . '">' . $lang['game_rating_submit'] . '</a>';
+		$rating_submit = '<a href="'. append_sid('javascript:popup_open(\'activity_popup.' . PHP_EXT . '?mode=rate&amp;game=' . $games_data[$x]['game_id'] . '\', \'New_Window\', \'450\', \'300\', \'yes\')') . '">' . $lang['game_rating_submit'] . '</a>';
 	}
 
 	//if ($board_config['allow_smilies']) $game_desc = smilies_pass($game_desc);
@@ -331,13 +331,13 @@ for ($x = 0; $x < $games_c; $x++)
 
 		$challenge = $board_config['ina_challenge'];
 		if ( ($challenge == '1') && ($t_player_id != ANONYMOUS) && ($userdata['user_id'] != ANONYMOUS) )
-			$challenge_link = '<br />'. $lang['seperator'] .'&nbsp;<a href="' . append_sid('javascript:Trophy_Popup(\'activity_popup.' . PHP_EXT . '?mode=challenge&g= '. $game_id . '&u=' . $t_player_id . '\', \'New_Window\', \'400\', \'200\', \'yes\')') . '" class="nav">' . $lang['challenge_link_key'] . '</a>';
+			$challenge_link = '<br />'. $lang['seperator'] .'&nbsp;<a href="' . append_sid('javascript:popup_open(\'activity_popup.' . PHP_EXT . '?mode=challenge&g= '. $game_id . '&u=' . $t_player_id . '\', \'New_Window\', \'400\', \'200\', \'yes\')') . '" class="nav">' . $lang['challenge_link_key'] . '</a>';
 
 		if ($challenge != '1' || $t_player_id == ANONYMOUS || $userdata['user_id'] == ANONYMOUS)
 			$challenge_link = '<br />'. $lang['seperator'] .'&nbsp;'. $lang['challenge_link_key'];
 
 		if ($userdata['user_level'] == ADMIN)
-			$admin_edit = '<br />' . $lang['seperator'] . '&nbsp;<a href="javascript:Trophy_Popup(\'' . ADM . '/admin_activity.' . PHP_EXT . '?mode=edit_games&amp;action=edit&amp;game=' . $game_id . '&amp;sid=' . $userdata['session_id'] . '\', \'New_Window\', \'550\', \'300\', \'yes\')" class="nav">'. $lang['admin_edit_link'] . '</a>';
+			$admin_edit = '<br />' . $lang['seperator'] . '&nbsp;<a href="javascript:popup_open(\'' . ADM . '/admin_activity.' . PHP_EXT . '?mode=edit_games&amp;action=edit&amp;game=' . $game_id . '&amp;sid=' . $userdata['session_id'] . '\', \'New_Window\', \'550\', \'300\', \'yes\')" class="nav">'. $lang['admin_edit_link'] . '</a>';
 
 		if ($userdata['user_level'] != ADMIN)
 			$admin_edit = '';
@@ -354,7 +354,7 @@ for ($x = 0; $x < $games_c; $x++)
 		if ( ($board_config['ina_disable_comments_page']) && ($userdata['user_level'] != ADMIN) )
 			$comments_link = '';
 		else
-			$comments_link = append_sid('javascript:Trophy_Popup(\'activity_popup.' . PHP_EXT . '?mode=comments&amp;game=' . $game_name . '\', \'New_Window\', \'550\', \'300\', \'yes\')');
+			$comments_link = append_sid('javascript:popup_open(\'activity_popup.' . PHP_EXT . '?mode=comments&amp;game=' . $game_name . '\', \'New_Window\', \'550\', \'300\', \'yes\')');
 
 		if ($game_type == 2)
 			$trophy_link = $top_player = $top_score = $top_date = $best_player = $best_score = $trophy_link = $download_link = $challenge_link = $highscore_link = '';
@@ -396,7 +396,7 @@ for ($x = 0; $x < $games_c; $x++)
 			'INFO' => $lang['info'],
 			'WIDTH' => $win_width,
 			'HEIGHT' => $win_height,
-			'STATS' => append_sid('javascript:Trophy_Popup(\'activity_popup.' . PHP_EXT . '?mode=info&amp;g=' . $game_id . '\', \'New_Window\', \'400\', \'380\', \'yes\')'),
+			'STATS' => append_sid('javascript:popup_open(\'activity_popup.' . PHP_EXT . '?mode=info&amp;g=' . $game_id . '\', \'New_Window\', \'400\', \'380\', \'yes\')'),
 			'COMMENTS' => $comments_link,
 			'L_COMMENTS' => $total_comments_shown . '&nbsp; '. $lang['comments_link_key'],
 			'CHALLENGE' => $challenge_link,

@@ -176,7 +176,7 @@ if ($search)
 $template->pparse('body');
 /* Give credit where credit is due. */
 echo ('
-<script language="JavaScript">
+<script type="text/javascript">
 function copyright()
 {
 	var popurl = \'' . ACTIVITY_MOD_PATH . 'includes/functions_amod_plusC.' . PHP_EXT . '\'

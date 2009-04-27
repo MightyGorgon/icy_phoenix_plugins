@@ -263,7 +263,7 @@ if ( ($board_config['use_rewards_mod']) && ($board_config['use_cash_system'] ||
 if (!$board_config['use_rewards_mod'])
 	$onhand = '';
 
-$shoutbox_link = ($board_config['ina_use_shoutbox']) ? '<br /><b>' . $lang['seperator_2'] . '</b>&nbsp;<a href="' . append_sid('javascript:Trophy_Popup(\'activity_popup.' . PHP_EXT . '?mode=chat&amp;action=view\', \'New_Window\', \'550\', \'300\', \'yes\')') . '">' . $lang['shoutbox_link'] . '</a>' : '';
+$shoutbox_link = ($board_config['ina_use_shoutbox']) ? '<br /><b>' . $lang['seperator_2'] . '</b>&nbsp;<a href="' . append_sid('javascript:popup_open(\'activity_popup.' . PHP_EXT . '?mode=chat&amp;action=view\', \'New_Window\', \'550\', \'300\', \'yes\')') . '">' . $lang['shoutbox_link'] . '</a>' : '';
 
 $template->assign_block_vars('info_box', array(
 	'MOST_POPULAR_1' => $lang['info_box_popular_1'] . $f_game_name .'.',

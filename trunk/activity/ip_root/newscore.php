@@ -278,7 +278,7 @@ if ( ($score > '0') && ($name) && ($game_info['game_type'] != 2) )
 
 #==== Start Comments ================================ |
 	$template->assign_block_vars('comment', array(
-		'COMMENT_LINK' => '<a href="' . append_sid('javascript:Trophy_Popup(\'activity_popup.' . PHP_EXT . '?mode=comments&amp;action=leave_comment&user=' . $userdata['user_id'] . '&amp;game=' . $game_name . '\', \'New_Window\', \'400\', \'300\', \'yes\')') . '" class="mainmenu">' . $lang['trophy_comment_notice'] . '</a>'
+		'COMMENT_LINK' => '<a href="' . append_sid('javascript:popup_open(\'activity_popup.' . PHP_EXT . '?mode=comments&amp;action=leave_comment&user=' . $userdata['user_id'] . '&amp;game=' . $game_name . '\', \'New_Window\', \'400\', \'300\', \'yes\')') . '" class="mainmenu">' . $lang['trophy_comment_notice'] . '</a>'
 		)
 	);
 #==== End Comments ================================== |
@@ -433,14 +433,14 @@ if ( ($score > '0') && ($name) && ($game_info['game_type'] != 2) )
 		$lang1 = $lang['go_back_to_games'];
 	}
 
-	$rate = '<a href="' . append_sid('javascript:Trophy_Popup(\'activity_popup.' . PHP_EXT . '?mode=rate&amp;game=' . $game_info['game_id'] .'\', \'New_Window\', \'450\', \'300\', \'yes\')') . '" class="mainmenu">' . $lang['saved_body_rate'] . '</a>';
+	$rate = '<a href="' . append_sid('javascript:popup_open(\'activity_popup.' . PHP_EXT . '?mode=rate&amp;game=' . $game_info['game_id'] .'\', \'New_Window\', \'450\', \'300\', \'yes\')') . '" class="mainmenu">' . $lang['saved_body_rate'] . '</a>';
 	if ( ($board_config['ina_disable_comments_page']) && ($userdata['user_level'] != ADMIN) )
 	{
 		$comms = '';
 	}
 	else
 	{
-		$comms = '<a href="'.  append_sid('javascript:Trophy_Popup(\'activity_popup.' . PHP_EXT . '?mode=comments&amp;game=' . $game_info['game_name'] .'\', \'New_Window\', \'550\', \'300\', \'yes\')') . '">' . $lang['saved_body_comms'] . '</a>';
+		$comms = '<a href="'.  append_sid('javascript:popup_open(\'activity_popup.' . PHP_EXT . '?mode=comments&amp;game=' . $game_info['game_name'] .'\', \'New_Window\', \'550\', \'300\', \'yes\')') . '">' . $lang['saved_body_comms'] . '</a>';
 	}
 
 	$template->assign_vars(array(
@@ -462,7 +462,7 @@ else
 {
 #==== Start Comments ================================ |
 	$template->assign_block_vars('comment', array(
-		'COMMENT_LINK' => '<a href="' . append_sid('javascript:Trophy_Popup(\'activity_popup.' . PHP_EXT . '?mode=comments&amp;action=leave_comment&amp;user=' . $userdata['user_id'] . '&amp;game=' . $game_name . '\', \'New_Window\', \'400\', \'300\', \'yes\')') . '" class="mainmenu">' . $lang['trophy_comment_notice'] . '</a>'
+		'COMMENT_LINK' => '<a href="' . append_sid('javascript:popup_open(\'activity_popup.' . PHP_EXT . '?mode=comments&amp;action=leave_comment&amp;user=' . $userdata['user_id'] . '&amp;game=' . $game_name . '\', \'New_Window\', \'400\', \'300\', \'yes\')') . '" class="mainmenu">' . $lang['trophy_comment_notice'] . '</a>'
 		)
 	);
 #==== End Comments ================================== |
@@ -545,14 +545,14 @@ else
 		$lang1 = $lang['go_back_to_games'];
 	}
 
-	$rate = '<a href="' . append_sid('javascript:Trophy_Popup(\'activity_popup.' . PHP_EXT . '?mode=rate&amp;game=' . $game_info['game_id'] . '\', \'New_Window\', \'450\', \'300\', \'yes\')') . '" class="mainmenu">' . $lang['saved_body_rate'] . '</a>';
+	$rate = '<a href="' . append_sid('javascript:popup_open(\'activity_popup.' . PHP_EXT . '?mode=rate&amp;game=' . $game_info['game_id'] . '\', \'New_Window\', \'450\', \'300\', \'yes\')') . '" class="mainmenu">' . $lang['saved_body_rate'] . '</a>';
 	if ( ($board_config['ina_disable_comments_page']) && ($userdata['user_level'] != ADMIN) )
 	{
 		$comms = '';
 	}
 	else
 	{
-		$comms = '<a href="'.  append_sid('javascript:Trophy_Popup(\'activity_popup.' . PHP_EXT . '?mode=comments&amp;game=' . $game_info['game_name'] . '\', \'New_Window\', \'550\', \'300\', \'yes\')') . '">' . $lang['saved_body_comms'] .'</a>';
+		$comms = '<a href="'.  append_sid('javascript:popup_open(\'activity_popup.' . PHP_EXT . '?mode=comments&amp;game=' . $game_info['game_name'] . '\', \'New_Window\', \'550\', \'300\', \'yes\')') . '">' . $lang['saved_body_comms'] .'</a>';
 	}
 
 	$template->assign_vars(array(
