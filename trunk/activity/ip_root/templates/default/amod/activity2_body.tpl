@@ -10,8 +10,8 @@
 </form>
 <table width="100%" cellspacing="0" cellpadding="0" border="0">
 <tr>
-	<td id="var_width" width="220" valign="top" align="left" style="padding-right:7px;">
-		<div id="quick_links_games2" style="padding-top:5px;display:none;margin-left:0px;text-align:left;position:relative;float:left;"><a href="javascript:ShowHide('quick_links_games','quick_links_games2','quick_links_games');setWidth(220);" title="{L_SHOW} {L_QUICK_LINKS_GAMES}"><img src="{IMG_NAV_MENU_APPLICATION}" alt="{L_SHOW} {L_QUICK_LINKS_GAMES}" /></a></div>
+	<td id="var_width" width="160" valign="top" align="left" style="padding-right:7px;">
+		<div id="quick_links_games2" style="padding-top: 5px; display: none; margin-left: 0px; text-align: left;position: relative;float: left;"><a href="javascript:ShowHide('quick_links_games','quick_links_games2','quick_links_games');setWidth('var_width',160);" title="{L_SHOW} {L_QUICK_LINKS_GAMES}"><img src="{IMG_NAV_MENU_APPLICATION}" alt="{L_SHOW} {L_QUICK_LINKS_GAMES}" /></a></div>
 		<div id="quick_links_games">
 <script type="text/javascript">
 <!--
@@ -19,25 +19,25 @@ tmp = 'quick_links_games';
 if(GetCookie(tmp) == '2')
 {
 	ShowHide('quick_links_games','quick_links_games2','quick_links_games');
-	setWidth(16);
+	setWidth('var_width', 16);
 }
 //-->
 </script>
 
 {IMG_THL}{IMG_THC}
-<!-- &nbsp;[<a href="javascript:ShowHide('quick_links_games','quick_links_games2','quick_links_games');setWidth(16);" title="{L_HIDE} {L_QUICK_LINKS_GAMES}">{L_HIDE}</a>] -->
-<img style="padding-top:3px;float:right;cursor:pointer;" src="{IMG_MINIMISE}" onclick="javascript:ShowHide('quick_links_games','quick_links_games2','quick_links_games');setWidth(16);" alt="{L_SHOW}" />
+<!-- &nbsp;[<a href="javascript:ShowHide('quick_links_games','quick_links_games2','quick_links_games');setWidth('var_width',16);" title="{L_HIDE} {L_QUICK_LINKS_GAMES}">{L_HIDE}</a>] -->
+<img style="padding-top: 3px; float: right; cursor: pointer;" src="{IMG_MINIMISE}" onclick="javascript:ShowHide('quick_links_games','quick_links_games2','quick_links_games');setWidth('var_width',16);" alt="{L_SHOW}" />
 <span class="forumlink">{L_QUICK_LINKS_GAMES}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
 
 <tr>
-	<th style="cursor:pointer;" align="left" onclick="ShowHide('main_links_games','main_links_games2','main_links_games');">
+	<th style="cursor: pointer;" align="left" onclick="ShowHide('main_links_games','main_links_games2','main_links_games');">
 		<img src="{IMG_NAV_MENU_GAMES}" alt="{L_STATISTICS}" title="{L_STATISTICS}" />&nbsp;
-		<a href="javascript:void(0);" title="{L_STATISTICS}" style="vertical-align:top;text-decoration:none;"><b>{L_STATISTICS}</b></a>
+		<a href="javascript:void(0);" title="{L_STATISTICS}" style="vertical-align: top; text-decoration: none;"><b>{L_STATISTICS}</b></a>
 	</th>
 </tr>
 <tr>
 	<td class="row5">
-		<div id="main_links_games2" style="display:none;position:relative;padding-top:0px;padding-bottom:0px;">
+		<div id="main_links_games2" style="display: none; position: relative; padding-top: 0px; padding-bottom: 0px;">
 			<table class="forumline-no2" width="100%" cellspacing="0" cellpadding="2" border="0">
 				<!-- BEGIN links_check -->
 				{links_check.LINKS}
@@ -48,7 +48,7 @@ if(GetCookie(tmp) == '2')
 				</tr>
 			</table>
 		</div>
-		<div id="main_links_games" style="display:'';position:relative;">
+		<div id="main_links_games" style="display: inline; position: relative;">
 			<script type="text/javascript">
 			<!--
 			tmp = 'main_links';
@@ -62,14 +62,14 @@ if(GetCookie(tmp) == '2')
 	</td>
 </tr>
 <tr>
-	<th style="cursor:pointer;" align="left" onclick="ShowHide('games_links','games_links2','games_links');">
+	<th style="cursor: pointer;" align="left" onclick="ShowHide('games_links','games_links2','games_links');">
 		<img src="{IMG_NAV_MENU_GAMES_ALT}" alt="{L_GAMES}" title="{L_GAMES}" />&nbsp;
-		<a href="javascript:void(0);" title="{L_GAMES}" style="vertical-align:top;text-decoration:none;"><b>{L_GAMES}</b></a>
+		<a href="javascript:void(0);" title="{L_GAMES}" style="vertical-align: top; text-decoration: none;"><b>{L_GAMES}</b></a>
 	</th>
 </tr>
 <tr>
 	<td class="row5">
-		<div id="games_links2" style="display:none;position:relative;padding-top:0px;padding-bottom:0px;">
+		<div id="games_links2" style="display: none; position: relative; padding-top: 0px; padding-bottom: 0px;">
 			<table class="forumline-no2" width="100%" cellspacing="0" cellpadding="2" border="0">
 				<tr>
 					<td width="8" align="left" valign="middle">
@@ -105,7 +105,7 @@ if(GetCookie(tmp) == '2')
 				</tr>
 			</table>
 		</div>
-		<div id="games_links" style="display:'';position:relative;">
+		<div id="games_links" style="display: inline; position: relative;">
 			<script type="text/javascript">
 			<!--
 			tmp = 'games_links';
@@ -131,12 +131,12 @@ if(GetCookie(tmp) == '2')
 
 <!-- BEGIN games_on -->
 <div id="games_h" style="display: none;">
-	{IMG_THL}{IMG_THC}<img style="padding-top:3px;float:right;cursor:pointer;" src="{IMG_MAXIMISE}" onclick="javascript:ShowHide('games','games_h','games');" alt="{L_SHOW}" /><span class="forumlink">{L_GAMES}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+	{IMG_THL}{IMG_THC}<img style="padding-top: 3px; float: right; cursor: pointer;" src="{IMG_MAXIMISE}" onclick="javascript:ShowHide('games','games_h','games');" alt="{L_SHOW}" /><span class="forumlink">{L_GAMES}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
 	<tr><td class="row1g row-center">&nbsp;</td></tr>
 	</table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
 </div>
 <div id="games">
-	{IMG_THL}{IMG_THC}<img style="padding-top:3px;float:right;cursor:pointer;" src="{IMG_MINIMISE}" onclick="javascript:ShowHide('games','games_h','games');" alt="{L_HIDE}" /><span class="forumlink">{L_GAMES}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+	{IMG_THL}{IMG_THC}<img style="padding-top: 3px; float: right; cursor: pointer;" src="{IMG_MINIMISE}" onclick="javascript:ShowHide('games','games_h','games');" alt="{L_HIDE}" /><span class="forumlink">{L_GAMES}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
 <tr>
 	<th class="th" width="20%">{L_GAMES}</th>
 	<th class="th" width="15%">{L_T_HOLDER}</th>
