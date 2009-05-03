@@ -1,11 +1,11 @@
 <!-- BEGIN info_box -->
 <div id="info_games_h" style="display: none;">
-	{IMG_THL}{IMG_THC}<img style="padding-top:3px;float:right;cursor:pointer;" src="{IMG_MAXIMISE}" onclick="javascript:ShowHide('info_games','info_games_h','info_games');" alt="{L_SHOW}" /><span class="forumlink">{info_box.L_INFO_TITLE}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+	{IMG_THL}{IMG_THC}<img style="padding-top: 3px; float: right; cursor: pointer;" src="{IMG_MAXIMISE}" onclick="javascript:ShowHide('info_games','info_games_h','info_games');" alt="{L_SHOW}" /><span class="forumlink">{info_box.L_INFO_TITLE}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
 	<tr><td class="row1g row-center">&nbsp;</td></tr>
 	</table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
 </div>
 <div id="info_games">
-	{IMG_THL}{IMG_THC}<img style="padding-top:3px;float:right;cursor:pointer;" src="{IMG_MINIMISE}" onclick="javascript:ShowHide('info_games','info_games_h','info_games');" alt="{L_HIDE}" /><span class="forumlink">{info_box.L_INFO_TITLE}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+	{IMG_THL}{IMG_THC}<img style="padding-top: 3px; float: right; cursor: pointer;" src="{IMG_MINIMISE}" onclick="javascript:ShowHide('info_games','info_games_h','info_games');" alt="{L_HIDE}" /><span class="forumlink">{info_box.L_INFO_TITLE}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
 <tr>
 	<th width="33%">{info_box.L_INFO_TITLE1}</th>
 	<th width="33%">{info_box.L_INFO_TITLE2}</th>

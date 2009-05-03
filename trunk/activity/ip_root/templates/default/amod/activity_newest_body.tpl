@@ -1,11 +1,11 @@
 <!-- BEGIN newest_only -->
 <div id="newest_games_h" style="display: none;">
-	{IMG_THL}{IMG_THC}<img style="padding-top:3px;float:right;cursor:pointer;" src="{IMG_MAXIMISE}" onclick="javascript:ShowHide('newest_games','newest_games_h','newest_games');" alt="{L_SHOW}" /><span class="forumlink">{newest_only.NEWEST_TITLE}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+	{IMG_THL}{IMG_THC}<img style="padding-top: 3px; float: right; cursor: pointer;" src="{IMG_MAXIMISE}" onclick="javascript:ShowHide('newest_games','newest_games_h','newest_games');" alt="{L_SHOW}" /><span class="forumlink">{newest_only.NEWEST_TITLE}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
 	<tr><td class="row1g row-center">&nbsp;</td></tr>
 	</table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
 </div>
 <div id="newest_games">
-	{IMG_THL}{IMG_THC}<img style="padding-top:3px;float:right;cursor:pointer;" src="{IMG_MINIMISE}" onclick="javascript:ShowHide('newest_games','newest_games_h','newest_games');" alt="{L_HIDE}" /><span class="forumlink">{newest_only.NEWEST_TITLE}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+	{IMG_THL}{IMG_THC}<img style="padding-top: 3px; float: right; cursor: pointer;" src="{IMG_MINIMISE}" onclick="javascript:ShowHide('newest_games','newest_games_h','newest_games');" alt="{L_HIDE}" /><span class="forumlink">{newest_only.NEWEST_TITLE}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
 <tr>
 	<th width="20%" >{newest_only.L_GAMES}</th>
 	<th width="20%">{newest_only.L_T_HOLDER}</th>
