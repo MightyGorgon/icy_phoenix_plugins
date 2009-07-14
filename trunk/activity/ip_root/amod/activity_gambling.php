@@ -120,7 +120,7 @@ if (!defined('IN_ICYPHOENIX'))
 				'WINNER_LINK' => $winner_name . '<br />' . FormatScores($winner_sc),
 				'LOSER_LINK' => $loser_name . '<br />' . FormatScores($loser_sc),
 				'AMOUNT' => $amount_bet,
-				'DATE' => create_date2($board_config['default_dateformat'], $date, $board_config['board_timezone'])
+				'DATE' => create_date_ip($board_config['default_dateformat'], $date, $board_config['board_timezone'])
 				)
 			);
 			$i++;

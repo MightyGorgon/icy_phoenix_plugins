@@ -1,13 +1,19 @@
 <?php
-/***************************************************************************
- *                            activity_hof.php
- *                           ------------------
- *		Version			: 1.1.0
- *		Email			: austin@phpbb-amod.com
- *		Site			: http://phpbb-amod.com
- *		Copyright		: aUsTiN-Inc 2003/5
- *
- ***************************************************************************/
+/**
+*
+* @package Icy Phoenix
+* @version $Id$
+* @copyright (c) 2008 Icy Phoenix
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+*
+*/
+
+/**
+*
+* @Extra credits for this file
+* aUsTiN-Inc 2003/5 (austin@phpbb-amod.com) - (http://phpbb-amod.com)
+*
+*/
 
 if (!defined('IN_ICYPHOENIX'))
 {
@@ -106,9 +112,9 @@ for ($a = 0; $a < count($hof_data); $a++)
 	}
 
 	$new_score = FormatScores($hof_data[$a]['current_score']);
-	$new_date = create_date2($board_config['default_dateformat'], $hof_data[$a]['current_date'], $board_config['board_timezone']);
+	$new_date = create_date_ip($board_config['default_dateformat'], $hof_data[$a]['current_date'], $board_config['board_timezone']);
 	$old_score = FormatScores($hof_data[$a]['old_score']);
-	$old_date = create_date2($board_config['default_dateformat'], $hof_data[$a]['old_date'], $board_config['board_timezone']);
+	$old_date = create_date_ip($board_config['default_dateformat'], $hof_data[$a]['old_date'], $board_config['board_timezone']);
 	$game_image = CheckGameImages($game_name, $proper_name);
 	$row_class = ( !($i % 2) ) ? 'row1' : 'row2';
 	if (!$old_user_id)

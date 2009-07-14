@@ -1,13 +1,19 @@
 <?php
-/***************************************************************************
- *                              activity_newest.php
- *                            ----------------------
- *		Version			: 1.1.0
- *		Email			: austin@phpbb-amod.com
- *		Site			: http://phpbb-amod.com
- *		Copyright		: aUsTiN-Inc 2003/5
- *
- ***************************************************************************/
+/**
+*
+* @package Icy Phoenix
+* @version $Id$
+* @copyright (c) 2008 Icy Phoenix
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+*
+*/
+
+/**
+*
+* @Extra credits for this file
+* aUsTiN-Inc 2003/5 (austin@phpbb-amod.com) - (http://phpbb-amod.com)
+*
+*/
 
 if (!defined('IN_ICYPHOENIX'))
 {
@@ -216,7 +222,7 @@ for ($i = 0; $i < $game_count; $i++)
 					$top_player1 = colorize_username($user_data[$c]['user_id'], $user_data[$c]['username'], $user_data[$c]['user_color'], $user_data[$c]['user_active']);
 					$top_score1 = $trophy_data[$b]['score'];
 					$top_date = $trophy_data[$b]['date'];
-					$top_date = create_date2($board_config['default_dateformat'], $top_date, $board_config['board_timezone']);
+					$top_date = create_date_ip($board_config['default_dateformat'], $top_date, $board_config['board_timezone']);
 					$top_score = FormatScores($top_score1);
 					break;
 				}

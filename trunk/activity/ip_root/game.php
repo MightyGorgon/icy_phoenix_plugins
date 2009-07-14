@@ -176,7 +176,7 @@ elseif (($game_flash) && ($_GET['parent']))
 	$t_holder_sc = $row['score'];
 	$t_holder_da = $row['date'];
 	$trophy_score = FormatScores($t_holder_sc);
-	$trophy_date = create_date2($board_config['default_dateformat'], $t_holder_da, $board_config['board_timezone']);
+	$trophy_date = create_date_ip($board_config['default_dateformat'], $t_holder_da, $board_config['board_timezone']);
 
 	$q1 = "SELECT username, user_active, user_color
 			 FROM " . USERS_TABLE . "

@@ -1,13 +1,19 @@
 <?php
-/***************************************************************************
- *                            activity_top_scores_search.php
- *                           --------------------------------
- *		Version			: 1.1.0
- *		Email			: austin@phpbb-amod.com
- *		Site			: http://phpbb-amod.com
- *		Copyright		: aUsTiN-Inc 2003/5
- *
- ***************************************************************************/
+/**
+*
+* @package Icy Phoenix
+* @version $Id$
+* @copyright (c) 2008 Icy Phoenix
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+*
+*/
+
+/**
+*
+* @Extra credits for this file
+* aUsTiN-Inc 2003/5 (austin@phpbb-amod.com) - (http://phpbb-amod.com)
+*
+*/
 
 if (!defined('IN_ICYPHOENIX'))
 {
@@ -83,7 +89,7 @@ if ($search)
 		}
 
 		$user_regdate = create_date($lang['JOINED_DATE_FORMAT'], $user_regdate, $board_config['board_timezone']);
-		$user_lastvisit = create_date2($board_config['default_dateformat'], $user_lastvisit, $board_config['board_timezone']);
+		$user_lastvisit = create_date_ip($board_config['default_dateformat'], $user_lastvisit, $board_config['board_timezone']);
 
 		if ($user_gender == '0')
 			$user_gender = $lang['gender_none'] ;
@@ -152,7 +158,7 @@ if ($search)
 		$who = $username;
 		$date = $row['date'];
 		$score = FormatScores($score);
-		$date = create_date2($board_config['default_dateformat'], $date, $board_config['board_timezone']);
+		$date = create_date_ip($board_config['default_dateformat'], $date, $board_config['board_timezone']);
 
 		$q1 = "SELECT *
 					FROM ". iNA_GAMES ."
