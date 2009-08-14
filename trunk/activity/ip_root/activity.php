@@ -389,7 +389,7 @@ if ( ($mode == 'category_play') && (!$_GET['cat']) )
 		'P_GAMES' => $total_pop,
 		'N_GAMES' => $total_new,
 		'GAMES' => $total_games_here,
-		'GAMES_T' => $board_config['sitename'] . '\'s ' . $lang['admin_games'],
+		'GAMES_T' => ip_stripslashes($board_config['sitename']) . '\'s ' . $lang['admin_games'],
 		'GAMES_D' => $lang['main_cat_all_desc'],
 		'GAMES_I' => '<a href="activity.' . PHP_EXT . '?sid=' . $userdata['session_id'] . '"><img src="' . $board_config['ina_use_logo'] . '" alt="" /></a>'
 		)

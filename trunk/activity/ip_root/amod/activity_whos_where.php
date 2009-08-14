@@ -31,7 +31,7 @@ $template->assign_block_vars('main', array(
 	'TITLE_THREE' => $lang['whos_where_title_3'],
 	'TITLE_FOUR' => $lang['whos_where_contact_onsite'],
 	'TITLE_FIVE' => $lang['whos_where_contact_offsite'],
-	'LINK' => '<a href="index.' . PHP_EXT . '">'. $board_config['sitename'] .'</a>{NAV_SEP}<a href="activity.' . PHP_EXT . '">' . $lang['game_list'] . '</a>'
+	'LINK' => '<a href="index.' . PHP_EXT . '">'. ip_stripslashes($board_config['sitename']) .'</a>{NAV_SEP}<a href="activity.' . PHP_EXT . '">' . $lang['game_list'] . '</a>'
 	)
 );
 

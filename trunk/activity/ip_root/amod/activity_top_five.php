@@ -42,7 +42,7 @@ $template->set_filenames(array('body' => ACTIVITY_MOD_PATH . 'activity_top5.tpl'
 		'TOP_TITLE' => $lang['top_five_7'],
 		'BOTTOM_TITLE' => $lang['top_five_8'],
 		'LINKS' => '<b>::</b> <a href="activity.' . PHP_EXT . '?sid='. $userdata['session_id'] .'" class="nav">'. $lang['top_five_9'] .'</a> <b>::</b> <a href="activity.' . PHP_EXT . '?page=top&amp;sid='. $userdata['session_id'] .'" class="nav">'. $lang['top_five_10'] .'</a> <b>::</b>',
-		'TITLE' => $board_config['sitename'] ."'". $lang['top_five_11'])
+		'TITLE' => ip_stripslashes($board_config['sitename']) ."'". $lang['top_five_11'])
 			);
 
 #==== Users Query To Be Used Many Times Here

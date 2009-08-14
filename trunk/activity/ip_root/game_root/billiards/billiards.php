@@ -1,35 +1,19 @@
 <?php
-/***************************************************************************
+/**
 *
-*                                 game.php
-*                            ------------------
-*   begin                : Thursday, August 1, 2002
-*   copyright            : (c) 2002 iNetAngel
-*   email                : support@iNetAngel.com
+* @package Icy Phoenix
+* @version $Id$
+* @copyright (c) 2008 Icy Phoenix
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
-*   $Id                  : activity.php v1.0.0
+*/
+
+/**
 *
-***************************************************************************
+* @Extra credits for this file
+* aUsTiN-Inc 2003/5 (austin@phpbb-amod.com) - (http://phpbb-amod.com)
 *
-*   This program is free software; you can redistribute it and/or modify
-*   it under the terms of the GNU General Public License as published by
-*   the Free Software Foundation; either version 2 of the License, or
-*   (at your option) any later version.
-*
-***************************************************************************
-*
-*   This is a MOD for phpbb v2+. The phpbb group has all rights to the
-*   phpbb source. They can be contacted at :
-*
-*      I-Net : www.phpbb.com
-*      E-Mail: support@phpbb.com
-*
-*   If you have made any changes then please notify me so they can be added
-*   if they are improvments. You of course will get the credit for helping
-*   out. If you would like to see other MODs that I have made then check
-*   out my forum at : www.iNetAngel.com and click on the community button.
-*
-***************************************************************************/
+*/
 
 if (!defined('IN_ICYPHOENIX'))
 {
@@ -66,7 +50,7 @@ $game_width = $game_info['win_width'];
 $game_height = $game_info['win_height'];
 $game_path = $game_info['game_path'];
 $game_flash = $game_info['game_flash'];
-$game_title = $board_config['sitename'] . ' :: ' . $game_name;
+$game_title = ip_stripslashes($board_config['sitename']) . ' :: ' . $game_name;
 
 if ($game_flash)
 {
