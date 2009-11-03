@@ -1,0 +1,48 @@
+Before going on, make sure that you have a backup of both db and files.
+
+Here are the instructions on what you have to do to install the Activity on Icy Phoenix.
+
+
+* Upload all the files included in the package (you have both default and aphrodite, and even the Italian Lang if you need it)
+
+* Go in ACP and install Activity
+
+
+-----------------------------------
+----[ OPEN ]-----------------------
+-----------------------------------
+
+includes/constants.php
+
+-----------------------------------
+----[ FIND ]-----------------------
+-----------------------------------
+
+define('ACTIVITY_PLUGIN_ENABLED', false); // Allowed values => true / false
+
+-----------------------------------
+----[ REPLACE WITH ]---------------
+-----------------------------------
+
+define('ACTIVITY_PLUGIN_ENABLED', true); // Allowed values => true / false
+
+-----------------------------------
+----[ CLOSE ALL & SAVE ]-----------
+-----------------------------------
+
+
+
+EXTRA SQL YOU MAY NEED
+
+$sql[] = "CREATE TABLE ". iNA_SCORES ." (
+	`game_name` varchar(255) default NULL,
+	`player` varchar(40) default NULL,
+	`score` int(10) unsigned NOT NULL default '0',
+	`user_plays` int(6) default '0',
+	`play_time` int(11) default '0',
+	`date` int(11) default NULL
+	) TYPE=MyISAM;";
+
+
+ALTER TABLE `phpbb_ina_scores` ADD `user_plays` int(6) default '0' AFTER `score`;
+ALTER TABLE `phpbb_ina_scores` ADD `play_time` int(11) default '0' AFTER `user_plays`;
