@@ -18,8 +18,13 @@
 
 define('IN_ICYPHOENIX', true);
 
-if (!empty($setmodules) && defined('DL_PLUGIN_ENABLED') && DL_PLUGIN_ENABLED)
+if (!empty($setmodules))
 {
+	if (!defined('DL_PLUGIN_ENABLED') || (defined('DL_PLUGIN_ENABLED') && !DL_PLUGIN_ENABLED))
+	{
+		return;
+	}
+
 	//$file = basename(__FILE__);
 	$file = IP_ROOT_PATH . DL_PLUGIN_PATH . ADM . '/' . basename(__FILE__);
 	$module['2050_Downloads']['100_DL_Settings'] = $file;

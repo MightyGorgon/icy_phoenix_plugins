@@ -18,8 +18,13 @@
 // CTracker_Ignore: File checked by human
 define('IN_ICYPHOENIX', true);
 
-if (!empty($setmodules) && defined('ACTIVITY_PLUGIN_ENABLED') && ACTIVITY_PLUGIN_ENABLED)
+if (!empty($setmodules))
 {
+	if (!defined('ACTIVITY_PLUGIN_ENABLED') || (defined('ACTIVITY_PLUGIN_ENABLED') && !ACTIVITY_PLUGIN_ENABLED))
+	{
+		return;
+	}
+
 	//$file = basename(__FILE__);
 	$file = IP_ROOT_PATH . ACTIVITY_PLUGIN_PATH . ADM . '/' . basename(__FILE__);
 	$module['3000_ACTIVITY']['170_Char_Settings'] = $file;

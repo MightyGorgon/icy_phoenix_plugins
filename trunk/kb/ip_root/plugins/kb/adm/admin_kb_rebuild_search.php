@@ -17,8 +17,13 @@
 
 define('IN_ICYPHOENIX', true);
 
-if (!empty($setmodules) && defined('KB_PLUGIN_ENABLED') && KB_PLUGIN_ENABLED)
+if (!empty($setmodules))
 {
+	if (!defined('KB_PLUGIN_ENABLED') || (defined('KB_PLUGIN_ENABLED') && !KB_PLUGIN_ENABLED))
+	{
+		return;
+	}
+
 	//$file = basename(__FILE__);
 	$file = IP_ROOT_PATH . KB_PLUGIN_PATH . ADM . '/' . basename(__FILE__);
 	$module['1800_KB_title']['160_Optimize_tables'] = $file;
