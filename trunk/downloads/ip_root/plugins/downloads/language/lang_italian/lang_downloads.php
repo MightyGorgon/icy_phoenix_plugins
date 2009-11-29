@@ -36,8 +36,8 @@ $lang['Dl_mod_version'] = 'Download MOD v%s&nbsp;&copy; 2002 - 2007 by Hotschi, 
 $lang['Click_return_categoryadmin'] = 'Clicca %sQUI%s per ritornare all\'amministrazione delle categorie';
 $lang['Click_return_dl_config'] = 'Clicca %sQUI%s per ritornare alla configurazione della sezione download';
 $lang['Click_return_downloadadmin'] = 'Clicca %sQUI%s per ritornare all\'amministrazione della sezione download';
-$lang['Click_return_downloads']= 'Clicca %sQUI%s per ritornare alle categorie della sezione download';
-$lang['Click_return_download_details']= 'Clicca %sQUI%s per ritornare alla sezione download';
+$lang['Click_return_downloads'] = 'Clicca %sQUI%s per ritornare alle categorie della sezione download';
+$lang['Click_return_download_details'] = 'Clicca %sQUI%s per ritornare alla sezione download';
 $lang['Click_return_file_management'] = 'Clicca %sQUI%s per ritornare alla gestione dei file';
 $lang['Click_return_modcp_approve'] = 'Clicca %sQUI%s per ritornare alla gestione dei download non approvati';
 $lang['Click_return_modcp_manage'] = 'Clicca %sQUI%s per ritornare al pannello di controllo di moderazione';
@@ -104,7 +104,7 @@ $lang['Dl_page_downloads'] = 'Download';
 */
 $lang['Add_new_download'] = 'Inserisci nuovo download';
 $lang['Dl_add'] = 'Inserisci';
-$lang['Dl_add_category'] ='Inserisci Categoria';
+$lang['Dl_add_category'] = 'Inserisci Categoria';
 $lang['Dl_approve'] = 'Approva';
 $lang['Dl_check_file_sizes'] = 'Controllo dimensioni';
 $lang['Dl_check_thumbnails'] = 'Controllo miniature';
@@ -132,12 +132,12 @@ $lang['Dl_sub_sort_asc_zero'] = 'Ordinamento categorie principali: Ascendente';
 /*
 * categories related
 */
-$lang['Dl_cat_description']= 'Descrizione';
+$lang['Dl_cat_description'] = 'Descrizione';
 $lang['Dl_cat_files'] = 'File';
-$lang['Dl_cat_index'] ='Livello superiore';
+$lang['Dl_cat_index'] = 'Livello superiore';
 $lang['Dl_cat_name'] = 'Categoria';
 $lang['Dl_cat_parent'] = 'Categoria nidificata';
-$lang['Dl_cat_path'] ='Percorso';
+$lang['Dl_cat_path'] = 'Percorso';
 $lang['Dl_cat_title'] = 'Download - Categorie';
 $lang['Dl_choose_category'] = 'Seleziona una categoria';
 $lang['Dl_mod_desc_allow'] = 'Permetti descrizione mod in upload';
@@ -193,7 +193,7 @@ $lang['Dl_auth_mod'] = 'Modera';
 $lang['Dl_auth_up'] = 'Upload';
 $lang['Dl_auth_view'] = 'Visualizza';
 $lang['Dl_permissions'] = 'Permessi per gli iscritti ai seguenti gruppi';
-$lang['Dl_stop_uploads'] ='Disabilita upload';
+$lang['Dl_stop_uploads'] = 'Disabilita upload';
 $lang['Dl_stat_perm'] = 'Livello di accesso per consultazione statistiche';
 $lang['Dl_stat_perm_all'] = 'Tutti';
 $lang['Dl_stat_perm_user'] = 'Utenti registrati';
@@ -425,7 +425,7 @@ $lang['Dl_red_explain_alt'] = 'Traffico insufficiente o numero di messaggi neces
 $lang['Dl_red_explain_perm'] = 'Diritti insufficienti per effettuare il download!';
 $lang['Dl_yellow_explain'] = 'Download! Il traffico verr&agrave; scalato dall\'account utente.';
 $lang['Dl_config_explain'] = 'In questa sezione potrai abilitare o disabilitare diverse funzioni del Mod e modificare alcune impostazioni.';
-$lang['Dl_cat_edit_explain'] ='In questa sezione puoi gestire le categorie relativa al Download MOD.';
+$lang['Dl_cat_edit_explain'] = 'In questa sezione puoi gestire le categorie relativa al Download MOD.';
 $lang['DL_posts'] = 'Numero di messaggi che l\'utente deve scrivere prima di accedere al download';
 $lang['Dl_Links_per_page'] = 'Download per pagina';
 $lang['Dl_account'] = 'Traffico mensile restante: <strong>%s</strong> .';
@@ -459,7 +459,7 @@ $lang['Dl_cash_to_traffic'] = 'Scambia crediti con traffico';
 $lang['Dl_cash_to_traffic_explain'] = 'In questa sezione puoi impostare il tasso di scambio tra crediti e traffico. Lo scambio fornir&agrave; il valore stabilito di traffico per un\'unit&agrave; di valuta.';
 $lang['Dl_cash_currency'] = 'Valuta crediti';
 $lang['Dl_cash_exchange'] = 'Scambio: 1 %s in %s traffico';
-$lang['Dl_cash_current_amount']= 'Possiedi %s %s';
+$lang['Dl_cash_current_amount'] = 'Possiedi %s %s';
 
 /*
 * new on Download MOD 5.0.10: Blacklist for filetypes

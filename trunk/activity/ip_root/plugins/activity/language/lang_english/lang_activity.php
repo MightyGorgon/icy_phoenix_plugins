@@ -377,7 +377,7 @@ $lang['gambling_bet_choice_1']		= 'For Fun?';
 $lang['gambling_bet_choice_2']		= 'For A Price?';
 $lang['gambling_bet_choice_desc']	= 'If Betting For A Price, How Much?';
 $lang['gambling_max_bet']			= 'The Max Wager Here Is %a%.';
-$lang['gambling_max_exceeded_error']= 'Sorry, you have exceeded the max bet allowed.';
+$lang['gambling_max_exceeded_error'] = 'Sorry, you have exceeded the max bet allowed.';
 $lang['gambling_submit_title']		= 'Ready To Send The Gamble?';
 $lang['gambling_error']				= 'Error';
 $lang['gambling_numerical_error']	= 'Sorry %u%, bets can only be numerical.';
@@ -554,15 +554,15 @@ $lang['admin_proper_name']			= '<b>Real Game Name</b>';
 $lang['admin_proper_name_desc']		= 'This is what you want the users to see as a game name.';
 $lang['new_description']			= 'Description';
 $lang['new_games_played']			= 'Played:';
-$lang['personal_info_newest_game1']	= '%g% By %u%';
-$lang['info_box_top_trophy_holder1']= '%n% Currently Holds %t% Trophies.';
-$lang['trophy_holder_rank_name']	= 'Trophy King';
-$lang['bet_PM']						= 'Your Bet Statistics<br /><br />
-										Game: %G%<br />
-										Winner: %W%<br />
-										Winners Score: %WS%<br />
-										Loser: %L%<br />
-										Losers Score: %LS%';
+$lang['personal_info_newest_game1'] = '%g% By %u%';
+$lang['info_box_top_trophy_holder1'] = '%n% Currently Holds %t% Trophies.';
+$lang['trophy_holder_rank_name'] = 'Trophy King';
+$lang['bet_PM'] = 'Your Bet Statistics<br /><br />
+Game: %G%<br />
+Winner: %W%<br />
+Winners Score: %WS%<br />
+Loser: %L%<br />
+Losers Score: %LS%';
 $lang['bet_PM_subject']				= 'Your Gamble Results Are In';
 $lang['deny_users_sending_score1']	= 'Sorry, you are allowed to play, but the admins have decided your scores
 										will not be posted. Please click <a href="activity.php"><b>here</b></a> to go back to playing games.';

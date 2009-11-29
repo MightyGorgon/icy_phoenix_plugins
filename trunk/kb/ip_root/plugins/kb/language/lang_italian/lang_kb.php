@@ -223,11 +223,11 @@ $lang['Pre_text_body'] = 'Corpo Istruzioni Invio Articoli';
 $lang['Pre_text_explain'] = 'Queste sono le istruzioni visualizzate per gli utenti in cima al Forum d\'Invio Articoli.';
 $lang['Show'] = 'Visualizza';
 $lang['Hide'] = 'Nascondi';
-$lang['Empty_fields'] ='Per cortesia compila in tutte le sue parti il form.';
-$lang['Empty_fields_return'] ='Clicca %sQUI%s per ritornare al form.';
+$lang['Empty_fields'] = 'Per cortesia compila in tutte le sue parti il form.';
+$lang['Empty_fields_return'] = 'Clicca %sQUI%s per ritornare al form.';
 
-$lang['Empty_category'] ='Devi selezionare una Categoria';
-$lang['Empty_type']='Devi selezionare un Tipo';
+$lang['Empty_category'] = 'Devi selezionare una Categoria';
+$lang['Empty_type']= 'Devi selezionare un Tipo';
 
 $lang['Empty_article_name'] = 'Devi inserire il titolo dell\'articolo';
 $lang['Empty_article_desc'] = 'Devi inserire la descrizione dell\'articolo';
