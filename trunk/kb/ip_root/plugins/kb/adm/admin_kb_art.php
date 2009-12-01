@@ -22,13 +22,12 @@ define('IN_ICYPHOENIX', true);
 
 if (!empty($setmodules))
 {
-	if (!defined('KB_PLUGIN_ENABLED') || (defined('KB_PLUGIN_ENABLED') && !KB_PLUGIN_ENABLED))
+	if (empty($config['plugins']['kb']['enabled']))
 	{
 		return;
 	}
 
-	//$file = basename(__FILE__);
-	$file = IP_ROOT_PATH . KB_PLUGIN_PATH . ADM . '/' . basename(__FILE__);
+	$file = IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['kb']['dir'] . ADM . '/' . basename(__FILE__);
 	$module['1800_KB_title']['110_Art_man'] = $file;
 	return;
 }
@@ -37,7 +36,7 @@ if (!defined('IP_ROOT_PATH')) define('IP_ROOT_PATH', './../../../');
 if (!defined('PHP_EXT')) define('PHP_EXT', substr(strrchr(__FILE__, '.'), 1));
 require(IP_ROOT_PATH . 'adm/pagestart.' . PHP_EXT);
 
-include(IP_ROOT_PATH . KB_PLUGIN_PATH . 'common.' . PHP_EXT);
+include(IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['kb']['dir'] . 'common.' . PHP_EXT);
 
 if (isset($_POST['mode']) || isset($_GET['mode']))
 {

@@ -20,13 +20,12 @@ define('IN_ICYPHOENIX', true);
 
 if (!empty($setmodules))
 {
-	if (!defined('DL_PLUGIN_ENABLED') || (defined('DL_PLUGIN_ENABLED') && !DL_PLUGIN_ENABLED))
+	if (empty($config['plugins']['downloads']['enabled']))
 	{
 		return;
 	}
 
-	//$file = basename(__FILE__);
-	$file = IP_ROOT_PATH . DL_PLUGIN_PATH . ADM . '/' . basename(__FILE__);
+	$file = IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['downloads']['dir'] . ADM . '/' . basename(__FILE__);
 	$module['2050_Downloads']['100_DL_Settings'] = $file;
 	return;
 }
@@ -36,7 +35,12 @@ if (!defined('IP_ROOT_PATH')) define('IP_ROOT_PATH', './../../../');
 if (!defined('PHP_EXT')) define('PHP_EXT', substr(strrchr(__FILE__, '.'), 1));
 require(IP_ROOT_PATH . 'adm/pagestart.' . PHP_EXT);
 
-include(IP_ROOT_PATH . DL_PLUGIN_PATH . 'common.' . PHP_EXT);
+if (empty($config['plugins']['downloads']['enabled']))
+{
+	message_die(GENERAL_MESSAGE, 'PLUGIN_DISABLED');
+}
+
+include(IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['downloads']['dir'] . 'common.' . PHP_EXT);
 
 /*
 * include and create the main class

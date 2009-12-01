@@ -13,6 +13,7 @@ if (!defined('IN_ICYPHOENIX'))
 	die('Hacking attempt');
 }
 
+define('KB_PLUGIN_PATH', PLUGINS_PATH . $config['plugins']['kb']['dir']);
 define('KB_ROOT_PATH', IP_ROOT_PATH . KB_PLUGIN_PATH);
 
 include_once(IP_ROOT_PATH . 'includes/functions_post.' . PHP_EXT);

@@ -13,7 +13,7 @@ if (!defined('IN_ICYPHOENIX'))
 	die('Hacking attempt');
 }
 
-if (!defined('ACTIVITY_PLUGIN_ENABLED') || (defined('ACTIVITY_PLUGIN_ENABLED') && !ACTIVITY_PLUGIN_ENABLED))
+if (empty($config['plugins']['activity']['enabled']))
 {
 	message_die(GENERAL_MESSAGE, 'PLUGIN_DISABLED');
 }
@@ -21,6 +21,7 @@ if (!defined('ACTIVITY_PLUGIN_ENABLED') || (defined('ACTIVITY_PLUGIN_ENABLED') &
 define('CMS_PAGE_ACTIVITY', 'activity.' . PHP_EXT);
 define('CMS_PAGE_ACTIVITY_GAME', 'activity.' . PHP_EXT);
 
+define('ACTIVITY_PLUGIN_PATH', PLUGINS_PATH . $config['plugins']['activity']['dir']);
 define('ACTIVITY_ROOT_PATH', IP_ROOT_PATH . ACTIVITY_PLUGIN_PATH);
 
 define('ACTIVITY_GAMES_PATH', ACTIVITY_ROOT_PATH);

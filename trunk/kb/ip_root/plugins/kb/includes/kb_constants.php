@@ -34,8 +34,8 @@ $kb_config['news_operate_mode'] = false;
 $is_block = false;
 
 define('KB_TPL_PATH', 'kb/');
-define('KB_ADM_PATH', IP_ROOT_PATH . KB_PLUGIN_PATH . ADM . '/');
-define('KB_ADM_TPL_PATH', '../../' . KB_PLUGIN_PATH . ADM . '/templates/');
+define('KB_ADM_PATH', IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['kb']['dir'] . ADM . '/');
+define('KB_ADM_TPL_PATH', '../../' . PLUGINS_PATH . $config['plugins']['kb']['dir'] . ADM . '/templates/');
 
 // ---------------------------------------------------------------------START
 // This file defines specific constants for the module

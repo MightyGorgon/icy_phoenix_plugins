@@ -20,13 +20,12 @@ define('IN_ICYPHOENIX', true);
 
 if (!empty($setmodules))
 {
-	if (!defined('ACTIVITY_PLUGIN_ENABLED') || (defined('ACTIVITY_PLUGIN_ENABLED') && !ACTIVITY_PLUGIN_ENABLED))
+	if (empty($config['plugins']['activity']['enabled']))
 	{
 		return;
 	}
 
-	//$file = basename(__FILE__);
-	$file = IP_ROOT_PATH . ACTIVITY_PLUGIN_PATH . ADM . '/' . basename(__FILE__);
+	$file = IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['activity']['dir'] . ADM . '/' . basename(__FILE__);
 	$module['3000_ACTIVITY']['110_Configuration'] = $file;
 	$module['3000_ACTIVITY']['120_Add_Game'] = $file . '?mode=add_game';
 	$module['3000_ACTIVITY']['130_Edit_Games'] = $file . '?mode=edit_games';
@@ -38,7 +37,7 @@ if (!defined('IP_ROOT_PATH')) define('IP_ROOT_PATH', './../../../');
 if (!defined('PHP_EXT')) define('PHP_EXT', substr(strrchr(__FILE__, '.'), 1));
 require(IP_ROOT_PATH . 'adm/pagestart.' . PHP_EXT);
 
-include(IP_ROOT_PATH . ACTIVITY_PLUGIN_PATH . 'common.' . PHP_EXT);
+include(IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['activity']['dir'] . 'common.' . PHP_EXT);
 
 $action = (isset($_GET['action'])) ? $_GET['action'] : $_POST['action'];
 $mode = (isset($_GET['mode'])) ? $_GET['mode'] : $_POST['mode'];

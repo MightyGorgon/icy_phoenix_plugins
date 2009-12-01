@@ -13,6 +13,7 @@ if (!defined('IN_ICYPHOENIX'))
 	die('Hacking attempt');
 }
 
+define('DL_PLUGIN_PATH', PLUGINS_PATH . $config['plugins']['downloads']['dir']);
 define('DL_ROOT_PATH', IP_ROOT_PATH . DL_PLUGIN_PATH);
 
 define('DL_TPL_PATH', 'dl/');

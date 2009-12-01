@@ -19,13 +19,12 @@ define('IN_ICYPHOENIX', true);
 
 if (!empty($setmodules))
 {
-	if (!defined('KB_PLUGIN_ENABLED') || (defined('KB_PLUGIN_ENABLED') && !KB_PLUGIN_ENABLED))
+	if (empty($config['plugins']['kb']['enabled']))
 	{
 		return;
 	}
 
-	//$file = basename(__FILE__);
-	$file = IP_ROOT_PATH . KB_PLUGIN_PATH . ADM . '/' . basename(__FILE__);
+	$file = IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['kb']['dir'] . ADM . '/' . basename(__FILE__);
 	$module['1800_KB_title']['150_Permissions'] = $file;
 	return;
 }
@@ -34,7 +33,7 @@ if (!defined('IP_ROOT_PATH')) define('IP_ROOT_PATH', './../../../');
 if (!defined('PHP_EXT')) define('PHP_EXT', substr(strrchr(__FILE__, '.'), 1));
 require(IP_ROOT_PATH . 'adm/pagestart.' . PHP_EXT);
 
-include(IP_ROOT_PATH . KB_PLUGIN_PATH . 'common.' . PHP_EXT);
+include(IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['kb']['dir'] . 'common.' . PHP_EXT);
 
 if (!isset($_POST['submit']))
 {
@@ -44,7 +43,7 @@ if (!isset($_POST['submit']))
 	$template->assign_vars(array('L_KB_AUTH_TITLE' => $lang['KB_Auth_Title'],
 			'L_KB_AUTH_EXPLAIN' => $lang['KB_Auth_Explain'],
 			'L_SELECT_CAT' => $lang['Select_a_Category'],
-			'S_KB_ACTION' => append_sid("admin_kb_auth." . PHP_EXT),
+			'S_KB_ACTION' => append_sid('admin_kb_auth.' . PHP_EXT),
 			'L_LOOK_UP_CAT' => $lang['Look_up_Category'],
 			'CAT_SELECT_TITLE' => $s_kb_cat_list
 		)
