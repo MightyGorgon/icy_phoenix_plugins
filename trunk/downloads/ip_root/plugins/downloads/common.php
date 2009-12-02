@@ -16,7 +16,7 @@ if (!defined('IN_ICYPHOENIX'))
 define('DL_PLUGIN_PATH', PLUGINS_PATH . $config['plugins']['downloads']['dir']);
 define('DL_ROOT_PATH', IP_ROOT_PATH . DL_PLUGIN_PATH);
 
-define('DL_TPL_PATH', 'dl/');
+define('DL_TPL_PATH', 'downloads/');
 define('DL_ADM_PATH', IP_ROOT_PATH . DL_PLUGIN_PATH . ADM . '/');
 define('DL_ADM_TPL_PATH', '../../' . DL_PLUGIN_PATH . ADM . '/templates/');
 
