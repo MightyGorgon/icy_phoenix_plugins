@@ -1291,11 +1291,11 @@ function kb_insert_post($message, $subject, $forum_id, $user_id, $user_name, $us
 		}
 		// End if mode is update_only
 
-		if (!function_exists('update_poster_details'))
+		if (!function_exists('sync_topic_details'))
 		{
 			@include_once(IP_ROOT_PATH . 'includes/functions_post.' . PHP_EXT);
 		}
-		update_poster_details($topic_id, $post_id, $user_id);
+		sync_topic_details($topic_id, $forum_id, false, false);
 	}
 
 	// Start KB addon - update original post --------------------------------------------------
