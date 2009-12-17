@@ -315,7 +315,7 @@ if ($preview)
 
 	$preview_text = $bbcode->parse($preview_text, '', false, $clean_tags);
 	$preview_text = $bbcode->acronym_pass($preview_text);
-	$preview_text = autolink_text($preview_text, '999999');
+	$preview_text = $bbcode->autolink_text($preview_text, '999999');
 
 	$template->set_filenames(array('preview' => KB_TPL_PATH . 'kb_post_preview.tpl'));
 

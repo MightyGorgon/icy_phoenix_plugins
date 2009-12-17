@@ -45,8 +45,8 @@ if ($action == 'save' && $submit)
 	$disable_popup_notify = (isset($_POST['disable_popup_notify'])) ? intval($_POST['disable_popup_notify']) : 0;
 	$del_thumb = ( isset($_POST['del_thumb']) ) ? intval($_POST['del_thumb']) : 0;
 
-	$mod_desc = make_clickable($mod_desc);
-	$warning = make_clickable($warning);
+	$mod_desc = $bbcode->make_clickable($mod_desc);
+	$warning = $bbcode->make_clickable($warning);
 
 	$html_on = $config['allow_html'];
 	$bbcode_on = $config['allow_bbcode'];

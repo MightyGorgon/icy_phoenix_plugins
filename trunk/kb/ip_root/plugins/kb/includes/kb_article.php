@@ -155,7 +155,7 @@ if (!$bbcode_on)
 }
 $article = $bbcode->parse($article, '');
 $article = $bbcode->acronym_pass($article);
-$article = autolink_text($article, '999999');
+$article = $bbcode->autolink_text($article, '999999');
 
 //$article = kb_word_wrap_pass ($article);
 
@@ -419,7 +419,7 @@ else
 			// Parse message
 
 			$article_toc = preg_replace("'\[[\/\!]*?[^\[\]]*?\]'si", "", $article_toc); // Fixed
-			$article_toc = make_clickable($article_toc);
+			$article_toc = $bbcode->make_clickable($article_toc);
 
 			// Parse smilies
 

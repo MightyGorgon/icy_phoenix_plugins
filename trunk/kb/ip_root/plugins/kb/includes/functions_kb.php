@@ -1505,7 +1505,7 @@ function get_kb_comments($topic_id = '', $start = -1, $show_num_comments = 0)
 		if ($postrow[$i]['enable_autolinks_acronyms'])
 		{
 			$message = $bbcode->acronym_pass($message);
-			$message = autolink_text($message, '999999');
+			$message = $bbcode->autolink_text($message, '999999');
 		}
 		//$message = kb_word_wrap_pass($message);
 		// Editing information
