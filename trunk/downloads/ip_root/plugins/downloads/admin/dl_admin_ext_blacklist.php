@@ -54,7 +54,8 @@ elseif($action == 'delete')
 
 	if (!$confirm)
 	{
-		$template->set_filenames(array('confirm_body' => DL_TPL_PATH . 'dl_confirm_body.tpl'));
+		$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'dl_confirm_body.tpl');
+		$template->set_filenames(array('confirm_body' => $template_to_parse));
 
 		for ($i = 0; $i < sizeof($extention); $i++)
 		{

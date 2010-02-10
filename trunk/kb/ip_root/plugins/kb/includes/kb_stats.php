@@ -33,7 +33,7 @@ $kb_quick_nav = get_kb_cat_list('auth_view', 0, 0, true, $kb_is_auth_all);
 // load header
 include (KB_ROOT_PATH . 'includes/kb_header.' . PHP_EXT);
 
-$template->set_filenames(array('body' => KB_TPL_PATH . 'kb_stats_body.tpl'));
+$template->set_filenames(array('body' => $class_plugins->get_tpl_file(KB_TPL_PATH, 'kb_stats_body.tpl')));
 
 if ( $stats == 'toprated' )
 {

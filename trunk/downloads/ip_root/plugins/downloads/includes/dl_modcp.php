@@ -464,7 +464,8 @@ if ($action == 'delete' && $cat_id)
 				)
 			);
 
-			full_page_generation(DL_TPL_PATH . 'dl_confirm_body.tpl', $lang['Downloads'], '', '');
+			$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'dl_confirm_body.tpl');
+			full_page_generation($template_to_parse, $lang['Downloads'], '', '');
 		}
 		else
 		{
@@ -654,7 +655,8 @@ if ($action == 'edit')
 	$breadcrumbs_address = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>';
 	page_header($meta_content['page_title'], true);
 
-	$template->set_filenames(array('body' => DL_TPL_PATH . 'dl_edit_body.tpl'));
+	$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'dl_edit_body.tpl');
+	$template->set_filenames(array('body' => $template_to_parse));
 
 	$template->assign_block_vars('modcp', array());
 
@@ -922,7 +924,8 @@ if ($action == 'approve')
 	$breadcrumbs_address = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>';
 	page_header($meta_content['page_title'], true);
 
-	$template->set_filenames(array('body' => DL_TPL_PATH . 'dl_modcp_approve.tpl'));
+	$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'dl_modcp_approve.tpl');
+	$template->set_filenames(array('body' => $template_to_parse));
 
 	$sql = "SELECT cat, id, description FROM " . DOWNLOADS_TABLE . "
 		WHERE approve = 0
@@ -1027,7 +1030,8 @@ if ($action == 'capprove')
 	$breadcrumbs_address = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>';
 	page_header($meta_content['page_title'], true);
 
-	$template->set_filenames(array('body' => DL_TPL_PATH . 'dl_modcp_capprove.tpl'));
+	$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'dl_modcp_capprove.tpl');
+	$template->set_filenames(array('body' => $template_to_parse));
 
 	$sql = "SELECT d.cat, d.id, d.description, c.comment_text, c.user_id, c.username, c.dl_id
 		FROM " . DOWNLOADS_TABLE . " d, " . DL_COMMENTS_TABLE . " c
@@ -1146,7 +1150,8 @@ if (($action == 'manage') && $cat_id)
 	$breadcrumbs_address = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>';
 	page_header($meta_content['page_title'], true);
 
-	$template->set_filenames(array('body' => DL_TPL_PATH . 'dl_modcp_manage.tpl'));
+	$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'dl_modcp_manage.tpl');
+	$template->set_filenames(array('body' => $template_to_parse));
 
 	$sql = "SELECT * FROM " . DOWNLOADS_TABLE . "
 		WHERE approve = " . TRUE . "

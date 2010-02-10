@@ -516,9 +516,8 @@ elseif($action == 'delete')
 		$s_switch_cat .= $dl_mod->dl_dropdown(0, 0, $cat_id, 'auth_move');
 		$s_switch_cat .= '</select>';
 
-		$template->set_filenames(array(
-			'confirm_body' => DL_TPL_PATH . 'dl_confirm_body.tpl')
-		);
+		$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'dl_confirm_body.tpl');
+		$template->set_filenames(array('confirm_body' => $template_to_parse));
 
 		$template->assign_block_vars('choose_new_cat', array());
 
@@ -557,7 +556,8 @@ elseif($action == 'delete_stats')
 		$cat_name = $index[$cat_id]['cat_name'];
 		$cat_name = str_replace('&nbsp;&nbsp;|___&nbsp;', '', $cat_name);
 
-		$template->set_filenames(array('confirm_body' => DL_TPL_PATH . 'dl_confirm_body.tpl'));
+		$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'dl_confirm_body.tpl');
+		$template->set_filenames(array('confirm_body' => $template_to_parse));
 
 		$s_hidden_fields = '<input type="hidden" name="cat_id" value="' . $cat_id . '" />';
 		$s_hidden_fields .= '<input type="hidden" name="action" value="delete_stats" />';
@@ -602,9 +602,8 @@ elseif($action == 'delete_comments')
 		$cat_name = $index[$cat_id]['cat_name'];
 		$cat_name = str_replace('&nbsp;&nbsp;|___&nbsp;', '', $cat_name);
 
-		$template->set_filenames(array(
-			'confirm_body' => DL_TPL_PATH . 'dl_confirm_body.tpl')
-		);
+		$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'dl_confirm_body.tpl');
+		$template->set_filenames(array('confirm_body' => $template_to_parse));
 
 		$s_hidden_fields = '<input type="hidden" name="cat_id" value="' . $cat_id . '" />';
 		$s_hidden_fields .= '<input type="hidden" name="action" value="delete_comments" />';

@@ -1,13 +1,19 @@
 <?php
-/***************************************************************************
- *                            activity_trophy_holders.php
- *                           -----------------------------
- *		Version			: 1.1.0
- *		Email			: austin@phpbb-amod.com
- *		Site			: http://phpbb-amod.com
- *		Copyright		: aUsTiN-Inc 2003/5
- *
- ***************************************************************************/
+/**
+*
+* @package Icy Phoenix
+* @version $Id$
+* @copyright (c) 2008 Icy Phoenix
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+*
+*/
+
+/**
+*
+* @Extra credits for this file
+* aUsTiN-Inc 2003/5 (austin@phpbb-amod.com) - (http://phpbb-amod.com)
+*
+*/
 
 if (!defined('IN_ICYPHOENIX'))
 {
@@ -22,7 +28,8 @@ VersionCheck();
 BanCheck();
 /* End Restriction Checks */
 
-$template->set_filenames(array('body' => ACTIVITY_TPL_PATH . 'activity_trophy_holders_body.tpl'));
+$template_to_parse = $class_plugins->get_tpl_file(ACTIVITY_TPL_PATH, 'activity_trophy_holders_body.tpl');
+$template->set_filenames(array('body' => $template_to_parse));
 
 $template->assign_vars(array(
 	'U_TROPHY_PAGE' => append_sid('activity.' . PHP_EXT . '?page=trophy'),

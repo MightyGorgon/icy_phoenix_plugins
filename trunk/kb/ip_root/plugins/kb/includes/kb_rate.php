@@ -62,7 +62,7 @@ $start = ($start < 0) ? 0 : $start;
 // load header
 include (KB_ROOT_PATH . 'includes/kb_header.' . PHP_EXT);
 
-$template->set_filenames(array('body' => KB_TPL_PATH . 'kb_rate_body.tpl'));
+$template->set_filenames(array('body' => $class_plugins->get_tpl_file(KB_TPL_PATH, 'kb_rate_body.tpl')));
 
 $sql = "SELECT * FROM " . KB_ARTICLES_TABLE . " WHERE article_id = '" . $article_id . "'";
 $result = $db->sql_query($sql);

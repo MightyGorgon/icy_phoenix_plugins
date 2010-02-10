@@ -238,16 +238,16 @@ if (!$print_version)
 {
 	if ($reader_mode)
 	{
-		$template->set_filenames(array('body' => KB_TPL_PATH . 'kb_article_reader.tpl'));
+		$template->set_filenames(array('body' => $class_plugins->get_tpl_file(KB_TPL_PATH, 'kb_article_reader.tpl')));
 	}
 	else
 	{
-		$template->set_filenames(array('body' => KB_TPL_PATH . 'kb_article_body.tpl'));
+		$template->set_filenames(array('body' => $class_plugins->get_tpl_file(KB_TPL_PATH, 'kb_article_body.tpl')));
 	}
 }
 else
 {
-	$template->set_filenames(array('body' => KB_TPL_PATH . 'kb_article_body_print.tpl'));
+	$template->set_filenames(array('body' => $class_plugins->get_tpl_file(KB_TPL_PATH, 'kb_article_body_print.tpl')));
 }
 
 if (!$kb_is_auth['auth_view'] || !$article_title || (!$approved && !$kb_is_auth['auth_mod']) || (!ns_auth_cat($article_category_id) && !$print_version))

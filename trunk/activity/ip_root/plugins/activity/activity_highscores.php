@@ -1,13 +1,19 @@
 <?php
-/***************************************************************************
- *                             activity_highscores.php
- *                            -------------------------
- *		Version			: 1.1.0
- *		Email			: austin@phpbb-amod.com
- *		Site			: http://phpbb-amod.com
- *		Copyright		: aUsTiN-Inc 2003/5
- *
- ***************************************************************************/
+/**
+*
+* @package Icy Phoenix
+* @version $Id$
+* @copyright (c) 2008 Icy Phoenix
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+*
+*/
+
+/**
+*
+* @Extra credits for this file
+* aUsTiN-Inc 2003/5 (austin@phpbb-amod.com) - (http://phpbb-amod.com)
+*
+*/
 
 if (!defined('IN_ICYPHOENIX'))
 {
@@ -31,7 +37,8 @@ if (!defined('IN_ICYPHOENIX'))
 
 		if($p_search)
 		{
-			$template->set_filenames(array('body' => ACTIVITY_TPL_PATH . 'activity_scores.tpl'));
+			$template_to_parse = $class_plugins->get_tpl_file(ACTIVITY_TPL_PATH, 'activity_scores.tpl');
+			$template->set_filenames(array('body' => $template_to_parse));
 
 			$template->assign_vars(array(
 				'TITLE' => '',
@@ -90,7 +97,8 @@ if (!defined('IN_ICYPHOENIX'))
 
 			$highscore_limit = $game_info['highscore_limit'];
 
-			$template->set_filenames(array('body' => ACTIVITY_TPL_PATH . 'activity_scores.tpl'));
+			$template_to_parse = $class_plugins->get_tpl_file(ACTIVITY_TPL_PATH, 'activity_scores.tpl');
+			$template->set_filenames(array('body' => $template_to_parse));
 			$template->assign_vars(array(
 				'TITLE' => $game_info['proper_name'],
 				'L_HIGHSCORE' => $lang['game_highscores'],

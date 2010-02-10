@@ -385,7 +385,7 @@ if ($action == 'detail' && $fav_id)
 
 	//$report_text = str_replace("\n", "<br />", $report_text);
 
-	$template_to_parse = DL_TPL_PATH . 'dl_bt_detail.tpl';
+	$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'dl_bt_detail.tpl');
 
 	$template->assign_vars(array(
 		'L_REPORT_ID' => $lang['Dl_bug_report_id'],
@@ -546,7 +546,7 @@ if ($action == 'detail' && $fav_id)
 */
 if ($action == 'add' && $userdata['session_logged_in'])
 {
-	$template_to_parse = DL_TPL_PATH . 'dl_bt_add.tpl';
+	$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'dl_bt_add.tpl');
 
 	$s_hidden_fields = '<input type="hidden" name="action" value="save" />';
 
@@ -656,7 +656,7 @@ if ($action == 'delete' && $df_id && $fav_id && $allow_bug_mod)
 if (!$action)
 {
 	// Load board header and send default values to template
-	$template_to_parse = DL_TPL_PATH . 'dl_bt_list.tpl';
+	$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'dl_bt_list.tpl');
 
 	$s_select_filter = '<select name="bt_filter">';
 	$s_select_filter .= '<option value="0">' . $lang['Dl_no_filter'] . '</option>';

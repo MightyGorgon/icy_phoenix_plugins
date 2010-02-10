@@ -81,7 +81,7 @@ if (!isset($parse_header) || ($parse_header != false))
 }
 
 // Parse and show the overall header.
-$template->set_filenames(array('kb_header' => KB_TPL_PATH . 'kb_header.tpl'));
+$template->set_filenames(array('kb_header' => $class_plugins->get_tpl_file(KB_TPL_PATH, 'kb_header.tpl')));
 if (isset($_GET['cat']))
 {
 	$category_id = intval($_GET['cat']);

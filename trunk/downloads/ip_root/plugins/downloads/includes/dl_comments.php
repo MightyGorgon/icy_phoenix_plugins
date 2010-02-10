@@ -260,7 +260,8 @@ if (($action == 'edit' && $allow_manage) || ($action == 'post' && !$deny_post))
 
 	page_header($meta_content['page_title'], true);
 
-	$template->set_filenames(array('body' => DL_TPL_PATH . 'dl_edit_comments_body.tpl'));
+	$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'dl_edit_comments_body.tpl');
+	$template->set_filenames(array('body' => $template_to_parse));
 
 	$template->assign_vars(array(
 		'L_DL_COMMENT' => $lang['Dl_comment'],
@@ -387,7 +388,8 @@ if ($action == 'view' || !$action)
 
 		page_header($meta_content['page_title'], true);
 
-		$template->set_filenames(array('body' => DL_TPL_PATH . 'dl_view_comments_body.tpl'));
+		$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'dl_view_comments_body.tpl');
+		$template->set_filenames(array('body' => $template_to_parse));
 
 		$s_hidden_fields = '<input type="hidden" name="cat_id" value="' . $cat_id . '" />';
 		$s_hidden_fields .= '<input type="hidden" name="df_id" value="' . $df_id . '" />';

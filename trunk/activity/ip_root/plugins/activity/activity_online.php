@@ -1,20 +1,28 @@
 <?php
-/***************************************************************************
- *                              activity_online.php
- *                             ---------------------
- *		Version			: 1.1.0
- *		Email			: austin@phpbb-amod.com
- *		Site			: http://phpbb-amod.com
- *		Copyright		: aUsTiN-Inc 2003/5
- *
- ***************************************************************************/
+/**
+*
+* @package Icy Phoenix
+* @version $Id$
+* @copyright (c) 2008 Icy Phoenix
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+*
+*/
+
+/**
+*
+* @Extra credits for this file
+* aUsTiN-Inc 2003/5 (austin@phpbb-amod.com) - (http://phpbb-amod.com)
+*
+*/
 
 if (!defined('IN_ICYPHOENIX'))
 {
 	die('Hacking attempt');
 }
 
-$template->set_filenames(array('activity_online_section' => ACTIVITY_TPL_PATH . 'activity_online_body.tpl'));
+$template_to_parse = $class_plugins->get_tpl_file(ACTIVITY_TPL_PATH, 'activity_online_body.tpl');
+$template->set_filenames(array('activity_online_section' => $template_to_parse));
+
 $expired = time() - 300;
 
 $q = "SELECT COUNT(*) AS total

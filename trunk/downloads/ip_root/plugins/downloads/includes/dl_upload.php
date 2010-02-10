@@ -377,7 +377,7 @@ if ($submit)
 	}
 }
 
-$template_to_parse = DL_TPL_PATH . 'dl_edit_body.tpl';
+$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'dl_edit_body.tpl');
 
 if ($cat_auth['auth_mod'] || $index[$cat_id]['auth_mod'] || $userdata['user_level'] == ADMIN)
 {

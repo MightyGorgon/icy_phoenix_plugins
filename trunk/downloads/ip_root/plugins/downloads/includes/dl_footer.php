@@ -152,7 +152,7 @@ if (sizeof($index) || $cat)
 	/*
 	* load footer template and send default values
 	*/
-	$template->set_filenames(array('dl_footer' => DL_TPL_PATH . 'dl_footer.tpl'));
+	$template->set_filenames(array('dl_footer' => $class_plugins->get_tpl_file(DL_TPL_PATH, 'dl_footer.tpl')));
 
 	$template->assign_vars(array(
 		'L_DL_BLUE_EXPLAIN' => $lang['Dl_blue_explain_foot'],

@@ -1,13 +1,19 @@
 <?php
-/***************************************************************************
- *                             activity_top_five.php
- *                            -----------------------
- *		Version			: 1.1.0
- *		Email			: austin@phpbb-amod.com
- *		Site			: http://phpbb-amod.com
- *		Copyright		: aUsTiN-Inc 2003/5
- *
- ***************************************************************************/
+/**
+*
+* @package Icy Phoenix
+* @version $Id$
+* @copyright (c) 2008 Icy Phoenix
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+*
+*/
+
+/**
+*
+* @Extra credits for this file
+* aUsTiN-Inc 2003/5 (austin@phpbb-amod.com) - (http://phpbb-amod.com)
+*
+*/
 
 if (!defined('IN_ICYPHOENIX'))
 {
@@ -23,14 +29,17 @@ VersionCheck();
 BanCheck();
 /* Start File Specific Disable */
 if(($userdata['user_level'] != ADMIN) && ($config['ina_disable_top5_page']))
+{
 	message_die(GENERAL_ERROR, $lang['disabled_page_error'], $lang['ban_error']);
+}
 /* End File Specific Disable */
 /* End Restriction Checks */
 
 $start = (isset($_GET['start'])) ? intval($_GET['start']) : 0;
 $finish = $config['games_per_page'];
 
-$template->set_filenames(array('body' => ACTIVITY_TPL_PATH . 'activity_top5.tpl'));
+$template_to_parse = $class_plugins->get_tpl_file(ACTIVITY_TPL_PATH, 'activity_top5.tpl');
+$template->set_filenames(array('body' => $template_to_parse));
 
 	$template->assign_block_vars('top_five_keys', array(
 		'TROPHY_TITLE' => $lang['top_five_1'],

@@ -26,7 +26,8 @@ define('ACTIVITY_ROOT_PATH', IP_ROOT_PATH . ACTIVITY_PLUGIN_PATH);
 
 define('ACTIVITY_GAMES_PATH', ACTIVITY_ROOT_PATH);
 define('ACTIVITY_IMAGES_PATH', ACTIVITY_ROOT_PATH . 'images/');
-define('ACTIVITY_TPL_PATH', 'activity/');
+//define('ACTIVITY_TPL_PATH', 'activity/');
+define('ACTIVITY_TPL_PATH', '../../' . ACTIVITY_PLUGIN_PATH . 'templates/');
 define('ACTIVITY_ADM_PATH', IP_ROOT_PATH . ACTIVITY_PLUGIN_PATH . ADM . '/');
 define('ACTIVITY_ADM_TPL_PATH', '../../' . ACTIVITY_PLUGIN_PATH . ADM . '/templates/');
 
@@ -46,6 +47,9 @@ define('INA_RATINGS', $table_prefix . 'ina_rating_votes');
 define('INA_FAVORITES', $table_prefix . 'ina_favorites');
 define('INA_HOF', $table_prefix . 'ina_hall_of_fame');
 define('INA_CHAT', $table_prefix . 'ina_chat');
+
+include(IP_ROOT_PATH . 'includes/class_plugins.' . PHP_EXT);
+$class_plugins = new class_plugins();
 
 include_once(IP_ROOT_PATH . 'includes/bbcode.' . PHP_EXT);
 include_once(IP_ROOT_PATH . 'includes/functions_admin.' . PHP_EXT);

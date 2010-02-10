@@ -45,8 +45,8 @@ if (!defined('IN_ICYPHOENIX'))
 			}
 		}
 
-	$template->set_filenames(array('body' => ACTIVITY_TPL_PATH . 'activity_gambling_body.tpl'));
-
+		$template_to_parse = $class_plugins->get_tpl_file(ACTIVITY_TPL_PATH, 'activity_gambling_body.tpl');
+		$template->set_filenames(array('body' => $template_to_parse));
 
 		if($_GET['mode'] == 'stats')
 		{

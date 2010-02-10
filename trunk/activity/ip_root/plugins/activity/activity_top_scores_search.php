@@ -34,7 +34,8 @@ if(($config['ina_disable_trophy_page']) && ($userdata['user_level'] != ADMIN)) m
 $search = $_GET['user'];
 if ($search)
 {
-	$template->set_filenames(array('body' => ACTIVITY_TPL_PATH . 'activity_top_scores_search_body.tpl'));
+	$template_to_parse = $class_plugins->get_tpl_file(ACTIVITY_TPL_PATH, 'activity_top_scores_search_body.tpl');
+	$template->set_filenames(array('body' => $template_to_parse));
 
 	$search = str_replace("%APOS%", "\'", $search);
 	$search = stripslashes($search);

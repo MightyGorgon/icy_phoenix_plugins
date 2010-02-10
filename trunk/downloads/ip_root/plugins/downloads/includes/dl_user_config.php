@@ -205,7 +205,7 @@ if ($total_favorites)
 }
 $db->sql_freeresult($result);
 
-$template_to_parse = DL_TPL_PATH . 'dl_user_config_body.tpl';
+$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'dl_user_config_body.tpl');
 
 if (!$dl_config['sort_preform'])
 {

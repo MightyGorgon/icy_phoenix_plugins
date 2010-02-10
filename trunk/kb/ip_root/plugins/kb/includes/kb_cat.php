@@ -106,7 +106,7 @@ switch ($kb_config['news_sort'])
 		break;
 }
 
-$template->set_filenames(array('body' => KB_TPL_PATH . 'kb_cat_body.tpl'));
+$template->set_filenames(array('body' => $class_plugins->get_tpl_file(KB_TPL_PATH, 'kb_cat_body.tpl')));
 
 if (!$category_name)
 {

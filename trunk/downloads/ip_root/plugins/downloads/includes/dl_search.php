@@ -87,7 +87,7 @@ $search_fields = array('all', 'file_name', 'description', 'long_desc');
 */
 if ($search_keywords != '' && !$search_author)
 {
-	$template_to_parse = DL_TPL_PATH . 'dl_search_results.tpl';
+	$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'dl_search_results.tpl');
 
 	$search_keywords = strtolower($search_keywords);
 	$search_keywords = str_replace('sql', '', trim($search_keywords));
@@ -219,7 +219,7 @@ if ($search_keywords != '' && !$search_author)
 }
 elseif ($search_author)
 {
-	$template_to_parse = DL_TPL_PATH . 'dl_search_results.tpl';
+	$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'dl_search_results.tpl');
 
 	$search_author = str_replace('sql', '', $search_author);
 	$search_author = str_replace('union', '', $search_author);
@@ -371,7 +371,7 @@ else
 	}
 	$s_search_fields .= '</select>';
 
-	$template_to_parse = DL_TPL_PATH . 'dl_search_body.tpl';
+	$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'dl_search_body.tpl');
 
 	$template->assign_vars(array(
 		'L_SEARCH_QUERY' => $lang['Search'] . ' ' . $lang['Downloads'],

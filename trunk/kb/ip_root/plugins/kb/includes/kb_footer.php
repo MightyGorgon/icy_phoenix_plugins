@@ -21,17 +21,16 @@ if (!defined('IN_ICYPHOENIX'))
 }
 
 // Parse and show the overall footer.
+$template->set_filenames(array('kb_footer' => $class_plugins->get_tpl_file(KB_TPL_PATH, 'kb_footer.tpl')));
 
-$template->set_filenames( array( 'kb_footer' => KB_TPL_PATH . 'kb_footer.tpl' ) );
-
-if ( !empty($kb_auth_can) )
+if (!empty($kb_auth_can))
 {
-	$template->assign_block_vars( 'auth_can', array() );
+	$template->assign_block_vars('auth_can', array());
 }
 
-if ( !empty($kb_quick_nav) )
+if (!empty($kb_quick_nav))
 {
-	$template->assign_block_vars( 'quick_nav', array() );
+	$template->assign_block_vars('quick_nav', array());
 }
 
 $template->assign_block_vars('copy_footer', array());
@@ -39,7 +38,7 @@ $template->assign_block_vars('copy_footer', array());
 $quick_nav_action = this_kb_mxurl();
 $s_hidden_vars = '<input type="hidden" name="mode" value="cat" /><input type="hidden" name="page" value="' . $page_id . '" />';
 
-$template->assign_vars( array(
+$template->assign_vars(array(
 	'QUICK_JUMP_ACTION' => $quick_nav_action,
 	'S_HIDDEN_VARS' => $s_hidden_vars,
 	//'SID' => $userdata['session_id'],

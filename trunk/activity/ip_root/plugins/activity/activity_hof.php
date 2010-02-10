@@ -29,7 +29,9 @@ BanCheck();
 /* End Restriction Checks */
 
 $meta_content['page_title'] = $lang['hof_page_title'];
-$template->set_filenames(array('body' => ACTIVITY_TPL_PATH . 'activity_hof_body.tpl'));
+
+$template_to_parse = $class_plugins->get_tpl_file(ACTIVITY_TPL_PATH, 'activity_hof_body.tpl');
+$template->set_filenames(array('body' => $template_to_parse));
 
 $template->assign_vars(array(
 	'TITLE' => $meta_content['page_title'],

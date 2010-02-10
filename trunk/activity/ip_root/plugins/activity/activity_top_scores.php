@@ -119,7 +119,8 @@ if (($delete_action == 'delete_all_scores') && ($userdata['user_level'] == ADMIN
 $search = (isset($_GET['user'])) ? $_GET['user'] : '';
 if (!$search)
 {
-	$template->set_filenames(array('body' => ACTIVITY_TPL_PATH . 'activity_top_scores_body.tpl'));
+	$template_to_parse = $class_plugins->get_tpl_file(ACTIVITY_TPL_PATH, 'activity_top_scores_body.tpl');
+	$template->set_filenames(array('body' => $template_to_parse));
 
 	$q = "SELECT game_name, proper_name, game_id, game_parent, game_popup, win_width, win_height
 				FROM " . iNA_GAMES;

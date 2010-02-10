@@ -252,7 +252,7 @@ if ($kb_config['show_pretext'])
 	// Pull Header/Body info.
 	$pt_header = $kb_config['pt_header'];
 	$pt_body = $kb_config['pt_body'];
-	$template->set_filenames(array('pretext' => KB_TPL_PATH . 'kb_post_pretext.tpl'));
+	$template->set_filenames(array('pretext' => $class_plugins->get_tpl_file(KB_TPL_PATH, 'kb_post_pretext.tpl')));
 	$template->assign_vars(array(
 		'PRETEXT_HEADER' => $pt_header,
 		'PRETEXT_BODY' => $pt_body
@@ -317,7 +317,7 @@ if ($preview)
 	$preview_text = $bbcode->acronym_pass($preview_text);
 	$preview_text = $bbcode->autolink_text($preview_text, '999999');
 
-	$template->set_filenames(array('preview' => KB_TPL_PATH . 'kb_post_preview.tpl'));
+	$template->set_filenames(array('preview' => $class_plugins->get_tpl_file(KB_TPL_PATH, 'kb_post_preview.tpl')));
 
 	$template->assign_vars(array(
 		'L_PREVIEW' => $lang['Preview'],
@@ -350,7 +350,7 @@ $smilies_status = $smilies_on ? $lang['Smilies_are_ON'] : $lang['Smilies_are_OFF
 include(KB_ROOT_PATH . 'includes/kb_header.' . PHP_EXT);
 
 // set up page
-$template->set_filenames(array('body' => KB_TPL_PATH . 'kb_post_body.tpl'));
+$template->set_filenames(array('body' => $class_plugins->get_tpl_file(KB_TPL_PATH, 'kb_post_body.tpl')));
 
 if (!$userdata['session_logged_in'])
 {

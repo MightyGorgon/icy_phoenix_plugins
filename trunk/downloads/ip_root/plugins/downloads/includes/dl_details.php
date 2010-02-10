@@ -210,7 +210,7 @@ if ($index[$cat_id]['comments'] && $dl_mod->cat_auth_comment_read($cat_id))
 /*
 * generate page
 */
-$template_to_parse = DL_TPL_PATH . 'view_dl_body.tpl';
+$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'view_dl_body.tpl');
 
 $user_id = $userdata['user_id'];
 $username = $userdata['username'];
@@ -721,7 +721,7 @@ $template->assign_vars(array(
 	'S_HIDDEN_FIELDS_RATE' => $s_hidden_fields_rate,
 
 	'U_FAVORITE' => $u_favorite,
-	'U_SEARCH' => '<a href="' . append_sid('downloads.' . PHP_EXT . '?view=search') . '"><img src="' . $images['icon_search'] . '" border="0" title="' . $lang['Search'] . '" alt="' . $lang['Search'] . '" /></a>',
+	'U_DL_SEARCH' => '<a href="' . append_sid('downloads.' . PHP_EXT . '?view=search') . '"><img src="' . $images['icon_search'] . '" title="' . $lang['Search'] . '" alt="' . $lang['Search'] . '" border="0" /></a>',
 	'U_DL_CAT' => $dl_mod->dl_nav($cat_id, 'url'),
 	'U_DL_TOP' => append_sid('downloads.' . PHP_EXT))
 );

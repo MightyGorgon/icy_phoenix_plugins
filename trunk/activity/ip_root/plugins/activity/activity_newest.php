@@ -21,7 +21,9 @@ if (!defined('IN_ICYPHOENIX'))
 }
 
 $newest_count = ($user_use_newest_count > 0) ? $user_use_newest_count : $config['ina_new_game_count'];
-$template->set_filenames(array('activity_newest_section' => ACTIVITY_TPL_PATH . 'activity_newest_body.tpl'));
+
+$template_to_parse = $class_plugins->get_tpl_file(ACTIVITY_TPL_PATH, 'activity_newest_body.tpl');
+$template->set_filenames(array('activity_newest_section' => $template_to_parse));
 
 $template->assign_block_vars('newest_only', array(
 	'NEWEST_TITLE' => $lang['newest_title_1'] . $newest_count . $lang['newest_title_2'],

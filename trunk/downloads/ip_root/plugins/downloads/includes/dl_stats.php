@@ -515,7 +515,7 @@ else
 	redirect(append_sid('downloads.' . PHP_EXT));
 }
 
-$template_to_parse = DL_TPL_PATH . 'dl_stat_body.tpl';
+$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'dl_stat_body.tpl');
 
 $template->assign_vars(array(
 	'L_PAGE' => $meta_content['page_title'],

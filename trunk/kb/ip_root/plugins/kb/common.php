@@ -15,6 +15,13 @@ if (!defined('IN_ICYPHOENIX'))
 
 define('KB_PLUGIN_PATH', PLUGINS_PATH . $config['plugins']['kb']['dir']);
 define('KB_ROOT_PATH', IP_ROOT_PATH . KB_PLUGIN_PATH);
+//define('KB_TPL_PATH', 'kb/');
+define('KB_TPL_PATH', '../../' . KB_PLUGIN_PATH . 'templates/');
+define('KB_ADM_PATH', IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['kb']['dir'] . ADM . '/');
+define('KB_ADM_TPL_PATH', '../../' . PLUGINS_PATH . $config['plugins']['kb']['dir'] . ADM . '/templates/');
+
+include(IP_ROOT_PATH . 'includes/class_plugins.' . PHP_EXT);
+$class_plugins = new class_plugins();
 
 include_once(IP_ROOT_PATH . 'includes/functions_post.' . PHP_EXT);
 include_once(IP_ROOT_PATH . 'includes/bbcode.' . PHP_EXT);
