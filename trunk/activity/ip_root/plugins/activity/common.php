@@ -48,8 +48,11 @@ define('INA_FAVORITES', $table_prefix . 'ina_favorites');
 define('INA_HOF', $table_prefix . 'ina_hall_of_fame');
 define('INA_CHAT', $table_prefix . 'ina_chat');
 
-include(IP_ROOT_PATH . 'includes/class_plugins.' . PHP_EXT);
-$class_plugins = new class_plugins();
+if (empty($class_plugins))
+{
+	include(IP_ROOT_PATH . 'includes/class_plugins.' . PHP_EXT);
+	$class_plugins = new class_plugins();
+}
 
 include_once(IP_ROOT_PATH . 'includes/bbcode.' . PHP_EXT);
 include_once(IP_ROOT_PATH . 'includes/functions_admin.' . PHP_EXT);
