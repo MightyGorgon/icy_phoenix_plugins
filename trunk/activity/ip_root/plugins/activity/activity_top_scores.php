@@ -113,7 +113,7 @@ if (($delete_action == 'delete_all_scores') && ($userdata['user_level'] == ADMIN
 			WHERE game_name <> ''";
 	$db->sql_query($q1);
 
-	message_die(GENERAL_MESSAGE, $lang['scores_reset'] . $userdata['username'] . $lang['zero_score'] . $lang['please_click'] . $_SERVER['PHP_SELF'] . $lang['here_to_return'], $lang['success']);
+	message_die(GENERAL_MESSAGE, $lang['scores_reset'] . $userdata['username'] . $lang['zero_score'] . $lang['please_click'] . $_SERVER['SCRIPT_NAME'] . $lang['here_to_return'], $lang['success']);
 }
 
 $search = (isset($_GET['user'])) ? $_GET['user'] : '';

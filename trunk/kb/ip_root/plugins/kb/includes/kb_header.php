@@ -23,7 +23,7 @@ if(!defined('IN_ICYPHOENIX'))
 // NavBox - BEGIN
 $path_kb = '';
 $path_kb_array = array();
-$path_parts2 = pathinfo($_SERVER['PHP_SELF']);
+$path_parts2 = pathinfo($_SERVER['SCRIPT_NAME']);
 $query = $_SERVER['QUERY_STRING'];
 
 if (preg_match("/mode=cat/", $query))

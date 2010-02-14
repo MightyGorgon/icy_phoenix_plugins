@@ -401,7 +401,7 @@ if ($mode == 'save')
 		$db->sql_query($q[$x]);
 	}
 
-	message_die(GENERAL_MESSAGE, $lang['amp_char_settings_saved'] .'<br /><br />'. sprintf($lang['amp_char_settings_back'], '<a href="'. append_sid($_SERVER['PHP_SELF']) .'">', '</a>'));
+	message_die(GENERAL_MESSAGE, $lang['amp_char_settings_saved'] .'<br /><br />'. sprintf($lang['amp_char_settings_back'], '<a href="'. append_sid($_SERVER['SCRIPT_NAME']) .'">', '</a>'));
 }
 
 include(IP_ROOT_PATH . ADM . '/page_footer_admin.' . PHP_EXT);

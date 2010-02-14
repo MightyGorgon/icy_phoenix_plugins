@@ -20,7 +20,7 @@
 		<input type="button" class="button" name="addbbcode10" value="IMG" onclick="bbstyle(10)" />
 		<input type="button" class="button" name="addbbcode12" value="URL" onclick="bbstyle(12)" />
 		<br />{L_FONT_COLOR}:
-		<select name="addbbcode14" onChange="bbfontstyle('[color=' + this.form.addbbcode14.options[this.form.addbbcode14.selectedIndex].value + ']', '[/color]')" >
+		<select name="addbbcode14" onchange="bbfontstyle('[color=' + this.form.addbbcode14.options[this.form.addbbcode14.selectedIndex].value + ']', '[/color]')" >
 			<option style="color:darkred; background-color: darkred" value="darkred" class="genmed">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
 			<option style="color:red; background-color: red" value="red" class="genmed">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
 			<option style="color:orange; background-color: orange" value="orange" class="genmed">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
@@ -37,7 +37,7 @@
 			<option style="color:black; background-color: black" value="black" class="genmed">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
 		</select>
 		&nbsp;{L_FONT_SIZE}:
-		<select name="addbbcode16" onChange="bbfontstyle('[size=' + this.form.addbbcode16.options[this.form.addbbcode16.selectedIndex].value + ']', '[/size]')" >
+		<select name="addbbcode16" onchange="bbfontstyle('[size=' + this.form.addbbcode16.options[this.form.addbbcode16.selectedIndex].value + ']', '[/size]')" >
 			<option value="1" class="genmed">size 1</option>
 			<option value="2" class="genmed">size 2</option>
 			<option value="3" selected class="genmed">size 3 (*)</option>

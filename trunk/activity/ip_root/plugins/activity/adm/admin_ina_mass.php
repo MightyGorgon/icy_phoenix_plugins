@@ -378,7 +378,7 @@ if ($mode == 'save')
 				WHERE game_id > '0'";
 		$db->sql_query($q);
 
-		message_die(GENERAL_MESSAGE, sprintf($lang['mass_settings_complete'], '<a href="'. $_SERVER['PHP_SELF'] .'?sid='. $userdata['session_id'] .'" class="nav">', '</a>'));
+		message_die(GENERAL_MESSAGE, sprintf($lang['mass_settings_complete'], '<a href="'. $_SERVER['SCRIPT_NAME'] .'?sid='. $userdata['session_id'] .'" class="nav">', '</a>'));
 		}
 
 include(IP_ROOT_PATH . ADM . '/page_footer_admin.' . PHP_EXT);
