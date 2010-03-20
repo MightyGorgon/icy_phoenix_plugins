@@ -702,15 +702,15 @@ class dlmod
 					}
 					elseif ($this->dl_index[$cat_id]['parent'] == $parent)
 					{
-						$seperator = '';
+						$separator = '';
 						for ($i = 0; $i < $level; $i++)
 						{
-							$seperator .= ($this->dl_index[$cat_id]['parent'] != 0) ? '&nbsp;&nbsp;|___&nbsp;' : '';
+							$separator .= ($this->dl_index[$cat_id]['parent'] != 0) ? '&nbsp;&nbsp;|___&nbsp;' : '';
 						}
 
 						$tree_dl[$cat_id]['description'] = $this->dl_index[$cat_id]['description'];
 						$tree_dl[$cat_id]['rules'] = $this->dl_index[$cat_id]['rules'];
-						$tree_dl[$cat_id]['cat_name'] = $seperator.$this->dl_index[$cat_id]['cat_name'];
+						$tree_dl[$cat_id]['cat_name'] = $separator.$this->dl_index[$cat_id]['cat_name'];
 						$tree_dl[$cat_id]['nav_path'] = append_sid('downloads.' . PHP_EXT . '?cat=' . $cat_id);
 						$tree_dl[$cat_id]['cat_path'] = $this->dl_index[$cat_id]['path'];
 						$tree_dl[$cat_id]['total'] = intval($this->dl_index[$cat_id]['total']);
@@ -960,21 +960,21 @@ class dlmod
 			$bbcode->allow_bbcode = ($userdata['user_allowbbcode'] && $config['allow_bbcode']) ? true : false;
 			$bbcode->allow_smilies = ($userdata['user_allowsmile'] && $config['allow_smilies']) ? true : false;
 			$temp_title = $bbcode->parse($temp_title);
-			$seperator = '&nbsp;&raquo;&nbsp;';
+			$separator = '&nbsp;&raquo;&nbsp;';
 		}
 		else
 		{
 			$temp_title = preg_replace('/\:[0-9a-z\:]+\]/si', ']', $temp_title);
-			$seperator = '&nbsp;&raquo;&nbsp;';
+			$separator = '&nbsp;&raquo;&nbsp;';
 		}
 
 		if (($this->dl_index[$parent]['auth_view'] || $this->dl_auth[$parent]['auth_view'] || $this->user_level == ADMIN) && $disp_art == 'url')
 		{
-			$path_dl_array[] = $seperator.'<a href="' . $temp_url . '">' . $temp_title . '</a>';
+			$path_dl_array[] = $separator.'<a href="' . $temp_url . '">' . $temp_title . '</a>';
 		}
 		else
 		{
-			$path_dl_array[] = $seperator.$temp_title;
+			$path_dl_array[] = $separator.$temp_title;
 		}
 
 		if ($this->dl_index[$parent]['parent'] != 0)
@@ -1002,15 +1002,15 @@ class dlmod
 				{
 					$cat_name = $this->dl_index[$cat_id]['cat_name'];
 
-					$seperator = '';
+					$separator = '';
 
 					if ($this->dl_index[$cat_id]['parent'] != 0)
 					{
 						for($i = 0; $i < $level; $i++)
 						{
-							$seperator .= '&nbsp;&nbsp;|';
+							$separator .= '&nbsp;&nbsp;|';
 						}
-						$seperator .= '___&nbsp;';
+						$separator .= '___&nbsp;';
 					}
 
 					if ($perm == 'auth_up' || $rem_cat)
@@ -1024,7 +1024,7 @@ class dlmod
 
 					if ($rem_cat != $cat_id)
 					{
-						$catlist .= '<option value="' . $cat_id . '" '.$status.'>'.$seperator.$cat_name.'</option>';
+						$catlist .= '<option value="' . $cat_id . '" '.$status.'>'.$separator.$cat_name.'</option>';
 					}
 				}
 

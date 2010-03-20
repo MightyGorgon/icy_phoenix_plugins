@@ -15,7 +15,6 @@
 *
 */
 
-// CTracker_Ignore: File checked by human
 define('IN_ICYPHOENIX', true);
 
 if (!empty($setmodules))
@@ -697,7 +696,7 @@ if ($action == 'save')
 		$q = "INSERT INTO ". iNA_GAMES ."
 				(game_name, game_mouse, game_keyboard, game_links, game_type, game_path, game_desc, game_charge, game_reward, game_bonus, game_use_gl, game_flash, game_show_score, win_width, win_height, highscore_limit, reverse_list, played, instructions, disabled, install_date, proper_name, cat_id, jackpot, game_popup, game_parent, game_ge_cost)
 				VALUES
-				('". str_replace("\'", "''", $game_name) ."', '". $game_mouse ."', '". $game_keyboard ."', '". $game_links ."', '". $game_type ."', '". $config['ina_default_g_path'] ."$game_name/', '". str_replace("\'", "''", $game_desc) ."', '". $game_charge ."', '". $game_reward ."', '". $game_bonus ."', '". $game_glib ."', '". $game_flash ."', '". $game_allow_scores ."', '". $game_width ."', '". $game_height ."', '". $game_max_scores ."', '". $game_reverse ."', '0', '". str_replace("\'", "''", $game_instr) ."', '". $game_disabled ."', '". time() ."', '". str_replace("\'", "''", $game_proper) ."', '". $game_cat ."', '". $config['ina_jackpot_pool'] ."', '1', '1', '". $game_ge_cost ."')";
+				('". $db->sql_escape($game_name) ."', '". $game_mouse ."', '". $game_keyboard ."', '". $game_links ."', '". $game_type ."', '". $config['ina_default_g_path'] ."$game_name/', '". $db->sql_escape($game_desc) ."', '". $game_charge ."', '". $game_reward ."', '". $game_bonus ."', '". $game_glib ."', '". $game_flash ."', '". $game_allow_scores ."', '". $game_width ."', '". $game_height ."', '". $game_max_scores ."', '". $game_reverse ."', '0', '". $db->sql_escape($game_instr) ."', '". $game_disabled ."', '". time() ."', '". $db->sql_escape($game_proper) ."', '". $game_cat ."', '". $config['ina_jackpot_pool'] ."', '1', '1', '". $game_ge_cost ."')";
 		$db->sql_query($q);
 
 		$message = $lang['admin_game_saved'];
@@ -741,7 +740,7 @@ if ((!$mode) && (!$action))
 		if(isset($_POST['submit']))
 		{
 			$sql = "UPDATE " . CONFIG_TABLE . "
-					SET config_value = '" . str_replace("\'", "''", $new[$config_name]) . "'
+					SET config_value = '" . $db->sql_escape($new[$config_name]) . "'
 					WHERE config_name = '$config_name'";
 			$db->sql_query($sql);
 		}

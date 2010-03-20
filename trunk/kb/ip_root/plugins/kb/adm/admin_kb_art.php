@@ -15,7 +15,6 @@
 *
 */
 
-// CTracker_Ignore: File Checked By Human
 // Tell the Security Scanner that reachable code in this file is not a security issue
 
 define('IN_ICYPHOENIX', true);
@@ -38,12 +37,10 @@ require(IP_ROOT_PATH . 'adm/pagestart.' . PHP_EXT);
 
 include(IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['kb']['dir'] . 'common.' . PHP_EXT);
 
-if (isset($_POST['mode']) || isset($_GET['mode']))
+$mode = request_var('mode', '');
+if (empty($mode))
 {
-	$mode = (isset($_POST['mode'])) ? $_POST['mode'] : $_GET['mode'];
-}
-else
-{
+	$mode = '';
 	if ($approve)
 	{
 		$mode = 'approve';
@@ -56,15 +53,12 @@ else
 	{
 		$mode = 'delete';
 	}
-	else
-	{
-		$mode = '';
-	}
 }
 
-$start = (isset($_GET['start'])) ? intval($_GET['start']) : 0;
+$start = request_var('start', 0);
 $start = ($start < 0) ? 0 : $start;
-$article_id = intval($_GET['a']);
+
+$article_id = request_var('a', 0);
 
 switch ($mode)
 {

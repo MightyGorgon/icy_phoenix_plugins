@@ -187,7 +187,7 @@ if (!$search)
 				$fix_user_n = str_replace("'", "%APOS%", $user_n);
 				$user_color = colorize_username($u_data[$b]['user_id'], $u_data[$b]['username'], $u_data[$b]['user_color'], $u_data[$b]['user_active'], false, true);
 
-				$pmto = append_sid('privmsg.' . PHP_EXT . '?mode=post&amp;' . POST_USERS_URL . '=' . $u_data[$b]['user_id']);
+				$pmto = append_sid(CMS_PAGE_PRIVMSG . '?mode=post&amp;' . POST_USERS_URL . '=' . $u_data[$b]['user_id']);
 				$pm = '<a href="' . $pmto . '"><img src="' . $images['icon_pm'] . '" alt="' . $lang['Send_private_message'] . '" title="' . $lang['Send_private_message'] . '" border="0" /></a>';
 				$pro = append_sid(CMS_PAGE_PROFILE . '?mode=viewprofile&amp;' . POST_USERS_URL . '=' . $u_data[$b]['user_id']);
 				$profile = '<a href="' . $pro . '"><img src="' . $images['icon_profile'] . '" alt="' . $lang['Profile'] . '" title="' . $lang['Profile'] . '" border="0" /></a>';

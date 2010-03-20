@@ -31,7 +31,7 @@ $cms_page['global_blocks'] = (!empty($cms_config_layouts[$cms_page['page_id']]['
 $cms_auth_level = (isset($cms_config_layouts[$cms_page['page_id']]['view']) ? $cms_config_layouts[$cms_page['page_id']]['view'] : AUTH_ALL);
 check_page_auth($cms_page['page_id'], $cms_auth_level);
 
-include(IP_ROOT_PATH . KB_PLUGIN_PATH . 'common.' . PHP_EXT);
+include(IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['kb']['dir'] . 'common.' . PHP_EXT);
 
 // Instanciate custom fields
 $kb_custom_field = new kb_custom_field();
@@ -45,15 +45,13 @@ $page_num = ($page_num > 0) ? ($page_num - 1) : 0;
 
 // Print version
 $print_version = request_var('print', '');
-$print_version = htmlspecialchars($print_version);
 
 // Mode
 $mode = request_var('mode', '');
-$mode = ((htmlspecialchars($mode) != 'cat') || (intval($_GET['cat']) != 0)) ? htmlspecialchars($mode) : '';
+$mode = (($mode != 'cat') || (intval($_GET['cat']) != 0)) ? $mode : '';
 
 // Stats
 $stats = request_var('stats', '');
-$stats = htmlspecialchars($stats);
 
 $reader_mode = false;
 
@@ -99,7 +97,7 @@ else
 	// load header
 	include(KB_ROOT_PATH . 'includes/kb_header.' . PHP_EXT);
 
-	$template->set_filenames(array('body' => KB_TPL_PATH . 'kb_index_body.tpl'));
+	$template->set_filenames(array('body' => $class_plugins->get_tpl_file(KB_TPL_PATH, 'kb_index_body.tpl')));
 
 	$template->assign_vars(array(
 		'L_CATEGORY' => $lang['Category'],

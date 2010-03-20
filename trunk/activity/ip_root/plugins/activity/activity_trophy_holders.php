@@ -56,7 +56,7 @@ while($row = $db -> sql_fetchrow($r))
 	$user_c = colorize_username($row['user_id'], $row['username'], $row['user_color'], $row['user_active'], true);
 	$trophies = $row['user_trophies'];
 
-	$pmto = append_sid('privmsg.' . PHP_EXT . '?mode=post&amp;' . POST_USERS_URL . '=' . $row[user_id]);
+	$pmto = append_sid(CMS_PAGE_PRIVMSG . '?mode=post&amp;' . POST_USERS_URL . '=' . $row[user_id]);
 	$pm = '<a href="' . $pmto . '"><img src="' . $images['icon_pm'] . '" alt="' . $lang['Send_private_message'] . '" title="' . $lang['Send_private_message'] . '" alt="" /></a>';
 	$pro = append_sid(CMS_PAGE_PROFILE . '?mode=viewprofile&amp;' . POST_USERS_URL . '=' . $row[user_id]);
 	$profile = '<a href="' . $pro . '"><img src="' . $images['icon_profile'] . '" alt="' . $lang['Profile'] . '" title="' . $lang['Profile'] . '" /></a>';

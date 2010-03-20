@@ -38,7 +38,7 @@
 			&#8226; <a href="{newest.COMMENTS}" class="nav">{newest.L_COMMENTS}</a>
 			{newest.CHALLENGE}
 			{newest.LIST}
-			<br />{newest.SEPERATOR}<a href="{newest.STATS}" class="nav">{newest.INFO}</a><br />
+			<br />{newest.SEPARATOR}<a href="{newest.STATS}" class="nav">{newest.INFO}</a><br />
 			{newest.GAMES_PLAYED} {newest.I_PLAYED}
 			<!-- IF newest.POP_PIC --><br /><center>{newest.POP_PIC}</center><!-- ENDIF -->
 		</div>
@@ -46,7 +46,7 @@
 	<td class="row-post">
 		<div class="post-text">
 		<b>{newest.DESC2}:</b><br />{newest.DESC}<br /><br />
-		<b>{newest.RATING_TITLE}</b><br />{newest.SEPERATOR}{newest.RATING_SENT}  {newest.RATING_SUBMIT}  {newest.RATING_IMAGE}<br />
+		<b>{newest.RATING_TITLE}</b><br />{newest.SEPARATOR}{newest.RATING_SENT}  {newest.RATING_SUBMIT}  {newest.RATING_IMAGE}<br />
 		</div>
 	</td>
 </tr>

@@ -21,29 +21,29 @@ if (!defined('IN_ICYPHOENIX'))
 	die('Hacking attempt');
 }
 
-if ($action == 'save' && $submit)
+if (($action == 'save') && $submit)
 {
-	$approve = ( isset($_POST['approve']) ) ? intval($_POST['approve']) : 0;
-	$description = ( isset($_POST['description']) ) ? trim($_POST['description']) : '';
-	$file_traffic = ( isset($_POST['file_traffic']) ) ? intval($_POST['file_traffic']) : 0;
-	$file_traffic_range = ( isset($_POST['file_traffic_range']) ) ? $_POST['file_traffic_range'] : 'KB';
+	$approve = request_var('approve', 0);
+	$description = request_var('description', '', true);
+	$file_traffic = request_var('file_traffic', 0);
+	$file_traffic_range = request_var('file_traffic_range', 'KB', true);
 
-	$long_desc = ( isset($_POST['long_desc']) ) ? trim($_POST['long_desc']) : '';
-	$file_name = ( isset($_POST['file_name']) ) ? trim($_POST['file_name']) : '';
-	$file_free = ( isset($_POST['file_free']) ) ? intval($_POST['file_free']) : 0;
-	$file_extern = ( isset($_POST['file_extern']) ) ? intval($_POST['file_extern']) : 0;
+	$long_desc = request_var('long_desc', '', true);
+	$file_name = request_var('file_name', '', true);
+	$file_free = request_var('file_free', 0);
+	$file_extern = request_var('file_extern', 0);
 
-	$test = ( isset($_POST['test']) ) ? trim($_POST['test']) : '';
-	$require = ( isset($_POST['require']) ) ? trim($_POST['require']) : '';
-	$todo = ( isset($_POST['todo']) ) ? trim($_POST['todo']) : '';
-	$warning = ( isset($_POST['warning']) ) ? trim($_POST['warning']) : '';
-	$mod_desc = ( isset($_POST['mod_desc']) ) ? trim($_POST['mod_desc']) : '';
-	$mod_list = ( $_POST['mod_list'] == 1 ) ? 1 : 0;
+	$test = request_var('test', '', true);
+	$require = request_var('require', '', true);
+	$todo = request_var('todo', '', true);
+	$warning = request_var('warning', '', true);
+	$mod_desc = request_var('mod_desc', '', true);
+	$mod_list = ($_POST['mod_list'] == 1) ? 1 : 0;
 
-	$send_notify = ( isset($_POST['send_notify']) ) ? intval($_POST['send_notify']) : 0;
-	$change_time = (isset($_POST['change_time'])) ? intval($_POST['change_time']) : 0;
-	$disable_popup_notify = (isset($_POST['disable_popup_notify'])) ? intval($_POST['disable_popup_notify']) : 0;
-	$del_thumb = ( isset($_POST['del_thumb']) ) ? intval($_POST['del_thumb']) : 0;
+	$send_notify = request_var('send_notify', 0);
+	$change_time = request_var('change_time', 0);
+	$disable_popup_notify = request_var('disable_popup_notify', 0);
+	$del_thumb = request_var('del_thumb', 0);
 
 	$mod_desc = $bbcode->make_clickable($mod_desc);
 	$warning = $bbcode->make_clickable($warning);
@@ -56,12 +56,12 @@ if ($action == 'save' && $submit)
 	$mod_desc = prepare_message(trim($mod_desc), $html_on, $bbcode_on, $smile_on);
 	$warning = prepare_message(trim($warning), $html_on, $bbcode_on, $smile_on);
 
-	$hacklist = (isset($_POST['hacklist'])) ? intval($_POST['hacklist']) : 0;
-	$hack_author = (isset($_POST['hack_author'])) ? trim($_POST['hack_author']) : "";
-	$hack_author_email = (isset($_POST['hack_author_email'])) ? trim($_POST['hack_author_email']) : "";
-	$hack_author_website = (isset($_POST['hack_author_website'])) ? trim($_POST['hack_author_website']) : "";
-	$hack_version = (isset($_POST['hack_version'])) ? trim($_POST['hack_version']) : "";
-	$hack_dl_url = (isset($_POST['hack_dl_url'])) ? trim($_POST['hack_dl_url']) : "";
+	$hacklist = request_var('hacklist', 0);
+	$hack_author = request_var('hack_author', '', true);
+	$hack_author_email = request_var('hack_author_email', '', true);
+	$hack_author_website = request_var('hack_author_website', '', true);
+	$hack_version = request_var('hack_version', '', true);
+	$hack_dl_url = request_var('hack_dl_url', '', true);
 
 	if ($file_traffic_range == 'KB')
 	{
@@ -181,7 +181,7 @@ if ($action == 'save' && $submit)
 
 				$sql = "INSERT INTO " . DL_STATS_TABLE . "
 					(cat_id, id, user_id, username, traffic, direction, user_ip, browser, time_stamp) VALUES
-					($new_cat, $df_id, " . $userdata['user_id'] . ", '" . str_replace("\'", "''", $userdata['username']) . "', " . $file_size . ", 2, '" . $userdata['session_ip'] . "', '" . str_replace("\'", "''", $browser) . "', " . time() . ")";
+					($new_cat, $df_id, " . $userdata['user_id'] . ", '" . $db->sql_escape($userdata['username']) . "', " . $file_size . ", 2, '" . $userdata['session_ip'] . "', '" . $db->sql_escape($browser) . "', " . time() . ")";
 				$db->sql_query($sql);
 			}
 		}
@@ -200,20 +200,20 @@ if ($action == 'save' && $submit)
 	if($df_id && $new_cat)
 	{
 		$sql = "UPDATE " . DOWNLOADS_TABLE . " SET
-			description = '" . str_replace("\'", "''", $description) . "',
-			file_traffic = '" . str_replace("\'", "''", $file_traffic) . "',
-			long_desc = '" . str_replace("\'", "''", $long_desc) . "',
-			file_name = '" . str_replace("\'", "''", $file_name) . "',
-			free = '" . str_replace("\'", "''", $file_free) . "',
-			extern = '" . str_replace("\'", "''", $file_extern) . "',
-			cat = '" . str_replace("\'", "''", $new_cat) . "',
-			approve = '" . str_replace("\'", "''", $approve) . "',
-			hacklist = '" . str_replace("\'", "''", $hacklist) . "',
-			hack_author = '" . str_replace("\'", "''", $hack_author) . "',
-			hack_author_email = '" . str_replace("\'", "''", $hack_author_email) . "',
-			hack_author_website = '" . str_replace("\'", "''", $hack_author_website) . "',
-			hack_version = '" . str_replace("\'", "''", $hack_version) . "',
-			hack_dl_url = '" . str_replace("\'", "''", $hack_dl_url) . "',
+			description = '" . $db->sql_escape($description) . "',
+			file_traffic = '" . $db->sql_escape($file_traffic) . "',
+			long_desc = '" . $db->sql_escape($long_desc) . "',
+			file_name = '" . $db->sql_escape($file_name) . "',
+			free = '" . $db->sql_escape($file_free) . "',
+			extern = '" . $db->sql_escape($file_extern) . "',
+			cat = '" . $db->sql_escape($new_cat) . "',
+			approve = '" . $db->sql_escape($approve) . "',
+			hacklist = '" . $db->sql_escape($hacklist) . "',
+			hack_author = '" . $db->sql_escape($hack_author) . "',
+			hack_author_email = '" . $db->sql_escape($hack_author_email) . "',
+			hack_author_website = '" . $db->sql_escape($hack_author_website) . "',
+			hack_version = '" . $db->sql_escape($hack_version) . "',
+			hack_dl_url = '" . $db->sql_escape($hack_dl_url) . "',
 			file_size = $file_size";
 
 		if (!$change_time)
@@ -223,12 +223,12 @@ if ($action == 'save' && $submit)
 
 		if ($index[$cat_id]['allow_mod_desc'] || $userdata['user_level'] == ADMIN)
 		{
-			$sql .= ", test = '" . str_replace("\'", "''", $test) . "',
-				req = '" . str_replace("\'", "''", $require) . "',
-				todo = '" . str_replace("\'", "''", $todo) . "',
-				warning = '" . str_replace("\'", "''", $warning) . "',
-				mod_desc = '" . str_replace("\'", "''", $mod_desc) . "',
-				mod_list = '" . str_replace("\'", "''", $mod_list) . "'";
+			$sql .= ", test = '" . $db->sql_escape($test) . "',
+				req = '" . $db->sql_escape($require) . "',
+				todo = '" . $db->sql_escape($todo) . "',
+				warning = '" . $db->sql_escape($warning) . "',
+				mod_desc = '" . $db->sql_escape($mod_desc) . "',
+				mod_list = '" . $db->sql_escape($mod_list) . "'";
 		}
 
 		$sql .= " WHERE id = $df_id";
@@ -355,7 +355,7 @@ if ($action == 'save' && $submit)
 			$thumb_message = '<br />' . $lang['Dl_thumb_upload'];
 
 			$sql = "UPDATE " . DOWNLOADS_TABLE . "
-				SET thumbnail = '" . str_replace("\'", "''", $df_id . '_' . $thumb_name) . "'
+				SET thumbnail = '" . $db->sql_escape($df_id . '_' . $thumb_name) . "'
 				WHERE id = $df_id";
 			$db->sql_query($sql);
 		}

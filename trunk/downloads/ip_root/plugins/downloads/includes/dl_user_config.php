@@ -32,14 +32,14 @@ if (!$userdata['session_logged_in'])
 //
 if ($submit)
 {
-	$user_allow_new_download_popup = (isset($_POST['user_allow_new_download_popup'])) ? intval($_POST['user_allow_new_download_popup']) : 0;
-	$user_allow_fav_download_popup = (isset($_POST['user_allow_fav_download_popup'])) ? intval($_POST['user_allow_fav_download_popup']) : 0;
-	$user_allow_new_download_email = (isset($_POST['user_allow_new_download_email'])) ? intval($_POST['user_allow_new_download_email']) : 0;
-	$user_allow_fav_download_email = (isset($_POST['user_allow_fav_download_email'])) ? intval($_POST['user_allow_fav_download_email']) : 0;
-	$user_dl_note_type = (isset($_POST['user_dl_note_type'])) ? intval($_POST['user_dl_note_type']) : 0;
-	$user_dl_sort_fix = (isset($_POST['user_dl_sort_fix'])) ? intval($_POST['user_dl_sort_fix']) : 0;
-	$user_dl_sort_opt = (isset($_POST['user_dl_sort_opt'])) ? intval($_POST['user_dl_sort_opt']) : 0;
-	$user_dl_sort_dir = (isset($_POST['user_dl_sort_dir'])) ? intval($_POST['user_dl_sort_dir']) : 0;
+	$user_allow_new_download_popup = request_var('user_allow_new_download_popup', 0);
+	$user_allow_fav_download_popup = request_var('user_allow_fav_download_popup', 0);
+	$user_allow_new_download_email = request_var('user_allow_new_download_email', 0);
+	$user_allow_fav_download_email = request_var('user_allow_fav_download_email', 0);
+	$user_dl_note_type = request_var('user_dl_note_type', 0);
+	$user_dl_sort_fix = request_var('user_dl_sort_fix', 0);
+	$user_dl_sort_opt = request_var('user_dl_sort_opt', 0);
+	$user_dl_sort_dir = request_var('user_dl_sort_dir', 0);
 
 	$sql = "UPDATE " . USERS_TABLE . " SET
 		user_allow_new_download_popup = $user_allow_new_download_popup,
@@ -64,7 +64,7 @@ if ($submit)
 			$cash_dbfield = $row['cash_dbfield'];
 
 			$cash_to_traffic = $row['cash_to_traffic'];
-			$cash_to_traffic_in = intval($_POST['cash_to_traffic_'.$cash_id]);
+			$cash_to_traffic_in = request_var('cash_to_traffic_' . $cash_id, 0);
 			$cash_to_traffic_in = ($cash_to_traffic_in > $userdata[$cash_dbfield]) ? $userdata[$cash_dbfield] : $cash_to_traffic_in;
 
 			$add_traffic = $cash_to_traffic * $cash_to_traffic_in;

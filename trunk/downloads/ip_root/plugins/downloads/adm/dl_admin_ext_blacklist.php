@@ -28,12 +28,12 @@ if ($cancel)
 
 if($action == 'add')
 {
-	$extention = (isset($_POST['extention'])) ? htmlspecialchars($_POST['extention']) : "";
+	$extention = request_var('extention', '', true);
 
 	if ($extention)
 	{
 		$sql = "SELECT * FROM " . DL_EXT_BLACKLIST . "
-			WHERE extention = '$extention'";
+			WHERE extention = '" . $db->sql_escape($extention) . "'";
 		$result = $db->sql_query($sql);
 		$ext_exist = $db->sql_numrows($result);
 		$db->sql_freeresult($result);
@@ -41,7 +41,7 @@ if($action == 'add')
 		if (!$ext_exist)
 		{
 			$sql = "INSERT INTO " . DL_EXT_BLACKLIST . "
-				(extention) VALUES ('".str_replace("\'", "", $extention)."')";
+				(extention) VALUES ('" . $db->sql_escape($extention) . "')";
 			$db->sql_query($sql);
 		}
 	}

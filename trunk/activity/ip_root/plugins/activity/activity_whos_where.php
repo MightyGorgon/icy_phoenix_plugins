@@ -99,7 +99,7 @@ while($row = $db -> sql_fetchrow($r))
 	//$mailto = ($config['board_email_form']) ? append_sid(CMS_PAGE_PROFILE . '?mode=email&amp;' . POST_USERS_URL . '=' . $row1['user_id']) : 'mailto:' . $row1['user_email'];
 	$mailto = ($config['board_email_form'] && !empty($row1['user_viewemail'])) ? append_sid(CMS_PAGE_PROFILE . '?mode=email&amp;' . POST_USERS_URL . '=' . $row1['user_id']) : '';
 	$mail = ($row1['user_email'] && !empty($row1['user_viewemail'])) ? '<a href="' . $mailto . '"><img src="'. $images['icon_email'] .'" alt="'. $lang['Send_email'] .'" title="' . $lang['Send_email'] . '" border="0" /></a>' : '';
-	$pmto = append_sid('privmsg.' . PHP_EXT . '?mode=post&amp;' . POST_USERS_URL . '=' . $row1[user_id]);
+	$pmto = append_sid(CMS_PAGE_PRIVMSG . '?mode=post&amp;' . POST_USERS_URL . '=' . $row1[user_id]);
 	$pm = '<a href="' . $pmto . '"><img src="' . $images['icon_pm'] . '" alt="' . $lang['Send_private_message'] . '" title="' . $lang['Send_private_message'] . '" /></a>';
 	$pro = append_sid(CMS_PAGE_PROFILE . '?mode=viewprofile&amp;' . POST_USERS_URL . '=' . $row1[user_id]);
 	$profile = '<a href="' . $pro . '"><img src="' . $images['icon_profile'] . '" alt="' . $lang['Profile'] . '" title="' . $lang['Profile'] . '" /></a>';

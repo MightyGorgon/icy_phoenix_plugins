@@ -15,7 +15,6 @@
 *
 */
 
-// CTracker_Ignore: File checked by human
 define('IN_ICYPHOENIX', true);
 
 if (!empty($setmodules))
@@ -1393,7 +1392,7 @@ if (($mode == 'main') || !$mode)
 	$date = $row['date'];
 
 	$q3 = "INSERT INTO ". $table_prefix ."scores_fixer
-			 VALUES ('$game_name', '". str_replace("\'", "''", $player) ."', '$score', '$date')";
+			 VALUES ('$game_name', '". $db->sql_escape($player) ."', '$score', '$date')";
 	$r3 = $db->sql_query($q3);
 
 	$f++;
@@ -1415,7 +1414,7 @@ if (($mode == 'main') || !$mode)
 	$date = $row['date'];
 
 	$q3 = "INSERT INTO ". iNA_SCORES ."
-			 VALUES ('$game_name', '". str_replace("\'", "''", $player) ."', '$score', '$date')";
+			 VALUES ('$game_name', '". $db->sql_escape($player) ."', '$score', '$date')";
 	$r3 = $db->sql_query($q3);
 
 	$f++;

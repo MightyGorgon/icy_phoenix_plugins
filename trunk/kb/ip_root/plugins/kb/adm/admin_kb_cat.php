@@ -70,12 +70,10 @@ if (!function_exists('get_forums'))
 	}
 }
 
-if (isset($_POST['mode']) || isset($_GET['mode']))
+$mode = request_var('mode', '');
+if (empty($mode))
 {
-	$mode = (isset($_POST['mode'])) ? $_POST['mode'] : $_GET['mode'];
-}
-else
-{
+	$mode = '';
 	if ($create)
 	{
 		$mode = 'create';
@@ -88,10 +86,6 @@ else
 	{
 		$mode = 'delete';
 	}
-	else
-	{
-		$mode = '';
-	}
 }
 
 switch ($mode)
@@ -100,12 +94,11 @@ switch ($mode)
 
 		if (!$_POST['submit'])
 		{
-			$new_cat_name = stripslashes($_POST['new_cat_name']);
+			$new_cat_name = request_var('new_cat_name', '', true);
 
 			// Generate page
 
-			$template->set_filenames(array('body' => KB_ADM_TPL_PATH . 'kb_cat_edit_body.tpl')
-				);
+			$template->set_filenames(array('body' => KB_ADM_TPL_PATH . 'kb_cat_edit_body.tpl'));
 
 			$template->assign_block_vars('switch_cat', array());
 
@@ -163,31 +156,32 @@ switch ($mode)
 				)
 			);
 		}
-		else if ($_POST['submit'])
+		elseif ($_POST['submit'])
 		{
-			$cat_name = trim($_POST['catname']);
+			$cat_name = request_var('catname', '', true);
 
 			if (!$cat_name)
 			{
 				echo "Please put a category name in!";
 			}
 
-			$cat_desc = $_POST['catdesc'];
-			$parent = intval($_POST['parent']);
-			$comments_forum_id = intval($_POST['forum_id']);
+			$cat_desc = request_var('catdesc', '', true);
+			$parent = request_var('parent', 0);
+			$comments_forum_id = request_var('forum_id', 0);
 
 			if ($comments_forum_id == 0)
 			{
 				mx_message_die(GENERAL_MESSAGE , 'Select a Forum');
 			}
-			$view_level = intval($_POST['auth_view']);
-			$post_level = intval($_POST['auth_post']);
-			$rate_level = intval($_POST['auth_rate']);
-			$comment_level = intval($_POST['auth_comment']);
-			$edit_level = intval($_POST['auth_edit']);
-			$delete_level = intval($_POST['auth_delete']);
-			$approval_level = intval($_POST['auth_approval']);
-			$approval_edit_level = intval($_POST['auth_approval_edit']);
+
+			$view_level = request_var('auth_view', 0);
+			$post_level = request_var('auth_post', 0);
+			$rate_level = request_var('auth_rate', 0);
+			$comment_level = request_var('auth_comment', 0);
+			$edit_level = request_var('auth_edit', 0);
+			$delete_level = request_var('auth_delete', 0);
+			$approval_level = request_var('auth_approval', 0);
+			$approval_edit_level = request_var('auth_approval_edit', 0);
 
 			$sql = "SELECT MAX(cat_order) AS cat_order
 			FROM " . KB_CATEGORIES_TABLE . " WHERE parent = $parent";
@@ -199,8 +193,7 @@ switch ($mode)
 			}
 			$cat_order = $id['cat_order'] + 10;
 
-			$sql = "INSERT INTO " . KB_CATEGORIES_TABLE . " (category_name, category_details, number_articles, parent, cat_order, auth_view, auth_post, auth_rate, auth_comment, auth_edit, auth_delete, auth_approval, auth_approval_edit, comments_forum_id)" . " VALUES
-															('$cat_name', ' $cat_desc', '0',                 '$parent', '$cat_order', '$view_level', '$post_level', '$rate_level', '$comment_level', '$edit_level', '$delete_level', '$approval_level', '$approval_edit_level', '$comments_forum_id')";
+			$sql = "INSERT INTO " . KB_CATEGORIES_TABLE . " (category_name, category_details, number_articles, parent, cat_order, auth_view, auth_post, auth_rate, auth_comment, auth_edit, auth_delete, auth_approval, auth_approval_edit, comments_forum_id)" . " VALUES ('" . $db->sql_escape($cat_name) . "', '" . $db->sql_escape($cat_desc) . "', '0', '$parent', '$cat_order', '$view_level', '$post_level', '$rate_level', '$comment_level', '$edit_level', '$delete_level', '$approval_level', '$approval_edit_level', '$comments_forum_id')";
 			$result = $db->sql_query($sql);
 
 			$message = $lang['Cat_created'] . '<br /><br />' . sprintf($lang['Click_return_cat_manager'], '<a href="' . append_sid('admin_kb_cat.' . PHP_EXT) . '">', '</a>') . '<br /><br />' . sprintf($lang['Click_return_admin_index'], '<a href="' . append_sid(IP_ROOT_PATH . ADM . '/index.' . PHP_EXT . '?pane=right') . '">', '</a>');
@@ -213,7 +206,7 @@ switch ($mode)
 
 		if (!$_POST['submit'])
 		{
-			$cat_id = intval($_GET['cat']);
+			$cat_id = request_var('cat', 0);
 
 			$sql = "SELECT * FROM " . KB_CATEGORIES_TABLE . " WHERE category_id = " . $cat_id;
 			$result = $db->sql_query($sql);
@@ -329,29 +322,28 @@ switch ($mode)
 		}
 		elseif ($_POST['submit'])
 		{
-			$cat_id = intval($_POST['catid']);
-			$cat_name = trim($_POST['catname']);
-			$cat_desc = $_POST['catdesc'];
-			$number_articles = intval($_POST['number_articles']);
-			$parent = intval($_POST['parent']);
-			$comments_forum_id = intval($_POST['forum_id']);
+			$cat_id = request_var('catid', 0);
+			$cat_name = request_var('catname', '', true);
+			$cat_desc = request_var('catdesc', '', true);
+			$number_articles = request_var('number_articles', 0);
+			$parent = request_var('parent', 0);
+			$comments_forum_id = request_var('forum_id', 0);
 
-			$view_level = intval($_POST['auth_view']);
-			$post_level = intval($_POST['auth_post']);
-			$rate_level = intval($_POST['auth_rate']);
-			$comment_level = intval($_POST['auth_comment']);
-			$edit_level = intval($_POST['auth_edit']);
-			$delete_level = intval($_POST['auth_delete']);
-			$approval_level = intval($_POST['auth_approval']);
-			$approval_edit_level = intval($_POST['auth_approval_edit']);
-
+			$view_level = request_var('auth_view', 0);
+			$post_level = request_var('auth_post', 0);
+			$rate_level = request_var('auth_rate', 0);
+			$comment_level = request_var('auth_comment', 0);
+			$edit_level = request_var('auth_edit', 0);
+			$delete_level = request_var('auth_delete', 0);
+			$approval_level = request_var('auth_approval', 0);
+			$approval_edit_level = request_var('auth_approval_edit', 0);
 
 			if (!$cat_name)
 			{
 				echo "Please put a category name in!";
 			}
 
-			$sql = "UPDATE " . KB_CATEGORIES_TABLE . " SET category_name = '" . $cat_name . "', category_details = '" . $cat_desc . "', number_articles = '" . $number_articles . "', parent = '" . $parent . "', auth_view = '" . $view_level . "', auth_post = '" . $post_level . "', auth_rate = '" . $rate_level . "', auth_comment = '" . $comment_level . "', auth_edit = '" . $edit_level . "', auth_delete = '" . $delete_level . "', auth_approval = '" . $approval_level . "', auth_approval_edit = '" . $approval_edit_level . "', comments_forum_id = '" . $comments_forum_id . "' WHERE category_id = " . $cat_id;
+			$sql = "UPDATE " . KB_CATEGORIES_TABLE . " SET category_name = '" . $db->sql_escape($cat_name) . "', category_details = '" . $db->sql_escape($cat_desc) . "', number_articles = '" . $number_articles . "', parent = '" . $parent . "', auth_view = '" . $view_level . "', auth_post = '" . $post_level . "', auth_rate = '" . $rate_level . "', auth_comment = '" . $comment_level . "', auth_edit = '" . $edit_level . "', auth_delete = '" . $delete_level . "', auth_approval = '" . $approval_level . "', auth_approval_edit = '" . $approval_edit_level . "', comments_forum_id = '" . $comments_forum_id . "' WHERE category_id = " . $cat_id;
 			$result = $db->sql_query($sql);
 
 			$message = $lang['Cat_edited'] . '<br /><br />' . sprintf($lang['Click_return_cat_manager'], '<a href="' . append_sid('admin_kb_cat.' . PHP_EXT) . '">', '</a>') . '<br /><br />' . sprintf($lang['Click_return_admin_index'], '<a href="' . append_sid(IP_ROOT_PATH . ADM . '/index.' . PHP_EXT . '?pane=right') . '">', '</a>');
@@ -364,10 +356,9 @@ switch ($mode)
 
 		if (!$_POST['submit'])
 		{
-			$cat_id = $_GET['cat'];
+			$cat_id = request_var('cat', 0);
 
-			$sql = "SELECT *
-							FROM " . KB_CATEGORIES_TABLE . " WHERE category_id = '" . $cat_id . "'";
+			$sql = "SELECT * FROM " . KB_CATEGORIES_TABLE . " WHERE category_id = '" . $cat_id . "'";
 			$cat_result = $db->sql_query($sql);
 
 			if ($category = $db->sql_fetchrow($cat_result))
@@ -398,17 +389,17 @@ switch ($mode)
 		}
 		elseif ($_POST['submit'])
 		{
-			$new_category = $_POST['move_id'];
-			$old_category = $_POST['catid'];
+			$new_category = request_var('move_id', 0);
+			$old_category = request_var('catid', 0);
 
 			if ($new_category != '0')
 			{
-				$sql = "UPDATE " . KB_ARTICLES_TABLE . " SET article_category_id = '$new_category'
-								WHERE article_category_id = '$old_category'";
+				$sql = "UPDATE " . KB_ARTICLES_TABLE . "
+					SET article_category_id = '$new_category'
+					WHERE article_category_id = '$old_category'";
 				$move_result = $db->sql_query($sql);
 
-				$sql = "SELECT *
-								FROM " . KB_CATEGORIES_TABLE . " WHERE category_id = '$new_category'";
+				$sql = "SELECT * FROM " . KB_CATEGORIES_TABLE . " WHERE category_id = '$new_category'";
 				$cat_result = $db->sql_query($sql);
 
 				if ($new_cat = $db->sql_fetchrow($cat_result))
@@ -416,10 +407,8 @@ switch ($mode)
 					$new_articles = $new_cat['number_articles'];
 				}
 
-				$sql = "SELECT *
-								FROM " . KB_CATEGORIES_TABLE . " WHERE category_id = '$old_category'";
+				$sql = "SELECT * FROM " . KB_CATEGORIES_TABLE . " WHERE category_id = '$old_category'";
 				$oldcat_result = $db->sql_query($sql);
-
 				if ($old_cat = $db->sql_fetchrow($oldcat_result))
 				{
 					$old_articles = $old_cat['number_articles'];
@@ -433,7 +422,7 @@ switch ($mode)
 			else
 			{
 				$sql = "DELETE FROM " . KB_ARTICLES_TABLE . "
-								WHERE article_category_id = " . $old_category;
+					WHERE article_category_id = " . $old_category;
 				$delete__articles = $db->sql_query($sql);
 			}
 
@@ -448,9 +437,9 @@ switch ($mode)
 
 	default:
 
-		if ($mode == "up")
+		if ($mode == 'up')
 		{
-			$cat_id = $_GET['cat'];
+			$cat_id = request_var('cat', 0);
 
 			$sql = "SELECT *
 							FROM " . KB_CATEGORIES_TABLE . "
@@ -500,8 +489,7 @@ switch ($mode)
 
 		// Generate page
 
-		$template->set_filenames(array('body' => KB_ADM_TPL_PATH . 'kb_cat_admin_body.tpl')
-			);
+		$template->set_filenames(array('body' => KB_ADM_TPL_PATH . 'kb_cat_admin_body.tpl'));
 
 		$template->assign_vars(array('L_KB_CAT_TITLE' => $lang['Cat_man'],
 				'L_KB_CAT_DESCRIPTION' => $lang['KB_cat_description'],

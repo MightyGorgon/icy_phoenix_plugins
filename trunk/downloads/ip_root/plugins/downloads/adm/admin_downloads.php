@@ -62,7 +62,7 @@ $template->set_filenames(array('body' => DL_ADM_TPL_PATH . 'downloads_main.tpl')
 /*
 * init mod config
 */
-$dl_admin_path = IP_ROOT_PATH . DL_PLUGIN_PATH . 'admin/';
+$dl_admin_path = IP_ROOT_PATH . DL_PLUGIN_PATH . ADM . '/';
 
 /*
 * build download management page

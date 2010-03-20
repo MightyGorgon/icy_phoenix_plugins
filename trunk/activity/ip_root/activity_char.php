@@ -15,7 +15,6 @@
 *
 */
 
-// CTracker_Ignore: File checked by human
 define('CTRACKER_DISABLED', true);
 define('IN_ICYPHOENIX', true);
 if (!defined('IP_ROOT_PATH')) define('IP_ROOT_PATH', './');
@@ -27,7 +26,7 @@ $userdata = session_pagestart($user_ip);
 init_userprefs($userdata);
 // End session management
 
-include(IP_ROOT_PATH . ACTIVITY_PLUGIN_PATH . 'common.' . PHP_EXT);
+include(IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['activity']['dir'] . 'common.' . PHP_EXT);
 
 /* Start Version Check */
 VersionCheck();
@@ -62,12 +61,12 @@ $breadcrumbs_links_right = $char_shop_link;
 #==== Setup What .tpl To Use
 if ($mode == 'create_char' || $mode == 'edit_char' || $mode == 'del_char' || $mode == 'profile_char' || !$mode)
 {
-	$template_to_parse = ACTIVITY_TPL_PATH . 'activity_char_body.tpl';
+	$template_to_parse = $class_plugins->get_tpl_file(ACTIVITY_TPL_PATH, 'activity_char_body.tpl');
 }
 
 if ($mode == 'char_shop')
 {
-	$template_to_parse = ACTIVITY_TPL_PATH . 'activity_char_shop_body.tpl';
+	$template_to_parse = $class_plugins->get_tpl_file(ACTIVITY_TPL_PATH, 'activity_char_shop_body.tpl');
 }
 
 #==== Template Switches
@@ -95,7 +94,7 @@ $char_info = $db->sql_fetchrowset($r);
 
 $users_drop = '';
 $users_drop .= '<form>';
-$users_drop .= '<select onChange="if(options[selectedIndex].value)window.location.href=(options[selectedIndex].value)">';
+$users_drop .= '<select onchange="if(options[selectedIndex].value)window.location.href=(options[selectedIndex].value)">';
 $users_drop .= '<option selected value="">'. $lang['amp_char_other_chars'] .'</option>';
 	for ($x = 0; $x < sizeof($char_info); $x++)
 		$users_drop .= '<option value="activity_char.' . PHP_EXT . '?mode=profile_char&amp;char=' . $char_info[$x]['user_id'] . '">'  . $char_info[$x]['username'] . '\'s :: ' . $char_info[$x]['ina_char_name'] . '</option>';

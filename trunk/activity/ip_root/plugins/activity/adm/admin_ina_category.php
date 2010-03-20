@@ -15,7 +15,6 @@
 *
 */
 
-// CTracker_Ignore: File checked by human
 define('IN_ICYPHOENIX', true);
 
 if (!empty($setmodules))
@@ -505,7 +504,7 @@ if($mode == "add_new_cat")
 	}
 
 	$q = "INSERT INTO ". INA_CATEGORY ."
-			VALUES ('', '". str_replace("\'", "''", $cat) ."', '". str_replace("\'", "''", $des) ."', '". $img ."')";
+			VALUES ('', '". $db->sql_escape($cat) ."', '". $db->sql_escape($des) ."', '". $img ."')";
 	$r = $db->sql_query($q);
 
 	message_die(GENERAL_MESSAGE, $lang['admin_cat_40'] ."<a href='". $link ."'>". $lang['admin_cat_26'] .'</a>'. $lang['admin_cat_27'], $lang['admin_cat_23']);
@@ -626,8 +625,8 @@ if($mode == "edit_exis_cat")
 
 	$q = "UPDATE ". INA_CATEGORY ."
 			SET
-			cat_name = '". str_replace("\'", "''", $cat) ."',
-			cat_desc = '". str_replace("\'", "''", $desc) ."',
+			cat_name = '". $db->sql_escape($cat) ."',
+			cat_desc = '". $db->sql_escape($desc) ."',
 			cat_img = '". $img ."'
 			WHERE cat_id = '". $id ."'";
 	$r = $db->sql_query($q);

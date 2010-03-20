@@ -108,7 +108,7 @@ $playing_members = $row['total'];
 		'CURRENTLY_PLAYING4' => $message4 . '<br /><a href="activity.' . PHP_EXT . '?page=whos_where&amp;sid=' . $userdata['session_id'] . '">' . $lang['whos_where_link'] . '</a><br />',
 		'CURRENTLY_PLAYING5' => $message5,
 		'MAIN_COLOR1' => '[ <span class="text_red">' . $lang['online_viewing_games'] . '</span> ]',
-		'MAIN_SEPERATOR' => '<b> :: </b>',
+		'MAIN_SEPARATOR' => '<b> :: </b>',
 		'MAIN_COLOR2' => '[ <span class="text_green">' . $lang['online_playing_games'] . '</span> ]'
 		)
 	);
@@ -159,7 +159,7 @@ $playing_members = $row['total'];
 		$template->assign_block_vars('playing', array(
 			'USERNAME' => $username_link,
 			'USER_NUMBER'  => '&nbsp;',
-			'MAIN_SEPERATOR' => '&nbsp;'
+			'MAIN_SEPARATOR' => '&nbsp;'
 			)
 		);
 	}

@@ -37,7 +37,7 @@ function attach_rules(forum_id)
 </tr>
 <!-- END switch_edit -->
 <!-- BEGIN custom_data_fields -->
-<tr><td class="cat" colspan="2" align="center"><span class="cattitle">{custom_data_fields.L_ADDTIONAL_FIELD}</span></td></tr>
+<tr><th colspan="2" align="center">{custom_data_fields.L_ADDTIONAL_FIELD}</th></tr>
 <!-- END custom_data_fields -->
 
 <!-- BEGIN input -->

@@ -33,7 +33,7 @@
 		<div class="post-text">
 			&#8226; <a href="{daily_game.COMMENTS}" class="nav">{daily_game.L_COMMENTS}</a>
 			{daily_game.CHALLENGE}{daily_game.LIST}
-			<br />{daily_game.SEPERATOR}<a href="{daily_game.STATS}" class="nav">{daily_game.INFO}</a><br />
+			<br />{daily_game.SEPARATOR}<a href="{daily_game.STATS}" class="nav">{daily_game.INFO}</a><br />
 			{daily_game.GAMES_PLAYED} {daily_game.I_PLAYED}
 			<!-- IF daily_game.POP_PIC --><br /><center>{daily_game.POP_PIC}</center><!-- ENDIF -->
 		</div>
@@ -41,7 +41,7 @@
 	<td class="row-post">
 		<div class="post-text">
 		<b>{daily_game.DESC2}:</b><br />{daily_game.DESC}<br /><br /><b>{daily_game.RATING_TITLE}</b><br />
-		{daily_game.SEPERATOR}{daily_game.RATING_SENT} {daily_game.RATING_SUBMIT}  {daily_game.RATING_IMAGE}<br />
+		{daily_game.SEPARATOR}{daily_game.RATING_SENT} {daily_game.RATING_SUBMIT}  {daily_game.RATING_IMAGE}<br />
 		</div>
 	</td>
 </tr>

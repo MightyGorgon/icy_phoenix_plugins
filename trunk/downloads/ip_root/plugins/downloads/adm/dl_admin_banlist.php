@@ -26,30 +26,35 @@ if ($cancel)
 	$action = '';
 }
 
-$action = (isset($_POST['edit_banlist'])) ? 'edit' : $action;
-$action = (isset($_POST['delete_banlist'])) ? 'delete' : $action;
+$action_test = request_var('edit_banlist', '')
+$action = ($action_test == 'edit') ? 'edit' : $action;
+
+$action_test = request_var('delete_banlist', '')
+$action = ($action_test == 'delete') ? 'delete' : $action;
 
 if($action == 'add')
 {
-	$ban_id = (isset($_POST['ban_id'])) ? intval($_POST['ban_id']) : 0;
-	$user_id = (isset($_POST['user_id'])) ? intval($_POST['user_id']) : 0;
-	$user_ip = (!empty($_POST['user_ip'])) ? encode_ip($_POST['user_ip']) : "";
-	$user_agent = (isset($_POST['user_agent'])) ? htmlspecialchars($_POST['user_agent']) : "";
-	$username = (isset($_POST['username'])) ? phpbb_clean_username($_POST['username']) : "";
-	$guests = (isset($_POST['guests'])) ? intval($_POST['guests']) : 0;
+	$ban_id = request_var('ban_id', 0);
+	$user_id = request_var('user_id', 0);
+	$user_ip = request_var('user_ip', '', true);
+	$user_ip = (!empty($user_ip) ? encode_ip($user_ip) : '');
+	$user_agent = request_var('user_agent', '', true);
+	$username = request_var('username', '', true);
+	$username = (!empty($username) ? phpbb_clean_username($username) : '');
+	$guests = request_var('guests', 0);
 
 	if ($ban_id)
 	{
 		$sql = "UPDATE " . DL_BANLIST_TABLE . "
-			SET user_id = " . (int)$user_id . ", user_ip = '$user_ip', user_agent = '" . str_replace("\'", "''", $user_agent) . "', username = '" . str_replace("\'", "''", $username) . "', guests = " . (int)$guests . "
-			WHERE ban_id = " . (int)$ban_id;
+			SET user_id = " . (int) $user_id . ", user_ip = '" . $db->sql_escape($user_ip) . "', user_agent = '" . $db->sql_escape($user_agent) . "', username = '" . $db->sql_escape($username) . "', guests = " . (int) $guests . "
+			WHERE ban_id = " . (int) $ban_id;
 	}
 	else
 	{
 		$sql = "INSERT INTO " . DL_BANLIST_TABLE . "
 			(user_id, user_ip, user_agent, username, guests)
 			VALUES
-			(" . (int)$user_id . ", '$user_ip', '" . str_replace("\'", "''", $user_agent) . "', '" . str_replace("\'", "''", $username) . "', " . (int)$guests . ")";
+			(" . (int) $user_id . ", '" . $db->sql_escape($user_ip) . "', '" . $db->sql_escape($user_agent) . "', '" . $db->sql_escape($username) . "', " . (int) $guests . ")";
 	}
 	$result = $db->sql_query($sql);
 

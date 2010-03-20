@@ -171,7 +171,7 @@ if ($exists)
 			$last2 = str_replace('%d%', create_date($config['default_dateformat'], $when, $config['board_timezone']), $last);
 
 			$template->assign_block_vars('personal_info_box', array(
-				'LAST_GAME_PLAYED' => '<b>' . $lang['seperator_2'] . '</b>&nbsp;'. $last2
+				'LAST_GAME_PLAYED' => '<b>' . $lang['separator_2'] . '</b>&nbsp;'. $last2
 				)
 			);
 		}
@@ -220,9 +220,9 @@ if ($userdata['user_id'] == ANONYMOUS)
 	$users_link = $lang['Guest'];
 
 if ($userdata['user_id'] != ANONYMOUS)
-	$sent_link = '<b>' . $lang['seperator_2'] . '</b>&nbsp;' . str_replace('%t%', '<a href="' . append_sid('activity.' . PHP_EXT . '?page=challenges&amp;mode=check_user&amp;' . POST_USERS_URL . '=' . $userdata['user_id']) . '" class="nav">' . $total_challenges_sent . '</a>', $lang['personal_info_challenges_1']);
+	$sent_link = '<b>' . $lang['separator_2'] . '</b>&nbsp;' . str_replace('%t%', '<a href="' . append_sid('activity.' . PHP_EXT . '?page=challenges&amp;mode=check_user&amp;' . POST_USERS_URL . '=' . $userdata['user_id']) . '" class="nav">' . $total_challenges_sent . '</a>', $lang['personal_info_challenges_1']);
 if ($userdata['user_id'] == ANONYMOUS)
-	$sent_link = '<b>' . $lang['seperator_2'] . '</b>&nbsp;' . str_replace('%t%', $total_challenges_sent, $lang['personal_info_challenges_1']);
+	$sent_link = '<b>' . $lang['separator_2'] . '</b>&nbsp;' . str_replace('%t%', $total_challenges_sent, $lang['personal_info_challenges_1']);
 
 /* Select info for last game played */
 $q = "SELECT a.game_id, a.user_id, a.date, b.username, b.user_active, b.user_color, c.proper_name, c.game_popup, c.game_parent, c.win_width, c.win_height
@@ -259,19 +259,19 @@ $lang_to_use = ($userdata['user_trophies'] == 1) ? $lang['personal_info_trophies
 $game_lang 	 = ($total_scores == 1) ? $lang['personal_info_game_played'] : $lang['personal_info_games_played'];
 
 if ($userdata['user_trophies'] > 0)
-	$users_trophies = '<b>' . $lang['seperator_2'] . '</b>&nbsp;' . str_replace('%t%', '<a href="' . append_sid('activity.' . PHP_EXT . '?page=trophy_search&amp;user=' . urlencode($userdata['username'])) . '" class="nav">' . $userdata['user_trophies'] . '</a>', $lang_to_use);
+	$users_trophies = '<b>' . $lang['separator_2'] . '</b>&nbsp;' . str_replace('%t%', '<a href="' . append_sid('activity.' . PHP_EXT . '?page=trophy_search&amp;user=' . urlencode($userdata['username'])) . '" class="nav">' . $userdata['user_trophies'] . '</a>', $lang_to_use);
 if ($userdata['user_trophies'] < 1)
-	$users_trophies = '<b>'. $lang['seperator_2'] .'</b>&nbsp;'. str_replace('%t%', $userdata['user_trophies'], $lang_to_use);
+	$users_trophies = '<b>'. $lang['separator_2'] .'</b>&nbsp;'. str_replace('%t%', $userdata['user_trophies'], $lang_to_use);
 if ($config['use_cash_system'] || $config['use_allowance_system'])
 	$cash_fix = $config['default_reward_dbfield'];
 if (($config['use_rewards_mod']) && ($config['use_point_system']))
-	$onhand = '<b>' . $lang['seperator_2'] . '</b>&nbsp;' . str_replace('%p%', number_format($userdata['user_points']) .' '. $config['points_name'], $lang['info_box_user_points']);
+	$onhand = '<b>' . $lang['separator_2'] . '</b>&nbsp;' . str_replace('%p%', number_format($userdata['user_points']) .' '. $config['points_name'], $lang['info_box_user_points']);
 if (($config['use_rewards_mod']) && ($config['use_cash_system'] ||
-	$config['use_allowance_system'])) $onhand = '<b>' . $lang['seperator_2'] . '</b>&nbsp;' . str_replace('%p%', number_format($userdata[$cash_fix]) . ' ' . $config['ina_cash_name'], $lang['info_box_user_points']);
+	$config['use_allowance_system'])) $onhand = '<b>' . $lang['separator_2'] . '</b>&nbsp;' . str_replace('%p%', number_format($userdata[$cash_fix]) . ' ' . $config['ina_cash_name'], $lang['info_box_user_points']);
 if (!$config['use_rewards_mod'])
 	$onhand = '';
 
-$shoutbox_link = ($config['ina_use_shoutbox']) ? '<br /><b>' . $lang['seperator_2'] . '</b>&nbsp;<a href="' . append_sid('javascript:popup_open(\'activity_popup.' . PHP_EXT . '?mode=chat&amp;action=view\',\'New_Window\',\'550\',\'300\',\'yes\')') . '">' . $lang['shoutbox_link'] . '</a>' : '';
+$shoutbox_link = ($config['ina_use_shoutbox']) ? '<br /><b>' . $lang['separator_2'] . '</b>&nbsp;<a href="' . append_sid('javascript:popup_open(\'activity_popup.' . PHP_EXT . '?mode=chat&amp;action=view\',\'New_Window\',\'550\',\'300\',\'yes\')') . '">' . $lang['shoutbox_link'] . '</a>' : '';
 
 $template->assign_block_vars('info_box', array(
 	'MOST_POPULAR_1' => $lang['info_box_popular_1'] . $f_game_name .'.',
@@ -288,15 +288,15 @@ $template->assign_block_vars('info_box', array(
 	'TROPHY_TOP_HOLDER1' => '<br />' . $top_player,
 	'TROPHY_TOP_HOLDER' => $lang['info_box_top_trophy_holder'],
 	'USERNAME'	 => $users_link,
-	'TOTAL_GAMES_LINK' => '<b>' . $lang['seperator_2'] . '</b>&nbsp;' . str_replace('%t%', '<a href="'. append_sid('activity.' . PHP_EXT . '?page=high_scores&amp;mode=highscore&amp;player_search=' . urlencode($userdata['username'])) . '" class="nav">' . $total_scores . '</a>', $game_lang),
-	'FAVORITES_LINK' => '<b>' . $lang['seperator_2'] . '</b>&nbsp;<a href="activity_favs.' . PHP_EXT . '?sid=' . $userdata['session_id'] . '">'. $lang['favorites_info_link'] . '</a>' . $shoutbox_link,
+	'TOTAL_GAMES_LINK' => '<b>' . $lang['separator_2'] . '</b>&nbsp;' . str_replace('%t%', '<a href="'. append_sid('activity.' . PHP_EXT . '?page=high_scores&amp;mode=highscore&amp;player_search=' . urlencode($userdata['username'])) . '" class="nav">' . $total_scores . '</a>', $game_lang),
+	'FAVORITES_LINK' => '<b>' . $lang['separator_2'] . '</b>&nbsp;<a href="activity_favs.' . PHP_EXT . '?sid=' . $userdata['session_id'] . '">'. $lang['favorites_info_link'] . '</a>' . $shoutbox_link,
 	'TOTAL_CHALLENGES_SENT' => $sent_link,
-	'TOTAL_CHALLENGES_RECIEVED' => '<b>' . $lang['seperator_2'] . '</b>&nbsp;' . str_replace('%t%', $total_challenges_recieved, $lang['personal_info_challenges_2']),
-	'TOTAL_COMMENTS_LEFT' => '<b>' . $lang['seperator_2'] . '</b>&nbsp;' . str_replace('%t%', $total_comments_left, $lang['personal_info_comments']),
-	'TOTAL_TROPHIES_HELD' => $users_trophies . '<br /><b>' . $lang['seperator_2'] . '</b>&nbsp;' . str_replace('%T%', number_format($userdata['ina_char_ge']), $lang['info_box_user_ge_points']),
+	'TOTAL_CHALLENGES_RECIEVED' => '<b>' . $lang['separator_2'] . '</b>&nbsp;' . str_replace('%t%', $total_challenges_recieved, $lang['personal_info_challenges_2']),
+	'TOTAL_COMMENTS_LEFT' => '<b>' . $lang['separator_2'] . '</b>&nbsp;' . str_replace('%t%', $total_comments_left, $lang['personal_info_comments']),
+	'TOTAL_TROPHIES_HELD' => $users_trophies . '<br /><b>' . $lang['separator_2'] . '</b>&nbsp;' . str_replace('%T%', number_format($userdata['ina_char_ge']), $lang['info_box_user_ge_points']),
 	'LAST_GAME_PLAYED' => $newest_game_played_link,
 	'TOTAL_ONHAND_POINTS' => $onhand,
-	'TOTAL_TIME_IN_GAMES' => '<b>' . $lang['seperator_2'] . '</b>&nbsp;' . DisplayPlayingTime(1, $userdata['ina_time_playing']),
+	'TOTAL_TIME_IN_GAMES' => '<b>' . $lang['separator_2'] . '</b>&nbsp;' . DisplayPlayingTime(1, $userdata['ina_time_playing']),
 
 	'L_NEWEST_TITLE' => $newest_game_played_title,
 	'L_INFO_TITLE' => $lang['info_box_title'],

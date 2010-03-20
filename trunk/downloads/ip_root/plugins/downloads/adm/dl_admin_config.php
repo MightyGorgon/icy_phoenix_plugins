@@ -31,7 +31,7 @@ while($row = $db->sql_fetchrow($result))
 {
 	$config_name = $row['config_name'];
 	$config_value = $row['config_value'];
-	$default_config[$config_name] = isset($_POST['submit']) ? str_replace("'", "\'", $config_value) : $config_value;
+	$default_config[$config_name] = $config_value;
 
 	$new[$config_name] = (isset($_POST[$config_name])) ? $_POST[$config_name] : $default_config[$config_name];
 
@@ -144,7 +144,7 @@ while($row = $db->sql_fetchrow($result))
 		}
 
 		$sql = "UPDATE " . DL_CONFIG_TABLE . " SET
-			config_value = '" . str_replace("\'", "''", $new[$config_name]) . "'
+			config_value = '" . $db->sql_escape($new[$config_name]) . "'
 			WHERE config_name = '$config_name'";
 		if(!$db->sql_query($sql))
 		{

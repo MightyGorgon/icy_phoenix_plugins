@@ -22,11 +22,12 @@ if(!defined('IN_ICYPHOENIX'))
 
 include_once(IP_ROOT_PATH . 'includes/functions_admin.' . PHP_EXT);
 
-$category_id = (isset($_GET['cat'])) ? intval ($_GET['cat'])  : intval ($_POST['cat']);
-$article_id = (isset($_GET['a'])) ? intval ($_GET['a'])  : intval ($_POST['a']);
-$page_id = (isset($_GET['page'])) ? intval ($_GET['page'])  : intval ($_POST['page']);
-$ref_stats = (isset($_GET['ref'])) ? true : 0;
-$start = (isset($_GET['start'])) ? intval($_GET['start']) : 0;
+$category_id = request_var('cat', 0);
+$article_id = request_var('a', 0);
+$page_id = request_var('page', 0);
+$ref_stats = (isset($_GET['ref'])) ? true : false;
+
+$start = request_var('start', 0);
 $start = ($start < 0) ? 0 : $start;
 
 // Start auth check
@@ -40,12 +41,11 @@ if (!(($kb_is_auth['auth_delete'] || $kb_is_auth['auth_mod']) && $userdata['sess
 	mx_message_die(GENERAL_MESSAGE, $message);
 }
 
-if (isset($_POST['action']) || isset($_GET['action']))
+$action = request_var('action', '');
+
+if (empty($action))
 {
-	$action = (isset($_POST['action'])) ? $_POST['action'] : $_GET['action'];
-}
-else
-{
+	$action = '';
 	if ($approve && $kb_is_auth['auth_mod'])
 	{
 		$action = 'approve';
@@ -57,10 +57,6 @@ else
 	else if ($delete && ($kb_is_auth['auth_mod'] || $kb_is_auth['auth_delete']))
 	{
 		$action = 'delete';
-	}
-	else
-	{
-		$action = '';
 	}
 }
 

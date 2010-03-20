@@ -20,8 +20,8 @@ if(!defined('IN_ICYPHOENIX'))
 	die('Hacking attempt');
 }
 
-$category_id = (isset($_GET['cat'])) ? intval ($_GET['cat']) : intval ($_POST['cat']);
-$article_id = (isset($_GET['k'])) ? intval ($_GET['k']) : intval ($_POST['k']);
+$category_id = request_var('cat', 0);
+$article_id = request_var('k', 0);
 
 if (empty($category_id))
 {
@@ -69,21 +69,22 @@ if ($submit)
 		mx_message_die(GENERAL_MESSAGE, $message);
 	}
 
-	$article_title = (!empty($_POST['article_name'])) ? htmlspecialchars(trim ($_POST['article_name'])) : '';
-	$article_description = (!empty($_POST['article_desc'])) ? htmlspecialchars(trim ($_POST['article_desc'])) : '';
-	$article_text = (!empty($_POST['message'])) ? $_POST['message'] : '';
+	$article_title = request_var('article_name', '', true);
+	$article_description = request_var('article_desc', '', true);
+	$article_text = request_var('message', '', true);
 
 	$date = time();
 	$author_id = $userdata['user_id'] > 0 ? intval ($userdata['user_id']) : '-1';
-	$type_id = intval ($_POST['type_id']);
+	$type_id = request_var('type_id', 0);
 
-	$username = $_POST['username'];
+	$username = request_var('username', '', true);
+	$username = htmlspecialchars_decode($username, ENT_COMPAT);
 	// Check username
 	if (!empty($username))
 	{
 		$username = phpbb_clean_username($username);
 
-		if (!$userdata['session_logged_in'] || ($userdata['session_logged_in'] && $username != $userdata['username']))
+		if (!$userdata['session_logged_in'] || ($userdata['session_logged_in'] && ($username != $userdata['username'])))
 		{
 			include(IP_ROOT_PATH . 'includes/functions_validate.' . PHP_EXT);
 
@@ -104,7 +105,7 @@ if ($submit)
 	// Check message
 	if (!empty($article_text))
 	{
-		$article_text = prepare_message(trim($article_text), $html_on, $bbcode_on, $smilies_on);
+		$article_text = prepare_message($article_text, $html_on, $bbcode_on, $smilies_on);
 	}
 
 	switch ($kb_post_mode)
@@ -152,10 +153,10 @@ if ($submit)
 
 			$sql = "UPDATE " . KB_ARTICLES_TABLE . "
 					SET article_category_id = '$category_id',
-					article_title = '$article_title',
-					article_description = '$article_description',
+					article_title = '" . $db->sql_escape($article_title) . "',
+					article_description = '" . $db->sql_escape($article_description) . "',
 					article_date = '$date',
-					article_body = '$article_text',
+					article_body = '" . $db->sql_escape($article_text) . "',
 					article_type = '$type_id',
 					approved = '$approve'
 					WHERE article_id = '$article_id'";
@@ -191,7 +192,7 @@ if ($submit)
 			}
 
 			$sql = "INSERT INTO " . KB_ARTICLES_TABLE . " (article_category_id, article_title, article_description, article_date, article_author_id, username, article_body, article_type, approved, views)
-				VALUES ('$category_id', '$article_title', '$article_description', '$date', '$author_id', '$username', '$article_text', '$type_id', '$approve', '0')";
+				VALUES ('$category_id', '" . $db->sql_escape($article_title) . "', '" . $db->sql_escape($article_description) . "', '$date', '$author_id', '" . $db->sql_escape($username) . "', '" . $db->sql_escape($article_text) . "', '" . $db->sql_escape($type_id) . "', '$approve', '0')";
 			$result = $db->sql_query($sql);
 
 			// Update kb_row
@@ -227,12 +228,12 @@ if ($submit)
 	}
 
 	$kb_custom_field->file_update_data($article_id);
-	$kb_notify_info = $kb_post_mode == 'add' ? 'new' : 'edited';
+	$kb_notify_info = ($kb_post_mode == 'add') ? 'new' : 'edited';
 	kb_notify($kb_config['notify'], $kb_message, $kb_config['admin_id'], $kb_comment['article_editor_id'], $kb_notify_info);
 
 	if ($approve == 1)
 	{
-		mx_add_search_words('single', $article_id, stripslashes($article_text), stripslashes($article_title), 'kb');
+		mx_add_search_words('single', $article_id, $article_text, $article_title, 'kb');
 
 		// $message = $lang['Article_submitted'] . '<br /><br />' . sprintf($lang['Click_return_kb'], '<a href="' . append_sid(this_kb_mxurl()) . '">', '</a>') . '<br /><br />' . sprintf($lang['Click_return_index'], '<a href="' . append_sid(IP_ROOT_PATH . CMS_PAGE_FORUM) . '">', '</a>');
 		$message = $lang['Article_submitted'] . '<br /><br />' . sprintf($lang['Click_return_kb'], '<a href="' . append_sid(this_kb_mxurl()) . '">', '</a>') . '<br /><br />' . sprintf($lang['Click_return_article'], '<a href="' . append_sid(this_kb_mxurl("mode=article&amp;k=" . $article_id)). '">', '</a>') . '<br /><br />' . sprintf($lang['Click_return_index'], '<a href="' . append_sid(IP_ROOT_PATH . CMS_PAGE_FORUM) . '">', '</a>');
@@ -293,11 +294,11 @@ if ($kb_post_mode == 'edit')
 	$kb_row = $db->sql_fetchrow($result);
 }
 
-$kb_title = (isset($_POST['article_name'])) ? htmlspecialchars(trim(stripslashes($_POST['article_name']))) : $kb_row['article_title'];
-$kb_desc = (isset($_POST['article_desc'])) ? htmlspecialchars(trim(stripslashes($_POST['article_desc']))): $kb_row['article_description'];
-$kb_text = (isset($_POST['message'])) ? htmlspecialchars(trim(stripslashes($_POST['message']))) : $kb_row['article_body'];
-$type_id = (isset($_POST['type_id'])) ? htmlspecialchars(trim(stripslashes($_POST['type_id']))) : $kb_row['article_type'];
-$username = (isset($_POST['username'])) ? htmlspecialchars(trim(stripslashes($_POST['username']))) : $kb_row['username'];
+$kb_title = request_post_var('article_name', $kb_row['article_title'], true);
+$kb_desc = request_post_var('article_desc', $kb_row['article_description'], true);
+$kb_text = request_post_var('message', $kb_row['article_body'], true);
+$type_id = request_post_var('type_id', $kb_row['article_type'], true);
+$username = request_post_var('username', $kb_row['username'], true);
 
 if ($preview)
 {

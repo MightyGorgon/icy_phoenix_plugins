@@ -15,7 +15,6 @@
 *
 */
 
-// CTracker_Ignore: File checked by human
 define('CTRACKER_DISABLED', true);
 define('IN_ICYPHOENIX', true);
 if (!defined('IP_ROOT_PATH')) define('IP_ROOT_PATH', './');
@@ -27,7 +26,7 @@ $userdata = session_pagestart($user_ip);
 init_userprefs($userdata);
 // End session management
 
-include(IP_ROOT_PATH . ACTIVITY_PLUGIN_PATH . 'common.' . PHP_EXT);
+include(IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['activity']['dir'] . 'common.' . PHP_EXT);
 
 /* Start Version Check */
 VersionCheck();
@@ -380,8 +379,8 @@ else
 				$remove_link = '<br /><br /><center><a href="activity_favs.' . PHP_EXT . '?mode=del_fav&amp;game=' . $fav_game_id . '&amp;sid=' . $userdata['session_id'] . '"><img src="' . ACTIVITY_IMAGES_PATH . 'r_favorite_game.jpg" alt="' . $lang['favorites_r_mouse_over'] . '" /></a></center>';
 				$game_link = CheckGameImages($fav_game_name, $fav_game_proper);
 				$image_link = GameArrayLink($fav_game_id, $fav_game_parent, $fav_game_popup, $fav_win_width, $fav_win_height, 2, '');
-				$games_cost_line = '<br />'. $lang['seperator'] . $lang['cost'] .': '. $cost;
-				$games_cost_line .= '<br />'. $lang['seperator'] . strip_tags($lang['ge_cost_per_game']) .':&nbsp;'. number_format($fav_game_ge_cost);
+				$games_cost_line = '<br />'. $lang['separator'] . $lang['cost'] .': '. $cost;
+				$games_cost_line .= '<br />'. $lang['separator'] . strip_tags($lang['ge_cost_per_game']) .':&nbsp;'. number_format($fav_game_ge_cost);
 				$row_class = (!($p % 2)) ? 'row1' : 'row2';
 
 				$template->assign_block_vars('game', array(
@@ -396,7 +395,7 @@ else
 					'TOP_SCORE' => $lang['score'] . $top_score . $remove_link,
 					'ROW_CLASS' => $row_class,
 					'TROPHY_LINK' => ACTIVITY_IMAGES_PATH . 'trophy.gif',
-					'SEPERATOR' => $lang['seperator'],
+					'SEPARATOR' => $lang['separator'],
 					'CHARGE' => $cost,
 					'IMAGE_LINK' => $game_link . $new_image,
 					'NEW_I_LINK' => $image_link,
@@ -420,6 +419,7 @@ else
 	}
 }
 
-full_page_generation(ACTIVITY_TPL_PATH . 'activity_favs_body.tpl', $lang['favorites_page_title'], '', '');
+$template_to_parse = $class_plugins->get_tpl_file(ACTIVITY_TPL_PATH, 'activity_favs_body.tpl');
+full_page_generation($template_to_parse, $lang['favorites_page_title'], '', '');
 
 ?>

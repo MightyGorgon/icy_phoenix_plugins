@@ -357,20 +357,20 @@ class kb_custom_field
 	{
 		global $db, $lang;
 
-		$field_name = (isset($_POST['field_name'])) ? htmlspecialchars($_POST['field_name']) : '';
-		$field_desc = (isset($_POST['field_desc'])) ? htmlspecialchars($_POST['field_desc']) : '';
-		$regex = (isset($_POST['regex'])) ? $_POST['regex'] : '';
-		$data = (isset($_POST['data'])) ? $_POST['data'] : '';
-		$field_order = (isset($_POST['field_order'])) ? $_POST['field_order'] : '';
+		$field_name = request_post_var('field_name', '', true);
+		$field_desc = request_post_var('field_desc', '', true);
+		$regex = request_post_var('regex', '', true);
+		$data = request_post_var('data', '', true);
+		$field_order = request_post_var('field_order', '');
 
 		if ($field_id)
 		{
-			$field_order = (isset($_POST['field_order'])) ? intval($_POST['field_order']) : '';
+			$field_order = request_post_var('field_order', 0);
 		}
 
 		if (!empty($data))
 		{
-			$data = explode("\n", htmlspecialchars(trim($data)));
+			$data = explode("\n", $data);
 
 			foreach($data as $key => $value)
 			{
@@ -392,7 +392,7 @@ class kb_custom_field
 		if (!$field_id)
 		{
 			$sql = "INSERT INTO " . KB_CUSTOM_TABLE . " (custom_name, custom_description, data, regex, field_type)
-				VALUES('" . $field_name . "', '" . $field_desc . "', '" . $data . "', '" . $regex . "', '" . $field_type . "')";
+				VALUES('" . $db->sql_escape($field_name) . "', '" . $db->sql_escape($field_desc) . "', '" . $db->sql_escape($data) . "', '" . $db->sql_escape($regex) . "', '" . $db->sql_escape($field_type) . "')";
 			$db->sql_query($sql);
 
 			$field_id = $db->sql_nextid();
@@ -405,7 +405,7 @@ class kb_custom_field
 		else
 		{
 			$sql = "UPDATE " . KB_CUSTOM_TABLE . "
-				SET custom_name = '$field_name', custom_description = '$field_desc', data = '$data', regex = '$regex', field_order='$field_order'
+				SET custom_name = '" . $db->sql_escape($field_name) . "', custom_description = '" . $db->sql_escape($field_desc) . "', data = '" . $db->sql_escape($data) . "', regex = '" . $db->sql_escape($regex) . "', field_order='" . $db->sql_escape($field_order) . "'
 				WHERE custom_id = $field_id";
 			$db->sql_query($sql);
 		}
@@ -437,7 +437,7 @@ class kb_custom_field
 	function file_update_data($file_id)
 	{
 		global $db;
-		$field = (isset($_POST['field'])) ? $_POST['field'] : '';
+		$field = request_post_var('field', '', true);
 		if (!empty($field))
 		{
 			foreach($field as $field_id => $field_data)
@@ -456,7 +456,7 @@ class kb_custom_field
 					case TEXTAREA:
 					case RADIO:
 					case SELECT:
-						$data = htmlspecialchars($field_data);
+						$data = $field_data;
 						break;
 					case SELECT_MULTIPLE:
 					case CHECKBOX:
@@ -465,14 +465,14 @@ class kb_custom_field
 				}
 
 				$sql = "DELETE FROM " . KB_CUSTOM_DATA_TABLE . "
-					WHERE customdata_file = '$file_id'
-					AND customdata_custom = '$field_id'";
+					WHERE customdata_file = '" . $db->sql_escape($file_id) . "'
+					AND customdata_custom = '" . $db->sql_escape($field_id) . "'";
 				$db->sql_query($sql);
 
 				if (!empty($data))
 				{
 					$sql = "INSERT INTO " . KB_CUSTOM_DATA_TABLE . " (customdata_file, customdata_custom, data)
-						VALUES('$file_id', '$field_id', '$data')";
+						VALUES('" . $db->sql_escape($file_id) . "', '" . $db->sql_escape($field_id) . "', '" . $db->sql_escape($data) . "')";
 					$db->sql_query($sql);
 				}
 			}

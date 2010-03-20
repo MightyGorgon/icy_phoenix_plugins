@@ -15,7 +15,6 @@
 *
 */
 
-// CTracker_Ignore: File checked by human
 define('CTRACKER_DISABLED', true);
 define('IN_ICYPHOENIX', true);
 if (!defined('IP_ROOT_PATH')) define('IP_ROOT_PATH', './');
@@ -27,7 +26,7 @@ $userdata = session_pagestart($user_ip);
 init_userprefs($userdata);
 // End session management
 
-include(IP_ROOT_PATH . ACTIVITY_PLUGIN_PATH . 'common.' . PHP_EXT);
+include(IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['activity']['dir'] . 'common.' . PHP_EXT);
 
 @include_once(ACTIVITY_ROOT_PATH . 'includes/functions_amod_newscore.' . PHP_EXT);
 if($config['use_rewards_mod'])
@@ -560,6 +559,7 @@ TrophyKingRankCheck();
 UpdateGamePlayTime(time(), $userdata['ina_time_playing']);
 
 #==== Generate Page ================================= |
-full_page_generation(ACTIVITY_TPL_PATH . 'saved_body.tpl', '', '', '');
+$template_to_parse = $class_plugins->get_tpl_file(ACTIVITY_TPL_PATH, 'saved_body.tpl');
+full_page_generation($template_to_parse, '', '', '');
 
 ?>

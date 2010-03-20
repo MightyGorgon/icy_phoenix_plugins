@@ -15,7 +15,6 @@
 *
 */
 
-// CTracker_Ignore: File checked by human
 if (!defined('IN_ICYPHOENIX'))
 {
 	die('Hacking Attempt');
@@ -225,7 +224,7 @@ function send_challenge_pm($dest_user, $subject, $message)
 
 		$sql_info = "INSERT INTO ". PRIVMSGS_TABLE . "
 					(privmsgs_type, privmsgs_subject, privmsgs_text, privmsgs_from_userid, privmsgs_to_userid, privmsgs_date, privmsgs_ip, privmsgs_enable_html, privmsgs_enable_bbcode, privmsgs_enable_smilies)
-					VALUES (1 , '". str_replace("\'", "''", addslashes($privmsg_subject)) ."', '" . str_replace("\'", "''", addslashes($privmsg_message)) . "', " . $from_id . ", ". $to_userdata['user_id'] .", $msg_time, '$user_ip' , $html_on, $bbcode_on, $smilies_on)";
+					VALUES (1 , '". $db->sql_escape(addslashes($privmsg_subject)) ."', '" . $db->sql_escape(addslashes($privmsg_message)) . "', " . $from_id . ", ". $to_userdata['user_id'] .", $msg_time, '$user_ip' , $html_on, $bbcode_on, $smilies_on)";
 		$db->sql_query($sql_info);
 
 		$sql = "UPDATE ". USERS_TABLE ."
@@ -237,7 +236,7 @@ function send_challenge_pm($dest_user, $subject, $message)
 		{
 			// have the mail sender infos
 			$script_name = preg_replace('/^\/?(.*?)\/?$/', "\\1", trim($config['script_path']));
-			$script_name = ($script_name != '') ? $script_name . '/privmsg.' . PHP_EXT : 'privmsg.' . PHP_EXT;
+			$script_name = ($script_name != '') ? $script_name . '/privmsg.' . PHP_EXT : CMS_PAGE_PRIVMSG;
 			$server_name = trim($config['server_name']);
 			$server_protocol = ($config['cookie_secure']) ? 'https://' : 'http://';
 			$server_port = ($config['server_port'] <> 80) ? ':' . trim($config['server_port']) . '/' : '/';

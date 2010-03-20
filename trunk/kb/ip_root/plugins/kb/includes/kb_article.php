@@ -135,7 +135,7 @@ if (isset($_GET['highlight']))
 	unset($words);
 
 	$highlight = urlencode($_GET['highlight']);
-	$highlight_match = phpbb_rtrim($highlight_match, "\\");
+	$highlight_match = rtrim($highlight_match, "\\");
 }
 
 if (!$html_on)

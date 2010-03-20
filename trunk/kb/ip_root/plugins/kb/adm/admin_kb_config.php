@@ -42,12 +42,12 @@ foreach ($kb_config as $k => $v)
 	$config_value = $v;
 	$default_config[$config_name] = $config_value;
 
-	$new[$config_name] = (isset($_POST[$config_name])) ? $_POST[$config_name] : $default_config[$config_name];
+	$new[$config_name] = request_var($config_name, $default_config[$config_name], true);
 
 	if (isset($_POST['submit']))
 	{
-		$sql = "UPDATE " . KB_CONFIG_TABLE . " SET config_value = '" . str_replace("\'", "''", $new[$config_name]) . "'
-						WHERE config_name = '$config_name'";
+		$sql = "UPDATE " . KB_CONFIG_TABLE . " SET config_value = '" . $db->sql_escape($new[$config_name]) . "'
+			WHERE config_name = '" . $db->sql_escape($config_name) . "'";
 		$db->sql_query($sql);
 	}
 }
@@ -59,71 +59,71 @@ if (isset($_POST['submit']))
 	message_die(GENERAL_MESSAGE, $message);
 }
 
-$new_yes = ($new['allow_new']) ? "checked=\"checked\"" : "";
-$new_no = (!$new['allow_new']) ? "checked=\"checked\"" : "";
+$new_yes = ($new['allow_new']) ? 'checked="checked"' : '';
+$new_no = (!$new['allow_new']) ? 'checked="checked"' : '';
 
-$allow_html_yes = ($new['allow_html']) ? "checked=\"checked\"" : "";
-$allow_html_no = (!$new['allow_html']) ? "checked=\"checked\"" : "";
+$allow_html_yes = ($new['allow_html']) ? 'checked="checked"' : '';
+$allow_html_no = (!$new['allow_html']) ? 'checked="checked"' : '';
 
-$allow_bbcode_yes = ($new['allow_bbcode']) ? "checked=\"checked\"" : "";
-$allow_bbcode_no = (!$new['allow_bbcode']) ? "checked=\"checked\"" : "";
+$allow_bbcode_yes = ($new['allow_bbcode']) ? 'checked="checked"' : '';
+$allow_bbcode_no = (!$new['allow_bbcode']) ? 'checked="checked"' : '';
 
-$allow_smilies_yes = ($new['allow_smilies']) ? "checked=\"checked\"" : "";
-$allow_smilies_no = (!$new['allow_smilies']) ? "checked=\"checked\"" : "";
+$allow_smilies_yes = ($new['allow_smilies']) ? 'checked="checked"' : '';
+$allow_smilies_no = (!$new['allow_smilies']) ? 'checked="checked"' : '';
 
-$formatting_fixup_yes = ($new['formatting_fixup']) ? "checked=\"checked\"" : "";
-$formatting_fixup_no = (!$new['formatting_fixup']) ? "checked=\"checked\"" : "";
+$formatting_fixup_yes = ($new['formatting_fixup']) ? 'checked="checked"' : '';
+$formatting_fixup_no = (!$new['formatting_fixup']) ? 'checked="checked"' : '';
 
-$wysiwyg_yes = ($new['wysiwyg']) ? "checked=\"checked\"" : "";
-$wysiwyg_no = (!$new['wysiwyg']) ? "checked=\"checked\"" : "";
+$wysiwyg_yes = ($new['wysiwyg']) ? 'checked="checked"' : '';
+$wysiwyg_no = (!$new['wysiwyg']) ? 'checked="checked"' : '';
 
 $kb_allowed_html_tags = $new['allowed_html_tags'];
 
 $wysiwyg_path = $new['wysiwyg_path'];
 
-$pretext_show = ($new['show_pretext']) ? "checked=\"checked\"" : "";
-$pretext_hide = (!$new['show_pretext']) ? "checked=\"checked\"" : "";
+$pretext_show = ($new['show_pretext']) ? 'checked="checked"' : '';
+$pretext_hide = (!$new['show_pretext']) ? 'checked="checked"' : '';
 
 $pt_header = $new['pt_header'];
 $pt_body = $new['pt_body'];
 
-$notify_none = ($new['notify'] == 0) ? "checked=\"checked\"" : "";
-$notify_pm = ($new['notify'] == 1) ? "checked=\"checked\"" : "";
-$notify_email = ($new['notify'] == 2) ? "checked=\"checked\"" : "";
+$notify_none = ($new['notify'] == 0) ? 'checked="checked"' : '';
+$notify_pm = ($new['notify'] == 1) ? 'checked="checked"' : '';
+$notify_email = ($new['notify'] == 2) ? 'checked="checked"' : '';
 
 $admin_id = $new['admin_id'];
 
-$use_comments_yes = ($new['use_comments']) ? "checked=\"checked\"" : "";
-$use_comments_no = (!$new['use_comments']) ? "checked=\"checked\"" : "";
+$use_comments_yes = ($new['use_comments']) ? 'checked="checked"' : '';
+$use_comments_no = (!$new['use_comments']) ? 'checked="checked"' : '';
 
-$del_topic_yes = ($new['del_topic']) ? "checked=\"checked\"" : "";
-$del_topic_no = (!$new['del_topic']) ? "checked=\"checked\"" : "";
+$del_topic_yes = ($new['del_topic']) ? 'checked="checked"' : '';
+$del_topic_no = (!$new['del_topic']) ? 'checked="checked"' : '';
 // Added by Haplo
-$comments_show_yes = ($new['comments_show']) ? "checked=\"checked\"" : "";
-$comments_show_no = (!$new['comments_show']) ? "checked=\"checked\"" : "";
+$comments_show_yes = ($new['comments_show']) ? 'checked="checked"' : '';
+$comments_show_no = (!$new['comments_show']) ? 'checked="checked"' : '';
 
-$bump_post_yes = ($new['bump_post']) ? "checked=\"checked\"" : "";
-$bump_post_no = (!$new['bump_post']) ? "checked=\"checked\"" : "";
+$bump_post_yes = ($new['bump_post']) ? 'checked="checked"' : '';
+$bump_post_no = (!$new['bump_post']) ? 'checked="checked"' : '';
 
-$stats_list_yes = ($new['stats_list']) ? "checked=\"checked\"" : "";
-$stats_list_no = (!$new['stats_list']) ? "checked=\"checked\"" : "";
+$stats_list_yes = ($new['stats_list']) ? 'checked="checked"' : '';
+$stats_list_no = (!$new['stats_list']) ? 'checked="checked"' : '';
 
-$header_banner_yes = ($new['header_banner']) ? "checked=\"checked\"" : "";
-$header_banner_no = (!$new['header_banner']) ? "checked=\"checked\"" : "";
+$header_banner_yes = ($new['header_banner']) ? 'checked="checked"' : '';
+$header_banner_no = (!$new['header_banner']) ? 'checked="checked"' : '';
 
 //$mod_group = get_groups($new['mod_group']);
 
-$use_ratings_yes = ($new['use_ratings']) ? "checked=\"checked\"" : "";
-$use_ratings_no = (!$new['use_ratings']) ? "checked=\"checked\"" : "";
+$use_ratings_yes = ($new['use_ratings']) ? 'checked="checked"' : '';
+$use_ratings_no = (!$new['use_ratings']) ? 'checked="checked"' : '';
 
-//$allow_anonymos_rating_yes = ($new['allow_anonymos_rating']) ? "checked=\"checked\"" : "";
-//$allow_anonymos_rating_no = (!$new['allow_anonymos_rating']) ? "checked=\"checked\"" : "";
+//$allow_anonymos_rating_yes = ($new['allow_anonymos_rating']) ? 'checked="checked"' : '';
+//$allow_anonymos_rating_no = (!$new['allow_anonymos_rating']) ? 'checked="checked"' : '';
 
-$votes_check_ip_yes = ($new['votes_check_ip']) ? "checked=\"checked\"" : "";
-$votes_check_ip_no = (!$new['votes_check_ip']) ? "checked=\"checked\"" : "";
+$votes_check_ip_yes = ($new['votes_check_ip']) ? 'checked="checked"' : '';
+$votes_check_ip_no = (!$new['votes_check_ip']) ? 'checked="checked"' : '';
 
-$votes_check_userid_yes = ($new['votes_check_userid']) ? "checked=\"checked\"" : "";
-$votes_check_userid_no = (!$new['votes_check_userid']) ? "checked=\"checked\"" : "";
+$votes_check_userid_yes = ($new['votes_check_userid']) ? 'checked="checked"' : '';
+$votes_check_userid_no = (!$new['votes_check_userid']) ? 'checked="checked"' : '';
 
 $article_pag = $new['art_pagination'];
 $comments_pag = $new['comments_pagination'];
@@ -147,7 +147,7 @@ for($j = 0; $j < sizeof($news_sort_options); $j++)
 $news_sort_list .= '</select>';
 
 $news_sort_par_options = array();
-$news_sort_par_options = array("DESC", "ASC");
+$news_sort_par_options = array('DESC', 'ASC');
 
 $news_sort_par_list = '<select name="news_sort_par">';
 for($j = 0; $j < sizeof($news_sort_par_options); $j++)
@@ -164,8 +164,7 @@ for($j = 0; $j < sizeof($news_sort_par_options); $j++)
 }
 $news_sort_par_list .= '</select>';
 
-$template->set_filenames(array('body' => KB_ADM_TPL_PATH . 'kb_config_body.tpl')
-	);
+$template->set_filenames(array('body' => KB_ADM_TPL_PATH . 'kb_config_body.tpl'));
 
 $template->assign_vars(array(
 	'S_ACTION' => append_sid('admin_kb_config.' . PHP_EXT . '?mode=config'),

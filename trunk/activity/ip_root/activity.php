@@ -15,7 +15,6 @@
 *
 */
 
-// CTracker_Ignore: File checked by human
 define('IN_ACTIVITY', true);
 define('CTRACKER_DISABLED', true);
 define('IN_ICYPHOENIX', true);
@@ -28,7 +27,7 @@ $userdata = session_pagestart($user_ip);
 init_userprefs($userdata);
 // End session management
 
-include(IP_ROOT_PATH . ACTIVITY_PLUGIN_PATH . 'common.' . PHP_EXT);
+include(IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['activity']['dir'] . 'common.' . PHP_EXT);
 
 /* Start Version Check */
 VersionCheck();
@@ -338,7 +337,8 @@ $category_data = $db->sql_fetchrowset($r);
 
 if (($mode == 'category_play') && (!$_GET['cat']))
 {
-	$template->set_filenames(array('body' => ACTIVITY_TPL_PATH . 'activity_cat_page_body.tpl'));
+	$template_to_parse = $class_plugins->get_tpl_file(ACTIVITY_TPL_PATH, 'activity_cat_page_body.tpl');
+	$template->set_filenames(array('body' => $template_to_parse));
 
 	$total_games_here = $games_c;
 
@@ -620,7 +620,8 @@ else
 	if ($page_order == 'game_id') $order_by = "game_id $sort_order LIMIT $start," . $finish;
 	if (!$page_order) $order_by = "$admin_d LIMIT $start, " . $finish;
 
-	$template->set_filenames(array('body' => ACTIVITY_TPL_PATH . 'activity2_body.tpl'));
+	$template_to_parse = $class_plugins->get_tpl_file(ACTIVITY_TPL_PATH, 'activity2_body.tpl');
+	$template->set_filenames(array('body' => $template_to_parse));
 
 	$template->assign_block_vars('links_check', array(
 		'LINKS' => SetHeaderLinks() . ''
@@ -805,7 +806,8 @@ else
 		}
 		/* Finished With First Time Use */
 
-		$template->set_filenames(array('body' => ACTIVITY_TPL_PATH . 'activity2_body.tpl'));
+		$template_to_parse = $class_plugins->get_tpl_file(ACTIVITY_TPL_PATH, 'activity2_body.tpl');
+		$template->set_filenames(array('body' => $template_to_parse));
 		if ($user_use_games)
 		{
 			$template->assign_block_vars('games_on', array());
@@ -1157,7 +1159,7 @@ else
 			}
 			else
 			{
-				$highscore_link = '<br />' . $lang['seperator'] . '&nbsp;<a href="' . append_sid('activity.' . PHP_EXT . '?page=high_scores&amp;mode=highscore&amp;game_name=' . urlencode($game_name)) . '" class="nav">' . $lang['game_highscores'] . '</a>';
+				$highscore_link = '<br />' . $lang['separator'] . '&nbsp;<a href="' . append_sid('activity.' . PHP_EXT . '?page=high_scores&amp;mode=highscore&amp;game_name=' . urlencode($game_name)) . '" class="nav">' . $lang['game_highscores'] . '</a>';
 				$best_score = $best_score;
 			}
 
@@ -1196,17 +1198,17 @@ else
 			$challenge = $config['ina_challenge'];
 			if (($challenge == '1') && ($t_player_id != ANONYMOUS) && ($userdata['user_id'] != ANONYMOUS))
 			{
-				$challenge_link = '<br />' . $lang['seperator'] . '&nbsp;<a href="#" onclick="popup_open(\'' . append_sid('activity_popup.' . PHP_EXT . '?mode=challenge&amp;g=' . $game_id . '&amp;' . POST_USERS_URL . '=' . $t_player_id) . '\', \'New_Window\', \'400\', \'200\', \'yes\')' . '; return false;">' . $lang['challenge_link_key'] . '</a>';
+				$challenge_link = '<br />' . $lang['separator'] . '&nbsp;<a href="#" onclick="popup_open(\'' . append_sid('activity_popup.' . PHP_EXT . '?mode=challenge&amp;g=' . $game_id . '&amp;' . POST_USERS_URL . '=' . $t_player_id) . '\', \'New_Window\', \'400\', \'200\', \'yes\')' . '; return false;">' . $lang['challenge_link_key'] . '</a>';
 			}
 
 			if ($challenge != '1' || $t_player_id == ANONYMOUS || $userdata['user_id'] == ANONYMOUS)
 			{
-				$challenge_link = '<br />'. $lang['seperator'] .'&nbsp;'. $lang['challenge_link_key'];
+				$challenge_link = '<br />'. $lang['separator'] .'&nbsp;'. $lang['challenge_link_key'];
 			}
 
 			if ($userdata['user_level'] == ADMIN)
 			{
-				$admin_edit = '<br />' . $lang['seperator'] . '&nbsp;<a href="#" onclick="popup_open(\'' . ADM . '/admin_activity.' . PHP_EXT . '?mode=edit_games&amp;action=edit&amp;game=' . $game_id . '&amp;sid=' . $userdata['session_id'] . '\', \'New_Window\', \'550\', \'300\', \'yes\'); return false;">'. $lang['admin_edit_link'] .'</a>';
+				$admin_edit = '<br />' . $lang['separator'] . '&nbsp;<a href="#" onclick="popup_open(\'' . ADM . '/admin_activity.' . PHP_EXT . '?mode=edit_games&amp;action=edit&amp;game=' . $game_id . '&amp;sid=' . $userdata['session_id'] . '\', \'New_Window\', \'550\', \'300\', \'yes\'); return false;">'. $lang['admin_edit_link'] .'</a>';
 			}
 
 			if ($userdata['user_level'] != ADMIN)
@@ -1217,15 +1219,15 @@ else
 			$games_cost_line = $show_fees = $show_ge = $show_jack = '';
 			if ($game_fees)
 			{
-				$show_fees = '<br />' . $lang['seperator'] . '&nbsp;' . $lang['cost'] . ':&nbsp;' . $cost;
+				$show_fees = '<br />' . $lang['separator'] . '&nbsp;' . $lang['cost'] . ':&nbsp;' . $cost;
 			}
 			if ($game_ge_cost)
 			{
-				$show_ge = '<br />' . $lang['seperator'] . '&nbsp;' . strip_tags($lang['ge_cost_per_game']) . ':&nbsp;' . number_format($game_ge_cost);
+				$show_ge = '<br />' . $lang['separator'] . '&nbsp;' . strip_tags($lang['ge_cost_per_game']) . ':&nbsp;' . number_format($game_ge_cost);
 			}
 			if ($game_rows[$i]['jackpot'])
 			{
-				$show_jack = ($game_type != 2) ? '<br />'. $lang['seperator'] . '&nbsp;' . str_replace('%X%', intval($game_rows[$i]['jackpot']), $lang['jackpot_text']) : '';
+				$show_jack = ($game_type != 2) ? '<br />'. $lang['separator'] . '&nbsp;' . str_replace('%X%', intval($game_rows[$i]['jackpot']), $lang['jackpot_text']) : '';
 			}
 			$games_cost_line = $show_fees . $show_ge . $show_jack;
 
@@ -1269,9 +1271,9 @@ else
 				'MOUSE' => (($game_mouse) ? '<img src="' . ACTIVITY_IMAGES_PATH . 'mouse.gif" alt="' . $lang['game_mouse'] . '" title="' . $lang['game_mouse'] . '" /><br />' : ''),
 				'KEYBOARD' => (($game_keyboard) ? '<img src="' . ACTIVITY_IMAGES_PATH . 'keyboard.gif" alt="' . $lang['game_keyboard'] . '" title="' . $lang['game_keyboard'] . '" /><br />' : ''),
 				'DESC2' => $lang['new_description'],
-				'GAMES_PLAYED' => $lang['seperator'] .'&nbsp;'. $lang['new_games_played'],
+				'GAMES_PLAYED' => $lang['separator'] .'&nbsp;'. $lang['new_games_played'],
 				'I_PLAYED' => number_format($game_played) . $games_cost_line . $admin_edit,
-				'SEPERATOR' => $lang['seperator'] .'&nbsp;',
+				'SEPARATOR' => $lang['separator'] .'&nbsp;',
 				'PROPER_NAME' => $game_proper,
 				'TOP_PLAYER' => $top_player,
 				'POP_PIC' => $popular_image,

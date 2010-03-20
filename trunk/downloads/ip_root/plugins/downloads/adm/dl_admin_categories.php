@@ -328,32 +328,33 @@ if($action == 'edit' || $action == 'add')
 }
 elseif($action == 'save_cat')
 {
-	$cat_parent = ( isset($_POST['parent']) ) ? intval($_POST['parent']) : 0;
-	$description = ( isset($_POST['description']) ) ? trim($_POST['description']) : '';
-	$rules = ( isset($_POST['rules']) ) ? trim($_POST['rules']) : '';
-	$cat_name = ( isset($_POST['cat_name']) ) ? trim($_POST['cat_name']) : '';
-	$path = ( isset($_POST['path']) ) ? trim($_POST['path']) : '';
 	$bbcode_on = $config['allow_bbcode'];
 	$smilie_on = $config['allow_smilies'];
 	$html_on = $config['allow_html'];
+
+	$cat_parent = request_var('parent', 0);
+	$description = request_var('description', '', true);
 	$description = prepare_message(trim($description), $html_on, $bbcode_on, $smilie_on);
+	$rules = request_var('rules', '', true);
 	$rules = prepare_message(trim($rules), $html_on, $bbcode_on, $smilie_on);
-	$must_approve = ( isset($_POST['must_approve']) ) ? intval($_POST['must_approve']) : 0;
-	$allow_mod_desc = ( isset($_POST['allow_mod_desc']) ) ? intval($_POST['allow_mod_desc']) : 0;
-	$statistics = ( isset($_POST['allow_mod_desc']) ) ? intval($_POST['statistics']) : 0;
-	$stats_prune = ( isset($_POST['allow_mod_desc']) ) ? intval($_POST['stats_prune']) : 0;
-	$comments = ( isset($_POST['comments']) ) ? intval($_POST['comments']) : 0;
-	$cat_traffic = ( isset($_POST['cat_traffic']) ) ? intval($_POST['cat_traffic']) : 0;
-	$cat_traffic_range = ( isset($_POST['cat_traffic_range']) ) ? trim($_POST['cat_traffic_range']) : "";
-	$allow_thumbs = ( isset($_POST['allow_thumbs']) ) ? intval($_POST['allow_thumbs']) : 0;
-	$approve_comments = ( isset($_POST['approve_comments']) ) ? intval($_POST['approve_comments']) : 0;
-	$auth_view = ( isset($_POST['auth_view']) ) ? intval($_POST['auth_view']) : 0;
-	$auth_dl = ( isset($_POST['auth_dl']) ) ? intval($_POST['auth_dl']) : 0;
-	$auth_up = ( isset($_POST['auth_up']) ) ? intval($_POST['auth_up']) : 0;
-	$auth_mod = ( isset($_POST['auth_mod']) ) ? intval($_POST['auth_mod']) : 0;
-	$auth_cread = ( isset($_POST['auth_cread']) ) ? intval($_POST['auth_cread']) : 3;
-	$auth_cpost = ( isset($_POST['auth_cpost']) ) ? intval($_POST['auth_cpost']) : 3;
-	$bug_tracker = ( isset($_POST['bug_tracker']) ) ? intval($_POST['bug_tracker']) : 0;
+	$cat_name = request_var('cat_name', '', true);
+	$path = request_var('path', '', true);
+	$must_approve = request_var('must_approve', 0);
+	$allow_mod_desc = request_var('allow_mod_desc', 0);
+	$statistics = request_var('statistics', 0);
+	$stats_prune = request_var('stats_prune', 0);
+	$comments = request_var('comments', 0);
+	$cat_traffic = request_var('cat_traffic', 0);
+	$cat_traffic_range = request_var('cat_traffic_range', '', true);
+	$allow_thumbs = request_var('allow_thumbs', 0);
+	$approve_comments = request_var('approve_comments', 0);
+	$auth_view = request_var('auth_view', 0);
+	$auth_dl = request_var('auth_dl', 0);
+	$auth_up = request_var('auth_up', 0);
+	$auth_mod = request_var('auth_mod', 0);
+	$auth_cread = request_var('auth_cread', 0);
+	$auth_cpost = request_var('auth_cpost', 0);
+	$bug_tracker = request_var('bug_tracker', 0);
 
 	if ($cat_traffic_range == 'KB')
 	{
@@ -375,11 +376,11 @@ elseif($action == 'save_cat')
 	elseif($cat_id)
 	{
 		$sql = "UPDATE " . DL_CAT_TABLE . " SET
-			description = '" . str_replace("\'", "''", $description) . "',
-			rules = '" . str_replace("\'", "''", $rules) . "',
+			description = '" . $db->sql_escape($description) . "',
+			rules = '" . $db->sql_escape($rules) . "',
 			parent = $cat_parent,
-			cat_name = '" . str_replace("\'", "''", $cat_name) . "',
-			path= '".str_replace("\'", "''", $path)."',
+			cat_name = '" . $db->sql_escape($cat_name) . "',
+			path = '".$db->sql_escape($path)."',
 			must_approve = $must_approve,
 			allow_mod_desc = $allow_mod_desc,
 			statistics = $statistics,
@@ -404,7 +405,7 @@ elseif($action == 'save_cat')
 		$sql = "INSERT INTO " . DL_CAT_TABLE . "
 			(cat_name, parent, description, rules, path, must_approve, allow_mod_desc, statistics, stats_prune, comments, cat_traffic, allow_thumbs, approve_comments, auth_view, auth_dl, auth_up, auth_mod, auth_cread, auth_cpost, bug_tracker)
 			VALUES
-			('" . str_replace("\'", "''", $cat_name) . "', $cat_parent, '" . str_replace("\'", "''", $description) . "', '" . str_replace("\'", "''", $rules) . "', '".str_replace("\'", "''", $path)."', $must_approve, $allow_mod_desc, $statistics, $stats_prune, $comments, $cat_traffic, $allow_thumbs, $approve_comments, $auth_view, $auth_dl, $auth_up, $auth_mod, $auth_cread, $auth_cpost, $bug_tracker)";
+			('" . $db->sql_escape($cat_name) . "', $cat_parent, '" . $db->sql_escape($description) . "', '" . $db->sql_escape($rules) . "', '".$db->sql_escape($path)."', $must_approve, $allow_mod_desc, $statistics, $stats_prune, $comments, $cat_traffic, $allow_thumbs, $approve_comments, $auth_view, $auth_dl, $auth_up, $auth_mod, $auth_cread, $auth_cpost, $bug_tracker)";
 
 		$message = $lang['Dl_category_added'];
 	}

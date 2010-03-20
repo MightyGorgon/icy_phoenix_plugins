@@ -63,7 +63,7 @@ if ($action == 'save' && !$deny_post)
 	if ($dl_id)
 	{
 		$sql = "UPDATE " . DL_COMMENTS_TABLE . "
-			SET comment_edit_time = " . time() . ", comment_text = '" . str_replace("\'", "''", $comment_text) . "', approve = $approve
+			SET comment_edit_time = " . time() . ", comment_text = '" . $db->sql_escape($comment_text) . "', approve = $approve
 			WHERE dl_id = $dl_id";
 		$db->sql_query($sql);
 		$comment_message = $lang['Dl_comment_updated'];
@@ -71,7 +71,7 @@ if ($action == 'save' && !$deny_post)
 	else
 	{
 		$sql = "INSERT INTO " . DL_COMMENTS_TABLE . " (id, cat_id, user_id, username, comment_time, comment_edit_time, comment_text, approve) VALUES
-			($df_id, $cat_id, " . $userdata['user_id'] . ", '" . str_replace("\'", "''", $userdata['username']) . "', " . time() . ", " . time() . ", '" . str_replace("\'", "''", $comment_text) . "', $approve)";
+			($df_id, $cat_id, " . $userdata['user_id'] . ", '" . $db->sql_escape($userdata['username']) . "', " . time() . ", " . time() . ", '" . $db->sql_escape($comment_text) . "', $approve)";
 		$db->sql_query($sql);
 		$comment_message = $lang['Dl_comment_added'];
 	}

@@ -67,13 +67,15 @@ else
 */
 if (($action == 'save') && $userdata['session_logged_in'])
 {
-	$report_title = (isset($_POST['report_title'])) ? htmlspecialchars($_POST['report_title']) : '';
+	$report_title = request_var('report_title', '', true);
+
 	if (!$report_title)
 	{
 		message_die(GENERAL_MESSAGE, $lang['Dl_bug_report_no_title']);
 	}
 
-	$report_text = (isset($_POST['report_title'])) ? htmlspecialchars($_POST['report_text']) : '';
+	$report_text = request_var('report_text', '', true);
+
 	if (!$report_text)
 	{
 		message_die(GENERAL_MESSAGE, $lang['Dl_bug_report_no_text']);
@@ -85,22 +87,22 @@ if (($action == 'save') && $userdata['session_logged_in'])
 
 	$report_text = stripslashes(prepare_message(addslashes(unprepare_message($report_text)), 0, 1, 0));
 
-	$report_file_ver= (isset($_POST['report_file_ver'])) ? htmlspecialchars($_POST['report_file_ver']) : '';
-	$report_php = (isset($_POST['report_php'])) ? htmlspecialchars($_POST['report_php']) : '';
-	$report_db = (isset($_POST['report_db'])) ? htmlspecialchars($_POST['report_db']) : '';
-	$report_forum = (isset($_POST['report_forum'])) ? htmlspecialchars($_POST['report_forum']) : '';
+	$report_file_ver = request_var('report_file_ver', '', true);
+	$report_php = request_var('report_php', '', true);
+	$report_db = request_var('report_db', '', true);
+	$report_forum = request_var('report_forum', '', true);
 
 	$sql = "INSERT INTO " . DL_BUGS_TABLE . "
 		(df_id, report_title, report_text, report_file_ver, report_date, report_author_id, report_status_date, report_php, report_db, report_forum)
 		VALUES
-		($df_id, '" . str_replace("\'", "''", $report_title) . "', '" . str_replace("\'", "''", $report_text) . "', '" . str_replace("\'", "''", $report_file_ver) . "', " . time() . ", " . $userdata['user_id'] . ", " . time() . ", '" . str_replace("\'", "''", $report_php) . "', '" . str_replace("\'", "''", $report_db) . "', '" . str_replace("\'", "''", $report_forum) . "')";
+		($df_id, '" . $db->sql_escape($report_title) . "', '" . $db->sql_escape($report_text) . "', '" . $db->sql_escape($report_file_ver) . "', " . time() . ", " . $userdata['user_id'] . ", " . time() . ", '" . $db->sql_escape($report_php) . "', '" . $db->sql_escape($report_db) . "', '" . $db->sql_escape($report_forum) . "')";
 	$db->sql_query($sql);
 	$fav_id = $db->sql_nextid();
 
 	$sql = "INSERT INTO " . DL_BUG_HISTORY_TABLE . "
 		(df_id, report_id, report_his_type, report_his_date, report_his_value)
 		VALUES
-		($df_id, $fav_id, 'status', " . time() . ", '0:" . $userdata['username'] . "')";
+		($df_id, $fav_id, 'status', " . time() . ", '0:" . $db->sql_escape($userdata['username']) . "')";
 	$result = $db->sql_query($sql);
 
 	$message = $lang['Dl_bug_report_added'] . '<br /><br />' . sprintf($lang['Click_return_bug_tracker'], '<a href="' . append_sid('downloads.' . PHP_EXT . '?view=bug_tracker&amp;df_id=' . $df_id) . '">', '</a>');
@@ -113,10 +115,9 @@ if (($action == 'save') && $userdata['session_logged_in'])
 */
 if ($action == 'status' && $fav_id && $allow_bug_mod)
 {
-	$new_status = (isset($_POST['new_status'])) ? intval($_POST['new_status']) : 0;
-	$new_status_text = (isset($_POST['new_status_text'])) ? htmlspecialchars($_POST['new_status_text']) : '';
-	$new_status_text = str_replace("\'", "'", $new_status_text);
-	$new_status_text = str_replace(":", " ", $new_status_text);
+	$new_status = request_var('new_status', 0);
+	$new_status_text = request_var('new_status_text', '', true);
+	$new_status_text = str_replace(':', ' ', $new_status_text);
 
 	$sql = "SELECT df_id, report_status, report_author_id, report_title FROM " . DL_BUGS_TABLE . "
 		WHERE report_id = $fav_id";
@@ -131,7 +132,7 @@ if ($action == 'status' && $fav_id && $allow_bug_mod)
 	$sql = "INSERT INTO " . DL_BUG_HISTORY_TABLE . "
 		(df_id, report_id, report_his_type, report_his_date, report_his_value)
 		VALUES
-		($df_id, $fav_id, 'status', " . time() . ", '$new_status:" . $userdata['username'] . ":$new_status_text')";
+		($df_id, $fav_id, 'status', " . time() . ", '$new_status:" . $db->sql_escape($userdata['username']) . ":" . $db->sql_escape($new_status_text) . "')";
 	$result = $db->sql_query($sql);
 
 	$sql = "UPDATE " . DL_BUGS_TABLE . "
@@ -214,9 +215,9 @@ if ($action == 'status' && $fav_id && $allow_bug_mod)
 /*
 * assign bug report to team member
 */
-if ($action == 'assign' && $df_id && $fav_id && $allow_bug_mod)
+if (($action == 'assign') && $df_id && $fav_id && $allow_bug_mod)
 {
-	$new_user_id = (isset($_POST['user_assign'])) ? intval($_POST['user_assign']) : 0;
+	$new_user_id = request_var('user_assign', 0);
 	if (!$new_user_id)
 	{
 		message_die(GENERAL_MESSAGE, $lang['Dl_no_permissions']);

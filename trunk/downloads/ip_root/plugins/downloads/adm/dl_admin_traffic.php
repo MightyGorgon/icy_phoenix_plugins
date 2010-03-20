@@ -198,8 +198,8 @@ if ($submit)
 			while($row = $db->sql_fetchrow($result))
 			{
 				$group_id = $row['group_id'];
-				$group_dl_auto_traffic = (isset($_POST['group_dl_auto_traffic'])) ? $_POST['group_dl_auto_traffic'] : 0;
-				$data_group_range = ( isset($_POST['data_group_range']) ) ? $_POST['data_group_range'] : '';
+				$group_dl_auto_traffic = request_var('group_dl_auto_traffic', 0);
+				$data_group_range = request_var('data_group_range', '', true);
 
 				if ($data_group_range[$group_id] == 'B')
 				{
@@ -228,8 +228,8 @@ if ($submit)
 				$db->sql_query($sql);
 			}
 
-			$user_dl_auto_traffic = ( isset($_POST['user_dl_auto_traffic']) ) ? intval($_POST['user_dl_auto_traffic']) : 0;
-			$data_user_range = ( isset($_POST['data_user_range']) ) ? $_POST['data_user_range'] : '';
+			$user_dl_auto_traffic = request_var('user_dl_auto_traffic', 0);
+			$data_user_range = request_var('data_user_range', '', true);
 
 			if ($data_user_range == 'B')
 			{

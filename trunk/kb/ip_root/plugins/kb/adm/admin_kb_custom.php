@@ -35,24 +35,6 @@ require(IP_ROOT_PATH . 'adm/pagestart.' . PHP_EXT);
 
 include(IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['kb']['dir'] . 'common.' . PHP_EXT);
 
-// ===================================================
-// addslashes to vars if magic_quotes_gpc is off
-// ===================================================
-if (!@function_exists('slash_input_data'))
-{
-	function slash_input_data(&$data)
-	{
-		if (is_array($data))
-		{
-			foreach ($data as $k => $v)
-			{
-				$data[$k] = (is_array($v)) ? slash_input_data($v) : addslashes($v);
-			}
-		}
-		return $data;
-	}
-}
-
 if (!isset($_REQUEST))
 {
 	$_REQUEST = array_merge($_GET, $_POST, $_COOKIE);

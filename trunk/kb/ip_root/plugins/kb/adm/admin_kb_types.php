@@ -66,13 +66,10 @@ if(!function_exists('get_list_kb'))
 }
 
 // Load default header
-
-if (isset($_POST['mode']) || isset($_GET['mode']))
+$mode = request_var('mode', '');
+if (empty($mode))
 {
-	$mode = (isset($_POST['mode'])) ? $_POST['mode'] : $_GET['mode'];
-}
-else
-{
+	$mode = '';
 	if ($create)
 	{
 		$mode = 'create';
@@ -85,16 +82,12 @@ else
 	{
 		$mode = 'delete';
 	}
-	else
-	{
-		$mode = '';
-	}
 }
 
 switch ($mode)
 {
 	case 'create':
-		$type_name = trim($_POST['new_type_name']);
+		$type_name = request_var('new_type_name', '', true);
 
 		if (!$type_name)
 		{
@@ -102,7 +95,7 @@ switch ($mode)
 			exit;
 		}
 
-		$sql = "INSERT INTO " . KB_TYPES_TABLE . " (type) VALUES ('$type_name')";
+		$sql = "INSERT INTO " . KB_TYPES_TABLE . " (type) VALUES ('" . $db->sql_escape($type_name) . "')";
 		$result = $db->sql_query($sql);
 
 		$message = $lang['Type_created'] . '<br /><br />' . sprintf($lang['Click_return_type_manager'], '<a href="' . append_sid('admin_kb_types.' . PHP_EXT) . '">', '</a>') . '<br /><br />' . sprintf($lang['Click_return_admin_index'], '<a href="' . append_sid(IP_ROOT_PATH . ADM . '/index.' . PHP_EXT . '?pane=right') . '">', '</a>');
@@ -141,8 +134,8 @@ switch ($mode)
 		}
 		elseif ($_POST['submit'])
 		{
-			$type_id = intval($_POST['typeid']);
-			$type_name = trim($_POST['catname']);
+			$type_id = request_var('typeid', 0);
+			$type_name = request_var('catname', '', true);
 
 			if (!$type_name)
 			{
@@ -150,7 +143,7 @@ switch ($mode)
 				exit;
 			}
 
-			$sql = "UPDATE " . KB_TYPES_TABLE . " SET type = '" . $type_name . "' WHERE id = " . $type_id;
+			$sql = "UPDATE " . KB_TYPES_TABLE . " SET type = '" . $db->sql_escape($type_name) . "' WHERE id = " . $type_id;
 			$result = $db->sql_query($sql);
 
 			$message = $lang['Type_edited'] . '<br /><br />' . sprintf($lang['Click_return_type_manager'], '<a href="' . append_sid('admin_kb_types.' . PHP_EXT) . '">', '</a>') . '<br /><br />' . sprintf($lang['Click_return_admin_index'], '<a href="' . append_sid(IP_ROOT_PATH . ADM . '/index.' . PHP_EXT . '?pane=right') . '">', '</a>');
@@ -163,10 +156,9 @@ switch ($mode)
 
 		if (!$_POST['submit'])
 		{
-			$type_id = intval($_GET['cat']);
+			$type_id = request_var('cat', 0);
 
-			$sql = "SELECT *
-							FROM " . KB_TYPES_TABLE . " WHERE id = '" . $type_id . "'";
+			$sql = "SELECT * FROM " . KB_TYPES_TABLE . " WHERE id = '" . $type_id . "'";
 			$cat_result = $db->sql_query($sql);
 
 			if ($type = $db->sql_fetchrow($cat_result))
@@ -197,16 +189,15 @@ switch ($mode)
 		}
 		elseif ($_POST['submit'])
 		{
-			$new_type = $_POST['move_id'];
-			$old_type = $_POST['typeid'];
+			$new_type = request_var('move_id', '');
+			$old_type = request_var('typeid', '');
 
 			if ($new_type)
 			{
-				$sql = "UPDATE " . KB_ARTICLES_TABLE . " SET article_type = '$new_type'
-								WHERE article_type = '$old_type'";
+				$sql = "UPDATE " . KB_ARTICLES_TABLE . " SET article_type = '" . $db->sql_escape($new_type) . "' WHERE article_type = '" . $db->sql_escape($old_type) . "'";
 				$move_result = $db->sql_query($sql);
 			}
-			$sql = "DELETE FROM " . KB_TYPES_TABLE . " WHERE id = $old_type";
+			$sql = "DELETE FROM " . KB_TYPES_TABLE . " WHERE id = '" . $db->sql_escape($old_type) . "'";
 			$delete_result = $db->sql_query($sql);
 
 			$message = $lang['Type_deleted'] . '<br /><br />' . sprintf($lang['Click_return_type_manager'], '<a href="' . append_sid('admin_kb_types.' . PHP_EXT) . '">', '</a>') . '<br /><br />' . sprintf($lang['Click_return_admin_index'], '<a href="' . append_sid(IP_ROOT_PATH . ADM . '/index.' . PHP_EXT . '?pane=right') . '">', '</a>');
@@ -218,9 +209,7 @@ switch ($mode)
 	default:
 
 		// Generate page
-
-		$template->set_filenames(array('body' => KB_ADM_TPL_PATH . 'kb_type_body.tpl')
-			);
+		$template->set_filenames(array('body' => KB_ADM_TPL_PATH . 'kb_type_body.tpl'));
 
 		$template->assign_vars(array('L_KB_TYPE_TITLE' => $lang['Types_man'],
 			'L_KB_TYPE_DESCRIPTION' => $lang['KB_types_description'],

@@ -20,10 +20,10 @@ if (!defined('IN_ICYPHOENIX'))
 	die('Hacking attempt');
 }
 
-$start = (isset($_GET['start'])) ? intval($_GET['start']) : 0;
+$start = request_var('start', 0);
 $start = ($start < 0) ? 0 : $start;
 
-$category_id = (isset($_GET['cat'])) ? intval ($_GET['cat'])  : intval ($_POST['cat']);
+$category_id = request_var('cat', 0);
 
 $category = get_kb_cat($category_id);
 $category_name = $category['category_name'];

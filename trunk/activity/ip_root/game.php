@@ -15,7 +15,6 @@
 *
 */
 
-// CTracker_Ignore: File checked by human
 define('CTRACKER_DISABLED', true);
 define('IN_ICYPHOENIX', true);
 if (!defined('IP_ROOT_PATH')) define('IP_ROOT_PATH', './');
@@ -27,7 +26,7 @@ $userdata = session_pagestart($user_ip);
 init_userprefs($userdata);
 // End session management
 
-include(IP_ROOT_PATH . ACTIVITY_PLUGIN_PATH . 'common.' . PHP_EXT);
+include(IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['activity']['dir'] . 'common.' . PHP_EXT);
 
 if ($userdata['user_session_page'] != ('activity.' . PHP_EXT))
 {
@@ -43,7 +42,7 @@ CheckGamesPerDayMax($userdata['user_id'], $userdata['username']);
 BanCheck();
 /* End Restriction Checks */
 
-$game_id = (isset($_GET['id'])) ? intval($_GET['id']) : 0;
+$game_id = request_var('id', 0);
 $cheat_var = time();
 
 $sql = "SELECT *
@@ -147,7 +146,8 @@ if ($game_type == '2')
 
 if (($game_flash) && (!$_GET['parent']))
 {
-	$template->set_filenames(array('body' => ACTIVITY_TPL_PATH . 'flash_body.tpl'));
+	$template_to_parse = $class_plugins->get_tpl_file(ACTIVITY_TPL_PATH, 'flash_body.tpl');
+	$template->set_filenames(array('body' => $template_to_parse));
 	$template->assign_vars(array(
 		'TITLE' => $game_title,
 		'WIDTH' => $game_width,
@@ -161,7 +161,7 @@ if (($game_flash) && (!$_GET['parent']))
 elseif (($game_flash) && ($_GET['parent']))
 {
 
-	$template_to_parse = ACTIVITY_TPL_PATH . 'flash_body2.tpl';
+	$template_to_parse = $class_plugins->get_tpl_file(ACTIVITY_TPL_PATH, 'flash_body2.tpl');
 
 	$q = "SELECT *
 			FROM ". INA_TROPHY ."

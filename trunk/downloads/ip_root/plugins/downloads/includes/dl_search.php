@@ -24,60 +24,14 @@ if (!defined('IN_ICYPHOENIX'))
 /*
 * define initial search vars
 */
-if (isset($_POST['search_keywords']) || isset($_GET['search_keywords']))
-{
-	$search_keywords = (isset($_POST['search_keywords'])) ? htmlspecialchars($_POST['search_keywords']) : htmlspecialchars($_GET['search_keywords']);
-}
-else
-{
-	$search_keywords = '';
-}
 
-if (isset($_POST['search_cat']) || isset($_GET['search_cat']))
-{
-	$search_cat = (isset($_POST['search_cat'])) ? intval($_POST['search_cat']) : intval($_GET['search_cat']);
-}
-else
-{
-	$search_cat = '-1';
-}
+$search_keywords = request_var('search_cat', '', true);
+$search_cat = request_var('search_cat', -1);
+$sort_dir = request_var('sort_dir', 'ASC');
+$sort_dir = ($sort_dir == 'DESC') ? 'DESC' : 'ASC';
 
-if (isset($_POST['sort_dir']) || isset($_GET['sort_dir']))
-{
-	if (isset($_POST['sort_dir']))
-	{
-		$sort_dir = ($_POST['sort_dir'] == 'DESC') ? 'DESC' : 'ASC';
-	}
-
-	if (isset($_GET['sort_dir']))
-	{
-		$sort_dir = ($_GET['sort_dir'] == 'DESC') ? 'DESC' : 'ASC';
-	}
-
-}
-else
-{
-	$sort_dir =  'ASC';
-}
-
-if (isset($_POST['search_fields']) || isset($_GET['search_fields']))
-{
-	$search_in_fields = (isset($_POST['search_fields'])) ? $_POST['search_fields'] : $_GET['search_fields'];
-}
-else
-{
-	$search_in_fields = 'all';
-}
-
-if (isset($_POST['search_author']) || isset($_GET['search_author']))
-{
-	$search_author = (isset($_POST['search_author'])) ? $_POST['search_author'] : $_GET['search_author'];
-}
-else
-{
-	$search_author = '';
-}
-
+$search_in_fields = request_var('search_fields', 'all', true);
+$search_author = request_var('search_author', '', true);
 
 $search_fnames = array($lang['Dl_all'], $lang['Dl_file_name'], $lang['Dl_file_description'], $lang['Dl_detail']);
 $search_fields = array('all', 'file_name', 'description', 'long_desc');
@@ -105,7 +59,7 @@ if ($search_keywords != '' && !$search_author)
 	$sql_cat = ($search_cat == -1) ? '' : ' AND cat = ' . $search_cat;
 	$sql_cat_count = ($search_cat == -1) ? '' : ' AND cat = ' . $search_cat;
 
-	$search_keywords = str_replace("\'", "''", $search_keywords);
+	$search_keywords = $db->sql_escape($search_keywords);
 
 	switch($search_in_fields)
 	{
@@ -230,7 +184,7 @@ elseif ($search_author)
 	$sql_cat_count = ($search_cat == -1) ? '' : ' AND cat = ' . $search_cat;
 
 	$sql = "SELECT user_id FROM " . USERS_TABLE . "
-		WHERE username LIKE '" . str_replace("\'", "''", $search_author) . "'";
+		WHERE username LIKE '" . $db->sql_escape($search_author) . "'";
 	$result = $db->sql_query($sql);
 
 	$total_users = $db->sql_numrows($result);

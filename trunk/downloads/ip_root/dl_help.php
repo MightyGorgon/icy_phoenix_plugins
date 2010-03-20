@@ -24,13 +24,13 @@ include(IP_ROOT_PATH . 'common.' . PHP_EXT);
 $userdata = session_pagestart($user_ip);
 init_userprefs($userdata);
 
-$help_key = (isset($_GET['help_key'])) ? $_GET['help_key'] : '';
+$help_key = request_var('help_key', '');
 
-include(IP_ROOT_PATH . DL_PLUGIN_PATH . 'common.' . PHP_EXT);
-include(DL_ROOT_PATH . 'language/lang_' . $config['default_lang'] . '/lang_dl_help.' . PHP_EXT);
+include(IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['downloads']['dir'] . 'common.' . PHP_EXT);
+setup_extra_lang(array('lang_dl_help'), DL_ROOT_PATH . 'language/');
 
 // Pull all user config data
-if ($help_key && $lang['HELP_' . $help_key])
+if (!empty($help_key) && isset($lang['HELP_' . $help_key]))
 {
 	$help_string = $lang['HELP_' . $help_key];
 }
@@ -48,6 +48,7 @@ $template->assign_vars(array(
 );
 
 $gen_simple_header = true;
-full_page_generation(DL_TPL_PATH . 'dl_help_body.tpl', $lang['HELP_TITLE'], '', '');
+$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'dl_help_body.tpl');
+full_page_generation($template_to_parse, $lang['HELP_TITLE'], '', '');
 
 ?>

@@ -167,7 +167,7 @@ if(GetCookie(tmp) == '2')
 			&#8226; <a href="{games_on.game.COMMENTS}" class="nav">{games_on.game.L_COMMENTS}</a>
 			{games_on.game.CHALLENGE}
 			{games_on.game.LIST}
-			<br />{games_on.game.SEPERATOR}<a href="{games_on.game.STATS}" class="nav">{games_on.game.INFO}</a><br />
+			<br />{games_on.game.SEPARATOR}<a href="{games_on.game.STATS}" class="nav">{games_on.game.INFO}</a><br />
 			{games_on.game.GAMES_PLAYED} {games_on.game.I_PLAYED}
 			<!-- IF games_on.game.POP_PIC --><br /><center>{games_on.game.POP_PIC}</center><!-- ENDIF -->
 		</div>
@@ -177,7 +177,7 @@ if(GetCookie(tmp) == '2')
 		<b>{games_on.game.DESC2}:</b>	<br />
 		{games_on.game.DESC}<br /><br />
 		<b>{games_on.game.RATING_TITLE}</b><br />
-		{games_on.game.SEPERATOR}{games_on.game.RATING_SENT} {games_on.game.RATING_SUBMIT}  {games_on.game.RATING_IMAGE}<br />
+		{games_on.game.SEPARATOR}{games_on.game.RATING_SENT} {games_on.game.RATING_SUBMIT}  {games_on.game.RATING_IMAGE}<br />
 		</div>
 	</td>
 </tr>

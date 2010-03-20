@@ -13,9 +13,9 @@
 	<td class="row1g" width="15%"><span class="post-text"><img src="{game.TROPHY_LINK}" height="16" width="13">  {game.TOP_PLAYER}<br />{game.TOP_SCORE}</span></td>
 	<td class="row1g-left" width="20%">
 		<span class="post-text">
-			{game.SEPERATOR}{game.LIST}<br />
-			{game.SEPERATOR}<a href="{game.STATS}" class="nav">{game.INFO}</a><br />
-			{game.SEPERATOR}{game.GAMES_PLAYED} {game.I_PLAYED}<br />
+			{game.SEPARATOR}{game.LIST}<br />
+			{game.SEPARATOR}<a href="{game.STATS}" class="nav">{game.INFO}</a><br />
+			{game.SEPARATOR}{game.GAMES_PLAYED} {game.I_PLAYED}<br />
 			{game.POP_PIC}
 		</span>
 	</td>

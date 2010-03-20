@@ -55,10 +55,9 @@ if (!isset($_POST['submit']))
 }
 else
 {
+	$cat_id = request_var('cat_id', 0);
 	if (!isset($_GET['cat_id']))
 	{
-		$cat_id = intval($_POST['cat_id']);
-
 		$template->set_filenames(array('body' => KB_ADM_TPL_PATH . 'kb_cat_auth_body.tpl'));
 
 		$template->assign_vars(array(
@@ -131,8 +130,6 @@ else
 	}
 	else
 	{
-		$cat_id = intval($_GET['cat_id']);
-
 		$view_groups = @implode(',', $_POST['view']);
 		$post_groups = @implode(',', $_POST['post']);
 		$rate_groups = @implode(',', $_POST['rate']);

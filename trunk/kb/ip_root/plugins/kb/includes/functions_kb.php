@@ -15,8 +15,6 @@
 *
 */
 
-// CTracker_Ignore: File checked by human
-
 if (!defined('IN_ICYPHOENIX'))
 {
 	die('Hacking attempt');
@@ -718,7 +716,7 @@ function kb_insert_pm($to_id, $message, $subject, $from_id, $html_on = 0, $acro_
 	}
 
 	$sql_info = "INSERT INTO " . PRIVMSGS_TABLE . " (privmsgs_type, privmsgs_subject, privmsgs_text, privmsgs_from_userid, privmsgs_to_userid, privmsgs_date, privmsgs_ip, privmsgs_enable_html, privmsgs_enable_bbcode, privmsgs_enable_smilies, privmsgs_enable_autolinks_acronyms, privmsgs_attach_sig)
-		VALUES (" . PRIVMSGS_NEW_MAIL . ", '" . str_replace("\'", "''", $privmsg_subject) . "', '" . str_replace("\'", "''", addslashes($privmsg_message)) . "', " . $from_id . ", " . $to_userdata['user_id'] . ", $msg_time, '$user_ip', $html_on, $bbcode_on, $smilies_on, $acro_auto_on, $attach_sig)";
+		VALUES (" . PRIVMSGS_NEW_MAIL . ", '" . $db->sql_escape($privmsg_subject) . "', '" . $db->sql_escape($privmsg_message) . "', " . $from_id . ", " . $to_userdata['user_id'] . ", $msg_time, '$user_ip', $html_on, $bbcode_on, $smilies_on, $acro_auto_on, $attach_sig)";
 	$result = $db->sql_query($sql_info);
 	{
 		message_die(GENERAL_ERROR, "Could not insert/update private message sent info.", "", __LINE__, __FILE__, $sql_info);
@@ -733,7 +731,7 @@ function kb_insert_pm($to_id, $message, $subject, $from_id, $html_on = 0, $acro_
 	if ($to_userdata['user_notify_pm'] && !empty($to_userdata['user_email']) && $to_userdata['user_active'])
 	{
 		$script_name = preg_replace('/^\/?(.*?)\/?$/', "\\1", trim($config['script_path']));
-		$script_name = ($script_name != '') ? $script_name . '/privmsg.' . PHP_EXT : 'privmsg.' . PHP_EXT;
+		$script_name = ($script_name != '') ? $script_name . '/privmsg.' . PHP_EXT : CMS_PAGE_PRIVMSG;
 		$server_name = trim($config['server_name']);
 		$server_protocol = ($config['cookie_secure']) ? 'https://' : 'http://';
 		$server_port = ($config['server_port'] <> 80) ? ':' . trim($config['server_port']) . '/' : '/';
@@ -763,7 +761,7 @@ function kb_insert_pm($to_id, $message, $subject, $from_id, $html_on = 0, $acro_
 
 	return;
 
-	$msg = $lang['Message_sent'] . '<br /><br />' . sprintf($lang['Click_return_inbox'], '<a href="' . append_sid('privmsg.' . PHP_EXT . '?folder=inbox') . '">', '</a> ') . '<br /><br />' . sprintf($lang['Click_return_index'], '<a href="' . append_sid(CMS_PAGE_FORUM) . '">', '</a>');
+	$msg = $lang['Message_sent'] . '<br /><br />' . sprintf($lang['Click_return_inbox'], '<a href="' . append_sid(CMS_PAGE_PRIVMSG . '?folder=inbox') . '">', '</a> ') . '<br /><br />' . sprintf($lang['Click_return_index'], '<a href="' . append_sid(CMS_PAGE_FORUM) . '">', '</a>');
 
 	message_die(GENERAL_MESSAGE, $msg);
 
@@ -822,7 +820,7 @@ function kb_mailer($to_id, $message, $subject, $from_id, $html_on = 0, $acro_aut
 	}
 
 	$script_name = preg_replace('/^\/?(.*?)\/?$/', "\\1", trim($config['script_path']));
-	$script_name = ($script_name != '') ? $script_name . '/privmsg.' . PHP_EXT : 'privmsg.' . PHP_EXT;
+	$script_name = ($script_name != '') ? $script_name . '/privmsg.' . PHP_EXT : CMS_PAGE_PRIVMSG;
 	$server_name = trim($config['server_name']);
 	$server_protocol = ($config['cookie_secure']) ? 'https://' : 'http://';
 	$server_port = ($config['server_port'] <> 80) ? ':' . trim($config['server_port']) . '/' : '/';

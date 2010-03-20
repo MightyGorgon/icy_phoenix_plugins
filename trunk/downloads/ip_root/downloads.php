@@ -16,7 +16,6 @@
 *
 */
 
-// CTracker_Ignore: File checked by human
 define('IN_ICYPHOENIX', true);
 define('CT_SECLEVEL', 'MEDIUM');
 $ct_ignorepvar = array('mod_desc', 'long_desc', 'description', 'warning', 'todo', 'require', 'hack_author', 'hack_author_email', 'hack_author_website', 'hack_dl_url', 'dl_name', 'file_name');
@@ -34,7 +33,7 @@ $cms_page['global_blocks'] = (!empty($cms_config_layouts[$cms_page['page_id']]['
 $cms_auth_level = (isset($cms_config_layouts[$cms_page['page_id']]['view']) ? $cms_config_layouts[$cms_page['page_id']]['view'] : AUTH_ALL);
 check_page_auth($cms_page['page_id'], $cms_auth_level);
 
-include(IP_ROOT_PATH . DL_PLUGIN_PATH . 'common.' . PHP_EXT);
+include(IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['downloads']['dir'] . 'common.' . PHP_EXT);
 
 /*
 * init and get various values
@@ -63,14 +62,7 @@ $params = array(
 );
 while(list($var, $param) = @each($params))
 {
-	if (!empty($_POST[$param]) || !empty($_GET[$param]))
-	{
-		$$var = (!empty($_POST[$param])) ? htmlspecialchars($_POST[$param]) : htmlspecialchars($_GET[$param]);
-	}
-	else
-	{
-		$$var = '';
-	}
+	$$var = request_var($param, '');
 }
 
 $params = array(
@@ -90,14 +82,7 @@ $params = array(
 );
 while(list($var, $param) = @each($params))
 {
-	if (!empty($_POST[$param]) || !empty($_GET[$param]))
-	{
-		$$var = (!empty($_POST[$param])) ? intval($_POST[$param]) : intval($_GET[$param]);
-	}
-	else
-	{
-		$$var = 0;
-	}
+	$$var = request_var($param, 0);
 }
 
 $df_id = ($df_id < 0) ? 0 : $df_id;
@@ -290,7 +275,7 @@ if ($view == 'todo')
 		$nav_server_url = create_server_url();
 		$breadcrumbs_address = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>' . $lang['Nav_Separator'] . '<a class="nav-current" href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT . '?view=todo') . '">' . $lang['Dl_mod_todo'] . '</a>';
 
-		$template_to_parse = DL_TPL_PATH . 'dl_todo_body.tpl';
+		$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'dl_todo_body.tpl');
 
 		$template->assign_vars(array(
 			'L_DESCRIPTION' => $lang['Dl_file_description'],
@@ -372,7 +357,8 @@ if (($view == 'broken') && $df_id && $cat_id && ($userdata['session_logged_in'] 
 				'S_HIDDEN_FIELDS' => $s_hidden_fields
 				)
 			);
-			full_page_generation(DL_TPL_PATH . 'dl_report_code_body.tpl', $lang['Downloads'], '', '');
+			$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'dl_report_code_body.tpl');
+			full_page_generation($template_to_parse, $lang['Downloads'], '', '');
 		}
 		else
 		{
@@ -771,7 +757,7 @@ elseif ($view == 'load')
 		$cat_auth = array();
 		$cat_auth = $dl_mod->dl_cat_auth($cat_id);
 
-		if (!$userdata['user_level'] == ADMIN && !$cat_auth['auth_mod'])
+		if ((!$userdata['user_level'] == ADMIN) && !$cat_auth['auth_mod'])
 		{
 			$modcp = 0;
 		}
@@ -880,7 +866,7 @@ elseif ($view == 'load')
 
 				$sql = "INSERT INTO " . DL_STATS_TABLE . "
 					(cat_id, id, user_id, username, traffic, direction, user_ip, browser, time_stamp) VALUES
-					($cat_id, $df_id, " . $userdata['user_id'] . ", '" . str_replace("\'", "''", $userdata['username']) . "', " . $dl_file['file_size'] . ", 0, '" . $userdata['session_ip'] . "', '" . str_replace("\'", "''", $browser) . "', " . time() . ")";
+					($cat_id, $df_id, " . $userdata['user_id'] . ", '" . $db->sql_escape($userdata['username']) . "', " . $dl_file['file_size'] . ", 0, '" . $userdata['session_ip'] . "', '" . $db->sql_escape($browser) . "', " . time() . ")";
 				$result = $db->sql_query($sql);
 			}
 		}
@@ -1310,7 +1296,7 @@ if (($view == 'overall') && sizeof($index))
 	}
 	$db->sql_freeresult($result);
 
-	$template_to_parse = DL_TPL_PATH . 'dl_overview_body.tpl';
+	$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'dl_overview_body.tpl');
 
 	$template->assign_vars(array(
 		'L_DESCRIPTION' => $lang['Dl_file_description'],
@@ -1454,6 +1440,8 @@ if (($view == 'overall') && sizeof($index))
 	}
 }
 
+page_header($meta_content['page_title'], true);
+
 //default user entry. redirect to index or category
 if (empty($view) && !$inc_module)
 {
@@ -1461,7 +1449,7 @@ if (empty($view) && !$inc_module)
 
 	if (!$cat)
 	{
-		$template_to_parse = DL_TPL_PATH . 'view_dl_cat_body.tpl';
+		$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'view_dl_cat_body.tpl');
 	}
 	else
 	{
@@ -1475,7 +1463,7 @@ if (empty($view) && !$inc_module)
 			redirect(append_sid('downloads.' . PHP_EXT));
 		}
 
-		$template_to_parse = DL_TPL_PATH . 'downloads_body.tpl';
+		$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'downloads_body.tpl');
 
 		$sql = "SELECT dl_id, user_id FROM " . DL_RATING_TABLE;
 		$result = $db->sql_query($sql);
@@ -1555,11 +1543,11 @@ if (empty($view) && !$inc_module)
 
 			if ($mini_icon[$cat_id]['new'])
 			{
-				$mini_cat_icon .= '<img src="' . $images['Dl_new'] . '" border="0" alt="' . $lang['DL_new'] . '" title="' . $lang['DL_new'] . '" />&nbsp;';
+				$mini_cat_icon .= '<img src="' . $images['Dl_new'] . '" alt="' . $lang['DL_new'] . '" title="' . $lang['DL_new'] . '" border="0" />&nbsp;';
 			}
 			if ($mini_icon[$cat_id]['edit'])
 			{
-				$mini_cat_icon .= '<img src="' . $images['Dl_edit'] . '" border="0" alt="' . $lang['DL_edit'] . '" title="' . $lang['DL_edit'] . '" />&nbsp;';
+				$mini_cat_icon .= '<img src="' . $images['Dl_edit'] . '" alt="' . $lang['DL_edit'] . '" title="' . $lang['DL_edit'] . '" border="0" />&nbsp;';
 			}
 
 			$row_class = (($i % 2)) ? $theme['td_class1'] : $theme['td_class2'];
@@ -1591,7 +1579,8 @@ if (empty($view) && !$inc_module)
 
 			if ($cat)
 			{
-				$template->set_filenames(array('subcats' => DL_TPL_PATH . 'view_dl_subcat_body.tpl'));
+				$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'view_dl_subcat_body.tpl');
+				$template->set_filenames(array('subcats' => $template_to_parse));
 
 				$block = 'subcats';
 
@@ -1952,7 +1941,7 @@ if (empty($view) && !$inc_module)
 		'T_DL_CAT' => ($cat) ? $index[$cat]['cat_name'] : $lang['Dl_cat_name'],
 
 		'U_DOWNLOADS' => append_sid('downloads.' . PHP_EXT . '?start=' . $start . '&amp;cat=' . $cat),
-		'U_SEARCH' => (sizeof($index) || $cat) ? '<a href="' . append_sid('downloads.' . PHP_EXT . '?view=search') . '"><img src="' . $images['icon_search'] . '" border="0" alt="' . $lang['Search'] . '" title="' . $lang['Search'] . '" /></a>' : '&nbsp;',
+		'U_DL_SEARCH' => (sizeof($index) || $cat) ? '<a href="' . append_sid('downloads.' . PHP_EXT . '?view=search') . '"><img src="' . $images['icon_search'] . '" alt="' . $lang['Search'] . '" title="' . $lang['Search'] . '" border="0" /></a>' : '&nbsp;',
 		'U_DL_CAT' => ($cat) ? $dl_mod->dl_nav($cat, 'url') : '',
 
 		'U_DL_TOP' => append_sid('downloads.' . PHP_EXT)
@@ -1971,11 +1960,9 @@ $template->assign_vars(array(
 	)
 );
 
-/*
-* include the mod footer
-*/
+$template->set_filenames(array('body' => $template_to_parse));
+$template->pparse('body');
 include(IP_ROOT_PATH . DL_PLUGIN_PATH . 'includes/dl_footer.' . PHP_EXT);
-
-full_page_generation($template_to_parse, $meta_content['page_title'], $meta_content['description'], $meta_content['keywords']);
+page_footer(true, '', true);
 
 ?>

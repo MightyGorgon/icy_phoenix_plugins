@@ -310,7 +310,7 @@ for ($x = 0; $x < $games_c; $x++)
 	}
 	else
 	{
-		$highscore_link = '<br />' . $lang['seperator'] . '&nbsp;<a href="' . append_sid('activity.' . PHP_EXT . '?page=high_scores&amp;mode=highscore&amp;game_name=' . urlencode($game_name)) . '" class="nav">' . $lang['game_highscores'] . '</a>';
+		$highscore_link = '<br />' . $lang['separator'] . '&nbsp;<a href="' . append_sid('activity.' . PHP_EXT . '?page=high_scores&amp;mode=highscore&amp;game_name=' . urlencode($game_name)) . '" class="nav">' . $lang['game_highscores'] . '</a>';
 		$best_score = $best_score;
 	}
 
@@ -338,24 +338,24 @@ for ($x = 0; $x < $games_c; $x++)
 
 		$challenge = $config['ina_challenge'];
 		if (($challenge == '1') && ($t_player_id != ANONYMOUS) && ($userdata['user_id'] != ANONYMOUS))
-			$challenge_link = '<br />'. $lang['seperator'] .'&nbsp;<a href="#" onclick="popup_open(\'' . append_sid('activity_popup.' . PHP_EXT . '?mode=challenge&amp;g= '. $game_id . '&amp;' . POST_USERS_URL . '=' . $t_player_id) . '\', \'New_Window\', \'400\', \'200\', \'yes\')' . '; return false;">' . $lang['challenge_link_key'] . '</a>';
+			$challenge_link = '<br />'. $lang['separator'] .'&nbsp;<a href="#" onclick="popup_open(\'' . append_sid('activity_popup.' . PHP_EXT . '?mode=challenge&amp;g= '. $game_id . '&amp;' . POST_USERS_URL . '=' . $t_player_id) . '\', \'New_Window\', \'400\', \'200\', \'yes\')' . '; return false;">' . $lang['challenge_link_key'] . '</a>';
 
 		if ($challenge != '1' || $t_player_id == ANONYMOUS || $userdata['user_id'] == ANONYMOUS)
-			$challenge_link = '<br />'. $lang['seperator'] .'&nbsp;'. $lang['challenge_link_key'];
+			$challenge_link = '<br />'. $lang['separator'] .'&nbsp;'. $lang['challenge_link_key'];
 
 		if ($userdata['user_level'] == ADMIN)
-			$admin_edit = '<br />' . $lang['seperator'] . '&nbsp;<a href="#" onclick="popup_open(\'' . ADM . '/admin_activity.' . PHP_EXT . '?mode=edit_games&amp;action=edit&amp;game=' . $game_id . '&amp;sid=' . $userdata['session_id'] . '\', \'New_Window\', \'550\', \'300\', \'yes\'); return false;">' . $lang['admin_edit_link'] . '</a>';
+			$admin_edit = '<br />' . $lang['separator'] . '&nbsp;<a href="#" onclick="popup_open(\'' . ADM . '/admin_activity.' . PHP_EXT . '?mode=edit_games&amp;action=edit&amp;game=' . $game_id . '&amp;sid=' . $userdata['session_id'] . '\', \'New_Window\', \'550\', \'300\', \'yes\'); return false;">' . $lang['admin_edit_link'] . '</a>';
 
 		if ($userdata['user_level'] != ADMIN)
 			$admin_edit = '';
 
 		$games_cost_line = $show_fees = $show_ge = $show_jack = '';
 		if ($game_fees)
-			$show_fees = '<br />' . $lang['seperator'] . '&nbsp;' . $lang['cost'] . ':&nbsp;'. $cost;
+			$show_fees = '<br />' . $lang['separator'] . '&nbsp;' . $lang['cost'] . ':&nbsp;'. $cost;
 		if ($game_ge_cost)
-			$show_ge = '<br />' . $lang['seperator'] . '&nbsp;' . strip_tags($lang['ge_cost_per_game']) . ':&nbsp;' . number_format($game_ge_cost);
+			$show_ge = '<br />' . $lang['separator'] . '&nbsp;' . strip_tags($lang['ge_cost_per_game']) . ':&nbsp;' . number_format($game_ge_cost);
 		if ($games_data[$x]['jackpot'])
-			$show_jack = ($game_type != 2) ? '<br />' . $lang['seperator'] . '&nbsp;' . str_replace('%X%', intval($games_data[$x]['jackpot']), $lang['jackpot_text']) : '';
+			$show_jack = ($game_type != 2) ? '<br />' . $lang['separator'] . '&nbsp;' . str_replace('%X%', intval($games_data[$x]['jackpot']), $lang['jackpot_text']) : '';
 		$games_cost_line = $show_fees . $show_ge . $show_jack;
 
 		if (($config['ina_disable_comments_page']) && ($userdata['user_level'] != ADMIN))
@@ -390,9 +390,9 @@ for ($x = 0; $x < $games_c; $x++)
 			'TROPHY_IMG' => ($game_type != 2) ? '<img src="' . ACTIVITY_IMAGES_PATH . 'trophy.gif" alt="" />' : '',
 			'RUNNER_IMG' => ($game_type != 2) ? '<img src="' . ACTIVITY_IMAGES_PATH . 'trophy.gif" alt="" />' : '',
 			'DESC2' => $lang['new_description'],
-			'GAMES_PLAYED' => $lang['seperator'] .'&nbsp;'. $lang['new_games_played'],
+			'GAMES_PLAYED' => $lang['separator'] .'&nbsp;'. $lang['new_games_played'],
 			'I_PLAYED' => number_format($game_played) . $games_cost_line . $admin_edit,
-			'SEPERATOR' => $lang['seperator'] .'&nbsp;',
+			'SEPARATOR' => $lang['separator'] .'&nbsp;',
 			'CHARGE' => $cost,
 			'PROPER_NAME' => $game_proper,
 			'IMAGE_LINK' => $game_link,

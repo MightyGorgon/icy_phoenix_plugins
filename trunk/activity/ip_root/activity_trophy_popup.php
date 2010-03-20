@@ -15,7 +15,6 @@
 *
 */
 
-// CTracker_Ignore: File checked by human
 define('IN_ICYPHOENIX', true);
 define('CTRACKER_DISABLED', true);
 if (!defined('IP_ROOT_PATH')) define('IP_ROOT_PATH', './');
@@ -27,7 +26,7 @@ $userdata = session_pagestart($user_ip);
 init_userprefs($userdata);
 // End session management
 
-include(IP_ROOT_PATH . ACTIVITY_PLUGIN_PATH . 'common.' . PHP_EXT);
+include(IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['activity']['dir'] . 'common.' . PHP_EXT);
 
 /* Start Version Check */
 VersionCheck();
@@ -73,6 +72,7 @@ while($row = $db -> sql_fetchrow($r))
 }
 
 $gen_simple_header = true;
-full_page_generation(ACTIVITY_TPL_PATH . 'activity_tp_body.tpl', '', '', '');
+$template_to_parse = $class_plugins->get_tpl_file(ACTIVITY_TPL_PATH, 'activity_tp_body.tpl');
+full_page_generation($template_to_parse, '', '', '');
 
 ?>
