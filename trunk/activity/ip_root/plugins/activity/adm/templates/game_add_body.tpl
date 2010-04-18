@@ -63,7 +63,7 @@
 		<span class="genmed">{L_GAME_CHARGE}</span><br />
 		<span class="gensmall">{L_GAME_CHARGE_INFO}</span>
 	</td>
-	<td class="row2" width="20%" align="left"> 
+	<td class="row2" width="20%" align="left">Â 
 		<select name="game_charge">
 			<option class="post" selected value="">{V_DEFAULT_2}</option>
 			<option class="post" value="{V_INC_1}">{V_INC_1}</option>

@@ -82,7 +82,7 @@
 
 <tr>
 	<td class="cat" colspan="2" align="center">{S_HIDDEN_FIELDS}
-		<input type="submit" name="submit" value="{L_SUBMIT}" class="mainoption" /> 
+		<input type="submit" name="submit" value="{L_SUBMIT}" class="mainoption" />Â 
 		<input type="reset" value="{L_RESET}" class="mainoption" />
 		<input type="submit" name="edit_games" value="Edit Games" class="mainoption" />
 	</td>

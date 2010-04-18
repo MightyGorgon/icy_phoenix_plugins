@@ -180,18 +180,15 @@ if ($action == 'status' && $fav_id && $allow_bug_mod)
 			$config['smtp_host'] = @$ini_val('SMTP');
 		}
 
-		$emailer = new emailer($config['smtp_delivery']);
+		$emailer = new emailer();
 
-		$email_headers = 'X-AntiAbuse: Board servername - ' . trim($config['server_name']) . "\n";
-		$email_headers .= 'X-AntiAbuse: User_id - ' . $userdata['user_id'] . "\n";
-		$email_headers .= 'X-AntiAbuse: Username - ' . $userdata['username'] . "\n";
-		$email_headers .= 'X-AntiAbuse: User IP - ' . decode_ip($user_ip) . "\n";
+		$emailer->headers('X-AntiAbuse: Board servername - ' . trim($config['server_name']));
+		$emailer->headers('X-AntiAbuse: User_id - ' . $userdata['user_id']);
+		$emailer->headers('X-AntiAbuse: Username - ' . $userdata['username']);
+		$emailer->headers('X-AntiAbuse: User IP - ' . decode_ip($user_ip));
 
 		$emailer->use_template('dl_bt_status', $user_lang);
-		$emailer->email_address($user_email);
-		$emailer->from($config['board_email']);
-		$emailer->replyto($config['board_email']);
-		$emailer->extra_headers($email_headers);
+		$emailer->to($user_email);
 		$emailer->set_subject();
 
 		$emailer->assign_vars(array(
@@ -266,18 +263,15 @@ if (($action == 'assign') && $df_id && $fav_id && $allow_bug_mod)
 			$config['smtp_host'] = @$ini_val('SMTP');
 		}
 
-		$emailer = new emailer($config['smtp_delivery']);
+		$emailer = new emailer();
 
-		$email_headers = 'X-AntiAbuse: Board servername - ' . trim($config['server_name']) . "\n";
-		$email_headers .= 'X-AntiAbuse: User_id - ' . $userdata['user_id'] . "\n";
-		$email_headers .= 'X-AntiAbuse: Username - ' . $userdata['username'] . "\n";
-		$email_headers .= 'X-AntiAbuse: User IP - ' . decode_ip($user_ip) . "\n";
+		$emailer->headers('X-AntiAbuse: Board servername - ' . trim($config['server_name']));
+		$emailer->headers('X-AntiAbuse: User_id - ' . $userdata['user_id']);
+		$emailer->headers('X-AntiAbuse: Username - ' . $userdata['username']);
+		$emailer->headers('X-AntiAbuse: User IP - ' . decode_ip($user_ip));
 
 		$emailer->use_template('dl_bt_assign', $report_assign_user_lang);
-		$emailer->email_address($report_assign_user_email);
-		$emailer->from($config['board_email']);
-		$emailer->replyto($config['board_email']);
-		$emailer->extra_headers($email_headers);
+		$emailer->to($report_assign_user_email);
 		$emailer->set_subject();
 
 		$emailer->assign_vars(array(

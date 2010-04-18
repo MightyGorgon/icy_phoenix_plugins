@@ -26,5 +26,6 @@ if (!file_exists($lang_file))
 $plugin_details['config'] = 'cash';
 $plugin_details['name'] = $lang['PLUGIN_CASH'];
 $plugin_details['description'] = $lang['PLUGIN_CASH_EXPLAIN'];
+$plugin_details['version'] = '1.0.0';
 
 ?>

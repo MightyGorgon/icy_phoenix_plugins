@@ -26,5 +26,6 @@ if (!file_exists($lang_file))
 $plugin_details['config'] = 'kb';
 $plugin_details['name'] = $lang['PLUGIN_KB'];
 $plugin_details['description'] = $lang['PLUGIN_KB_EXPLAIN'];
+$plugin_details['version'] = '1.0.0';
 
 ?>

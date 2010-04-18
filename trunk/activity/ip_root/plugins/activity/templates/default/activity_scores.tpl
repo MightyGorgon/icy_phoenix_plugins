@@ -21,7 +21,7 @@
 <!-- BEGIN scores -->
 <tr>
 	<td class="{scores.ROW_CLASS} row-center"><span class="gen">{scores.POS}</span></td>
-	<td class="{scores.ROW_CLASS}" align="left">  <span class="gen">{scores.NAME}</span></td>
+	<td class="{scores.ROW_CLASS}" align="left">Â Â <span class="gen">{scores.NAME}</span></td>
 	<td class="{scores.ROW_CLASS}" align="{scores.ALIGN}"><span class="gen">{scores.SCORE}</span></td>
 	<td class="{scores.ROW_CLASS} row-center"><span class="gen">{scores.DATE}</span></td>
 </tr>

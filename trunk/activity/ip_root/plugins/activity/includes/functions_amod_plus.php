@@ -242,15 +242,13 @@ function send_challenge_pm($dest_user, $subject, $message)
 			$server_port = ($config['server_port'] <> 80) ? ':' . trim($config['server_port']) . '/' : '/';
 
 			include_once(IP_ROOT_PATH . './includes/emailer.' . PHP_EXT);
-			$emailer = new emailer($config['smtp_delivery']);
+			$emailer = new emailer();
 
-			$email_headers = 'From: ' . $config['board_email'] . "\nReturn-Path: " . $config['board_email'] . "\n";
 			$emailer->use_template('privmsg_notify', $to_userdata['user_lang']);
-			$emailer->extra_headers($email_headers);
-			$emailer->email_address($to_userdata['user_email']);
+			$emailer->to($to_userdata['user_email']);
 			$emailer->set_subject($lang['Notification_subject']);
 
-			if ($config['html_email'] === '1')
+			if (!empty($config['html_email']))
 			{
 				//HTML Message
 				$message = $bbcode->parse($privmsg_message);
@@ -261,6 +259,7 @@ function send_challenge_pm($dest_user, $subject, $message)
 			{
 				$message = bbcode_killer_mg ($privmsg_message, '');
 			}
+			$email_sig = create_signature($config['board_email_sig']);
 			$emailer->assign_vars(array(
 				// Mighty Gorgon - Begin
 				'FROM' => $userdata['username'],
@@ -270,7 +269,7 @@ function send_challenge_pm($dest_user, $subject, $message)
 				// Mighty Gorgon - End
 				'USERNAME' => $to_username,
 				'SITENAME' => $config['sitename'],
-				'EMAIL_SIG' => (!empty($config['board_email_sig'])) ? str_replace('<br />', "\n", $config['sig_line'] . " \n" . $config['board_email_sig']) : '',
+				'EMAIL_SIG' => $email_sig,
 				'U_INBOX' => $server_protocol . $server_name . $server_port . $script_name . '?folder=inbox'
 				)
 			);

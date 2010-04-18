@@ -737,19 +737,17 @@ function kb_insert_pm($to_id, $message, $subject, $from_id, $html_on = 0, $acro_
 		$server_port = ($config['server_port'] <> 80) ? ':' . trim($config['server_port']) . '/' : '/';
 
 		include(IP_ROOT_PATH . 'includes/emailer.' . PHP_EXT);
-		$emailer = new emailer($config['smtp_delivery']);
-
-		$emailer->from($config['board_email']);
-		$emailer->replyto($config['board_email']);
+		$emailer = new emailer();
 
 		$emailer->use_template('privmsg_notify', $to_userdata['user_lang']);
-		$emailer->email_address($to_userdata['user_email']);
+		$emailer->to($to_userdata['user_email']);
 		$emailer->set_subject($lang['Notification_subject']);
 
+		$email_sig = create_signature($config['board_email_sig']);
 		$emailer->assign_vars(array(
 			'USERNAME' => $to_username,
 			'SITENAME' => $config['sitename'],
-			'EMAIL_SIG' => (!empty($config['board_email_sig'])) ? str_replace('<br />', "\n", $config['sig_line'] . " \n" . $config['board_email_sig']) : '',
+			'EMAIL_SIG' => $email_sig,
 
 			'U_INBOX' => $server_protocol . $server_name . $server_port . $script_name . '?folder=inbox'
 			)
@@ -826,12 +824,9 @@ function kb_mailer($to_id, $message, $subject, $from_id, $html_on = 0, $acro_aut
 	$server_port = ($config['server_port'] <> 80) ? ':' . trim($config['server_port']) . '/' : '/';
 
 	include(IP_ROOT_PATH . 'includes/emailer.' . PHP_EXT);
-	$emailer = new emailer($config['smtp_delivery']);
+	$emailer = new emailer();
 
-	$emailer->from($config['board_email']);
-	$emailer->replyto($config['board_email']);
-
-	$emailer->email_address($to_userdata['user_email']);
+	$emailer->to($to_userdata['user_email']);
 	$emailer->set_subject($privmsg_subject);
 	$emailer->msg = $privmsg_message;
 

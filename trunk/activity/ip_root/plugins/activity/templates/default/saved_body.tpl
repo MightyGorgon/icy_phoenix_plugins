@@ -1,4 +1,4 @@
-<div class="text_cont_center" style="width:400px;"><div class="text_yellow_cont"><span class="text_red">((¯`·._*. {TITLE} .*_.·´¯))</span></div></div><br />
+<div class="text_cont_center" style="width:400px;"><div class="text_yellow_cont"><span class="text_red">((Â¯`Â·._*. {TITLE} .*_.Â·Â´Â¯))</span></div></div><br />
 <table class="forumline" width="100%" cellspacing="0" cellpadding="0" border="0">
 <tr>
 	<td align="center" valign="top" width="25%"><table><tr><td align="center" valign="top" width="100%"><span class="genmed">{GAME_IMAGE}</span></td></tr></table></td>

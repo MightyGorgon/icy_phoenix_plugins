@@ -26,5 +26,6 @@ if (!file_exists($lang_file))
 $plugin_details['config'] = 'downloads';
 $plugin_details['name'] = $lang['PLUGIN_DOWNLOADS'];
 $plugin_details['description'] = $lang['PLUGIN_DOWNLOADS_EXPLAIN'];
+$plugin_details['version'] = '1.0.0';
 
 ?>

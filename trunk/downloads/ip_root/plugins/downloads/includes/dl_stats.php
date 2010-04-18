@@ -178,7 +178,7 @@ if (sizeof($index))
 
 				$file_link = append_sid('downloads.' . PHP_EXT . '?view=detail&amp;df_id=' . $file_id);
 
-				$row_class = ( !($i % 2) ) ? $theme['td_class1'] : $theme['td_class2'];
+				$row_class = (!($i % 2)) ? $theme['td_class1'] : $theme['td_class2'];
 
 				$template->assign_block_vars('top_ten_dl_cur_month', array(
 					'POS' => $dl_pos,
@@ -270,7 +270,7 @@ if (sizeof($index))
 
 				$file_link = append_sid('downloads.' . PHP_EXT . '?view=detail&amp;df_id=' . $file_id);
 
-				$row_class = ( !($i % 2) ) ? $theme['td_class1'] : $theme['td_class2'];
+				$row_class = (!($i % 2)) ? $theme['td_class1'] : $theme['td_class2'];
 
 				$template->assign_block_vars('top_ten_traffic_cur_month', array(
 					'POS' => $dl_pos,
@@ -316,7 +316,7 @@ if (sizeof($index))
 
 				$file_link = append_sid('downloads.' . PHP_EXT . '?view=detail&amp;df_id=' . $file_id);
 
-				$row_class = ( !($i % 2) ) ? $theme['td_class1'] : $theme['td_class2'];
+				$row_class = (!($i % 2)) ? $theme['td_class1'] : $theme['td_class2'];
 
 				$template->assign_block_vars('top_ten_traffic_overall', array(
 					'POS' => $dl_pos,
@@ -363,7 +363,7 @@ if (sizeof($index))
 				$user_link = ($row['user_id'] == ANONYMOUS) ? $lang['Guest'] : colorize_username($row['user_id'], $row['user_username'], $row['user_color'], $row['user_active']);
 				$user_name = ($row['user_id'] == ANONYMOUS) ? $lang['Guest'] : $row['username'];
 
-				$row_class = ( !($i % 2) ) ? $theme['td_class1'] : $theme['td_class2'];
+				$row_class = (!($i % 2)) ? $theme['td_class1'] : $theme['td_class2'];
 
 				$template->assign_block_vars('top_ten_dl_counts', array(
 					'POS' => $dl_pos,
@@ -405,7 +405,7 @@ if (sizeof($index))
 				$user_name = ($row['user_id'] == ANONYMOUS) ? $lang['Guest'] : $row['username'];
 				$dl_traffic = $dl_mod->dl_size($row['dl_traffic']);
 
-				$row_class = ( !($i % 2) ) ? $theme['td_class1'] : $theme['td_class2'];
+				$row_class = (!($i % 2)) ? $theme['td_class1'] : $theme['td_class2'];
 
 				$template->assign_block_vars('top_ten_dl_traffic', array(
 					'POS' => $dl_pos,
