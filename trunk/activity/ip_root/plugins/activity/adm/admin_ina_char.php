@@ -25,7 +25,7 @@ if (!empty($setmodules))
 	}
 
 	$file = IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['activity']['dir'] . ADM . '/' . basename(__FILE__);
-	$module['3000_ACTIVITY']['170_Char_Settings'] = $file;
+	$module['3200_ACTIVITY']['170_Char_Settings'] = $file;
 	return;
 }
 

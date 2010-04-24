@@ -25,7 +25,7 @@ if (!empty($setmodules))
 	}
 
 	$file = IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['activity']['dir'] . ADM . '/' . basename(__FILE__);
-	$module['3000_ACTIVITY']['180_Hide_Show_Games'] = $file;
+	$module['3200_ACTIVITY']['180_Hide_Show_Games'] = $file;
 	return;
 }
 

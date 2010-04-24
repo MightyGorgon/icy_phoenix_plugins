@@ -25,9 +25,9 @@ if (!empty($setmodules))
 	}
 
 	$file = IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['activity']['dir'] . ADM . '/' . basename(__FILE__);
-	$module['3000_ACTIVITY']['110_Configuration'] = $file;
-	$module['3000_ACTIVITY']['120_Add_Game'] = $file . '?mode=add_game';
-	$module['3000_ACTIVITY']['130_Edit_Games'] = $file . '?mode=edit_games';
+	$module['3200_ACTIVITY']['110_Configuration'] = $file;
+	$module['3200_ACTIVITY']['120_Add_Game'] = $file . '?mode=add_game';
+	$module['3200_ACTIVITY']['130_Edit_Games'] = $file . '?mode=edit_games';
 	return;
 }
 

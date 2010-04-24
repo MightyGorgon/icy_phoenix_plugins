@@ -25,8 +25,8 @@ if (!empty($setmodules))
 	}
 
 	$file = IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['activity']['dir'] . ADM . '/' . basename(__FILE__);
-	$module['3000_ACTIVITY']['220_Xtras'] = $file;
-	$module['3000_ACTIVITY']['230_Check_Games'] = $file . '?mode=check_game_listing';
+	$module['3200_ACTIVITY']['220_Xtras'] = $file;
+	$module['3200_ACTIVITY']['230_Check_Games'] = $file . '?mode=check_game_listing';
 	return;
 }
 

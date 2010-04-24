@@ -25,7 +25,7 @@ if (!empty($setmodules))
 	}
 
 	$file = IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['activity']['dir'] . ADM . '/' . basename(__FILE__);
-	$module['3000_ACTIVITY']['150_Bulk_Add_Games'] = $file;
+	$module['3200_ACTIVITY']['150_Bulk_Add_Games'] = $file;
 	return;
 }
 
