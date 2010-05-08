@@ -150,21 +150,21 @@ if(($mode == 'main') || !$mode)
 	echo "		</td>";
 	echo "	</tr>";
 	echo "</table>";
-	echo "<form name='uninstall' action=\"$link\" method=\"post\">";
+	echo "<form name=\"uninstall\" action=\"$link\" method=\"post\">";
 	echo "<table align=\"center\" valign=\"top\" border=\"0\">";
 	echo "	<tr>";
 	echo "		<td class=\"row2 row-center\" width=\"100%\">";
-	echo "			<input type=\"hidden\" name=\"mode\" value='remove'>";
-	echo "			<input type=\"submit\" class=\"mainoption\" value='". $lang['admin_db_14'] ."' onchange='uninstall.edit_trophy.submit()'>";
+	echo "			<input type=\"hidden\" name=\"mode\" value=\"remove\">";
+	echo "			<input type=\"submit\" class=\"mainoption\" value=\"" . $lang['admin_db_14'] . "\" onchange=\"uninstall.edit_trophy.submit()\">";
 	echo "		</td>";
 	echo "	</tr>";
 	echo "</table>";
 	echo "</form>";
 		}
 
-	if ($mode == "upgrading" || $mode == "fresh_install" || $mode == 'remove')
+	if (($mode == 'upgrading') || ($mode == 'fresh_install') || ($mode == 'remove'))
 		{
-		if (($mode == "fresh_install" || $mode == "remove") && ($mode != "upgrading"))
+		if ((($mode == 'fresh_install') || ($mode == 'remove')) && ($mode != 'upgrading'))
 			{
 	$sql = array();
 	$sql[] = "DROP TABLE IF EXISTS ". iNA .", ". iNA_GAMES .", ". iNA_SCORES .", ". iNA_TOP_SCORES .", ". iNA_BAN .", ". iNA_CHEAT .", ". iNA_CAT .", ". iNA_CAT_DATA .", ". iNA_CHALLENGE .", ". iNA_CHALLENGE_USERS .", ". iNA_TROPHY_COMMENTS .", ". iNA_SESSIONS .", ". iNA_LAST_PLAYED .", ". iNA_GAMBLE .", ". iNA_GAMBLE_PROGRESS .", ". iNA_RATING .", ". iNA_FAVORITES .", ". iNA_HOF .", ". iNA_CHAT ."";
@@ -603,7 +603,11 @@ if(($mode == 'main') || !$mode)
 		$sql[] = "INSERT INTO ". CONFIG_TABLE ." (config_name, config_value) VALUES ('ina_game_pass_length', '5');";
 
 			for ($b = 0; $b < sizeof($sql); $b++)
-				$db->sql_query($sql[$b]);
+			{
+				$db->sql_return_on_error(true);
+				$result = $db->sql_query($sql[$b]);
+				$db->sql_return_on_error(false);
+			}
 
 			} #==== Close fresh install/upgrading
 
