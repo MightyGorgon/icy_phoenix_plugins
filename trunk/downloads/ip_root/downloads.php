@@ -16,9 +16,9 @@
 *
 */
 
-define('IN_ICYPHOENIX', true);
 define('CT_SECLEVEL', 'MEDIUM');
 $ct_ignorepvar = array('mod_desc', 'long_desc', 'description', 'warning', 'todo', 'require', 'hack_author', 'hack_author_email', 'hack_author_website', 'hack_dl_url', 'dl_name', 'file_name');
+define('IN_ICYPHOENIX', true);
 if (!defined('IP_ROOT_PATH')) define('IP_ROOT_PATH', './');
 if (!defined('PHP_EXT')) define('PHP_EXT', substr(strrchr(__FILE__, '.'), 1));
 include(IP_ROOT_PATH . 'common.' . PHP_EXT);

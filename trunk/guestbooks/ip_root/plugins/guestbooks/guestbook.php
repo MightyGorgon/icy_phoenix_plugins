@@ -294,7 +294,7 @@ elseif ($mode == 'input')
 	{
 		include_once(IP_ROOT_PATH . 'includes/class_captcha.' . PHP_EXT);
 		$class_captcha = new class_captcha();
-		$class_captcha->create_image();
+		$class_captcha->build_captcha();
 	}
 	*/
 }
@@ -457,7 +457,7 @@ else
 	{
 		include_once(IP_ROOT_PATH . 'includes/class_captcha.' . PHP_EXT);
 		$class_captcha = new class_captcha();
-		$class_captcha->create_image();
+		$class_captcha->build_captcha();
 	}
 }
 

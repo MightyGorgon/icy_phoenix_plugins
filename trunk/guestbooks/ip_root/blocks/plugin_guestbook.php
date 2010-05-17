@@ -243,7 +243,7 @@ if(!function_exists('cms_plugin_guestbook_form'))
 			{
 				include_once(IP_ROOT_PATH . 'includes/class_captcha.' . PHP_EXT);
 				$class_captcha = new class_captcha();
-				$class_captcha->create_image();
+				$class_captcha->build_captcha();
 			}
 
 			$current_cms_page_id = request_var('page', 0);

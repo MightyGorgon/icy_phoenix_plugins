@@ -1209,10 +1209,9 @@ function kb_insert_post($message, $subject, $forum_id, $user_id, $user_name, $us
 	global $db, $config, $userdata, $lang, $user_ip, $kb_config;
 	// initialise some variables
 
-	$topic_vote = 0;
 	$poll_title = '';
-	$poll_options = '';
-	$poll_length = '';
+	$poll_options = array();
+	$poll_data = array();
 	$mode = 'reply';
 
 	$error_die_function = ($error_die_function == '') ? 'message_die' : $error_die_function;
@@ -1232,7 +1231,7 @@ function kb_insert_post($message, $subject, $forum_id, $user_id, $user_name, $us
 	if (empty($topic_id))
 	{
 		$mode = 'newtopic';
-		$sql = "INSERT INTO " . TOPICS_TABLE . " (topic_title, topic_poster, topic_time, forum_id, topic_status, topic_type, topic_vote) VALUES ('$subject', " . $user_id . ", $current_time, $forum_id, " . TOPIC_UNLOCKED . ", $topic_type, $topic_vote)";
+		$sql = "INSERT INTO " . TOPICS_TABLE . " (topic_title, topic_poster, topic_time, forum_id, topic_status, topic_type) VALUES ('$subject', " . $user_id . ", $current_time, $forum_id, " . TOPIC_UNLOCKED . ", $topic_type)";
 		$db->sql_transaction('begin');
 		$db->sql_query($sql);
 		$topic_id = $db->sql_nextid();
