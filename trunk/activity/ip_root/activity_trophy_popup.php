@@ -58,7 +58,7 @@ while($row = $db -> sql_fetchrow($r))
 	$r1 = $db->sql_query($q1);
 	$row1 = $db->sql_fetchrow($r1);
 
-	$image = "<b><span class='genmed'>". $row1['proper_name'] ."</span></b><br />". PopupImages($row1['game_name']);
+	$image = '<b><span class="genmed">' . $row1['proper_name'] . '</span></b><br />' . PopupImages($row1['game_name']);
 	$score = $row['score'];
 	$row_class = (!($i % 2) ? 'row1' : 'row2');
 	$i++;

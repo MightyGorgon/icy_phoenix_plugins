@@ -34,7 +34,7 @@ if (!$userdata['session_logged_in'])
 $mode = request_var('mode', '');
 $ref = request_var('ref', 'index');
 $target = request_var(POST_USERS_URL, -1);
-$target = ($post < 2) ? ANONYMOUS : $target;
+$target = ($target < 2) ? ANONYMOUS : $target;
 $post = request_var(POST_POST_URL, 0);
 $post = ($post < 0) ? 0 : $post;
 
@@ -183,7 +183,7 @@ switch($mode)
 //========================================[ Modedit Code ]===========================
 //
 	case 'modedit':
-		if (($target == ANONYMOUS) || (!($profiledata = get_userdata($target))))
+	if (($target == ANONYMOUS) || (!($profiledata = get_userdata($target))))
 		{
 			if (($ref == 'viewtopic') && ($post != 0))
 			{
