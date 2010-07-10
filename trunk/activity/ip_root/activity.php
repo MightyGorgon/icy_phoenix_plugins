@@ -845,7 +845,7 @@ else
 			}
 			else
 			{
-				$game_i2 = 'javascript:popup_open(\'activity.' . PHP_EXT . '?mode=game&id=' . $row['game_id'] . '&sid=' . $userdata['session_id'] . '\',\'New_Window\',\'' . $row['win_width'] . '\',\'' . $row['win_height'] . '\',\'no\')';
+				$game_i2 = 'javascript:popup_open(\'activity.' . PHP_EXT . '?mode=game&amp;id=' . $row['game_id'] . '&amp;sid=' . $userdata['session_id'] . '\',\'New_Window\',\'' . $row['win_width'] . '\',\'' . $row['win_height'] . '\',\'no\')';
 			}
 			$game_n2 = $row['proper_name'];
 			$template->assign_block_vars('drop', array(

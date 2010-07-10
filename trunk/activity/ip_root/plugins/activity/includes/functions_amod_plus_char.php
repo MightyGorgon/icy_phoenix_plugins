@@ -136,10 +136,10 @@ function AMP_Gender($gender)
 	global $lang, $images;
 
 	if ($gender == 1)
-		return ($lang['amp_char_cp_gender_m'] .'  <img src="' . $images['icon_minigender_male'] . '">');
+		return ($lang['amp_char_cp_gender_m'] .' <img src="' . $images['icon_minigender_male'] . '" />');
 
 	if ($gender == 2)
-		return ($lang['amp_char_cp_gender_f'] .'  <img src="' . $images['icon_minigender_female'] . '">');
+		return ($lang['amp_char_cp_gender_f'] .' <img src="' . $images['icon_minigender_female'] . '" />');
 }
 
 function AMP_Delete_Char($user)
@@ -260,11 +260,13 @@ function AMP_Profile_Char($user, $char_profile)
 			$profile .= '</tr>';
 			$profile .= '<tr>';
 			$profile .= '	<td class="row2" align="left" valign="middle">';
-			$profile .= '		<span class="genmed">';
-			$profile .= '			<center>';
+			$profile .= '		<center>';
+			$profile .= '			<span class="genmed">';
 			$profile .= '			'. $char_title;
 			$profile .= '			'. $char_img;
-			$profile .= '			</center>';
+			$profile .= '			</span>';
+			$profile .= '		</center>';
+			$profile .= '		<span class="genmed">';
 			$profile .= '			'. $char_saying;
 			$profile .= '		</span>';
 			$profile .= '	</td>';
