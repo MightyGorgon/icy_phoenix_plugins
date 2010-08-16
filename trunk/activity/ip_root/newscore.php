@@ -269,7 +269,7 @@ if (($score > '0') && ($name) && ($game_info['game_type'] != 2))
 
 #==== Start Comments ================================ |
 	$template->assign_block_vars('comment', array(
-		'COMMENT_LINK' => '<a href="#" onclick="popup_open(\'' . append_sid('activity_popup.' . PHP_EXT . '?mode=comments&amp;action=leave_comment&user=' . $userdata['user_id'] . '&amp;game=' . $game_name) . '\', \'New_Window\', \'400\', \'300\', \'yes\')' . '; return false;">' . $lang['trophy_comment_notice'] . '</a>'
+		'COMMENT_LINK' => '<a href="#" onclick="popup_open(\'' . append_sid('activity_popup.' . PHP_EXT . '?mode=comments&amp;action=leave_comment&amp;user=' . $userdata['user_id'] . '&amp;game=' . $game_name) . '\', \'New_Window\', \'400\', \'300\', \'yes\')' . '; return false;">' . $lang['trophy_comment_notice'] . '</a>'
 		)
 	);
 #==== End Comments ================================== |
