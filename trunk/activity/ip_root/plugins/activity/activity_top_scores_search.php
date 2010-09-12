@@ -38,15 +38,14 @@ if ($search)
 	$template->set_filenames(array('body' => $template_to_parse));
 
 	$search = str_replace("%APOS%", "\'", $search);
-	$search = stripslashes($search);
-	$search = addslashes($search);
+	$search = addslashes(stripslashes($search));
 
 	if ($userdata['user_gender'] >= '0')
+	{
 		$use_gender_mod = '1';
+	}
 
-	$q1 = "SELECT *
-			FROM ". USERS_TABLE ."
-			WHERE username = '" . $search . "'";
+	$q1 = get_users_sql($search, false, true, true, true);
 	$r1 = $db->sql_query($q1);
 	while($row = $db->sql_fetchrow($r1))
 	{

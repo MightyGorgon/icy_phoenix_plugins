@@ -192,9 +192,7 @@ if (($score > '0') && ($name) && ($game_info['game_type'] != 2))
 		$row = $db->sql_fetchrow($r);
 		$proper_name = $row['proper_name'];
 
-		$q = "SELECT user_id
-				FROM ". USERS_TABLE ."
-				WHERE username = '". $name ."'";
+		$q = get_users_sql($name, false, false, true, false);
 		$r = $db->sql_query($q);
 		$row = $db->sql_fetchrow($r);
 		$name_id = $row['user_id'];
@@ -225,16 +223,14 @@ if (($score > '0') && ($name) && ($game_info['game_type'] != 2))
 		$row = $db->sql_fetchrow($r);
 		$proper_name = $row['proper_name'];
 
-		$q = "SELECT user_id
-				FROM ". USERS_TABLE ."
-				WHERE username = '". $name ."'";
+		$q = get_users_sql($name, false, false, true, false);
 		$r = $db->sql_query($q);
 		$row = $db->sql_fetchrow($r);
 		$name_id = $row['user_id'];
 
-		$q1 = "UPDATE ". $table_prefix ."ina_top_scores
-				 SET player = '". $name_id ."', score = '". $score ."', date = '". time() ."'
-				 WHERE game_name = '". $game_name ."'";
+		$q1 = "UPDATE " . $table_prefix . "ina_top_scores
+				SET player = '" . $name_id . "', score = '" . $score . "', date = '" . time() . "'
+				WHERE game_name = '" . $game_name . "'";
 		$r1 = $db->sql_query($q1);
 
 		$trophy_won = $lang['trophy_won_notice'];

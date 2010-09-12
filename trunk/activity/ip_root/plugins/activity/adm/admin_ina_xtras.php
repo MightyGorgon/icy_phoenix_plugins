@@ -1481,9 +1481,7 @@ if (($mode == 'main') || !$mode)
 		$who = $row2['player'];
 		$date = $row2['date'];
 
-		$q3 =  "SELECT user_id
-				FROM ". USERS_TABLE ."
-				WHERE username = '$who'";
+		$q3 = get_users_sql($who, false, false, true, false);
 		$r3 = $db->sql_query($q3);
 		$row3 = $db->sql_fetchrow($r3);
 		$who_id = $row3['user_id'];

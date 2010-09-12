@@ -47,10 +47,7 @@ if ($submit)
 
 			if ($traffic_bytes)
 			{
-				$username = phpbb_clean_username($username);
-
-				$sql = "SELECT user_id FROM " . USERS_TABLE . "
-					WHERE username = '$username'";
+				$sql = get_users_sql($username, false, false, true, true);
 				$result = $db->sql_query($sql);
 				$row = $db->sql_fetchrow($result);
 				$user_id = $row['user_id'];
@@ -58,7 +55,7 @@ if ($submit)
 
 				if (!$user_id)
 				{
-					message_die(GENERAL_MESSAGE, ' <b>' . $lang['Username'] . ' '.$username.'</b><br /><br />' . $lang['Admin_user_fail']);
+					message_die(GENERAL_MESSAGE, ' <b>' . $lang['Username'] . ' ' . phpbb_clean_username($username) . '</b><br /><br />' . $lang['Admin_user_fail']);
 				}
 
 				if ($func == 'add')

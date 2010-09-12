@@ -338,9 +338,7 @@ if(($mode == 'main') || !$mode)
 	$trophy_id = $row['player'];
 	$trophy_sc = $row['score'];
 
-	$q = "SELECT user_id
-			FROM ". USERS_TABLE ."
-			WHERE username = '". $player ."'";
+	$q = get_users_sql($player, false, false, true, false);
 	$r = $db->sql_query($q);
 	$row = $db->sql_fetchrow($r);
 	$player_id = $row['user_id'];

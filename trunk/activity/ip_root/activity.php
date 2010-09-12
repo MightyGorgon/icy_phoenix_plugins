@@ -787,9 +787,7 @@ else
 				$h_g = $row['game_name'];
 				$h_t = time();
 
-				$q1 = "SELECT user_id
-						FROM ". USERS_TABLE ."
-						WHERE username = '". $h_p ."'";
+				$q1 = get_users_sql($h_p, false, false, true, false);
 				$r1 = $db->sql_query($q1);
 				$row1 = $db->sql_fetchrow($r1);
 				$n_h_p = $row1['user_id'];

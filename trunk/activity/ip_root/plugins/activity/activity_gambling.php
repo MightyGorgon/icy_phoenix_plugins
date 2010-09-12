@@ -291,21 +291,25 @@ if (!defined('IN_ICYPHOENIX'))
 			}
 
 	if ($_POST['mode'] == "submit_gamble")
-		{
+	{
 		if (intval($_POST['user_option_one']) > 1)
+		{
 			$reciever_id = $_POST['user_option_one'];
+		}
 		elseif ($_POST['user_option_two'])
-			{
-				$q = "SELECT user_id
-						FROM ". USERS_TABLE ."
-						WHERE username = '". addslashes(stripslashes($_POST['user_option_two'])) ."'";
-				$r = $db->sql_query($q);
-				$exists = $db->sql_fetchrow($r);
+		{
+			$q = get_users_sql($_POST['user_option_two'], false, false);
+			$r = $db->sql_query($q);
+			$exists = $db->sql_fetchrow($r);
 			if (!$exists['user_id'])
+			{
 				message_die(GENERAL_ERROR, $lang['No_such_user'], $lang['error']);
+			}
 			else
+			{
 				$reciever_id = $exists['user_id'];
 			}
+		}
 
 	$game_id = $_POST['game_selected'];
 	$sender_id = $userdata['user_id'];

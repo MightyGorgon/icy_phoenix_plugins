@@ -178,13 +178,11 @@ elseif ($search_author)
 	$search_author = str_replace('sql', '', $search_author);
 	$search_author = str_replace('union', '', $search_author);
 	$search_author = str_replace('*', '%', trim($search_author));
-	$search_author = phpbb_clean_username($search_author);
 
 	$sql_cat = ($search_cat == -1) ? '' : ' AND cat = ' . $search_cat;
 	$sql_cat_count = ($search_cat == -1) ? '' : ' AND cat = ' . $search_cat;
 
-	$sql = "SELECT user_id FROM " . USERS_TABLE . "
-		WHERE username LIKE '" . $db->sql_escape($search_author) . "'";
+	$sql = get_users_sql($search_author, true, false, true, true);
 	$result = $db->sql_query($sql);
 
 	$total_users = $db->sql_numrows($result);

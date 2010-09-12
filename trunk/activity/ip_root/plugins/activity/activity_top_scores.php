@@ -76,12 +76,9 @@ if (($delete_action == 'delete_specific_score') && ($userdata['user_level'] == A
 
 	$score2 = $row['score'];
 	$player2 = $row['player'];
-	$player2 = stripslashes($player2);
-	$player2 = addslashes($player2);
+	$player2 = addslashes(stripslashes($player2));
 
-	$q1 = "SELECT user_id
-				FROM " . USERS_TABLE . "
-				WHERE username = '" . $player2 . "'";
+	$q1 = get_users_sql($player2, false, false, true, false);
 	$r1 = $db->sql_query($q1);
 	$row = $db->sql_fetchrow($r1);
 
