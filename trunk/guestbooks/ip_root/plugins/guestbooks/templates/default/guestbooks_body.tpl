@@ -2,7 +2,7 @@
 
 <!-- IF S_INPUT_ALLOWED -->
 <div class="css-button-wrap">
-<div class="forumline css-button-left"><div class="row1h css-button-body" onclick="window.location.href='{U_ITEM_ADD}'"><img src="images/cms/b_add.png" alt="{L_GUESTBOOK_ADD}" title="{L_GUESTBOOK_ADD}" style="vertical-align: middle;" />&nbsp;<b>{L_GUESTBOOK_ADD}</b>&nbsp;</div></div>
+<div class="forumline css-button-left"><div class="row1h css-button-body" onclick="window.location.href='{U_ITEM_ADD}'"><img src="images/cms/b_add.png" alt="{L_GUESTBOOK_ADD}" title="{L_GUESTBOOK_ADD}" />&nbsp;<b>{L_GUESTBOOK_ADD}</b>&nbsp;</div></div>
 </div>
 <!-- ENDIF -->
 
@@ -55,7 +55,7 @@
 
 <!-- IF S_INPUT_ALLOWED -->
 <div class="css-button-wrap">
-<div class="forumline css-button-left"><div class="row1h css-button-body" onclick="window.location.href='{U_ITEM_ADD}'"><img src="images/cms/b_add.png" alt="{L_GUESTBOOK_ADD}" title="{L_GUESTBOOK_ADD}" style="vertical-align: middle;" />&nbsp;<b>{L_GUESTBOOK_ADD}</b>&nbsp;</div></div>
+<div class="forumline css-button-left"><div class="row1h css-button-body" onclick="window.location.href='{U_ITEM_ADD}'"><img src="images/cms/b_add.png" alt="{L_GUESTBOOK_ADD}" title="{L_GUESTBOOK_ADD}" />&nbsp;<b>{L_GUESTBOOK_ADD}</b>&nbsp;</div></div>
 </div>
 <!-- ENDIF -->
 
