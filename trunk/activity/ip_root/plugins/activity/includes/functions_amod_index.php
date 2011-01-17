@@ -1,24 +1,12 @@
 <?php
-/***************************************************************************
- *                            functions_amod_index.php
- *                            ---------------------
- *   begin                : 2006/02/19
- *   copyright            : Mighty Gorgon (Luca Libralato)
- *   website              : http://www.mightygorgon.com
- *   email                : mightygorgon@mightygorgon.com
- *   version              : 0.1.0
- *
- *
- ***************************************************************************/
-
-/***************************************************************************
- *
- *   This program is free software; you can redistribute it and/or modify
- *   it under the terms of the GNU General Public License as published by
- *   the Free Software Foundation; either version 2 of the License, or
- *   (at your option) any later version.
- *
- ***************************************************************************/
+/**
+*
+* @package Icy Phoenix
+* @version $Id$
+* @copyright (c) 2008 Icy Phoenix
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+*
+*/
 
 if (!defined('IN_ICYPHOENIX'))
 {
@@ -55,4 +43,5 @@ if (($ipb_check) && ($ipb_score))
 		redirect(append_sid('activity.' . PHP_EXT), true);
 	}
 }
+
 ?>
