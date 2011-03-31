@@ -75,7 +75,7 @@ $category = $db->sql_fetchrow($result);
 // Start auth check
 //
 	$kb_is_auth = array();
-	$kb_is_auth = kb_auth(AUTH_ALL, $article['article_category_id'], $userdata);
+	$kb_is_auth = kb_auth(AUTH_ALL, $article['article_category_id'], $user->data);
 
 // End of auth check
 //
@@ -108,7 +108,7 @@ if ($kb_config['votes_check_ip'] == 1)
 
 if ($kb_config['votes_check_userid'] == 1)
 {
-	$sql = "SELECT * FROM " . KB_VOTES_TABLE . " WHERE votes_userid = '" . $userdata['user_id'] . "' AND votes_file = '" . $article_id . "'";
+	$sql = "SELECT * FROM " . KB_VOTES_TABLE . " WHERE votes_userid = '" . $user->data['user_id'] . "' AND votes_file = '" . $article_id . "'";
 	$result = $db->sql_query($sql);
 
 	if ($db->sql_numrows($result) > 0)
@@ -140,7 +140,7 @@ if ($rate == 'dorate')
 
 	$ipaddy = getenv ("REMOTE_ADDR");
 
-	$sql = "INSERT INTO " . KB_VOTES_TABLE . " VALUES('" . $ipaddy . "', '" . $userdata['user_id'] . "', '" . $article_id . "')";
+	$sql = "INSERT INTO " . KB_VOTES_TABLE . " VALUES('" . $ipaddy . "', '" . $user->data['user_id'] . "', '" . $article_id . "')";
 	$insert = $db->sql_query($sql);
 
 	$sql = "SELECT * FROM " . KB_ARTICLES_TABLE . " WHERE article_id = '" . $article_id . "'";

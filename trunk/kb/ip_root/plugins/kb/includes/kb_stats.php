@@ -25,7 +25,7 @@ $start = ($start < 0) ? 0 : $start;
 
 // Start auth check
 $kb_is_auth_all = array();
-$kb_is_auth_all = kb_auth(AUTH_ALL, AUTH_LIST_ALL, $userdata);
+$kb_is_auth_all = kb_auth(AUTH_ALL, AUTH_LIST_ALL, $user->data);
 // End of auth check
 
 $kb_quick_nav = get_kb_cat_list('auth_view', 0, 0, true, $kb_is_auth_all);

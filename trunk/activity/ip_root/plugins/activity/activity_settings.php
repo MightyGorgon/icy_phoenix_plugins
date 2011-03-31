@@ -52,7 +52,7 @@ if (!defined('IN_ICYPHOENIX'))
 
 	$q = "UPDATE ". USERS_TABLE ."
 			SET ina_settings = '". $compiled ."'
-			WHERE user_id = ". $userdata['user_id'] ."";
+			WHERE user_id = ". $user->data['user_id'] ."";
 	$db->sql_query($q);
 
 	message_die(GENERAL_MESSAGE, $lang['games_settings_finished']);
@@ -61,7 +61,7 @@ if (!defined('IN_ICYPHOENIX'))
 	$template_to_parse = $class_plugins->get_tpl_file(ACTIVITY_TPL_PATH, 'activity_settings_body.tpl');
 	$template->set_filenames(array('body' => $template_to_parse));
 
-	$user_amod_settings = $userdata['ina_settings'];
+	$user_amod_settings = $user->data['ina_settings'];
 	$decifer_settings = explode(';;', $user_amod_settings);
 	$decifer_info = explode('-', $decifer_settings[0]);
 	$user_use_info = $decifer_info[1];

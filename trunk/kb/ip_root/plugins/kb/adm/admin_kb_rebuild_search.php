@@ -133,7 +133,7 @@ else
 		'L_POST_LIMIT' => $lang['Post_limit'],
 		'L_TIME_LIMIT' => $lang['Time_limit'],
 		'L_REFRESH_RATE' => $lang['Refresh_rate'],
-		'SESSION_ID' => $userdata['session_id'],
+		'SESSION_ID' => $user->data['session_id'],
 
 		'S_REBUILD_SEARCH_ACTION' => append_sid ('admin_kb_rebuild_search.' . PHP_EXT)
 		)

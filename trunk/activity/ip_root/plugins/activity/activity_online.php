@@ -105,7 +105,7 @@ $playing_members = $row['total'];
 		'CURRENTLY_PLAYING1' => $message1,
 		'CURRENTLY_PLAYING2' => $message2,
 		'CURRENTLY_PLAYING3' => $message3,
-		'CURRENTLY_PLAYING4' => $message4 . '<br /><a href="activity.' . PHP_EXT . '?page=whos_where&amp;sid=' . $userdata['session_id'] . '">' . $lang['whos_where_link'] . '</a><br />',
+		'CURRENTLY_PLAYING4' => $message4 . '<br /><a href="activity.' . PHP_EXT . '?page=whos_where&amp;sid=' . $user->data['session_id'] . '">' . $lang['whos_where_link'] . '</a><br />',
 		'CURRENTLY_PLAYING5' => $message5,
 		'MAIN_COLOR1' => '[ <span class="text_red">' . $lang['online_viewing_games'] . '</span> ]',
 		'MAIN_SEPARATOR' => '<b> :: </b>',
@@ -122,11 +122,11 @@ $playing_members = $row['total'];
 	{
 		$playing_id = $row['playing_id'];
 
-		if ($userdata['user_level'] == ADMIN)
+		if ($user->data['user_level'] == ADMIN)
 		{
 			$admin_hidden = '';
 		}
-		if ($userdata['user_level'] != ADMIN)
+		if ($user->data['user_level'] != ADMIN)
 		{
 			$admin_hidden = "AND user_allow_viewonline = '1'";
 		}
@@ -141,7 +141,7 @@ $playing_members = $row['total'];
 		$playing_where = $row['user_session_page'];
 		$playing_hidden = $row['user_allow_viewonline'];
 
-		if ((!$playing_hidden) && ($userdata['user_level'] == ADMIN))
+		if ((!$playing_hidden) && ($user->data['user_level'] == ADMIN))
 		{
 			$playing_user = '<i>' . $playing_user . '</i>';
 		}

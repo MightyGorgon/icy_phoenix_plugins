@@ -22,8 +22,9 @@ if (!defined('PHP_EXT')) define('PHP_EXT', substr(strrchr(__FILE__, '.'), 1));
 include(IP_ROOT_PATH . 'common.' . PHP_EXT);
 
 // Start session management
-$userdata = session_pagestart($user_ip);
-init_userprefs($userdata);
+$user->session_begin();
+//$auth->acl($user->data);
+$user->setup();
 // End session management
 
 include(IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['activity']['dir'] . 'common.' . PHP_EXT);
@@ -42,12 +43,12 @@ if($config['use_rewards_mod'])
 }
 
 #==== Start Disable Scores Check ==================== |
-if (($config['ina_disable_submit_scores_m']) && ($userdata['user_id'] <> ANONYMOUS))
+if (($config['ina_disable_submit_scores_m']) && ($user->data['user_id'] <> ANONYMOUS))
 {
 	message_die(GENERAL_MESSAGE, $lang['score_disable_message_m'], $lang['score_disable_info']);
 }
 
-if (($config['ina_disable_submit_scores_g']) && ($userdata['user_id'] == ANONYMOUS))
+if (($config['ina_disable_submit_scores_g']) && ($user->data['user_id'] == ANONYMOUS))
 {
 	message_die(GENERAL_MESSAGE, $lang['score_disable_message_g'], $lang['score_disable_info']);
 }
@@ -64,13 +65,13 @@ if(($_GET['mode'] == 'check_score') || $_GET['score'] || $_GET['game_name'])
 }
 #==== End Deny $_GET Mode Games ===================== |
 
-$cheat_name = $userdata['username'];
+$cheat_name = $user->data['username'];
 $game_name = (($_POST['game_name'])) ? $_POST['game_name'] : $_POST['game_name'];
 $score = (($_POST['score'])) ? $_POST['score'] : $_POST['score'];
-$name = $userdata['username'];
+$name = $user->data['username'];
 $gen_simple_header = true;
 
-Gamble($score, $userdata['user_id']);
+Gamble($score, $user->data['user_id']);
 
 $sql = "SELECT *
 	FROM ". iNA_GAMES ."
@@ -84,7 +85,7 @@ if (($score > '0') && ($name) && ($game_info['game_type'] != 2))
 	$sql = "SELECT *
 			FROM ". INA_CHEAT ."
 			WHERE game_id = '". $game_info['game_id'] ."'
-			AND player = " . $userdata['user_id'];
+			AND player = " . $user->data['user_id'];
 	$result = $db->sql_query($sql);
 	$row = $db->sql_fetchrow($result);
 	if(!$row['player'] || $row['game_id'] != $game_info['game_id'])
@@ -92,9 +93,9 @@ if (($score > '0') && ($name) && ($game_info['game_type'] != 2))
 		message_die(GENERAL_MESSAGE, $lang['no_game_start_error_1'], $lang['no_game_start_error_2']);
 	}
 	$sql = "DELETE FROM ". INA_CHEAT ."
-			WHERE player = " . $userdata['user_id'];
+			WHERE player = " . $user->data['user_id'];
 	$db->sql_query($sql);
-	RemovePlayingGame($userdata['user_id']);
+	RemovePlayingGame($user->data['user_id']);
 #==== End Game Started Check========================= |
 
 	Gamble($score, $game_info['game_id']);
@@ -113,7 +114,7 @@ if (($score > '0') && ($name) && ($game_info['game_type'] != 2))
 	$r = $db->sql_query($q);
 	$row = $db->sql_fetchrow($r);
 	$trophy_score = $row['score'];
-	$user_id = $userdata['user_id'];
+	$user_id = $user->data['user_id'];
 	$bonus = 0;
 
 
@@ -206,9 +207,9 @@ if (($score > '0') && ($name) && ($game_info['game_type'] != 2))
 
 		$message_sent = $lang['pm_trophy_msg'];
 		$message_sent = str_replace('%s%', FormatScores($score), $message_sent);
-		$message_sent = str_replace('%n%', $userdata['username'], $message_sent);
+		$message_sent = str_replace('%n%', $user->data['username'], $message_sent);
 		$message_sent = str_replace('%g%', $proper_name, $message_sent);
-		if ((!$config['ina_disable_comments_page']) && ($config['ina_pm_trophy'] == '1') && ($t_holder != "-1") && ($t_holder != $userdata['user_id']))
+		if ((!$config['ina_disable_comments_page']) && ($config['ina_pm_trophy'] == '1') && ($t_holder != "-1") && ($t_holder != $user->data['user_id']))
 		{
 			send_challenge_pm($t_holder, $lang['pm_trophy_sub'], $message_sent);
 		}
@@ -237,9 +238,9 @@ if (($score > '0') && ($name) && ($game_info['game_type'] != 2))
 
 		$message_sent = $lang['pm_trophy_msg'];
 		$message_sent = str_replace('%s%', FormatScores($score), $message_sent);
-		$message_sent = str_replace('%n%', $userdata['username'], $message_sent);
+		$message_sent = str_replace('%n%', $user->data['username'], $message_sent);
 		$message_sent = str_replace('%g%', $proper_name, $message_sent);
-		if ((!$config['ina_disable_comments_page']) && ($config['ina_pm_trophy'] == '1') && ($t_holder != '-1') && ($t_holder != $userdata['user_id']))
+		if ((!$config['ina_disable_comments_page']) && ($config['ina_pm_trophy'] == '1') && ($t_holder != '-1') && ($t_holder != $user->data['user_id']))
 		{
 			send_challenge_pm($t_holder, $lang['pm_trophy_sub'], $message_sent);
 		}
@@ -265,17 +266,17 @@ if (($score > '0') && ($name) && ($game_info['game_type'] != 2))
 
 #==== Start Comments ================================ |
 	$template->assign_block_vars('comment', array(
-		'COMMENT_LINK' => '<a href="#" onclick="popup_open(\'' . append_sid('activity_popup.' . PHP_EXT . '?mode=comments&amp;action=leave_comment&amp;user=' . $userdata['user_id'] . '&amp;game=' . $game_name) . '\', \'New_Window\', \'400\', \'300\', \'yes\')' . '; return false;">' . $lang['trophy_comment_notice'] . '</a>'
+		'COMMENT_LINK' => '<a href="#" onclick="popup_open(\'' . append_sid('activity_popup.' . PHP_EXT . '?mode=comments&amp;action=leave_comment&amp;user=' . $user->data['user_id'] . '&amp;game=' . $game_name) . '\', \'New_Window\', \'400\', \'300\', \'yes\')' . '; return false;">' . $lang['trophy_comment_notice'] . '</a>'
 		)
 	);
 #==== End Comments ================================== |
 
 #==== Start Hall Of Fame ============================ |
-	HallOfFamePass($userdata['user_id'], $score, $game_info['game_id'], $game_info['reverse_list']);
+	HallOfFamePass($user->data['user_id'], $score, $game_info['game_id'], $game_info['reverse_list']);
 #==== End Hall Of Fame ============================== |
 
 #==== Start One Score Per User ====================== |
-	$name = addslashes(stripslashes($userdata['username']));
+	$name = addslashes(stripslashes($user->data['username']));
 	$q = "SELECT player, score
 			FROM ". iNA_SCORES ."
 			WHERE player = '". $name ."'
@@ -288,7 +289,7 @@ if (($score > '0') && ($name) && ($game_info['game_type'] != 2))
 /* See if we have a score already & if its a higher score for this game */
 	if (($exist) && ($game_info['reverse_list'] == '1') && ($score < $e_score))
 	{
-		$name = addslashes(stripslashes($userdata['username']));
+		$name = addslashes(stripslashes($user->data['username']));
 		$sql = "UPDATE " . iNA_SCORES . "
 				SET score = '". $score ."', date = '" . time() . "'
 				WHERE player = '". $name ."' AND
@@ -298,7 +299,7 @@ if (($score > '0') && ($name) && ($game_info['game_type'] != 2))
 	}
 	elseif (($exist) && ($game_info['reverse_list'] == '0') && ($score > $e_score))
 	{
-		$name = addslashes(stripslashes($userdata['username']));
+		$name = addslashes(stripslashes($user->data['username']));
 		$sql = "UPDATE " . iNA_SCORES . "
 				SET score = '". $score ."', date = '" . time() . "'
 				WHERE player = '".  $name ."' AND
@@ -309,7 +310,7 @@ if (($score > '0') && ($name) && ($game_info['game_type'] != 2))
 	/* See if we dont have a score for this game */
 	elseif ((!$exist) && (!$e_score))
 	{
-		$name = addslashes(stripslashes($userdata['username']));
+		$name = addslashes(stripslashes($user->data['username']));
 		$sql = "INSERT INTO " . iNA_SCORES . " (game_name, player, score, date)
 				VALUES ('". $game_name ."', '". $name ."', '". $score ."', '" . time() . "')";
 		$result = $db->sql_query($sql);
@@ -321,7 +322,7 @@ if (($score > '0') && ($name) && ($game_info['game_type'] != 2))
 	}
 
 /* Add the total game plays & time playing this certain game, credits to JRSweets for making me do this! */
-	$get_time  = explode(';;', $userdata['ina_time_playing']);
+	$get_time  = explode(';;', $user->data['ina_time_playing']);
 	$game_started = $get_time[0];
 	$game_ended = time();
 	$time_spent = ceil($game_ended - $game_started);
@@ -344,16 +345,16 @@ if (($score > '0') && ($name) && ($game_info['game_type'] != 2))
 		$beat_score_GE = 1;
 	}
 
-	if ($userdata['ina_char_name'])
+	if ($user->data['ina_char_name'])
 	{
-		AMP_Add_GE($userdata['user_id'], $userdata['ina_char_ge'], $trophy_GE, $beat_score_GE);
+		AMP_Add_GE($user->data['user_id'], $user->data['ina_char_ge'], $trophy_GE, $beat_score_GE);
 	}
 #==== End GE Add ==================================== |
 
 #==== Start Get Previous Page ======================= |
 	$q = "SELECT ina_last_visit_page
 			FROM ". USERS_TABLE ."
-			WHERE user_id = '". $userdata['user_id'] ."'";
+			WHERE user_id = '". $user->data['user_id'] ."'";
 	$r = $db -> sql_query($q);
 	$row = $db -> sql_fetchrow($r);
 	$last_page_viewed = $row['ina_last_visit_page'];
@@ -363,11 +364,11 @@ if (($score > '0') && ($name) && ($game_info['game_type'] != 2))
 	}
 	if(!$last_page_viewed)
 	{
-		$return_page = 'activity.' . PHP_EXT . '?sid=' . $userdata['session_id'];
+		$return_page = 'activity.' . PHP_EXT . '?sid=' . $user->data['session_id'];
 	}
 #==== End Get Previous Page ========================= |
 
-	$play_again = str_replace("%G%", '<a href="activity.' . PHP_EXT . '?mode=game&amp;id=' . $game_info['game_id'] . '&amp;parent=true&amp;sid=' . $userdata['session_id'] . '">' . $game_info['proper_name'] . '</a>', $lang['play_again_link']);
+	$play_again = str_replace("%G%", '<a href="activity.' . PHP_EXT . '?mode=game&amp;id=' . $game_info['game_id'] . '&amp;parent=true&amp;sid=' . $user->data['session_id'] . '">' . $game_info['proper_name'] . '</a>', $lang['play_again_link']);
 	$msg_prt1 = str_replace("%G%", $game_info['proper_name'], $lang['score_on_newscore']);
 	$msg_prt2 = str_replace("%S%", $score, $msg_prt1);
 	$msg .= '<br />' . $msg_prt2;
@@ -375,7 +376,7 @@ if (($score > '0') && ($name) && ($game_info['game_type'] != 2))
 #==== Start Favorites =============================== |
 		$q = "SELECT games
 				FROM ". INA_FAVORITES ."
-				WHERE user = '". $userdata['user_id'] ."'";
+				WHERE user = '". $user->data['user_id'] ."'";
 		$r = $db -> sql_query($q);
 		$row = $db -> sql_fetchrow($r);
 		$fav_games = $row['games'];
@@ -385,25 +386,25 @@ if (($score > '0') && ($name) && ($game_info['game_type'] != 2))
 		}
 		else
 		{
-			$add_to_favs = '<a href="activity_favs.' . PHP_EXT . '?mode=add_fav&amp;game=' . $game_info['game_id'] . '&amp;sid=' . $userdata['session_id'] . '" target="_blank">'. $lang['saved_body_favs'] .'</a>';
+			$add_to_favs = '<a href="activity_favs.' . PHP_EXT . '?mode=add_fav&amp;game=' . $game_info['game_id'] . '&amp;sid=' . $user->data['session_id'] . '" target="_blank">'. $lang['saved_body_favs'] .'</a>';
 		}
 #==== End Favorites ================================= |
 
 			$game_img = CheckGameImages($game_info['game_name'], $game_info['proper_name']);
 
 #==== Setup Links Based On Gameplay================== |
-	if ($userdata['ina_last_playtype'] == 'parent')
+	if ($user->data['ina_last_playtype'] == 'parent')
 	{
 		$link1 = $return_page;
 		$lang1 = $lang['go_back_to_games'];
-		$add_to_favs = '<a href="activity_favs.' . PHP_EXT . '?mode=add_fav&amp;game=' . $game_info['game_id'] . '&amp;sid=' . $userdata['session_id'] . '" target="_parent">' . $lang['saved_body_favs'] .'</a>';
+		$add_to_favs = '<a href="activity_favs.' . PHP_EXT . '?mode=add_fav&amp;game=' . $game_info['game_id'] . '&amp;sid=' . $user->data['session_id'] . '" target="_parent">' . $lang['saved_body_favs'] .'</a>';
 	}
-	elseif ($userdata['ina_last_playtype'] == 'popup')
+	elseif ($user->data['ina_last_playtype'] == 'popup')
 	{
 		$link1 = 'javascript:parent.window.close();';
 		$lang1 = $lang['game_score_close'];
 		$play_again = '';
-		$add_to_favs = '<a href="activity_favs.' . PHP_EXT . '?mode=add_fav&amp;game='. $game_info['game_id'] . '&amp;sid=' . $userdata['session_id'] . '" target="_blank">' . $lang['saved_body_favs'] . '</a>';
+		$add_to_favs = '<a href="activity_favs.' . PHP_EXT . '?mode=add_fav&amp;game='. $game_info['game_id'] . '&amp;sid=' . $user->data['session_id'] . '" target="_blank">' . $lang['saved_body_favs'] . '</a>';
 	}
 	else
 	{
@@ -412,7 +413,7 @@ if (($score > '0') && ($name) && ($game_info['game_type'] != 2))
 	}
 
 	$rate = '<a href="#" onclick="javascript:popup_open(\'' . append_sid('activity_popup.' . PHP_EXT . '?mode=rate&amp;game=' . $game_info['game_id']) .'\', \'New_Window\', \'450\', \'300\', \'yes\')' . '; return false;">' . $lang['saved_body_rate'] . '</a>';
-	if (($config['ina_disable_comments_page']) && ($userdata['user_level'] != ADMIN))
+	if (($config['ina_disable_comments_page']) && ($user->data['user_level'] != ADMIN))
 	{
 		$comms = '';
 	}
@@ -440,7 +441,7 @@ else
 {
 #==== Start Comments ================================ |
 	$template->assign_block_vars('comment', array(
-		'COMMENT_LINK' => '<a href="#" onclick="popup_open(\'' . append_sid('activity_popup.' . PHP_EXT . '?mode=comments&amp;action=leave_comment&amp;user=' . $userdata['user_id'] . '&amp;game=' . $game_name) . '\', \'New_Window\', \'400\', \'300\', \'yes\')' . '; return false;">' . $lang['trophy_comment_notice'] . '</a>'
+		'COMMENT_LINK' => '<a href="#" onclick="popup_open(\'' . append_sid('activity_popup.' . PHP_EXT . '?mode=comments&amp;action=leave_comment&amp;user=' . $user->data['user_id'] . '&amp;game=' . $game_name) . '\', \'New_Window\', \'400\', \'300\', \'yes\')' . '; return false;">' . $lang['trophy_comment_notice'] . '</a>'
 		)
 	);
 #==== End Comments ================================== |
@@ -456,16 +457,16 @@ else
 		$beat_score_GE = 1;
 	}
 
-	if ($userdata['ina_char_name'])
+	if ($user->data['ina_char_name'])
 	{
-		AMP_Add_GE($userdata['user_id'], $userdata['ina_char_ge'], $trophy_GE, $beat_score_GE);
+		AMP_Add_GE($user->data['user_id'], $user->data['ina_char_ge'], $trophy_GE, $beat_score_GE);
 	}
 #==== End GE Add ==================================== |
 
 #==== Start Get Previous Page ======================= |
 	$q = "SELECT ina_last_visit_page
 			FROM ". USERS_TABLE ."
-			WHERE user_id = '". $userdata['user_id'] ."'";
+			WHERE user_id = '". $user->data['user_id'] ."'";
 	$r = $db -> sql_query($q);
 	$row = $db -> sql_fetchrow($r);
 	$last_page_viewed = $row['ina_last_visit_page'];
@@ -475,11 +476,11 @@ else
 	}
 	if (!$last_page_viewed)
 	{
-		$return_page = 'activity.' . PHP_EXT . '?sid='. $userdata['session_id'];
+		$return_page = 'activity.' . PHP_EXT . '?sid='. $user->data['session_id'];
 	}
 #==== End Get Previous Page ========================= |
 
-	$play_again = str_replace("%G%", '<a href="activity.' . PHP_EXT . '?mode=game&amp;id=' . $game_info['game_id'] . '&amp;parent=true&amp;sid=' . $userdata['session_id'] . '">' . $game_info['proper_name'] . '</a>', $lang['play_again_link']);
+	$play_again = str_replace("%G%", '<a href="activity.' . PHP_EXT . '?mode=game&amp;id=' . $game_info['game_id'] . '&amp;parent=true&amp;sid=' . $user->data['session_id'] . '">' . $game_info['proper_name'] . '</a>', $lang['play_again_link']);
 	$msg_prt1 = str_replace("%G%", $game_info['proper_name'], $lang['score_on_newscore']);
 	$msg_prt2 = str_replace("%S%", $score, $msg_prt1);
 	$msg .= '<br />' . $msg_prt2;
@@ -487,7 +488,7 @@ else
 #==== Start Favorites =============================== |
 	$q = "SELECT games
 			FROM ". INA_FAVORITES ."
-			WHERE user = '". $userdata['user_id'] ."'";
+			WHERE user = '". $user->data['user_id'] ."'";
 	$r = $db -> sql_query($q);
 	$row = $db -> sql_fetchrow($r);
 	$fav_games = $row['games'];
@@ -497,25 +498,25 @@ else
 	}
 	else
 	{
-		$add_to_favs = '<a href="activity_favs.' . PHP_EXT . '?mode=add_fav&amp;game=' . $game_info['game_id'] . '&amp;sid=' . $userdata['session_id'] . '" class="mainmenu" target="_blank">' . $lang['saved_body_favs'] . '</a>';
+		$add_to_favs = '<a href="activity_favs.' . PHP_EXT . '?mode=add_fav&amp;game=' . $game_info['game_id'] . '&amp;sid=' . $user->data['session_id'] . '" class="mainmenu" target="_blank">' . $lang['saved_body_favs'] . '</a>';
 	}
 #==== End Favorites ================================= |
 
 	$game_img = CheckGameImages($game_info['game_name'], $game_info['proper_name']);
 
 #==== Setup Links Based On Gameplay================== |
-	if ($userdata['ina_last_playtype'] == 'parent')
+	if ($user->data['ina_last_playtype'] == 'parent')
 	{
 		$link1 = $return_page;
 		$lang1 = $lang['go_back_to_games'];
-		$add_to_favs = '<a href="activity_favs.' . PHP_EXT . '?mode=add_fav&amp;game=' . $game_info['game_id'] . '&amp;sid=' . $userdata['session_id'] . '" class="mainmenu" target="_parent">' . $lang['saved_body_favs'] . '</a>';
+		$add_to_favs = '<a href="activity_favs.' . PHP_EXT . '?mode=add_fav&amp;game=' . $game_info['game_id'] . '&amp;sid=' . $user->data['session_id'] . '" class="mainmenu" target="_parent">' . $lang['saved_body_favs'] . '</a>';
 	}
-	elseif ($userdata['ina_last_playtype'] == 'popup')
+	elseif ($user->data['ina_last_playtype'] == 'popup')
 	{
 		$link1 = 'javascript:parent.window.close();';
 		$lang1 = $lang['game_score_close'];
 		$play_again = '';
-		$add_to_favs = '<a href="activity_favs.' . PHP_EXT . '?mode=add_fav&amp;game=' . $game_info['game_id'] . '&amp;sid=' . $userdata['session_id'] . '" class="mainmenu" target="_blank">' . $lang['saved_body_favs'] . '</a>';
+		$add_to_favs = '<a href="activity_favs.' . PHP_EXT . '?mode=add_fav&amp;game=' . $game_info['game_id'] . '&amp;sid=' . $user->data['session_id'] . '" class="mainmenu" target="_blank">' . $lang['saved_body_favs'] . '</a>';
 	}
 	else
 	{
@@ -524,7 +525,7 @@ else
 	}
 
 	$rate = '<a href="#" onclick="popup_open(\'' . append_sid('activity_popup.' . PHP_EXT . '?mode=rate&amp;game=' . $game_info['game_id']) . '\', \'New_Window\', \'450\', \'300\', \'yes\')' . '; return false;">' . $lang['saved_body_rate'] . '</a>';
-	if (($config['ina_disable_comments_page']) && ($userdata['user_level'] != ADMIN))
+	if (($config['ina_disable_comments_page']) && ($user->data['user_level'] != ADMIN))
 	{
 		$comms = '';
 	}
@@ -552,7 +553,7 @@ else
 UpdateTrophyStats();
 CheckGamesDeletion();
 TrophyKingRankCheck();
-UpdateGamePlayTime(time(), $userdata['ina_time_playing']);
+UpdateGamePlayTime(time(), $user->data['ina_time_playing']);
 
 #==== Generate Page ================================= |
 $template_to_parse = $class_plugins->get_tpl_file(ACTIVITY_TPL_PATH, 'saved_body.tpl');

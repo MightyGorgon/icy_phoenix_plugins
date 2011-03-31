@@ -22,8 +22,9 @@ if (!defined('PHP_EXT')) define('PHP_EXT', substr(strrchr(__FILE__, '.'), 1));
 include(IP_ROOT_PATH . 'common.' . PHP_EXT);
 
 // Start session management
-$userdata = session_pagestart($user_ip);
-init_userprefs($userdata);
+$user->session_begin();
+//$auth->acl($user->data);
+$user->setup();
 // End session management
 
 include(IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['activity']['dir'] . 'common.' . PHP_EXT);
@@ -33,7 +34,7 @@ VersionCheck();
 /* End Version Check */
 
 $v3_session = (isset($_POST['sessdo'])) ? $_POST['sessdo'] : '';
-$error_path = 'activity.' . PHP_EXT . '?sid=' . $userdata['session_id'];
+$error_path = 'activity.' . PHP_EXT . '?sid=' . $user->data['session_id'];
 
 if ($v3_session != '')
 {

@@ -53,6 +53,6 @@ $kb_module_orig_author = 'wGEric';
 $bbcode_on = $kb_config['allow_bbcode'] ? 1 : 0;
 $html_on = $kb_config['allow_html'] ? 1 : 0;
 $smilies_on = $kb_config['allow_smilies'] ? 1 : 0;
-$is_admin = (($userdata['user_level'] == ADMIN) && $userdata['session_logged_in']) ? true : 0;
+$is_admin = (($user->data['user_level'] == ADMIN) && $user->data['session_logged_in']) ? true : 0;
 
 ?>

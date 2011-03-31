@@ -14,8 +14,9 @@ if (!defined('PHP_EXT')) define('PHP_EXT', substr(strrchr(__FILE__, '.'), 1));
 include(IP_ROOT_PATH . 'common.' . PHP_EXT);
 
 // Start session management
-$userdata = session_pagestart($user_ip);
-init_userprefs($userdata);
+$user->session_begin();
+//$auth->acl($user->data);
+$user->setup();
 // End session management
 
 include(IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['kb']['dir'] . 'common.' . PHP_EXT);
@@ -201,7 +202,7 @@ switch ($mode)
 
 			$sql = "UPDATE " . KB_SEARCH_TABLE . "
 							SET search_id = " . $db->sql_escape($search_id) . ", search_array = '" . $db->sql_escape($result_array) . "'
-							WHERE session_id = '" . $userdata['session_id'] . "'";
+							WHERE session_id = '" . $user->data['session_id'] . "'";
 			$db->sql_return_on_error(true);
 			$result = $db->sql_query($sql);
 			$db->sql_return_on_error(false);
@@ -209,7 +210,7 @@ switch ($mode)
 			if (!$result || !$affectedrow)
 			{
 				$sql = "INSERT INTO " . KB_SEARCH_TABLE . " (search_id, session_id, search_array)
-								VALUES($search_id, '" . $userdata['session_id'] . "', '" . $db->sql_escape($result_array) . "')";
+								VALUES($search_id, '" . $user->data['session_id'] . "', '" . $db->sql_escape($result_array) . "')";
 				$result = $db->sql_query($sql);
 			}
 		}
@@ -221,7 +222,7 @@ switch ($mode)
 				$sql = "SELECT search_array
 								FROM " . KB_SEARCH_TABLE . "
 								WHERE search_id = $search_id
-									AND session_id = '" . $userdata['session_id'] . "'";
+									AND session_id = '" . $user->data['session_id'] . "'";
 				$result = $db->sql_query($sql);
 
 				if ($kb_row = $db->sql_fetchrow($result))

@@ -36,9 +36,9 @@ if($action == 'add')
 {
 	$ban_id = request_var('ban_id', 0);
 	$user_id = request_var('user_id', 0);
-	$user_ip = request_var('user_ip', '', true);
-	$user_ip = (!empty($user_ip) ? encode_ip($user_ip) : '');
-	$user_agent = request_var('user_agent', '', true);
+	$user_ip_dl = request_var('user_ip', '', true);
+	$user_ip_dl = (!empty($user_ip_dl) ? $user_ip_dl : '');
+	$user_agent_dl = request_var('user_agent', '', true);
 	$username = request_var('username', '', true);
 	$username = (!empty($username) ? phpbb_clean_username($username) : '');
 	$guests = request_var('guests', 0);
@@ -46,7 +46,7 @@ if($action == 'add')
 	if ($ban_id)
 	{
 		$sql = "UPDATE " . DL_BANLIST_TABLE . "
-			SET user_id = " . (int) $user_id . ", user_ip = '" . $db->sql_escape($user_ip) . "', user_agent = '" . $db->sql_escape($user_agent) . "', username = '" . $db->sql_escape($username) . "', guests = " . (int) $guests . "
+			SET user_id = " . (int) $user_id . ", user_ip = '" . $db->sql_escape($user_ip_dl) . "', user_agent = '" . $db->sql_escape($user_agent_dl) . "', username = '" . $db->sql_escape($username) . "', guests = " . (int) $guests . "
 			WHERE ban_id = " . (int) $ban_id;
 	}
 	else
@@ -54,7 +54,7 @@ if($action == 'add')
 		$sql = "INSERT INTO " . DL_BANLIST_TABLE . "
 			(user_id, user_ip, user_agent, username, guests)
 			VALUES
-			(" . (int) $user_id . ", '" . $db->sql_escape($user_ip) . "', '" . $db->sql_escape($user_agent) . "', '" . $db->sql_escape($username) . "', " . (int) $guests . ")";
+			(" . (int) $user_id . ", '" . $db->sql_escape($user_ip_dl) . "', '" . $db->sql_escape($user_agent_dl) . "', '" . $db->sql_escape($username) . "', " . (int) $guests . ")";
 	}
 	$result = $db->sql_query($sql);
 
@@ -128,8 +128,8 @@ if ($action == '' || $action == 'edit')
 
 		$ban_id = $row['ban_id'];
 		$user_id = $row['user_id'];
-		$user_ip = ($row['user_ip']) ? decode_ip($row['user_ip']) : '';
-		$user_agent = $row['user_agent'];
+		$user_ip_dl = ($row['user_ip']) ? $row['user_ip'] : '';
+		$user_agent_dl = $row['user_agent'];
 		$username = $row['username'];
 		$guests = $row['guests'];
 
@@ -137,8 +137,8 @@ if ($action == '' || $action == 'edit')
 			'ROW_CLASS' => $row_class,
 			'BAN_ID' => $ban_id,
 			'USER_ID' => $user_id,
-			'USER_IP' => $user_ip,
-			'USER_AGENT' => $user_agent,
+			'USER_IP' => $user_ip_dl,
+			'USER_AGENT' => $user_agent_dl,
 			'USERNAME' => $username,
 			'GUESTS' => ($guests) ? $lang['Yes'] : $lang['No']
 			)
@@ -164,8 +164,8 @@ if ($action == '' || $action == 'edit')
 		{
 			$ban_id = $row['ban_id'];
 			$user_id = $row['user_id'];
-			$user_ip = ($row['user_ip']) ? decode_ip($row['user_ip']) : '';
-			$user_agent = $row['user_agent'];
+			$user_ip_dl = ($row['user_ip']) ? $row['user_ip'] : '';
+			$user_agent_dl = $row['user_agent'];
 			$username = $row['username'];
 			$guests = $row['guests'];
 			$s_hidden_fields .= '<input type="hidden" name="ban_id" value="' . $ban_id . '" />';
@@ -176,8 +176,8 @@ if ($action == '' || $action == 'edit')
 	{
 		$ban_id = '';
 		$user_id = '';
-		$user_ip = '';
-		$user_agent = '';
+		$user_ip_dl = '';
+		$user_agent_dl = '';
 		$username = '';
 		$guests = '';
 	}
@@ -198,8 +198,8 @@ if ($action == '' || $action == 'edit')
 		'L_DL_EDIT' => $lang['Edit'],
 
 		'DL_USER_ID' => $user_id,
-		'DL_USER_IP' => $user_ip,
-		'DL_USER_AGENT' => $user_agent,
+		'DL_USER_IP' => $user_ip_dl,
+		'DL_USER_AGENT' => $user_agent_dl,
 		'DL_USERNAME' => $username,
 		'CHECKED_YES' => ($guests) ? 'checked="checked"' : '',
 		'CHECKED_NO' => (!$guests) ? 'checked="checked"' : '',

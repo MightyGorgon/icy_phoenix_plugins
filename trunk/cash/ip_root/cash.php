@@ -22,11 +22,12 @@ if (!defined('PHP_EXT')) define('PHP_EXT', substr(strrchr(__FILE__, '.'), 1));
 include(IP_ROOT_PATH . 'common.' . PHP_EXT);
 
 // Start session management
-$userdata = session_pagestart($user_ip);
-init_userprefs($userdata);
+$user->session_begin();
+//$auth->acl($user->data);
+$user->setup();
 // End session management
 
-if (!$userdata['session_logged_in'])
+if (!$user->data['session_logged_in'])
 {
 	redirect(append_sid(CMS_PAGE_LOGIN . '?redirect=cash.' . PHP_EXT, true));
 }
@@ -44,7 +45,7 @@ switch($mode)
 //========================================[ Donate Code ]===========================
 //
 	case 'donate':
-		if (($target == ANONYMOUS) || ($target == $userdata['user_id']) || (!($profiledata = get_userdata($target))))
+		if (($target == ANONYMOUS) || ($target == $user->data['user_id']) || (!($profiledata = get_userdata($target))))
 		{
 			if (($ref == 'viewtopic') && ($post != 0))
 			{
@@ -84,7 +85,7 @@ switch($mode)
 			'L_MESSAGE' => $lang['Message'],
 
 			'TARGET' => $profiledata['username'],
-			'DONATER' => $userdata['username']
+			'DONATER' => $user->data['username']
 			)
 		);
 
@@ -93,7 +94,7 @@ switch($mode)
 			$template->assign_block_vars('cashrow',array(
 				'CASH_NAME' => $c_cur->name(),
 				'RECEIVER_AMOUNT' => $profiledata[$c_cur->db()],
-				'DONATER_AMOUNT' => $userdata[$c_cur->db()],
+				'DONATER_AMOUNT' => $user->data[$c_cur->db()],
 				'S_DONATE_FIELD' => 'cash[' . $c_cur->id() . ']'
 				)
 			);
@@ -105,7 +106,7 @@ switch($mode)
 //========================================[ Donated Code ]===========================
 //
 	case 'donated':
-		if (($target == ANONYMOUS) || ($target == $userdata['user_id']) || (!($profiledata = get_userdata($target))))
+		if (($target == ANONYMOUS) || ($target == $user->data['user_id']) || (!($profiledata = get_userdata($target))))
 		{
 			if (($ref == 'viewtopic') && ($post != 0))
 			{
@@ -120,7 +121,7 @@ switch($mode)
 		}
 
 		$target = new cash_user($target, $profiledata);
-		$donater = new cash_user($userdata['user_id'], $userdata);
+		$donater = new cash_user($user->data['user_id'], $user->data);
 		if (($target->id() != $donater->id()) && isset($_POST['cash']) && is_array($_POST['cash']))
 		{
 			$donate_array = array();
@@ -152,11 +153,11 @@ switch($mode)
 								$target->name());
 				cash_create_log(CASH_LOG_DONATE, $action, $message);
 
-				if (($message != '') && $userdata['user_allow_pm'])
+				if (($message != '') && $user->data['user_allow_pm'])
 				{
-					$privmsg_subject = sprintf($lang['Donation_recieved'], $userdata['username']);
+					$privmsg_subject = sprintf($lang['Donation_recieved'], $user->data['username']);
 
-					$preamble = sprintf($lang['Has_donated'], $userdata['username'], implode('[/b], [b]', $message_clause), $userdata['username']);
+					$preamble = sprintf($lang['Has_donated'], $user->data['username'], implode('[/b], [b]', $message_clause), $user->data['username']);
 					$message = str_replace("'", "''", $preamble) . $message;
 
 					cash_pm($profiledata,$privmsg_subject,$message);
@@ -196,7 +197,7 @@ switch($mode)
 				exit;
 			}
 		}
-		if (($userdata['user_level'] != ADMIN) && ($userdata['user_level'] != MOD))
+		if (($user->data['user_level'] != ADMIN) && ($user->data['user_level'] != MOD))
 		{
 			if ($ref == 'viewprofile')
 			{
@@ -248,12 +249,12 @@ switch($mode)
 			'TITLE' => sprintf($lang['Mod_usercash'],$profiledata['username']),
 
 			'TARGET' => $profiledata['username'],
-			'DONATER' => $userdata['username']
+			'DONATER' => $user->data['username']
 			)
 		);
 
 		$mask = false;
-		if ($userdata['user_level'] == MOD)
+		if ($user->data['user_level'] == MOD)
 		{
 			$mask = (CURRENCY_ENABLED | CURRENCY_MODEDIT);
 		}
@@ -262,7 +263,7 @@ switch($mode)
 			$template->assign_block_vars('cashrow',array(
 				'CASH_NAME' => $c_cur->name(),
 				'RECEIVER_AMOUNT' => $profiledata[$c_cur->db()],
-				'DONATER_AMOUNT' => $userdata[$c_cur->db()],
+				'DONATER_AMOUNT' => $user->data[$c_cur->db()],
 				'S_TYPE_FIELD' => 'cashtype[' . $c_cur->id() . ']',
 				'S_CHANGE_FIELD' => 'cashchange[' . $c_cur->id() . ']'
 				)
@@ -288,7 +289,7 @@ switch($mode)
 				exit;
 			}
 		}
-		if (($userdata['user_level'] != ADMIN) && ($userdata['user_level'] != MOD))
+		if (($user->data['user_level'] != ADMIN) && ($user->data['user_level'] != MOD))
 		{
 			if ($ref == 'viewprofile')
 			{
@@ -311,7 +312,7 @@ switch($mode)
 		if (isset($_POST['cashtype']) && is_array($_POST['cashtype']) && isset($_POST['cashchange']) && is_array($_POST['cashchange']))
 		{
 			$mask = false;
-			if ($userdata['user_level'] == MOD)
+			if ($user->data['user_level'] == MOD)
 			{
 				$mask = (CURRENCY_ENABLED | CURRENCY_MODEDIT);
 			}
@@ -369,8 +370,8 @@ switch($mode)
 			{
 				$message = request_var('message', '', true);
 
-				$action = array($userdata['user_id'],
-								$userdata['username'],
+				$action = array($user->data['user_id'],
+								$user->data['username'],
 								$target->id(),
 								$target->name(),
 								implode('</b>, <b>', $moderate_clause[1]),
@@ -390,9 +391,9 @@ switch($mode)
 					$target->set_by_id_array($moderate_array[3]);
 				}
 
-				if (($message != '') && $userdata['user_allow_pm'])
+				if (($message != '') && $user->data['user_allow_pm'])
 				{
-					$privmsg_subject = sprintf($lang['Has_moderated'], $userdata['username'], implode(", ", $editlist));
+					$privmsg_subject = sprintf($lang['Has_moderated'], $user->data['username'], implode(", ", $editlist));
 
 					$preamble = $privmsg_subject . ":\n[list]";
 					if ($modedit[1])
@@ -447,7 +448,7 @@ switch($mode)
 		{
 			$exchange_data[$row['ex_cash_id1']][$row['ex_cash_id2']] = 1;
 		}
-		$exchanger = new cash_user($userdata['user_id'], $userdata);
+		$exchanger = new cash_user($user->data['user_id'], $user->data);
 
 		if (isset($_POST['exchange']) && isset($_POST['from_id']) && is_numeric($_POST['from_id']) && isset($_POST['to_id']) && is_numeric($_POST['to_id']) && isset($_POST['convert_amount']) && is_numeric($_POST['convert_amount']))
 		{

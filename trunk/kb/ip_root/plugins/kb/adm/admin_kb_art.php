@@ -74,7 +74,7 @@ switch ($mode)
 		$kb_comment = array();
 
 		// Populate the kb_comment variable
-		$kb_comment = kb_get_data($kb_row, $userdata);
+		$kb_comment = kb_get_data($kb_row, $user->data);
 
 		// Compose post header
 		$subject = $lang['KB_comment_prefix'] . $kb_comment['article_title'];

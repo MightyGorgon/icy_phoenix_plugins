@@ -20,7 +20,7 @@ if (!defined('IN_ICYPHOENIX'))
 	die('Hacking attempt');
 }
 
-function kb_auth($type, $cat_id, $userdata, $f_access = '', $f_access_group = '')
+function kb_auth($type, $cat_id, $user_data, $f_access = '', $f_access_group = '')
 {
 	global $db, $lang;
 
@@ -93,7 +93,7 @@ function kb_auth($type, $cat_id, $userdata, $f_access = '', $f_access_group = ''
 			break;
 	}
 
-	$is_admin = ($userdata['user_level'] == ADMIN && $userdata['session_logged_in']) ? true : 0;
+	$is_admin = (($user_data['user_level'] == ADMIN) && $user_data['session_logged_in']) ? true : 0;
 
 	//
 	// If f_access has not been passed, or auth is needed to return an array of forums
@@ -167,22 +167,22 @@ function kb_auth($type, $cat_id, $userdata, $f_access = '', $f_access_group = ''
 					break;
 
 				case AUTH_REG:
-					$auth_user[$key] = ($userdata['session_logged_in']) ? true : 0;
+					$auth_user[$key] = ($user_data['session_logged_in']) ? true : 0;
 					$auth_user[$key . '_type'] = $lang['Auth_Registered_Users'];
 					break;
 
 				case AUTH_ANONYMOUS:
-					$auth_user[$key] = (! $userdata['session_logged_in']) ? true : 0;
+					$auth_user[$key] = (! $user_data['session_logged_in']) ? true : 0;
 					$auth_user[$key . '_type'] = $lang['Auth_Anonymous_users'];
 					break;
 
 				case AUTH_ACL: // PRIVATE
-					$auth_user[$key] = ($userdata['session_logged_in']) ? mx_is_group_member($value_groups) || $is_admin : 0;
+					$auth_user[$key] = ($user_data['session_logged_in']) ? mx_is_group_member($value_groups) || $is_admin : 0;
 					$auth_user[$key . '_type'] = $lang['Auth_Users_granted_access'];
 					break;
 
 				case AUTH_MOD:
-					$auth_user[$key] = ($userdata['session_logged_in']) ? mx_is_group_member($f_access_group['auth_moderator_groups']) || $is_admin : 0;
+					$auth_user[$key] = ($user_data['session_logged_in']) ? mx_is_group_member($f_access_group['auth_moderator_groups']) || $is_admin : 0;
 					$auth_user[$key . '_type'] = $lang['Auth_Moderators'];
 					break;
 
@@ -213,22 +213,22 @@ function kb_auth($type, $cat_id, $userdata, $f_access = '', $f_access_group = ''
 						break;
 
 					case AUTH_REG:
-						$auth_user[$f_cat_id][$key] = ($userdata['session_logged_in']) ? true : 0;
+						$auth_user[$f_cat_id][$key] = ($user_data['session_logged_in']) ? true : 0;
 						$auth_user[$f_cat_id][$key . '_type'] = $lang['Auth_Registered_Users'];
 						break;
 
 					case AUTH_ANONYMOUS:
-						$auth_user[$f_cat_id][$key] = (! $userdata['session_logged_in']) ? true : 0;
+						$auth_user[$f_cat_id][$key] = (!$user_data['session_logged_in']) ? true : 0;
 						$auth_user[$f_cat_id][$key . '_type'] = $lang['Auth_Anonymous_users'];
 						break;
 
 					case AUTH_ACL: // PRIVATE
-						$auth_user[$f_cat_id][$key] = ($userdata['session_logged_in']) ? mx_is_group_member($value_groups) || $is_admin : 0;
+						$auth_user[$f_cat_id][$key] = ($user_data['session_logged_in']) ? mx_is_group_member($value_groups) || $is_admin : 0;
 						$auth_user[$f_cat_id][$key . '_type'] = $lang['Auth_Users_granted_access'];
 						break;
 
 					case AUTH_MOD:
-						$auth_user[$f_cat_id][$key] = ($userdata['session_logged_in']) ? mx_is_group_member($f_access_group[$k]['auth_moderator_groups']) || $is_admin : 0;
+						$auth_user[$f_cat_id][$key] = ($user_data['session_logged_in']) ? mx_is_group_member($f_access_group[$k]['auth_moderator_groups']) || $is_admin : 0;
 						$auth_user[$f_cat_id][$key . '_type'] = $lang['Auth_Moderators'];
 						break;
 
@@ -250,7 +250,7 @@ function kb_auth($type, $cat_id, $userdata, $f_access = '', $f_access_group = ''
 	//
 	if ($cat_id != AUTH_LIST_ALL)
 	{
-		$auth_user['auth_mod'] = ($userdata['session_logged_in']) ? mx_is_group_member($f_access_group['auth_moderator_groups']) || $is_admin : 0;
+		$auth_user['auth_mod'] = ($user_data['session_logged_in']) ? mx_is_group_member($f_access_group['auth_moderator_groups']) || $is_admin : 0;
 	}
 	else
 	{
@@ -258,7 +258,7 @@ function kb_auth($type, $cat_id, $userdata, $f_access = '', $f_access_group = ''
 		{
 			$f_cat_id = $f_access[$k]['category_id'];
 
-			$auth_user[$f_cat_id]['auth_mod'] = ($userdata['session_logged_in']) ? mx_is_group_member($f_access_group[$k]['auth_moderator_groups']) || $is_admin : 0;
+			$auth_user[$f_cat_id]['auth_mod'] = ($user_data['session_logged_in']) ? mx_is_group_member($f_access_group[$k]['auth_moderator_groups']) || $is_admin : 0;
 		}
 	}
 	//die(var_export($auth_user));

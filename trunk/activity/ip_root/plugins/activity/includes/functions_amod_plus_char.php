@@ -41,7 +41,7 @@ function AMP_Level_GE($ge)
 	return $level;
 }
 
-function AMP_Add_GE($user, $ge, $trophy, $beat_score)
+function AMP_Add_GE($target_user, $ge, $trophy, $beat_score)
 {
 	global $db, $config;
 	$ge_per_level = $config['ina_char_ge_level_up'];
@@ -61,30 +61,30 @@ function AMP_Add_GE($user, $ge, $trophy, $beat_score)
 	{
 		$q = "UPDATE ". USERS_TABLE ."
 				SET ina_char_ge = '". $total_ge ."'
-				WHERE user_id = '". $user ."'";
+				WHERE user_id = '". $target_user ."'";
 	}
 
 	#==== Send It To The DB
-	if ($user != ANONYMOUS)
+	if ($target_user != ANONYMOUS)
 		$db->sql_query($q);
 }
 
-function AMP_Sub_GE($user, $ge)
+function AMP_Sub_GE($target_user, $ge)
 {
 	global $db;
 
 	$q = "UPDATE ". USERS_TABLE ."
 			SET ina_char_ge = ina_char_ge - '". $ge ."'
-			WHERE user_id = '". $user ."'";
+			WHERE user_id = '". $target_user ."'";
 
 	#==== Send It To The DB
-	if ($user != ANONYMOUS)
+	if ($target_user != ANONYMOUS)
 		$db->sql_query($q);
 }
 
-function AMP_Update_Char($user, $name, $age, $gender, $char, $from, $intrests, $title, $saying)
+function AMP_Update_Char($target_user, $name, $age, $gender, $char, $from, $intrests, $title, $saying)
 {
-	global $db, $userdata, $lang;
+	global $db, $user, $lang;
 
 	$name = addslashes(stripslashes($name));
 	$from = addslashes(stripslashes($from));
@@ -95,12 +95,12 @@ function AMP_Update_Char($user, $name, $age, $gender, $char, $from, $intrests, $
 	$q = "SELECT *
 			FROM ". USERS_TABLE ."
 			WHERE ina_char_name = '". $name ."'
-			AND user_id <> '". $user ."'";
+			AND user_id <> '". $target_user ."'";
 	$r = $db->sql_query($q);
 	$row = $db->sql_fetchrow($r);
 
 	if ($row['user_id'])
-		AMP_Error_Handler(2, $lang['amp_char_cp_name_exists'], 'activity_char', '?sid='. $userdata['session_id']);
+		AMP_Error_Handler(2, $lang['amp_char_cp_name_exists'], 'activity_char', '?sid='. $user->data['session_id']);
 
 	$q = "UPDATE ". USERS_TABLE ."
 			SET ina_char_name = '". $name ."',
@@ -111,10 +111,10 @@ function AMP_Update_Char($user, $name, $age, $gender, $char, $from, $intrests, $
 			ina_char_gender = '". $gender ."',
 			ina_char_saying = '". $saying ."',
 			ina_char_title = '". $title ."'
-			WHERE user_id = '". $user ."'";
+			WHERE user_id = '". $target_user ."'";
 	$db->sql_query($q);
 
-	AMP_Error_Handler(1, $lang['amp_char_cp_success'], 'activity_char', '?sid='. $userdata['session_id']);
+	AMP_Error_Handler(1, $lang['amp_char_cp_success'], 'activity_char', '?sid='. $user->data['session_id']);
 }
 
 function AMP_Error_Handler($type, $msg, $return, $variables)
@@ -142,7 +142,7 @@ function AMP_Gender($gender)
 		return ($lang['amp_char_cp_gender_f'] .' <img src="' . $images['icon_minigender_female'] . '" />');
 }
 
-function AMP_Delete_Char($user)
+function AMP_Delete_Char($target_user)
 {
 	global $db, $lang;
 
@@ -157,15 +157,15 @@ function AMP_Delete_Char($user)
 			ina_char_ge_level = '1',
 			ina_char_saying = '',
 			ina_char_title = ''
-			WHERE user_id = '". $user ."'";
+			WHERE user_id = '". $target_user ."'";
 	$db->sql_query($q);
 
-	AMP_Error_Handler(1, $lang['amp_char_cp_delete_complete'], 'activity_char', '?sid='. $userdata['session_id']);
+	AMP_Error_Handler(1, $lang['amp_char_cp_delete_complete'], 'activity_char', '?sid='. $user->data['session_id']);
 }
 
-function AMP_Profile_Char($user, $char_profile)
+function AMP_Profile_Char($target_user, $char_profile)
 {
-	global $userdata, $db, $config, $lang, $bbcode;
+	global $user, $db, $config, $lang, $bbcode;
 
 	$q = "SELECT *
 			FROM ". USERS_TABLE ."
@@ -175,7 +175,7 @@ function AMP_Profile_Char($user, $char_profile)
 
 	$q = "SELECT *
 			FROM ". INA_HOF ."
-			WHERE current_user_id = '". $user ."'";
+			WHERE current_user_id = '". $target_user ."'";
 	$r = $db->sql_query($q);
 	$hof = $db->sql_numrows($r);
 
@@ -183,14 +183,14 @@ function AMP_Profile_Char($user, $char_profile)
 	$q = "SELECT ". INA_LAST_GAME .".*, ". iNA_GAMES .".*
 			FROM ". INA_LAST_GAME ." LEFT JOIN ". iNA_GAMES ."
 			ON ". INA_LAST_GAME .".game_id = ". iNA_GAMES .".game_id
-			WHERE ". INA_LAST_GAME .".user_id = '". $user ."'";
+			WHERE ". INA_LAST_GAME .".user_id = '". $target_user ."'";
 	$r = $db->sql_query($q);
 	$row = $db->sql_fetchrow($r);
 
 	$profile = '';
 	for ($a = 0; $a < sizeof($info); $a++)
 	{
-		if ($info[$a]['user_id'] == $user)
+		if ($info[$a]['user_id'] == $target_user)
 		{
 			#==== Build character profile
 			$char_gender = AMP_Gender($info[$a]['ina_char_gender']);

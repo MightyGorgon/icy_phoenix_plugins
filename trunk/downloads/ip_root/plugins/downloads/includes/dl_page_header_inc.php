@@ -21,14 +21,14 @@ if (!defined('IN_ICYPHOENIX'))
 	die('Hacking attempt');
 }
 
-if ($userdata['user_new_download'])
+if ($user->data['user_new_download'])
 {
 	$sql = "UPDATE " . USERS_TABLE . "
 		SET user_new_download = 0
-		WHERE user_id = " . $userdata['user_id'];
+		WHERE user_id = " . $user->data['user_id'];
 	$db->sql_query($sql);
 
-	if ($userdata['user_dl_note_type'])
+	if ($user->data['user_dl_note_type'])
 	{
 		$template->assign_block_vars('switch_new_download', array(
 			'U_NEW_DOWNLOAD_POPUP' => append_sid('downloads.' . PHP_EXT . '?view=popup')

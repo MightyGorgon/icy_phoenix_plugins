@@ -179,11 +179,11 @@ if ($submit)
 	if($cat_id)
 	{
 		$current_time = time();
-		$current_user = $userdata['user_id'];
+		$current_user = $user->data['user_id'];
 
-		$approve = ($index[$cat_id]['must_approve'] && !$cat_auth['auth_mod'] && !$index[$cat_id]['auth_mod'] && $userdata['user_level'] != ADMIN) ? 0 : $approve;
+		$approve = ($index[$cat_id]['must_approve'] && !$cat_auth['auth_mod'] && !$index[$cat_id]['auth_mod'] && $user->data['user_level'] != ADMIN) ? 0 : $approve;
 
-		if (!$cat_auth['auth_mod'] && !$index[$cat_id]['auth_mod'] && !$index[$cat_id]['allow_mod_desc'] && $userdata['user_level'] != ADMIN)
+		if (!$cat_auth['auth_mod'] && !$index[$cat_id]['auth_mod'] && !$index[$cat_id]['allow_mod_desc'] && $user->data['user_level'] != ADMIN)
 		{
 			$sql = "INSERT INTO " . DOWNLOADS_TABLE . "
 				(file_name, cat, description, long_desc, free, extern,
@@ -272,7 +272,7 @@ if ($submit)
 
 			$sql = "INSERT INTO " . DL_STATS_TABLE . "
 				(cat_id, id, user_id, username, traffic, direction, user_ip, browser, time_stamp) VALUES
-				($cat_id, $next_id, " . $userdata['user_id'] . ", '" . $db->sql_escape($userdata['username']) . "', " . $file_size . ", 1, '" . $userdata['session_ip'] . "', '" . $db->sql_escape($browser) . "', " . time() . ")";
+				($cat_id, $next_id, " . $user->data['user_id'] . ", '" . $db->sql_escape($user->data['username']) . "', " . $file_size . ", 1, '" . $db->sql_escape($user->data['session_ip']) . "', '" . $db->sql_escape($browser) . "', " . time() . ")";
 			$db->sql_query($sql);
 		}
 
@@ -326,9 +326,9 @@ if ($submit)
 				$emailer = new emailer();
 
 				$emailer->headers('X-AntiAbuse: Board servername - ' . trim($config['server_name']));
-				$emailer->headers('X-AntiAbuse: User_id - ' . $userdata['user_id']);
-				$emailer->headers('X-AntiAbuse: Username - ' . $userdata['username']);
-				$emailer->headers('X-AntiAbuse: User IP - ' . decode_ip($user_ip));
+				$emailer->headers('X-AntiAbuse: User_id - ' . $user->data['user_id']);
+				$emailer->headers('X-AntiAbuse: Username - ' . $user->data['username']);
+				$emailer->headers('X-AntiAbuse: User IP - ' . $user_ip);
 
 				$emailer->use_template($email_template, $row['user_lang']);
 				$emailer->to($row['user_email']);
@@ -380,7 +380,7 @@ if ($submit)
 
 $template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'dl_edit_body.tpl');
 
-if ($cat_auth['auth_mod'] || $index[$cat_id]['auth_mod'] || $userdata['user_level'] == ADMIN)
+if ($cat_auth['auth_mod'] || $index[$cat_id]['auth_mod'] || $user->data['user_level'] == ADMIN)
 {
 	$template->assign_block_vars('modcp', array());
 }
@@ -422,13 +422,13 @@ $s_cat_select .= '</select>';
 
 $thumbnail_explain = sprintf($lang['Dl_thumb_dim_size'], $dl_config['thumb_xsize'], $dl_config['thumb_ysize'], $dl_mod->dl_size($dl_config['thumb_fsize']));
 
-if (!$cat_auth['auth_mod'] && !$index[$cat_id]['auth_mod'] && $userdata['user_level'] != ADMIN)
+if (!$cat_auth['auth_mod'] && !$index[$cat_id]['auth_mod'] && $user->data['user_level'] != ADMIN)
 {
 	$approve = ($index[$cat_id]['must_approve']) ? 0 : true;
 	$s_hidden_fields = '<input type="hidden" name="approve" value="'.$approve.'" />';
 }
 
-if ($dl_config['use_hacklist'] && $userdata['user_level'] == ADMIN)
+if ($dl_config['use_hacklist'] && $user->data['user_level'] == ADMIN)
 {
 	$template->assign_block_vars('use_hacklist', array());
 }

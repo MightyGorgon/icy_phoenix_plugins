@@ -53,7 +53,7 @@ $template->assign_block_vars('formatting', array());
 
 // Start auth check
 $kb_is_auth = array();
-$kb_is_auth = kb_auth(AUTH_ALL, $category_id, $userdata);
+$kb_is_auth = kb_auth(AUTH_ALL, $category_id, $user->data);
 // End of auth check
 
 $meta_content['page_title'] = $kb_post_mode == 'add' ? $lang['Add_article'] : $lang['Edit_article'];
@@ -74,7 +74,7 @@ if ($submit)
 	$article_text = request_var('message', '', true);
 
 	$date = time();
-	$author_id = $userdata['user_id'] > 0 ? intval ($userdata['user_id']) : '-1';
+	$author_id = $user->data['user_id'] > 0 ? intval ($user->data['user_id']) : '-1';
 	$type_id = request_var('type_id', 0);
 
 	$username = request_var('username', '', true);
@@ -84,7 +84,7 @@ if ($submit)
 	{
 		$username = phpbb_clean_username($username);
 
-		if (!$userdata['session_logged_in'] || ($userdata['session_logged_in'] && ($username != $userdata['username'])))
+		if (!$user->data['session_logged_in'] || ($user->data['session_logged_in'] && ($username != $user->data['username'])))
 		{
 			include(IP_ROOT_PATH . 'includes/functions_validate.' . PHP_EXT);
 
@@ -209,7 +209,7 @@ if ($submit)
 	$kb_comment = array();
 
 	// Populate the kb_comment variable
-	$kb_comment = kb_get_data($kb_row, $userdata, $kb_post_mode);
+	$kb_comment = kb_get_data($kb_row, $user->data, $kb_post_mode);
 
 	// Compose post header
 	$subject = $lang['KB_comment_prefix'] . $kb_comment['article_title'];
@@ -353,7 +353,7 @@ include(KB_ROOT_PATH . 'includes/kb_header.' . PHP_EXT);
 // set up page
 $template->set_filenames(array('body' => $class_plugins->get_tpl_file(KB_TPL_PATH, 'kb_post_body.tpl')));
 
-if (!$userdata['session_logged_in'])
+if (!$user->data['session_logged_in'])
 {
 	$template->assign_block_vars('switch_name', array());
 }

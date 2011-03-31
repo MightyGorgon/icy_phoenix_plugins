@@ -81,7 +81,7 @@ for ($x = 0; $x < $games_c; $x++)
 		{
 			if (eregi('http://phpbb-amod.com/games/games/' . $games_data[$x]["game_name"] . '.zip', $download_data[$j]['url']))
 			{
-				$download_link = '<br /><a href="downloads.' . PHP_EXT . '?mode=download&amp;cid=910&amp;lid=' . $download_data[$j]['lid'] . '&amp;sid=' . $userdata['session_id'] . '" class="nav"><font color="#339933">Download This</font></a><br />';
+				$download_link = '<br /><a href="downloads.' . PHP_EXT . '?mode=download&amp;cid=910&amp;lid=' . $download_data[$j]['lid'] . '&amp;sid=' . $user->data['session_id'] . '" class="nav"><font color="#339933">Download This</font></a><br />';
 				break;
 			}
 		}
@@ -126,12 +126,12 @@ for ($x = 0; $x < $games_c; $x++)
 	{
 		if (eregi(quotemeta("S". $games_data[$x]["game_id"] ."E"), $favorites_data[$j]["games"]))
 		{
-			$favorites_link = '<a href="activity_favs.' . PHP_EXT . '?mode=del_fav&amp;game=' . $game_id . '&amp;sid=' . $userdata['session_id'] . '"><img src="' . ACTIVITY_IMAGES_PATH . 'r_favorite_game.jpg" alt="' . $lang['favorites_r_mouse_over'] . '" /></a>';
+			$favorites_link = '<a href="activity_favs.' . PHP_EXT . '?mode=del_fav&amp;game=' . $game_id . '&amp;sid=' . $user->data['session_id'] . '"><img src="' . ACTIVITY_IMAGES_PATH . 'r_favorite_game.jpg" alt="' . $lang['favorites_r_mouse_over'] . '" /></a>';
 			break;
 		}
 		else
 		{
-			$favorites_link = '<a href="activity_favs.' . PHP_EXT . '?mode=add_fav&amp;game=' . $game_id . '&amp;sid=' . $userdata['session_id'] . '"><img src="' . ACTIVITY_IMAGES_PATH . 'favorite_game.jpg" alt="' . $lang['favorites_mouse_over'] . '" /></a>';
+			$favorites_link = '<a href="activity_favs.' . PHP_EXT . '?mode=add_fav&amp;game=' . $game_id . '&amp;sid=' . $user->data['session_id'] . '"><img src="' . ACTIVITY_IMAGES_PATH . 'favorite_game.jpg" alt="' . $lang['favorites_mouse_over'] . '" /></a>';
 			break;
 		}
 	}
@@ -142,7 +142,7 @@ for ($x = 0; $x < $games_c; $x++)
 	{
 		if ($games_data[$x]['game_id'] == $rating_info[$j]['game_id'])
 		{
-			if ($rating_info[$j]['player'] == $userdata['user_id'])
+			if ($rating_info[$j]['player'] == $user->data['user_id'])
 			{
 				$rating_submit = str_replace('%R%', $rating_info[$j]['rating'], $lang['rating_text_line']);
 				break;
@@ -179,9 +179,9 @@ for ($x = 0; $x < $games_c; $x++)
 
 	//if ($config['allow_smilies']) $game_desc = smilies_pass($game_desc);
 	global $bbcode;
-	$html_on = ($userdata['user_allowhtml'] && $config['allow_html']) ? 1 : 0 ;
-	$bbcode_on = ($userdata['user_allowbbcode'] && $config['allow_bbcode']) ? 1 : 0 ;
-	$smilies_on = ($userdata['user_allowsmile'] && $config['allow_smilies']) ? 1 : 0 ;
+	$html_on = ($user->data['user_allowhtml'] && $config['allow_html']) ? 1 : 0 ;
+	$bbcode_on = ($user->data['user_allowbbcode'] && $config['allow_bbcode']) ? 1 : 0 ;
+	$smilies_on = ($user->data['user_allowsmile'] && $config['allow_smilies']) ? 1 : 0 ;
 
 	$bbcode->allow_html = $html_on;
 	$bbcode->allow_bbcode = $bbcode_on;
@@ -337,16 +337,16 @@ for ($x = 0; $x < $games_c; $x++)
 			$image_link = GameArrayLink($game_id, $game_parent, $game_popup, $win_width, $win_height, 2, '');
 
 		$challenge = $config['ina_challenge'];
-		if (($challenge == '1') && ($t_player_id != ANONYMOUS) && ($userdata['user_id'] != ANONYMOUS))
+		if (($challenge == '1') && ($t_player_id != ANONYMOUS) && ($user->data['user_id'] != ANONYMOUS))
 			$challenge_link = '<br />'. $lang['separator'] .'&nbsp;<a href="#" onclick="popup_open(\'' . append_sid('activity_popup.' . PHP_EXT . '?mode=challenge&amp;g= '. $game_id . '&amp;' . POST_USERS_URL . '=' . $t_player_id) . '\', \'New_Window\', \'400\', \'200\', \'yes\')' . '; return false;">' . $lang['challenge_link_key'] . '</a>';
 
-		if ($challenge != '1' || $t_player_id == ANONYMOUS || $userdata['user_id'] == ANONYMOUS)
+		if ($challenge != '1' || $t_player_id == ANONYMOUS || $user->data['user_id'] == ANONYMOUS)
 			$challenge_link = '<br />'. $lang['separator'] .'&nbsp;'. $lang['challenge_link_key'];
 
-		if ($userdata['user_level'] == ADMIN)
-			$admin_edit = '<br />' . $lang['separator'] . '&nbsp;<a href="#" onclick="popup_open(\'' . ADM . '/admin_activity.' . PHP_EXT . '?mode=edit_games&amp;action=edit&amp;game=' . $game_id . '&amp;sid=' . $userdata['session_id'] . '\', \'New_Window\', \'550\', \'300\', \'yes\'); return false;">' . $lang['admin_edit_link'] . '</a>';
+		if ($user->data['user_level'] == ADMIN)
+			$admin_edit = '<br />' . $lang['separator'] . '&nbsp;<a href="#" onclick="popup_open(\'' . ADM . '/admin_activity.' . PHP_EXT . '?mode=edit_games&amp;action=edit&amp;game=' . $game_id . '&amp;sid=' . $user->data['session_id'] . '\', \'New_Window\', \'550\', \'300\', \'yes\'); return false;">' . $lang['admin_edit_link'] . '</a>';
 
-		if ($userdata['user_level'] != ADMIN)
+		if ($user->data['user_level'] != ADMIN)
 			$admin_edit = '';
 
 		$games_cost_line = $show_fees = $show_ge = $show_jack = '';
@@ -358,7 +358,7 @@ for ($x = 0; $x < $games_c; $x++)
 			$show_jack = ($game_type != 2) ? '<br />' . $lang['separator'] . '&nbsp;' . str_replace('%X%', intval($games_data[$x]['jackpot']), $lang['jackpot_text']) : '';
 		$games_cost_line = $show_fees . $show_ge . $show_jack;
 
-		if (($config['ina_disable_comments_page']) && ($userdata['user_level'] != ADMIN))
+		if (($config['ina_disable_comments_page']) && ($user->data['user_level'] != ADMIN))
 			$comments_link = '';
 		else
 			$comments_link = 'javascript:popup_open(\'' . append_sid('activity_popup.' . PHP_EXT . '?mode=comments&amp;game=' . $game_name) . '\',\'New_Window\',\'550\',\'300\',\'yes\')';

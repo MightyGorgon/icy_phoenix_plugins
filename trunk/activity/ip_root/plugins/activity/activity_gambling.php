@@ -27,7 +27,7 @@ if (!defined('IN_ICYPHOENIX'))
 /* Start Restriction Checks */
 	BanCheck();
 	/* Start File Specific Disable */
-	if(($config['ina_disable_gamble_page']) && ($userdata['user_level'] != ADMIN)) message_die(GENERAL_ERROR, $lang['disabled_page_error'], $lang['ban_error']);
+	if(($config['ina_disable_gamble_page']) && ($user->data['user_level'] != ADMIN)) message_die(GENERAL_ERROR, $lang['disabled_page_error'], $lang['ban_error']);
 	/* End File Specific Disable */
 /* End Restriction Checks */
 
@@ -131,14 +131,14 @@ if (!defined('IN_ICYPHOENIX'))
 		{
 			$deny_id = $_GET['id'];
 			$game_id = $_GET['game'];
-			if($userdata['user_id'] != $deny_id)
+			if($user->data['user_id'] != $deny_id)
 			{
 				message_die(GENERAL_ERROR, $lang['gambling_deny_error'], $lang['gambling_error']);
 			}
 
 			$q = "SELECT *
 					FROM ". INA_GAMBLE_GAMES ."
-					WHERE reciever_id = '". $userdata['user_id'] ."'
+					WHERE reciever_id = '". $user->data['user_id'] ."'
 					AND game_id = '". $game_id ."'";
 			$r = $db->sql_query($q);
 			$row = $db->sql_fetchrow($r);
@@ -154,16 +154,16 @@ if (!defined('IN_ICYPHOENIX'))
 			$game2 = $row['proper_name'];
 
 			$q = "DELETE FROM ". INA_GAMBLE ."
-					WHERE reciever_id = '". $userdata['user_id'] ."'
+					WHERE reciever_id = '". $user->data['user_id'] ."'
 					AND game_id = '". $game_id ."'";
 			$r = $db->sql_query($q);
 
 			$q = "DELETE FROM ". INA_GAMBLE_GAMES ."
-					WHERE reciever_id = '". $userdata['user_id'] ."'
+					WHERE reciever_id = '". $user->data['user_id'] ."'
 					AND game_id = '". $game_id ."'";
 			$r = $db->sql_query($q);
 
-		$new_msg1 = str_replace("%u%", $userdata['username'], $lang['gambling_deny_bet_sub']);
+		$new_msg1 = str_replace("%u%", $user->data['username'], $lang['gambling_deny_bet_sub']);
 		$new_msg2 = str_replace("%g%", $game2, $new_msg1);
 		send_challenge_pm($sender_id, $new_msg2, $new_msg2);
 		message_die(GENERAL_MESSAGE, $lang['gambling_bet_denied_msg'], $lang['gambling_bet_denied']);
@@ -186,14 +186,14 @@ if (!defined('IN_ICYPHOENIX'))
 		$amount_bet = $row['amount'];
 		if($config['use_point_system'] && $config['use_rewards_mod'])
 			{
-			if ($userdata['user_points'] < $amount_bet)
+			if ($user->data['user_points'] < $amount_bet)
 				{
 			message_die(GENERAL_MESSAGE, $lang['not_enough_points'], '', __LINE__, __FILE__, $sql);
 				}
 			}
 		if(($config['use_cash_system'] || $config['use_allowance_system']) && $config['use_rewards_mod'])
 			{
-			if (get_reward($userdata['user_id']) < $amount_bet)
+			if (get_reward($user->data['user_id']) < $amount_bet)
 				{
 			message_die(GENERAL_MESSAGE, $lang['not_enough_reward'], '', __LINE__, __FILE__, $sql);
 				}
@@ -244,14 +244,14 @@ if (!defined('IN_ICYPHOENIX'))
 		$amount_bet = $row['amount'];
 		if($config['use_point_system'] && $config['use_rewards_mod'])
 			{
-			if ($userdata['user_points'] < $amount_bet)
+			if ($user->data['user_points'] < $amount_bet)
 				{
 			message_die(GENERAL_MESSAGE, $lang['not_enough_points'], '', __LINE__, __FILE__, $sql);
 				}
 			}
 		if(($config['use_cash_system'] || $config['use_allowance_system']) && $config['use_rewards_mod'])
 			{
-			if (get_reward($userdata['user_id']) < $amount_bet)
+			if (get_reward($user->data['user_id']) < $amount_bet)
 				{
 			message_die(GENERAL_MESSAGE, $lang['not_enough_reward'], '', __LINE__, __FILE__, $sql);
 				}
@@ -312,32 +312,32 @@ if (!defined('IN_ICYPHOENIX'))
 		}
 
 	$game_id = $_POST['game_selected'];
-	$sender_id = $userdata['user_id'];
+	$sender_id = $user->data['user_id'];
 	$free_fee = $_POST['bet_selection'];
 	$amount = round($_POST['bet_amount']);
 
 		/* Start all the possible screw ups */
-	if($userdata['user_id'] == ANONYMOUS || $userdata['user_id'] == "") redirect('activity.' . PHP_EXT, true);
+	if($user->data['user_id'] == ANONYMOUS || $user->data['user_id'] == "") redirect('activity.' . PHP_EXT, true);
 	if($amount > $config['ina_max_gamble']) message_die(GENERAL_ERROR, $lang['gambling_max_exceeded_error'], $lang['gambling_error']);
 	if($reciever_id == $sender_id) message_die(GENERAL_ERROR, $lang['gambling_bet_self'], $lang['gambling_error']);
 	if(!$free_fee) message_die(GENERAL_ERROR, $lang['gambling_no_fee_error'], $lang['gambling_error']);
 	if(!$game_id) message_die(GENERAL_ERROR, $lang['gambling_no_game_selected'], $lang['gambling_error']);
 	if(!$reciever_id) message_die(GENERAL_ERROR, $lang['gambling_no_user_selected'], $lang['gambling_error']);
-	if(!is_numeric($amount)) message_die(GENERAL_ERROR, str_replace("%u%", $userdata['username'], $lang['gambling_numerical_error']), $lang['gambling_error']);
-	if(($free_fee == "2") && ($userdata['user_id'] == ANONYMOUS)) message_die(GENERAL_ERROR, $lang['gambling_anonymous_error'], $lang['gambling_error']);
-	if(($free_fee == "2") && (!$amount)) message_die(GENERAL_ERROR, str_replace("%u%", $userdata['username'], $lang['gambling_no_bet_error']), $lang['gambling_error']);
+	if(!is_numeric($amount)) message_die(GENERAL_ERROR, str_replace("%u%", $user->data['username'], $lang['gambling_numerical_error']), $lang['gambling_error']);
+	if(($free_fee == "2") && ($user->data['user_id'] == ANONYMOUS)) message_die(GENERAL_ERROR, $lang['gambling_anonymous_error'], $lang['gambling_error']);
+	if(($free_fee == "2") && (!$amount)) message_die(GENERAL_ERROR, str_replace("%u%", $user->data['username'], $lang['gambling_no_bet_error']), $lang['gambling_error']);
 	if(($config['use_point_system']) && ($config['use_rewards_mod']) && ($free_fee == "2"))
 		{
-		if($userdata['user_points'] < $amount)
+		if($user->data['user_points'] < $amount)
 			{
-		message_die(GENERAL_ERROR, str_replace("%u%", $userdata['username'], $lang['gambling_low_points']), $lang['gambling_error']);
+		message_die(GENERAL_ERROR, str_replace("%u%", $user->data['username'], $lang['gambling_low_points']), $lang['gambling_error']);
 			}
 		}
 	if(($config['use_cash_system'] || $config['use_allowance_system']) && ($config['use_rewards_mod']) && ($free_fee == "2"))
 		{
-		if(get_reward($userdata['user_id']) < $amount)
+		if(get_reward($user->data['user_id']) < $amount)
 			{
-		message_die(GENERAL_ERROR, str_replace("%u%", $userdata['username'], $lang['gambling_low_points']), $lang['gambling_error']);
+		message_die(GENERAL_ERROR, str_replace("%u%", $user->data['username'], $lang['gambling_low_points']), $lang['gambling_error']);
 			}
 		}
 		/* End all the possible screw ups */
@@ -345,8 +345,8 @@ if (!defined('IN_ICYPHOENIX'))
 	$q = "SELECT *
 				FROM ". INA_GAMBLE_GAMES ."
 			WHERE game_id = '". $game_id  ."'
-			AND (sender_id = '". $userdata['user_id'] ."' OR
-			reciever_id = '". $userdata['user_id'] ."')
+			AND (sender_id = '". $user->data['user_id'] ."' OR
+			reciever_id = '". $user->data['user_id'] ."')
 			AND (sender_score = '' OR reciever_score = '')";
 	$r = $db->sql_query($q);
 	$row = $db->sql_fetchrow($r);
@@ -377,12 +377,12 @@ if (!defined('IN_ICYPHOENIX'))
 	$sender_message = str_replace("%P%", "http://". $config['server_name'] . $config['script_path'] . $senders_link, $lang['gambling_pm_sender_msg']);
 	$reciever_message1 = str_replace("%D%", "http://". $config['server_name'] . $config['script_path'] . $recievers_link_d, $lang['gambling_pm_reciever_msg']);
 	$reciever_message2 = str_replace("%A%", "http://". $config['server_name'] . $config['script_path'] . $recievers_link_a, $reciever_message1);
-	$reciever_message3 = str_replace("%u%", $userdata['username'], $reciever_message2);
+	$reciever_message3 = str_replace("%u%", $user->data['username'], $reciever_message2);
 	$reciever_message4 = str_replace("%g%", $game2, $reciever_message3);
 	$reciever_message = str_replace("%C%", $amount_bet, $reciever_message4);
 
 	send_challenge_pm($sender_id, $lang['gambling_pm_sender_sub'], $sender_message);
-	send_challenge_pm($reciever_id, str_replace("%u%", $userdata['username'], $lang['gambling_pm_reciever_sub']), $reciever_message);
+	send_challenge_pm($reciever_id, str_replace("%u%", $user->data['username'], $lang['gambling_pm_reciever_sub']), $reciever_message);
 
 	message_die(GENERAL_MESSAGE, $lang['gambling_success_msg'], $lang['gambling_success']);
 		}

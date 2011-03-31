@@ -40,14 +40,14 @@ $rating_access = true;
 while ($row = $db->sql_fetchrow($result))
 {
 	$ratings++;
-	if ($userdata['user_id'] == $row['user_id'])
+	if ($user->data['user_id'] == $row['user_id'])
 	{
 		$rating_access = 0;
 	}
 }
 $db->sql_freeresult($result);
 
-if (!$userdata['session_logged_in'] || $userdata['user_id'] == ANONYMOUS)
+if (!$user->data['session_logged_in'] || $user->data['user_id'] == ANONYMOUS)
 {
 	$rating_access = 0;
 }
@@ -68,7 +68,7 @@ if (!$rating_access)
 
 $rating = $s_hidden_fields = '';
 
-if ($action == 'rate' && (($userdata['session_logged_in'] && $userdata['user_id'] != ANONYMOUS)))
+if ($action == 'rate' && (($user->data['session_logged_in'] && $user->data['user_id'] != ANONYMOUS)))
 {
 	$rating = '<select name="rate_point">';
 	for ( $i = 1; $i <= 10; $i++ )
@@ -148,9 +148,9 @@ if ($index[$cat_id]['comments'] && $dl_mod->cat_auth_comment_read($cat_id))
 
 				$message = censor_text($message);
 
-				$bbcode->allow_html = ($userdata['user_allowhtml'] && $config['allow_html']) ? true : false;
-				$bbcode->allow_bbcode = ($userdata['user_allowbbcode'] && $config['allow_bbcode']) ? true : false;
-				$bbcode->allow_smilies = ($userdata['user_allowsmile'] && $config['allow_smilies']) ? true : false;
+				$bbcode->allow_html = ($user->data['user_allowhtml'] && $config['allow_html']) ? true : false;
+				$bbcode->allow_bbcode = ($user->data['user_allowbbcode'] && $config['allow_bbcode']) ? true : false;
+				$bbcode->allow_smilies = ($user->data['user_allowsmile'] && $config['allow_smilies']) ? true : false;
 				$message = $bbcode->parse($message);
 
 				$message = str_replace("\n", "\n<br />\n", $message);
@@ -212,8 +212,8 @@ if ($index[$cat_id]['comments'] && $dl_mod->cat_auth_comment_read($cat_id))
 */
 $template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'view_dl_body.tpl');
 
-$user_id = $userdata['user_id'];
-$username = $userdata['username'];
+$user_id = $user->data['user_id'];
+$username = $user->data['username'];
 
 /*
 * prepare the download for displaying
@@ -226,9 +226,9 @@ $hack_version = '&nbsp;' . $dl_files['hack_version'];
 
 $long_desc = stripslashes($dl_files['long_desc']);
 
-$bbcode->allow_html = ($userdata['user_allowhtml'] && $config['allow_html']) ? true : false;
-$bbcode->allow_bbcode = ($userdata['user_allowbbcode'] && $config['allow_bbcode']) ? true : false;
-$bbcode->allow_smilies = ($userdata['user_allowsmile'] && $config['allow_smilies']) ? true : false;
+$bbcode->allow_html = ($user->data['user_allowhtml'] && $config['allow_html']) ? true : false;
+$bbcode->allow_bbcode = ($user->data['user_allowbbcode'] && $config['allow_bbcode']) ? true : false;
+$bbcode->allow_smilies = ($user->data['user_allowsmile'] && $config['allow_smilies']) ? true : false;
 $long_desc = $bbcode->parse($long_desc);
 $long_desc = str_replace("\n", "\n<br />\n", $long_desc);
 
@@ -315,9 +315,9 @@ $todo = $dl_files['todo'];
 $warning = $dl_files['warning'];
 
 $warning = stripslashes($warning);
-$bbcode->allow_html = ($userdata['user_allowhtml'] && $config['allow_html']) ? true : false;
-$bbcode->allow_bbcode = ($userdata['user_allowbbcode'] && $config['allow_bbcode']) ? true : false;
-$bbcode->allow_smilies = ($userdata['user_allowsmile'] && $config['allow_smilies']) ? true : false;
+$bbcode->allow_html = ($user->data['user_allowhtml'] && $config['allow_html']) ? true : false;
+$bbcode->allow_bbcode = ($user->data['user_allowbbcode'] && $config['allow_bbcode']) ? true : false;
+$bbcode->allow_smilies = ($user->data['user_allowsmile'] && $config['allow_smilies']) ? true : false;
 $warning = $bbcode->parse($warning);
 $warning = str_replace("\n", "\n<br />\n", $warning);
 
@@ -325,9 +325,9 @@ $mod_desc = $dl_files['mod_desc'];
 $mod_list = $dl_files['mod_list'];
 
 $mod_desc = stripslashes($mod_desc);
-$bbcode->allow_html = ($userdata['user_allowhtml'] && $config['allow_html']) ? true : false;
-$bbcode->allow_bbcode = ($userdata['user_allowbbcode'] && $config['allow_bbcode']) ? true : false;
-$bbcode->allow_smilies = ($userdata['user_allowsmile'] && $config['allow_smilies']) ? true : false;
+$bbcode->allow_html = ($user->data['user_allowhtml'] && $config['allow_html']) ? true : false;
+$bbcode->allow_bbcode = ($user->data['user_allowbbcode'] && $config['allow_bbcode']) ? true : false;
+$bbcode->allow_smilies = ($user->data['user_allowsmile'] && $config['allow_smilies']) ? true : false;
 $mod_desc = $bbcode->parse($mod_desc);
 $mod_desc = str_replace("\n", "\n<br />\n", $mod_desc);
 
@@ -417,10 +417,10 @@ if ($mod_list && $index[$cat_id]['allow_mod_desc'])
 /*
 * Check for recurring downloads
 */
-if ($dl_config['user_traffic_once'] && !$file_load && !$dl_files['free'] && !$dl_files['extern'] && ($dl_files['file_size'] > $userdata['user_traffic']))
+if ($dl_config['user_traffic_once'] && !$file_load && !$dl_files['free'] && !$dl_files['extern'] && ($dl_files['file_size'] > $user->data['user_traffic']))
 {
 	$sql = "SELECT * FROM " . DL_NOTRAF_TABLE . "
-		WHERE user_id = " . $userdata['user_id'] . "
+		WHERE user_id = " . $user->data['user_id'] . "
 			AND dl_id = $df_id";
 	$result = $db->sql_query($sql);
 	$still_count = $db->sql_numrows($result);
@@ -446,12 +446,12 @@ if ($file_load)
 	{
 		if ($dl_config['prevent_hotlink'])
 		{
-			$hotlink_id = md5($userdata['user_id'].time().$df_id.$userdata['session_id']);
+			$hotlink_id = md5($user->data['user_id'].time().$df_id.$user->data['session_id']);
 
 			$sql = "INSERT INTO " . DL_HOTLINK_TABLE . "
 				(user_id, session_id, hotlink_id)
 				VALUES
-				(" . $userdata['user_id'] . ", '" . $userdata['session_id'] . "', '$hotlink_id')";
+				(" . $user->data['user_id'] . ", '" . $user->data['session_id'] . "', '$hotlink_id')";
 			$result = $db->sql_query($sql);
 		}
 
@@ -471,11 +471,11 @@ if ($file_load)
 			$sql = "INSERT INTO " . DL_HOTLINK_TABLE . "
 				(user_id, session_id, hotlink_id, code)
 				VALUES
-				(" . $userdata['user_id'] . ", '" . $userdata['session_id'] . "', 'dlvc', '$code')";
+				(" . $user->data['user_id'] . ", '" . $user->data['session_id'] . "', 'dlvc', '$code')";
 			$result = $db->sql_query($sql);
 		}
 
-		if ($cat_auth['auth_mod'] || $userdata['user_level'] == ADMIN)
+		if ($cat_auth['auth_mod'] || $user->data['user_level'] == ADMIN)
 		{
 			$modcp = ($modcp) ? 1 : 0;
 		}
@@ -505,7 +505,7 @@ if ($file_load)
 */
 if ($dl_config['report_broken'] && !$dl_files['broken'])
 {
-	if ($userdata['session_logged_in'] || (!$userdata['session_logged_in'] && $dl_config['report_broken'] == 1))
+	if ($user->data['session_logged_in'] || (!$user->data['session_logged_in'] && $dl_config['report_broken'] == 1))
 	{
 		$template->assign_block_vars('report_broken_dl', array(
 			'L_BROKEN_DOWNLOAD' => $lang['Dl_broken'],
@@ -526,7 +526,7 @@ $cat_auth = $dl_mod->dl_cat_auth($cat_id);
 */
 if ($dl_files['broken'])
 {
-	if ($index[$cat_id]['auth_mod'] || $cat_auth['auth_mod'] || $userdata['user_level'] == ADMIN)
+	if ($index[$cat_id]['auth_mod'] || $cat_auth['auth_mod'] || $user->data['user_level'] == ADMIN)
 	{
 		$template->assign_block_vars('dl_broken_mod', array(
 			'L_REPORT' => $lang['Dl_broken_mod'],
@@ -601,7 +601,7 @@ if ($dl_config['show_real_filetime'] && !$dl_files['extern'])
 $rating_points = $dl_files['rating'];
 
 $l_rating_text = $u_rating_text = '';
-if ((!$rating_points || $rating_access) && $userdata['session_logged_in'])
+if ((!$rating_points || $rating_access) && $user->data['session_logged_in'])
 {
 	$l_rating_text = $lang['Dl_klick_to_rate'];
 	$u_rating_text = append_sid('downloads.' . PHP_EXT . '?view=detail&amp;action=rate&amp;df_id=' . $df_id . '&amp;dlo=2');
@@ -642,11 +642,11 @@ elseif ($l_rating_text)
 /*
 * Some user like to link to each favorite page, download, programm, friend, house friend... ahrrrrrrggggg...
 */
-if ($userdata['session_logged_in'] && !$dl_config['disable_email'])
+if ($user->data['session_logged_in'] && !$dl_config['disable_email'])
 {
 	$sql = "SELECT fav_id FROM " . DL_FAVORITES_TABLE . "
 		WHERE fav_dl_id = $df_id
-			AND fav_user_id = " . $userdata['user_id'];
+			AND fav_user_id = " . $user->data['user_id'];
 	$result = $db->sql_query($sql);
 	$row = $db->sql_fetchrow($result);
 	$fav_id = $row['fav_id'];
@@ -677,7 +677,7 @@ $cat_id = $dl_files['cat'];
 /*
 * Can we edit the download? Yes we can, or not?
 */
-if ($dl_mod->user_auth($dl_files['cat'], 'auth_mod') || ($dl_config['edit_own_downloads'] && $dl_files['add_user'] == $userdata['user_id']))
+if ($dl_mod->user_auth($dl_files['cat'], 'auth_mod') || ($dl_config['edit_own_downloads'] && $dl_files['add_user'] == $user->data['user_id']))
 {
 	$template->assign_block_vars('edit_button', array(
 		'EDIT_IMG' => '<img src="' . $images['icon_edit'] . '" border="0" alt="" title="" />',

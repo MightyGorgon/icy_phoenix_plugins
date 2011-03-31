@@ -73,7 +73,7 @@ while($row = $db -> sql_fetchrow($r))
 		'ROW_CLASS' => $row_class,
 		'POSITION' => $i,
 		'TROPHIES' => $trophies,
-		'USER_SEARCH' => '<a href="activity.' . PHP_EXT . '?page=trophy_search&amp;user=' . urlencode($user_n) . '&ampsid=' . $userdata['session_id'] . '" style="text-decoration:none">' . $user_c . '</a>',
+		'USER_SEARCH' => '<a href="activity.' . PHP_EXT . '?page=trophy_search&amp;user=' . urlencode($user_n) . '&ampsid=' . $user->data['session_id'] . '" style="text-decoration:none">' . $user_c . '</a>',
 		'PM_PROFILE' => $pm . ' &nbsp; ' . $profile)
 		);
 	$i++;

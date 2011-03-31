@@ -27,7 +27,7 @@ VersionCheck();
 /* Start Restriction Checks */
 BanCheck();
 /* Start Specific Page Disabled */
-if (($config['ina_disable_trophy_page']) && ($userdata['user_level'] != ADMIN))
+if (($config['ina_disable_trophy_page']) && ($user->data['user_level'] != ADMIN))
 {
 	message_die(GENERAL_ERROR, $lang['disabled_page_error'], $lang['ban_error']);
 }
@@ -38,7 +38,7 @@ $delete_action = (isset($_POST['action'])) ? $_POST['action'] : '';
 $start = (isset($_GET['start'])) ? intval($_GET['start']) : 0;
 $end = $config['games_per_page'];
 
-if (($delete_action == 'delete_specific_score') && ($userdata['user_level'] == ADMIN))
+if (($delete_action == 'delete_specific_score') && ($user->data['user_level'] == ADMIN))
 {
 	$delete_certain_score = (isset($_POST['delete_score'])) ? $_POST['delete_score'] : '';
 
@@ -86,7 +86,7 @@ if (($delete_action == 'delete_specific_score') && ($userdata['user_level'] == A
 
 	if(!$player2_n)
 	{
-		$player2_n = $userdata['user_id'];
+		$player2_n = $user->data['user_id'];
 	}
 
 	$q1 = "UPDATE " . $table_prefix . "ina_top_scores
@@ -103,14 +103,14 @@ if (($delete_action == 'delete_specific_score') && ($userdata['user_level'] == A
 	message_die(GENERAL_MESSAGE, $lang['the_trophy_holder'] . $player1 . $lang['score_of'] . $score1 . $lang['been_deleted_n_replaced'] . $player2 . $lang['score_of'] . $score2 . $lang['please_click'] . 'activity.' . PHP_EXT . '?page=trophy'. $lang['here_to_return'], $lang['success']);
 }
 
-if (($delete_action == 'delete_all_scores') && ($userdata['user_level'] == ADMIN))
+if (($delete_action == 'delete_all_scores') && ($user->data['user_level'] == ADMIN))
 {
 	$q1 = "UPDATE " . $table_prefix . "ina_top_scores
-			SET player = '" . $userdata['user_id'] . "', score = '0', date = '" . time() . "'
+			SET player = '" . $user->data['user_id'] . "', score = '0', date = '" . time() . "'
 			WHERE game_name <> ''";
 	$db->sql_query($q1);
 
-	message_die(GENERAL_MESSAGE, $lang['scores_reset'] . $userdata['username'] . $lang['zero_score'] . $lang['please_click'] . $_SERVER['SCRIPT_NAME'] . $lang['here_to_return'], $lang['success']);
+	message_die(GENERAL_MESSAGE, $lang['scores_reset'] . $user->data['username'] . $lang['zero_score'] . $lang['please_click'] . $_SERVER['SCRIPT_NAME'] . $lang['here_to_return'], $lang['success']);
 }
 
 $search = (isset($_GET['user'])) ? $_GET['user'] : '';
@@ -138,7 +138,7 @@ if (!$search)
 	$u_data  = $db->sql_fetchrowset($r);
 	$db->sql_freeresult($r);
 
-	if ($userdata['user_level'] == ADMIN)
+	if ($user->data['user_level'] == ADMIN)
 	{
 		$template->assign_block_vars('admin', array());
 		$games_drop = '';
@@ -210,7 +210,7 @@ if (!$search)
 				$template->assign_block_vars('top_scores_rows', array(
 					'ROW_CLASS' => $row_class,
 					'GAME_IMAGE' => $game_image,
-					'USER_SEARCH' => '<a href="activity.' . PHP_EXT . '?page=trophy_search&amp;user=' . urlencode($fix_user_n) . '&amp;sid=' . $userdata['session_id'] . '" ' . $user_color . '>' . $user_n . '</a>',
+					'USER_SEARCH' => '<a href="activity.' . PHP_EXT . '?page=trophy_search&amp;user=' . urlencode($fix_user_n) . '&amp;sid=' . $user->data['session_id'] . '" ' . $user_color . '>' . $user_n . '</a>',
 					'SCORE_DATE' => $score . '<br />' . $date,
 					'PM_PROFILE' => $pm . ' ' . $profile
 					)

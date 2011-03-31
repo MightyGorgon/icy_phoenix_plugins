@@ -23,9 +23,11 @@ if (!defined('IP_ROOT_PATH')) define('IP_ROOT_PATH', './');
 if (!defined('PHP_EXT')) define('PHP_EXT', substr(strrchr(__FILE__, '.'), 1));
 include(IP_ROOT_PATH . 'common.' . PHP_EXT);
 
-// Session management
-$userdata = session_pagestart($user_ip);
-init_userprefs($userdata);
+// Start session management
+$user->session_begin();
+//$auth->acl($user->data);
+$user->setup();
+// End session management
 
 $cms_page['page_id'] = 'download';
 $cms_page['page_nav'] = (!empty($cms_config_layouts[$cms_page['page_id']]['page_nav']) ? true : false);
@@ -106,9 +108,9 @@ if (($view == 'code') && $code)
 	$hotlink_id = ($code == 'd') ? 'dlvc' : 'repvc';
 
 	$sql = "SELECT code FROM " . DL_HOTLINK_TABLE . "
-		WHERE user_id = " . $userdata['user_id'] . "
+		WHERE user_id = " . $user->data['user_id'] . "
 			AND hotlink_id = '" . $hotlink_id . "'";
-	$sql .= (!$userdata['session_logged_in']) ? " AND session_id = '" . $userdata['session_id'] . "' " : '';
+	$sql .= (!$user->data['session_logged_in']) ? " AND session_id = '" . $user->data['session_id'] . "' " : '';
 	$result = $db->sql_query($sql);
 	$row = $db->sql_fetchrow($result);
 	$code = $row['code'];
@@ -239,7 +241,7 @@ if (($view != 'load') && ($view != 'broken'))
 {
 	$sql_where = '';
 
-	if (!$userdata['session_logged_in'])
+	if (!$user->data['session_logged_in'])
 	{
 		$sql = "SELECT session_id FROM " . SESSIONS_TABLE . "
 			WHERE session_user_id = " . ANONYMOUS;
@@ -256,7 +258,7 @@ if (($view != 'load') && ($view != 'broken'))
 	}
 
 	$sql = "DELETE FROM " . DL_HOTLINK_TABLE . "
-		WHERE user_id = " . $userdata['user_id'] . "
+		WHERE user_id = " . $user->data['user_id'] . "
 			$sql_where";
 	$result = $db->sql_query($sql);
 }
@@ -306,7 +308,7 @@ if ($view == 'todo')
 }
 
 //handle reported broken download
-if (($view == 'broken') && $df_id && $cat_id && ($userdata['session_logged_in'] || (!$userdata['session_logged_id'] && $dl_config['report_broken'])))
+if (($view == 'broken') && $df_id && $cat_id && ($user->data['session_logged_in'] || (!$user->data['session_logged_id'] && $dl_config['report_broken'])))
 {
 	if ($dl_config['report_broken_vc'])
 	{
@@ -324,18 +326,18 @@ if (($view == 'broken') && $df_id && $cat_id && ($userdata['session_logged_in'] 
 			}
 
 			$sql = "DELETE FROM " . DL_HOTLINK_TABLE . "
-				WHERE user_id = " . $userdata['user_id'] . "
+				WHERE user_id = " . $user->data['user_id'] . "
 					AND hotlink_id = 'repvc'";
-			if (!$userdata['session_logged_id'])
+			if (!$user->data['session_logged_id'])
 			{
-				$sql .= " AND session_id = '" . $userdata['session_id'] . "'";
+				$sql .= " AND session_id = '" . $user->data['session_id'] . "'";
 			}
 			$result = $db->sql_query($sql);
 
 			$sql = "INSERT INTO " . DL_HOTLINK_TABLE . "
 				(user_id, session_id, hotlink_id, code)
 				VALUES
-				(" . $userdata['user_id'] . ", '" . $userdata['session_id'] . "', 'repvc', '$code')";
+				(" . $user->data['user_id'] . ", '" . $user->data['session_id'] . "', 'repvc', '$code')";
 			$result = $db->sql_query($sql);
 
 			$nav_server_url = create_server_url();
@@ -363,8 +365,8 @@ if (($view == 'broken') && $df_id && $cat_id && ($userdata['session_logged_in'] 
 		else
 		{
 			$sql = "SELECT code FROM " . DL_HOTLINK_TABLE . "
-				WHERE user_id = " . $userdata['user_id'] . "
-					AND session_id = '" . $userdata['session_id'] . "'
+				WHERE user_id = " . $user->data['user_id'] . "
+					AND session_id = '" . $user->data['session_id'] . "'
 					AND hotlink_id = 'repvc'";
 			$result = $db->sql_query($sql);
 			$row = $db->sql_fetchrow($result);
@@ -426,14 +428,14 @@ if (($view == 'broken') && $df_id && $cat_id && ($userdata['session_logged_in'] 
 				$config['smtp_host'] = @$ini_val('SMTP');
 			}
 
-			$username = (!$userdata['session_logged_in']) ? $lang['Dl_a_guest'] : $userdata['username'];
+			$username = (!$user->data['session_logged_in']) ? $lang['Dl_a_guest'] : $user->data['username'];
 
 			$emailer = new emailer();
 
 			$emailer->headers('X-AntiAbuse: Board servername - ' . trim($config['server_name']));
-			$emailer->headers('X-AntiAbuse: User_id - ' . $userdata['user_id']);
-			$emailer->headers('X-AntiAbuse: Username - ' . $userdata['username']);
-			$emailer->headers('X-AntiAbuse: User IP - ' . decode_ip($user_ip));
+			$emailer->headers('X-AntiAbuse: User_id - ' . $user->data['user_id']);
+			$emailer->headers('X-AntiAbuse: Username - ' . $user->data['username']);
+			$emailer->headers('X-AntiAbuse: User IP - ' . $user_ip);
 
 			$emailer->use_template($email_template, $row['user_lang']);
 			$emailer->to($row['user_email']);
@@ -462,7 +464,7 @@ if ($view == 'unbroken' && $df_id && $cat_id)
 	$cat_auth = array();
 	$cat_auth = $dl_mod->dl_cat_auth($cat_id);
 
-	if ($index[$cat_id]['auth_mod'] || $cat_auth['auth_mod'] || $userdata['user_level'] == ADMIN)
+	if ($index[$cat_id]['auth_mod'] || $cat_auth['auth_mod'] || $user->data['user_level'] == ADMIN)
 	{
 		$sql = "UPDATE " . DOWNLOADS_TABLE . "
 			SET broken = 0
@@ -474,11 +476,11 @@ if ($view == 'unbroken' && $df_id && $cat_id)
 }
 
 //set favorite for the choosen download
-if (($view == 'fav') && $df_id && $cat_id && $userdata['session_logged_in'])
+if (($view == 'fav') && $df_id && $cat_id && $user->data['session_logged_in'])
 {
 	$sql = "SELECT * FROM " . DL_FAVORITES_TABLE . "
 		WHERE fav_dl_id = " . (int) $df_id . "
-			AND fav_user_id = " . $userdata['user_id'];
+			AND fav_user_id = " . $user->data['user_id'];
 	$result = $db->sql_query($sql);
 
 	$fav_check = $db->sql_numrows($result);
@@ -489,7 +491,7 @@ if (($view == 'fav') && $df_id && $cat_id && $userdata['session_logged_in'])
 		$sql = "INSERT INTO " . DL_FAVORITES_TABLE . "
 			(fav_dl_id, fav_dl_cat, fav_user_id)
 			VALUES
-			(" . (int) $df_id . ", " . (int) $cat_id . ", " . $userdata['user_id'] . ")";
+			(" . (int) $df_id . ", " . (int) $cat_id . ", " . $user->data['user_id'] . ")";
 		$result = $db->sql_query($sql);
 	}
 
@@ -497,12 +499,12 @@ if (($view == 'fav') && $df_id && $cat_id && $userdata['session_logged_in'])
 }
 
 //drop favorite for the choosen download
-if (($view == 'unfav') && $fav_id && $df_id && $cat_id && $userdata['session_logged_in'])
+if (($view == 'unfav') && $fav_id && $df_id && $cat_id && $user->data['session_logged_in'])
 {
 	$sql = "DELETE FROM " . DL_FAVORITES_TABLE . "
 		WHERE fav_id = " . (int) $fav_id . "
 			AND fav_dl_id = " . (int) $df_id . "
-			AND fav_user_id = " . $userdata['user_id'];
+			AND fav_user_id = " . $user->data['user_id'];
 	$result = $db->sql_query($sql);
 	redirect(append_sid('downloads.' . PHP_EXT . '?view=detail&df_id=' . $df_id . '&cat_id=' . $cat_id));
 }
@@ -512,7 +514,7 @@ if (($view == 'unfav') && $fav_id && $df_id && $cat_id && $userdata['session_log
 */
 if ($view == 'bug_tracker')
 {
-	if ($userdata['session_logged_in'])
+	if ($user->data['session_logged_in'])
 	{
 		$bug_tracker = $dl_mod->bug_tracker();
 		if ($bug_tracker)
@@ -565,7 +567,7 @@ elseif ($view == 'user_config')
 
 		$sql = "DELETE FROM " . DL_FAVORITES_TABLE . "
 			WHERE fav_id IN ($sql_fav_ids)
-				AND fav_user_id = " . $userdata['user_id'];
+				AND fav_user_id = " . $user->data['user_id'];
 		$result = $db->sql_query($sql);
 		$action = '';
 		$submit = '';
@@ -586,7 +588,7 @@ elseif ($view == 'detail')
 	$cat_auth = array();
 	$cat_auth = $dl_mod->dl_cat_auth($cat_id);
 
-	if (!$userdata['user_level'] == ADMIN && !$cat_auth['auth_mod'])
+	if (!$user->data['user_level'] == ADMIN && !$cat_auth['auth_mod'])
 	{
 		$modcp = 0;
 	}
@@ -606,7 +608,7 @@ elseif ($view == 'detail')
 	//save rating into database after submitting
 	if ($submit && ($action == 'rate'))
 	{
-		$rate_user_id = $userdata['user_id'];
+		$rate_user_id = $user->data['user_id'];
 		$rate_point = round($rate_point, 2);
 
 		$sql = "INSERT INTO " . DL_RATING_TABLE . " (dl_id, user_id, rate_point)
@@ -691,13 +693,13 @@ elseif ($view == 'load')
 		}
 		else
 		{
-			if (!$userdata['session_logged_in'])
+			if (!$user->data['session_logged_in'])
 			{
-				$sql_where = " AND session_id = '" . $userdata['session_id'] . "' ";
+				$sql_where = " AND session_id = '" . $user->data['session_id'] . "' ";
 			}
 
 			$sql = "SELECT hotlink_id FROM " . DL_HOTLINK_TABLE . "
-				WHERE user_id = " . $userdata['user_id'] . "
+				WHERE user_id = " . $user->data['user_id'] . "
 					AND hotlink_id = '" . $hotlink_id . "'
 					$sql_where";
 			$result = $db->sql_query($sql);
@@ -724,13 +726,13 @@ elseif ($view == 'load')
 
 	if ($dl_config['download_vc'])
 	{
-			if (!$userdata['session_logged_in'])
+			if (!$user->data['session_logged_in'])
 			{
-				$sql_where = " AND session_id = '" . $userdata['session_id'] . "' ";
+				$sql_where = " AND session_id = '" . $user->data['session_id'] . "' ";
 			}
 
 			$sql = "SELECT code FROM " . DL_HOTLINK_TABLE . "
-				WHERE user_id = " . $userdata['user_id'] . "
+				WHERE user_id = " . $user->data['user_id'] . "
 					AND hotlink_id = 'dlvc'
 					$sql_where";
 			$result = $db->sql_query($sql);
@@ -754,7 +756,7 @@ elseif ($view == 'load')
 		$cat_auth = array();
 		$cat_auth = $dl_mod->dl_cat_auth($cat_id);
 
-		if ((!$userdata['user_level'] == ADMIN) && !$cat_auth['auth_mod'])
+		if ((!$user->data['user_level'] == ADMIN) && !$cat_auth['auth_mod'])
 		{
 			$modcp = 0;
 		}
@@ -783,7 +785,7 @@ elseif ($view == 'load')
 		//fix the mod and admin auth if needed
 		if (!$dl_file['approve'])
 		{
-			if ((($cat_auth['auth_mod'] || $index[$cat_id]['auth_mod']) && $userdata['user_level'] != ADMIN) || $userdata['user_level'] == ADMIN)
+			if ((($cat_auth['auth_mod'] || $index[$cat_id]['auth_mod']) && $user->data['user_level'] != ADMIN) || $user->data['user_level'] == ADMIN)
 			{
 				$status = true;
 			}
@@ -793,19 +795,19 @@ elseif ($view == 'load')
 		if ($status)
 		{
 			$sql = "UPDATE " . DOWNLOADS_TABLE . "
-				SET klicks = klicks + 1, overall_klicks = overall_klicks + 1, last_time = " . time() . ", down_user = " . $userdata['user_id'] . "
+				SET klicks = klicks + 1, overall_klicks = overall_klicks + 1, last_time = " . time() . ", down_user = " . $user->data['user_id'] . "
 				WHERE id = $df_id";
 			$result = $db->sql_query($sql);
 
-			if ($userdata['session_logged_in'] && !$dl_file['free'] && !$dl_file['extern'])
+			if ($user->data['session_logged_in'] && !$dl_file['free'] && !$dl_file['extern'])
 			{
 				$count_user_traffic = true;
 				// MG DL Counter - BEGIN
-				if (($dl_config['user_download_limit_flag'] == true) && ($userdata['user_level'] != ADMIN) && ($userdata['user_level'] != MOD))
+				if (($dl_config['user_download_limit_flag'] == true) && ($user->data['user_level'] != ADMIN) && ($user->data['user_level'] != MOD))
 				{
 					$sql = "UPDATE " . USERS_TABLE . "
 						SET user_download_counter = (user_download_counter + 1)
-						WHERE user_id = " . $userdata['user_id'];
+						WHERE user_id = " . $user->data['user_id'];
 					$db->sql_query($sql);
 				}
 				// MG DL Counter - END
@@ -813,7 +815,7 @@ elseif ($view == 'load')
 				if ($dl_config['user_traffic_once'])
 				{
 					$sql = "SELECT * FROM " . DL_NOTRAF_TABLE . "
-						WHERE user_id = " . $userdata['user_id'] . "
+						WHERE user_id = " . $user->data['user_id'] . "
 							AND dl_id = " . $dl_file['id'];
 					$result = $db->sql_query($sql);
 					$still_count = $db->sql_numrows($result);
@@ -829,13 +831,13 @@ elseif ($view == 'load')
 				{
 					$sql = "UPDATE " . USERS_TABLE . "
 						SET user_traffic = user_traffic - " . $dl_file['file_size'] . "
-						WHERE user_id = " . $userdata['user_id'];
+						WHERE user_id = " . $user->data['user_id'];
 					$result = $db->sql_query($sql);
 
 					if ($dl_config['user_traffic_once'])
 					{
 						$sql = "INSERT INTO " . DL_NOTRAF_TABLE . "
-							(user_id, dl_id) VALUES (" . $userdata['user_id'] . ", " . $dl_file['id'] . ")";
+							(user_id, dl_id) VALUES (" . $user->data['user_id'] . ", " . $dl_file['id'] . ")";
 						$result = $db->sql_query($sql);
 					}
 				}
@@ -863,7 +865,7 @@ elseif ($view == 'load')
 
 				$sql = "INSERT INTO " . DL_STATS_TABLE . "
 					(cat_id, id, user_id, username, traffic, direction, user_ip, browser, time_stamp) VALUES
-					($cat_id, $df_id, " . $userdata['user_id'] . ", '" . $db->sql_escape($userdata['username']) . "', " . $dl_file['file_size'] . ", 0, '" . $userdata['session_ip'] . "', '" . $db->sql_escape($browser) . "', " . time() . ")";
+					($cat_id, $df_id, " . $user->data['user_id'] . ", '" . $db->sql_escape($user->data['username']) . "', " . $db->sql_escape($dl_file['file_size']) . ", 0, '" . $db->sql_escape($user->data['session_ip']) . "', '" . $db->sql_escape($browser) . "', " . time() . ")";
 				$result = $db->sql_query($sql);
 			}
 		}
@@ -963,7 +965,7 @@ elseif ($view == 'comment')
 	$cat_auth = array();
 	$cat_auth = $dl_mod->dl_cat_auth($cat_id);
 
-	if (!$cat_auth['auth_view'] && !$index[$cat_id]['auth_view'] && $userdata['user_level'] != ADMIN)
+	if (!$cat_auth['auth_view'] && !$index[$cat_id]['auth_view'] && $user->data['user_level'] != ADMIN)
 	{
 		message_die(GENERAL_MESSAGE, $lang['Dl_no_permission']);
 	}
@@ -995,7 +997,7 @@ elseif ($view == 'comment')
 	$db->sql_freeresult($result);
 
 	$allow_manage = 0;
-	if ($row['user_id'] == $userdata['user_id'] || $cat_auth['auth_mod'] || $index[$cat_id]['auth_mod'] || $userdata['user_level'] == ADMIN)
+	if ($row['user_id'] == $user->data['user_id'] || $cat_auth['auth_mod'] || $index[$cat_id]['auth_mod'] || $user->data['user_level'] == ADMIN)
 	{
 		$allow_manage = true;
 	}
@@ -1043,7 +1045,7 @@ elseif ($view == 'upload')
 		message_die(GENERAL_MESSAGE, $lang['Dl_blue_explain']);
 	}
 
-	if (($dl_config['stop_uploads'] && $userdata['user_level'] != ADMIN) || !sizeof($index) || (!$cat_auth['auth_up'] && !$index[$cat_id]['auth_up'] && $userdata['user_level'] != ADMIN))
+	if (($dl_config['stop_uploads'] && $user->data['user_level'] != ADMIN) || !sizeof($index) || (!$cat_auth['auth_up'] && !$index[$cat_id]['auth_up'] && $user->data['user_level'] != ADMIN))
 	{
 		message_die(GENERAL_MESSAGE, $lang['Dl_no_permission']);
 	}
@@ -1068,7 +1070,7 @@ elseif ($view == 'modcp')
 		$row = $db->sql_fetchrow($result);
 		$db->sql_freeresult($result);
 
-		if ($row['add_user'] == $userdata['user_id'])
+		if ($row['add_user'] == $user->data['user_id'])
 		{
 			$own_edit = true;
 		}
@@ -1091,7 +1093,7 @@ elseif ($view == 'modcp')
 	{
 		$access_cat = array();
 		$access_cat = $dl_mod->full_index(0, 0, 0, 2);
-		if (!sizeof($access_cat) && $userdata['user_level'] != ADMIN)
+		if (!sizeof($access_cat) && $user->data['user_level'] != ADMIN)
 		{
 			$deny_modcp = true;
 		}
@@ -1100,7 +1102,7 @@ elseif ($view == 'modcp')
 	$cat_auth = array();
 	$cat_auth = $dl_mod->dl_cat_auth($cat_id);
 
-	if (!$cat_id && !$cat_auth['auth_mod'] && !$index[$cat_id]['auth_mod'] && $userdata['user_level'] != ADMIN)
+	if (!$cat_id && !$cat_auth['auth_mod'] && !$index[$cat_id]['auth_mod'] && $user->data['user_level'] != ADMIN)
 	{
 		$deny_modcp = true;
 	}
@@ -1149,7 +1151,7 @@ elseif ($view == 'modcp')
 
 		$dl_id = (isset($_POST['dlo_id'])) ? $_POST['dlo_id'] : array();
 
-		if ($fmove && $userdata['user_level'] == ADMIN)
+		if ($fmove && $user->data['user_level'] == ADMIN)
 		{
 			if ($fmove == 'ABC')
 			{
@@ -1204,8 +1206,8 @@ if ($dl_config['sort_preform'])
 }
 else
 {
-	$sort_by = (!$sort_by) ? $userdata['user_dl_sort_fix'] : $sort_by;
-	$order = (!$order) ? (($userdata['user_dl_sort_dir']) ? 'DESC' : 'ASC') : $order;
+	$sort_by = (!$sort_by) ? $user->data['user_dl_sort_fix'] : $sort_by;
+	$order = (!$order) ? (($user->data['user_dl_sort_dir']) ? 'DESC' : 'ASC') : $order;
 }
 
 switch ($sort_by)
@@ -1250,7 +1252,7 @@ switch ($order)
 		$sql_order = 'ASC';
 }
 
-if (!$dl_config['sort_preform'] && $userdata['user_dl_sort_opt'])
+if (!$dl_config['sort_preform'] && $user->data['user_dl_sort_opt'])
 {
 	$template->assign_block_vars('sort_options', array());
 
@@ -1336,7 +1338,7 @@ if (($view == 'overall') && sizeof($index))
 			$cat_id = $dl_files[$i]['cat'];
 			$cat_auth = array();
 			$cat_auth = $dl_mod->dl_cat_auth($cat_id);
-			if ($cat_auth['auth_view'] || $index[$cat_id]['auth_view'] || $userdata['user_level'] == ADMIN)
+			if ($cat_auth['auth_view'] || $index[$cat_id]['auth_view'] || $user->data['user_level'] == ADMIN)
 			{
 				$total_files++;
 			}
@@ -1364,7 +1366,7 @@ if (($view == 'overall') && sizeof($index))
 			$cat_id = $dl_files[$i]['cat'];
 			$cat_auth = array();
 			$cat_auth = $dl_mod->dl_cat_auth($cat_id);
-			if ($cat_auth['auth_view'] || $index[$cat_id]['auth_view'] || $userdata['user_level'] == ADMIN)
+			if ($cat_auth['auth_view'] || $index[$cat_id]['auth_view'] || $user->data['user_level'] == ADMIN)
 			{
 				$cat_name = $index[$cat_id]['cat_name'];
 				$cat_name = str_replace('&nbsp;&nbsp;|', '', $cat_name);
@@ -1400,7 +1402,7 @@ if (($view == 'overall') && sizeof($index))
 				$rating_points = $dl_files[$i]['rating'];
 
 				$u_rating_link = '';
-				if (($rating_points == 0 || !@in_array($userdata['user_id'], $ratings[$file_id])) && $userdata['session_logged_in'])
+				if (($rating_points == 0 || !@in_array($user->data['user_id'], $ratings[$file_id])) && $user->data['session_logged_in'])
 				{
 					$u_rating_link = '<a href="' . append_sid('downloads.' . PHP_EXT . '?view=detail&amp;action=rate&amp;df_id=' . $file_id . '&amp;dlo=1') . '">' . $lang['Dl_klick_to_rate'] . '</a>';
 				}
@@ -1455,7 +1457,7 @@ if (empty($view) && !$inc_module)
 		$index_auth = array();
 		$index_auth = $dl_mod->full_index($cat);
 
-		if (!$cat_auth['auth_view'] && !$index_auth[$cat]['auth_view'] && $userdata['user_level'] != ADMIN)
+		if (!$cat_auth['auth_view'] && !$index_auth[$cat]['auth_view'] && $user->data['user_level'] != ADMIN)
 		{
 			redirect(append_sid('downloads.' . PHP_EXT));
 		}
@@ -1482,9 +1484,9 @@ if (empty($view) && !$inc_module)
 	$breadcrumbs_address = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>' . (($dl_nav != '') ? ('<a class="nav-current" href="#">' . $dl_nav . '</a>'): '');
 	$path_dl_array = array();
 
-	$user_id = $userdata['user_id'];
-	$username = $userdata['username'];
-	$user_traffic = $userdata['user_traffic'];
+	$user_id = $user->data['user_id'];
+	$username = $user->data['username'];
+	$user_traffic = $user->data['user_traffic'];
 
 	$sql = "SELECT c.parent, d.cat, d.id, d.change_time, d. description, d.change_user, u.user_id, u.username, u.user_active, u.user_color
 		FROM " . DOWNLOADS_TABLE . " d, " . USERS_TABLE . " u, " . DL_CAT_TABLE . " c
@@ -1526,9 +1528,9 @@ if (empty($view) && !$inc_module)
 
 			if ($cat_desc)
 			{
-				$bbcode->allow_html = ($userdata['user_allowhtml'] && $config['allow_html']) ? true : false;
-				$bbcode->allow_bbcode = ($userdata['user_allowbbcode'] && $config['allow_bbcode']) ? true : false;
-				$bbcode->allow_smilies = ($userdata['user_allowsmile'] && $config['allow_smilies']) ? true : false;
+				$bbcode->allow_html = ($user->data['user_allowhtml'] && $config['allow_html']) ? true : false;
+				$bbcode->allow_bbcode = ($user->data['user_allowbbcode'] && $config['allow_bbcode']) ? true : false;
+				$bbcode->allow_smilies = ($user->data['user_allowsmile'] && $config['allow_smilies']) ? true : false;
 				$cat_desc = $bbcode->parse($cat_desc);
 				$cat_desc = str_replace("\n", "\n<br />", $cat_desc);
 			}
@@ -1693,9 +1695,9 @@ if (empty($view) && !$inc_module)
 		if ($index_cat[$cat]['rules'])
 		{
 			$cat_rule = $index_cat[$cat]['rules'];
-			$bbcode->allow_html = ($userdata['user_allowhtml'] && $config['allow_html']) ? true : false;
-			$bbcode->allow_bbcode = ($userdata['user_allowbbcode'] && $config['allow_bbcode']) ? true : false;
-			$bbcode->allow_smilies = ($userdata['user_allowsmile'] && $config['allow_smilies']) ? true : false;
+			$bbcode->allow_html = ($user->data['user_allowhtml'] && $config['allow_html']) ? true : false;
+			$bbcode->allow_bbcode = ($user->data['user_allowbbcode'] && $config['allow_bbcode']) ? true : false;
+			$bbcode->allow_smilies = ($user->data['user_allowsmile'] && $config['allow_smilies']) ? true : false;
 			$cat_rule = $bbcode->parse($cat_rule);
 			$cat_rule = str_replace("\n", "\n<br />", $cat_rule);
 			$template->assign_block_vars('cat_rule', array(
@@ -1714,7 +1716,7 @@ if (empty($view) && !$inc_module)
 
 		$physical_size = $dl_mod->read_dl_sizes($dl_config['dl_path']);
 
-		if ($physical_size < $dl_config['physical_quota'] && (!$dl_config['stop_uploads']) || ($userdata['user_level'] == ADMIN))
+		if ($physical_size < $dl_config['physical_quota'] && (!$dl_config['stop_uploads']) || ($user->data['user_level'] == ADMIN))
 		{
 			if ($dl_mod->user_auth($cat, 'auth_up'))
 			{
@@ -1779,9 +1781,9 @@ if (empty($view) && !$inc_module)
 				$long_desc = substr($long_desc, 0, intval($dl_config['limit_desc_on_index'])) . ' [...]';
 			}
 
-			$bbcode->allow_html = ($userdata['user_allowhtml'] && $config['allow_html']) ? true : false;
-			$bbcode->allow_bbcode = ($userdata['user_allowbbcode'] && $config['allow_bbcode']) ? true : false;
-			$bbcode->allow_smilies = ($userdata['user_allowsmile'] && $config['allow_smilies']) ? true : false;
+			$bbcode->allow_html = ($user->data['user_allowhtml'] && $config['allow_html']) ? true : false;
+			$bbcode->allow_bbcode = ($user->data['user_allowbbcode'] && $config['allow_bbcode']) ? true : false;
+			$bbcode->allow_smilies = ($user->data['user_allowsmile'] && $config['allow_smilies']) ? true : false;
 			$long_desc = $bbcode->parse($long_desc);
 			$long_desc = str_replace("\n", "\n<br />\n", $long_desc);
 
@@ -1808,7 +1810,7 @@ if (empty($view) && !$inc_module)
 				$rating_points = $dl_files[$i]['rating'];
 
 				$l_rating_text = $u_rating_text = '';
-				if ((!$rating_points || !@in_array($userdata['user_id'], $ratings[$file_id])) && $userdata['session_logged_in'])
+				if ((!$rating_points || !@in_array($user->data['user_id'], $ratings[$file_id])) && $user->data['session_logged_in'])
 				{
 					$l_rating_text = $lang['Dl_klick_to_rate'];
 					$u_rating_text = append_sid('downloads.' . PHP_EXT . '?view=detail&amp;action=rate&amp;df_id=' . $file_id . '&amp;dlo=2&amp;start=' . $start);

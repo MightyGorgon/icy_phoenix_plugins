@@ -22,7 +22,7 @@ if (!defined('IN_ICYPHOENIX'))
 	exit;
 }
 
-if (!$userdata['session_logged_in'])
+if (!$user->data['session_logged_in'])
 {
 	redirect(append_sid('downloads.' . PHP_EXT));
 }
@@ -50,7 +50,7 @@ if ($submit)
 		user_dl_sort_fix = $user_dl_sort_fix,
 		user_dl_sort_opt = $user_dl_sort_opt,
 		user_dl_sort_dir = $user_dl_sort_dir
-		WHERE user_id = " . $userdata['user_id'];
+		WHERE user_id = " . $user->data['user_id'];
 	$db->sql_query($sql);
 
 	if (defined('CASH_TABLE'))
@@ -65,14 +65,14 @@ if ($submit)
 
 			$cash_to_traffic = $row['cash_to_traffic'];
 			$cash_to_traffic_in = request_var('cash_to_traffic_' . $cash_id, 0);
-			$cash_to_traffic_in = ($cash_to_traffic_in > $userdata[$cash_dbfield]) ? $userdata[$cash_dbfield] : $cash_to_traffic_in;
+			$cash_to_traffic_in = ($cash_to_traffic_in > $user->data[$cash_dbfield]) ? $user->data[$cash_dbfield] : $cash_to_traffic_in;
 
 			$add_traffic = $cash_to_traffic * $cash_to_traffic_in;
 
 			$sql_user = "UPDATE " . USERS_TABLE . " SET
 					$cash_dbfield = $cash_dbfield - $cash_to_traffic_in,
 					user_traffic = user_traffic + $add_traffic
-					WHERE user_id = " . $userdata['user_id'];
+					WHERE user_id = " . $user->data['user_id'];
 
 			$db->sql_query($sql_user);
 		}
@@ -84,18 +84,18 @@ if ($submit)
 	message_die(GENERAL_MESSAGE, $message);
 }
 
-$allow_new_popup_yes = ($userdata['user_allow_new_download_popup']) ? 'checked="checked"' : '';
-$allow_new_popup_no = (!$userdata['user_allow_new_download_popup']) ? 'checked="checked"' : '';
-$allow_fav_popup_yes = ($userdata['user_allow_fav_download_popup']) ? 'checked="checked"' : '';
-$allow_fav_popup_no = (!$userdata['user_allow_fav_download_popup']) ? 'checked="checked"' : '';
-$allow_new_email_yes = ($userdata['user_allow_new_download_email']) ? 'checked="checked"' : '';
-$allow_new_email_no = (!$userdata['user_allow_new_download_email']) ? 'checked="checked"' : '';
-$allow_fav_email_yes = ($userdata['user_allow_fav_download_email']) ? 'checked="checked"' : '';
-$allow_fav_email_no = (!$userdata['user_allow_fav_download_email']) ? 'checked="checked"' : '';
+$allow_new_popup_yes = ($user->data['user_allow_new_download_popup']) ? 'checked="checked"' : '';
+$allow_new_popup_no = (!$user->data['user_allow_new_download_popup']) ? 'checked="checked"' : '';
+$allow_fav_popup_yes = ($user->data['user_allow_fav_download_popup']) ? 'checked="checked"' : '';
+$allow_fav_popup_no = (!$user->data['user_allow_fav_download_popup']) ? 'checked="checked"' : '';
+$allow_new_email_yes = ($user->data['user_allow_new_download_email']) ? 'checked="checked"' : '';
+$allow_new_email_no = (!$user->data['user_allow_new_download_email']) ? 'checked="checked"' : '';
+$allow_fav_email_yes = ($user->data['user_allow_fav_download_email']) ? 'checked="checked"' : '';
+$allow_fav_email_no = (!$user->data['user_allow_fav_download_email']) ? 'checked="checked"' : '';
 
-$user_dl_note_type_popup = ($userdata['user_dl_note_type']) ? 'checked="checked"' : '';
-$user_dl_note_type_message = (!$userdata['user_dl_note_type']) ? 'checked="checked"' : '';
-$user_dl_sort_opt = ($userdata['user_dl_sort_opt']) ? 'checked="checked"' : '';
+$user_dl_note_type_popup = ($user->data['user_dl_note_type']) ? 'checked="checked"' : '';
+$user_dl_note_type_message = (!$user->data['user_dl_note_type']) ? 'checked="checked"' : '';
+$user_dl_sort_opt = ($user->data['user_dl_sort_opt']) ? 'checked="checked"' : '';
 
 $s_user_dl_sort_fix = '<select name="user_dl_sort_fix">';
 $s_user_dl_sort_fix .= '<option value="0">' . $lang['Dl_default_sort'] . '</option>';
@@ -108,13 +108,13 @@ $s_user_dl_sort_fix .= '<option value="6">' . $lang['Dl_file_size'] . '</option>
 $s_user_dl_sort_fix .= '<option value="7">' . $lang['Last_updated'] . '</option>';
 $s_user_dl_sort_fix .= '<option value="8">' . $lang['Dl_rating'] . '</option>';
 $s_user_dl_sort_fix .= '</select>';
-$s_user_dl_sort_fix = str_replace('value="'.$userdata['user_dl_sort_fix'] . '">', 'value="'.$userdata['user_dl_sort_fix'] . '" selected="selected">', $s_user_dl_sort_fix);
+$s_user_dl_sort_fix = str_replace('value="'.$user->data['user_dl_sort_fix'] . '">', 'value="'.$user->data['user_dl_sort_fix'] . '" selected="selected">', $s_user_dl_sort_fix);
 
 $s_user_dl_sort_dir = '<select name="user_dl_sort_dir">';
 $s_user_dl_sort_dir .= '<option value="0">' . $lang['Sort_Ascending'] . '</option>';
 $s_user_dl_sort_dir .= '<option value="1">' . $lang['Sort_Descending'] . '</option>';
 $s_user_dl_sort_dir .= '</select>';
-$s_user_dl_sort_dir = str_replace('value="'.$userdata['user_dl_sort_dir'] . '">', 'value="'.$userdata['user_dl_sort_dir'] . '" selected="selected">', $s_user_dl_sort_dir);
+$s_user_dl_sort_dir = str_replace('value="'.$user->data['user_dl_sort_dir'] . '">', 'value="'.$user->data['user_dl_sort_dir'] . '" selected="selected">', $s_user_dl_sort_dir);
 
 /*
 * display exchange settings for cash mod
@@ -136,7 +136,7 @@ if (defined('CASH_TABLE'))
 		$cash_name = $row['cash_name'];
 		$cash_dbfield = $row['cash_dbfield'];
 		$cash_to_traffic = $row['cash_to_traffic'];
-		$cash_amount = sprintf($lang['Dl_cash_current_amount'], $userdata[$cash_dbfield], $cash_name);
+		$cash_amount = sprintf($lang['Dl_cash_current_amount'], $user->data[$cash_dbfield], $cash_name);
 		$cash_to_traffic_out = $dl_mod->dl_size($cash_to_traffic);
 		$cash_exchange = sprintf($lang['Dl_cash_exchange'], $cash_name, $cash_to_traffic_out);
 
@@ -161,7 +161,7 @@ if (sizeof($access_cat))
 
 	$sql = "DELETE FROM " . DL_FAVORITES_TABLE . "
 		WHERE fav_dl_cat NOT IN ($sql_access_cat)
-			AND fav_user_id = " . $userdata['user_id'];
+			AND fav_user_id = " . $user->data['user_id'];
 	$result = $db->sql_query($sql);
 }
 
@@ -170,7 +170,7 @@ if (sizeof($access_cat))
 */
 $sql = "SELECT f.fav_id, d.description, d.cat, d.id FROM " . DL_FAVORITES_TABLE . " f, " . DOWNLOADS_TABLE . " d
 	WHERE f.fav_dl_id = d.id
-		AND f.fav_user_id = " . $userdata['user_id'];
+		AND f.fav_user_id = " . $user->data['user_id'];
 $result = $db->sql_query($sql);
 
 $total_favorites = $db->sql_numrows($result);
@@ -219,7 +219,7 @@ if (!$dl_config['sort_preform'])
 	);
 }
 
-$s_hidden_fields = '<input type="hidden" name="'.POST_USERS_URL.'" value="'.$userdata['user_id'] . '" />';
+$s_hidden_fields = '<input type="hidden" name="'.POST_USERS_URL.'" value="'.$user->data['user_id'] . '" />';
 
 $template->assign_vars(array(
 	'L_CONFIGURATION_TITLE' => $meta_content['page_title'],

@@ -40,7 +40,7 @@ $mode = (isset($_GET['mode']) ? $_GET['mode'] : (isset($_POST['mode']) ? $_POST[
 
 if (!$mode)
 {
-	echo '<form name="save_mass" method="post" action="admin_ina_mass.' . PHP_EXT . '?mode=save&sid='. $userdata['session_id'] .'">';
+	echo '<form name="save_mass" method="post" action="admin_ina_mass.' . PHP_EXT . '?mode=save&sid='. $user->data['session_id'] .'">';
 	echo '<table align="center" width="100%" class="forumline">';
 	echo '	<tr>';
 	echo '		<th width="80%">';
@@ -377,7 +377,7 @@ if ($mode == 'save')
 				WHERE game_id > '0'";
 		$db->sql_query($q);
 
-		message_die(GENERAL_MESSAGE, sprintf($lang['mass_settings_complete'], '<a href="'. $_SERVER['SCRIPT_NAME'] .'?sid='. $userdata['session_id'] .'" class="nav">', '</a>'));
+		message_die(GENERAL_MESSAGE, sprintf($lang['mass_settings_complete'], '<a href="'. $_SERVER['SCRIPT_NAME'] .'?sid='. $user->data['session_id'] .'" class="nav">', '</a>'));
 		}
 
 include(IP_ROOT_PATH . ADM . '/page_footer_admin.' . PHP_EXT);

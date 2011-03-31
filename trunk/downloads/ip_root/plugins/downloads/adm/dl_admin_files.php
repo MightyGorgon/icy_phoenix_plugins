@@ -390,7 +390,7 @@ elseif($action == 'save')
 	}
 
 	$current_time = time();
-	$current_user = $userdata['user_id'];
+	$current_user = $user->data['user_id'];
 
 	if (!$file_extern)
 	{
@@ -609,9 +609,9 @@ elseif($action == 'save')
 			$emailer = new emailer();
 
 			$emailer->headers('X-AntiAbuse: Board servername - ' . trim($config['server_name']));
-			$emailer->headers('X-AntiAbuse: User_id - ' . $userdata['user_id']);
-			$emailer->headers('X-AntiAbuse: Username - ' . $userdata['username']);
-			$emailer->headers('X-AntiAbuse: User IP - ' . decode_ip($user_ip));
+			$emailer->headers('X-AntiAbuse: User_id - ' . $user->data['user_id']);
+			$emailer->headers('X-AntiAbuse: Username - ' . $user->data['username']);
+			$emailer->headers('X-AntiAbuse: User IP - ' . $user_ip);
 
 			$emailer->use_template($email_template, $row['user_lang']);
 			$emailer->to($row['user_email']);
@@ -670,9 +670,9 @@ elseif($action == 'save')
 			$emailer = new emailer();
 
 			$emailer->headers('X-AntiAbuse: Board servername - ' . trim($config['server_name']));
-			$emailer->headers('X-AntiAbuse: User_id - ' . $userdata['user_id']);
-			$emailer->headers('X-AntiAbuse: Username - ' . $userdata['username']);
-			$emailer->headers('X-AntiAbuse: User IP - ' . decode_ip($user_ip));
+			$emailer->headers('X-AntiAbuse: User_id - ' . $user->data['user_id']);
+			$emailer->headers('X-AntiAbuse: Username - ' . $user->data['username']);
+			$emailer->headers('X-AntiAbuse: User IP - ' . $user_ip);
 
 			$emailer->use_template($email_template, $row['user_lang']);
 			$emailer->to($row['user_email']);

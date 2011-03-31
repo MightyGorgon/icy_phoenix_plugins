@@ -58,8 +58,8 @@ if ($mode == 'save')
 
 	// EXTRA ASSIGNMENTS - BEGIN
 	$inputs_array['guestbook_owner'] = empty($inputs_array['guestbook_owner']) ? ANONYMOUS : $class_form->get_user_id($inputs_array['guestbook_owner']);
-	//$inputs_array['guestbook_user_id_update'] = ($admin_allowed) ? $inputs_array['guestbook_user_id_update'] : $userdata['user_id'];
-	$inputs_array['guestbook_user_id_update'] = $userdata['user_id'];
+	//$inputs_array['guestbook_user_id_update'] = ($admin_allowed) ? $inputs_array['guestbook_user_id_update'] : $user->data['user_id'];
+	$inputs_array['guestbook_user_id_update'] = $user->data['user_id'];
 	$inputs_array['guestbook_time_update'] = $current_time;
 	// EXTRA ASSIGNMENTS - END
 
@@ -71,8 +71,8 @@ if ($mode == 'save')
 	else
 	{
 		// EXTRA ASSIGNMENTS - BEGIN
-		$inputs_array['guestbook_owner'] = ($inputs_array['guestbook_owner'] == ANONYMOUS) ? $userdata['user_id'] : $inputs_array['guestbook_owner'];
-		$inputs_array['guestbook_user_id_create'] = $userdata['user_id'];
+		$inputs_array['guestbook_owner'] = ($inputs_array['guestbook_owner'] == ANONYMOUS) ? $user->data['user_id'] : $inputs_array['guestbook_owner'];
+		$inputs_array['guestbook_user_id_create'] = $user->data['user_id'];
 		$inputs_array['guestbook_time_creation'] = $current_time;
 		// EXTRA ASSIGNMENTS - END
 
@@ -133,8 +133,8 @@ elseif ($mode == 'input')
 
 	// EXTRA ASSIGNMENTS - BEGIN
 	$items_row['guestbook_owner'] = $class_form->get_username($items_row['guestbook_owner']);
-	//$table_fields['guestbook_user_id_update']['default'] = ($admin_allowed && ($action == 'edit')) ? $table_fields['guestbook_user_id_update']['default'] : $userdata['user_id'];
-	//$items_row['guestbook_user_id_update'] = ($admin_allowed && ($action == 'edit')) ? $items_row['guestbook_user_id_update'] : $userdata['user_id'];
+	//$table_fields['guestbook_user_id_update']['default'] = ($admin_allowed && ($action == 'edit')) ? $table_fields['guestbook_user_id_update']['default'] : $user->data['user_id'];
+	//$items_row['guestbook_user_id_update'] = ($admin_allowed && ($action == 'edit')) ? $items_row['guestbook_user_id_update'] : $user->data['user_id'];
 	// EXTRA ASSIGNMENTS - END
 
 	$template_to_parse = 'items_add_body.tpl';

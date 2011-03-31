@@ -53,8 +53,8 @@ if ($search_keywords != '' && !$search_author)
 
 	$access_cats = array();
 	$access_cats = $dl_mod->full_index(0, 0, 0, 1);
-	$sql_access_cats = ($userdata['user_level'] == ADMIN) ? '' : ' AND cat IN (' . implode(',', $access_cats) . ') ';
-	$sql_access_dls = ($userdata['user_level'] == ADMIN) ? '' : ' AND d.cat IN (' . implode(',', $access_cats) . ') ';
+	$sql_access_cats = ($user->data['user_level'] == ADMIN) ? '' : ' AND cat IN (' . implode(',', $access_cats) . ') ';
+	$sql_access_dls = ($user->data['user_level'] == ADMIN) ? '' : ' AND d.cat IN (' . implode(',', $access_cats) . ') ';
 
 	$sql_cat = ($search_cat == -1) ? '' : ' AND cat = ' . $search_cat;
 	$sql_cat_count = ($search_cat == -1) ? '' : ' AND cat = ' . $search_cat;
@@ -204,8 +204,8 @@ elseif ($search_author)
 
 	$access_cats = array();
 	$access_cats = $dl_mod->full_index(0, 0, 0, 1);
-	$sql_access_cats = ($userdata['user_level'] == ADMIN) ? '' : ' AND cat IN (' . implode(',', $access_cats) . ') ';
-	$sql_access_dls = ($userdata['user_level'] == ADMIN) ? '' : ' AND d.cat IN (' . implode(',', $access_cats) . ') ';
+	$sql_access_cats = ($user->data['user_level'] == ADMIN) ? '' : ' AND cat IN (' . implode(',', $access_cats) . ') ';
+	$sql_access_dls = ($user->data['user_level'] == ADMIN) ? '' : ' AND d.cat IN (' . implode(',', $access_cats) . ') ';
 
 	$sql = "SELECT id FROM ".DOWNLOADS_TABLE."
 		WHERE approve = " . TRUE . "

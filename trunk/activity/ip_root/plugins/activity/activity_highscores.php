@@ -144,7 +144,7 @@ if (!defined('IN_ICYPHOENIX'))
 					$template->assign_block_vars('scores', array(
 						'ROW_CLASS' => $row_class,
 						'POS' => $i,
-						'NAME' => '<a href="activity.' . PHP_EXT . '?page=high_scores&amp;mode=highscore&amp;player_search=' . urlencode(str_replace("'", "%APOS%", $row['player'])) .'&amp;sid=' . $userdata['session_id'] . '">' . $row['player'] .'</a>',
+						'NAME' => '<a href="activity.' . PHP_EXT . '?page=high_scores&amp;mode=highscore&amp;player_search=' . urlencode(str_replace("'", "%APOS%", $row['player'])) .'&amp;sid=' . $user->data['session_id'] . '">' . $row['player'] .'</a>',
 						'SCORE' => FormatScores($row['hscore']),
 						'ALIGN' => 'left',
 						'DATE' => create_date($config['default_dateformat'], $row['date'], $config['board_timezone'])

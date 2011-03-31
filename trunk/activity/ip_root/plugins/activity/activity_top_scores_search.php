@@ -27,7 +27,7 @@ VersionCheck();
 /* Start Restriction Checks */
 BanCheck();
 /* Start Specific Page Disabled */
-if(($config['ina_disable_trophy_page']) && ($userdata['user_level'] != ADMIN)) message_die(GENERAL_ERROR, $lang['disabled_page_error'], $lang['ban_error']);
+if(($config['ina_disable_trophy_page']) && ($user->data['user_level'] != ADMIN)) message_die(GENERAL_ERROR, $lang['disabled_page_error'], $lang['ban_error']);
 /* End Specific Page Disabled */
 /* End Restriction Checks */
 
@@ -40,7 +40,7 @@ if ($search)
 	$search = str_replace("%APOS%", "\'", $search);
 	$search = addslashes(stripslashes($search));
 
-	if ($userdata['user_gender'] >= '0')
+	if ($user->data['user_gender'] >= '0')
 	{
 		$use_gender_mod = '1';
 	}

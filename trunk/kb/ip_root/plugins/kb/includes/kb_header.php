@@ -87,7 +87,7 @@ if (isset($_GET['cat']))
 	$category_id = intval($_GET['cat']);
 	// Start auth check
 	$kb_is_auth = array();
-	$kb_is_auth = kb_auth(AUTH_ALL, $category_id, $userdata);
+	$kb_is_auth = kb_auth(AUTH_ALL, $category_id, $user->data);
 	// End of auth check
 
 	if (($kb_config['allow_new'] == 1) && ($kb_is_auth['auth_post'] || $kb_is_auth['auth_mod']))

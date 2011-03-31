@@ -330,7 +330,7 @@ if ($mode == 'edit_games')
 			'T_R' => $lang['admin_edit_title_r'],
 			'M_L' => $lang['admin_edit_all_l'],
 			'M_RC' => $games,
-			'M_R' => '<a href="admin_activity.' . PHP_EXT .'?mode=edit_games&amp;action=view&amp;cat=all&amp;sid='. $userdata['session_id'] .'">'. $lang['admin_edit_title_r_exp'] .'</a>'
+			'M_R' => '<a href="admin_activity.' . PHP_EXT .'?mode=edit_games&amp;action=view&amp;cat=all&amp;sid='. $user->data['session_id'] .'">'. $lang['admin_edit_title_r_exp'] .'</a>'
 			)
 		);
 
@@ -361,7 +361,7 @@ if ($mode == 'edit_games')
 				'ONE' => $cat_name,
 				'TWO' => $cat_img,
 				'THREE' => $total_games,
-				'FOUR' => ($total_games > '0') ? '<a href="admin_activity.' . PHP_EXT .'?mode=edit_games&amp;action=view&amp;cat='. $cat_id .'&amp;sid=' . $userdata['session_id'] .'">'. $lang['admin_edit_title_r_exp'] .'</a>' : $lang['admin_edit_title_r_exp']
+				'FOUR' => ($total_games > '0') ? '<a href="admin_activity.' . PHP_EXT .'?mode=edit_games&amp;action=view&amp;cat='. $cat_id .'&amp;sid=' . $user->data['session_id'] .'">'. $lang['admin_edit_title_r_exp'] .'</a>' : $lang['admin_edit_title_r_exp']
 				)
 			);
 		}
@@ -385,7 +385,7 @@ if ($action == 'view')
 			if (!$game_image)
 				$game_image = $lang['admin_edit_title_r'];
 
-			$edit_link = '<a href="admin_activity.' . PHP_EXT .'?mode=edit_games&amp;action=edit&amp;game='. $game_id .'&amp;sid=' . $userdata['session_id'] .'">'. $game_image .'</a>';
+			$edit_link = '<a href="admin_activity.' . PHP_EXT .'?mode=edit_games&amp;action=edit&amp;game='. $game_id .'&amp;sid=' . $user->data['session_id'] .'">'. $game_image .'</a>';
 
 			$template->assign_block_vars('cat_choice.rows', array(
 				'ONE' => $game_name,
@@ -412,7 +412,7 @@ if ($action == 'view')
 					if (!$game_image)
 						$game_image = $lang['admin_edit_title_r'];
 
-				$edit_link = '<a href="admin_activity.' . PHP_EXT .'?mode=edit_games&amp;action=edit&amp;game='. $game_id .'&amp;sid=' . $userdata['session_id'] .'">'. $game_image .'</a>';
+				$edit_link = '<a href="admin_activity.' . PHP_EXT .'?mode=edit_games&amp;action=edit&amp;game='. $game_id .'&amp;sid=' . $user->data['session_id'] .'">'. $game_image .'</a>';
 
 				$template->assign_block_vars('cat_choice.rows', array(
 					'ONE' => $game_name,

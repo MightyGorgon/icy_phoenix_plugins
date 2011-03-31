@@ -22,7 +22,7 @@ if (!defined('IN_ICYPHOENIX'))
 
 function VersionCheck()
 {
-	global $config, $userdata;
+	global $config, $user;
 
 	$version = '1.1.0';
 	$ver_check = $config['ina_version'];
@@ -37,9 +37,9 @@ function VersionCheck()
 	}
 	$error_msg = "Sorry, the games are currently offline until the admin upgrades/installs the current version. The current version is <b>". $version ."</b>. Your version is <b>". $this_version ."</b>.";
 
-	if($userdata['user_level'] == ADMIN)
+	if($user->data['user_level'] == ADMIN)
 	{
-		$msg_switch = 'Since you are an admin, please goto your admin panel, you can get there by clicking <a href="' . ADM . '/index.' . PHP_EXT . '?sid=' . $userdata['session_id'] . '"><i><b>here</b></i></a>. After you do that, please look on the left for <b>Amod+ Admin</b> and under it you will see a link, Db Adjustments. If this is a fresh install for you, please click <b>Install Activity Mod Plus</b>. If you are upgrading from a previous version, please look in the second section, and in the drop down menu and select what you are upgrading from. You are upgrading to <b>' . $version . '</b>. After doing that, this error will go away and you will be allowed to play games.';
+		$msg_switch = 'Since you are an admin, please goto your admin panel, you can get there by clicking <a href="' . ADM . '/index.' . PHP_EXT . '?sid=' . $user->data['session_id'] . '"><i><b>here</b></i></a>. After you do that, please look on the left for <b>Amod+ Admin</b> and under it you will see a link, Db Adjustments. If this is a fresh install for you, please click <b>Install Activity Mod Plus</b>. If you are upgrading from a previous version, please look in the second section, and in the drop down menu and select what you are upgrading from. You are upgrading to <b>' . $version . '</b>. After doing that, this error will go away and you will be allowed to play games.';
 	}
 	else
 	{
@@ -57,24 +57,24 @@ function VersionCheck()
 
 function UpdateSessions()
 {
-	global $db, $userdata;
+	global $db, $user;
 
 	$sql = "SELECT playing_id
 			FROM " . INA_SESSIONS . "
-			WHERE playing_id = '" . $userdata['user_id'] . "'";
+			WHERE playing_id = '" . $user->data['user_id'] . "'";
 	$result = $db->sql_query($sql);
 	$exists = $db->sql_fetchrow($result);
 
-	if (($exists) && ($userdata['user_id'] != ANONYMOUS))
+	if (($exists) && ($user->data['user_id'] != ANONYMOUS))
 	{
 		$sql = "UPDATE " . INA_SESSIONS . "
 				SET playing_time = '" . time() . "'
-				WHERE playing_id = '" . $userdata['user_id'] . "'";
+				WHERE playing_id = '" . $user->data['user_id'] . "'";
 		$db->sql_query($sql);
 	}
 	else
 	{
-		if ($userdata['user_id'] == ANONYMOUS)
+		if ($user->data['user_id'] == ANONYMOUS)
 		{
 			$logged_in = '0';
 		}
@@ -84,7 +84,7 @@ function UpdateSessions()
 		}
 
 		$sql = "INSERT INTO " . INA_SESSIONS . "
-				VALUES ('" . time() . "', '" . $userdata['user_id'] . "', '" . $logged_in . "')";
+				VALUES ('" . time() . "', '" . $user->data['user_id'] . "', '" . $logged_in . "')";
 		$db->sql_query($sql);
 	}
 
@@ -95,11 +95,11 @@ function UpdateSessions()
 
 function BanCheck()
 {
-	global $userdata, $db, $config, $lang;
+	global $user, $db, $config, $lang;
 
 	$sql = "SELECT id
 			FROM ". INA_BAN ."
-			WHERE id = '". $userdata['user_id'] ."'";
+			WHERE id = '". $user->data['user_id'] ."'";
 	$result = $db->sql_query($sql);
 	$row = $db->sql_fetchrow($result);
 	$ban_1 = $row['id'];
@@ -111,7 +111,7 @@ function BanCheck()
 
 	$sql = "SELECT *
 			FROM ". INA_BAN ."
-			WHERE username = '". $userdata['username'] ."'";
+			WHERE username = '". $user->data['username'] ."'";
 	$result = $db->sql_query($sql);
 	$row = $db->sql_fetchrow($result);
 	$ban_2 = $row['username'];
@@ -123,7 +123,7 @@ function BanCheck()
 
 	if ($config['ina_post_block'] == '1')
 	{
-		if($userdata['user_posts'] < $config['ina_post_block_count'])
+		if($user->data['user_posts'] < $config['ina_post_block_count'])
 		{
 			message_die(GENERAL_ERROR, str_replace("%B%", $config['ina_post_block_count'], $lang['restriction_check_1']), $lang['ban_error']);
 		}
@@ -132,7 +132,7 @@ function BanCheck()
 	if ($config['ina_join_block'] == '1')
 	{
 		$days_block = $config['ina_join_block_count'];
-		$length_check = time() - $userdata['user_regdate'];
+		$length_check = time() - $user->data['user_regdate'];
 		$length_block = $length_check / 86400;
 		$rounded = round($length_block);
 
@@ -142,7 +142,7 @@ function BanCheck()
 		}
 	}
 
-	if (($config['ina_disable_everything']) && ($userdata['user_level'] != ADMIN))
+	if (($config['ina_disable_everything']) && ($user->data['user_level'] != ADMIN))
 	{
 		message_die(GENERAL_ERROR, $lang['restriction_check_3'], $lang['ban_error']);
 	}
@@ -152,13 +152,13 @@ function BanCheck()
 /* Borrowed From ADR & Modified So I Wouldn't Have To Write It From Scratch =-) */
 function send_challenge_pm($dest_user, $subject, $message)
 {
-	global $db, $config, $userdata, $lang, $user_ip, $bbcode;
+	global $db, $config, $user, $lang, $bbcode;
 
 	$dest_user = intval($dest_user);
 	$msg_time = time();
-	$from_id = $userdata['user_id'];
+	$from_id = $user->data['user_id'];
 
-	if ((!$dest_user || !$from_id) || ($dest_user == ANONYMOUS || $from_id == ANONYMOUS))
+	if ((!$dest_user || !$from_id) || (($dest_user == ANONYMOUS) || ($from_id == ANONYMOUS)))
 	{
 		return;
 	}
@@ -224,7 +224,7 @@ function send_challenge_pm($dest_user, $subject, $message)
 
 		$sql_info = "INSERT INTO ". PRIVMSGS_TABLE . "
 					(privmsgs_type, privmsgs_subject, privmsgs_text, privmsgs_from_userid, privmsgs_to_userid, privmsgs_date, privmsgs_ip, privmsgs_enable_html, privmsgs_enable_bbcode, privmsgs_enable_smilies)
-					VALUES (1 , '". $db->sql_escape(addslashes($privmsg_subject)) ."', '" . $db->sql_escape(addslashes($privmsg_message)) . "', " . $from_id . ", ". $to_userdata['user_id'] .", $msg_time, '$user_ip' , $html_on, $bbcode_on, $smilies_on)";
+					VALUES (1 , '". $db->sql_escape(addslashes($privmsg_subject)) ."', '" . $db->sql_escape(addslashes($privmsg_message)) . "', " . $from_id . ", ". $to_userdata['user_id'] .", $msg_time, '" . $db->sql_escape($user->ip) . "' , $html_on, $bbcode_on, $smilies_on)";
 		$db->sql_query($sql_info);
 
 		$sql = "UPDATE ". USERS_TABLE ."
@@ -262,7 +262,7 @@ function send_challenge_pm($dest_user, $subject, $message)
 			$email_sig = create_signature($config['board_email_sig']);
 			$emailer->assign_vars(array(
 				// Mighty Gorgon - Begin
-				'FROM' => $userdata['username'],
+				'FROM' => $user->data['username'],
 				'DATE' => create_date($config['default_dateformat'], time(), $config['board_timezone']),
 				'SUBJECT' => $privmsg_subject,
 				'PRIV_MSG_TEXT' => $message,
@@ -433,19 +433,19 @@ function UpdateGamblePoints()
 
 function UpdateActivitySession()
 {
-	global $db, $userdata;
+	global $db, $user;
 
 	$sql = "UPDATE ". SESSIONS_TABLE ." s, ". USERS_TABLE ." u
 			SET s.session_page = '" . CMS_PAGE_ACTIVITY . "', u.user_session_page = '" . CMS_PAGE_ACTIVITY . "'
-			WHERE s.session_user_id = '". $userdata['user_id'] ."'
-			AND u.user_id = '". $userdata['user_id'] ."'";
+			WHERE s.session_user_id = '". $user->data['user_id'] ."'
+			AND u.user_id = '". $user->data['user_id'] ."'";
 	$db->sql_query($sql);
 	return;
 }
 
 function ChallengeSelected($who, $game)
 {
-	global $db, $userdata;
+	global $db, $user;
 
 	$sql = "UPDATE ". CONFIG_TABLE ."
 			SET config_value = config_value + 1
@@ -454,7 +454,7 @@ function ChallengeSelected($who, $game)
 
 	$sql = "SELECT *
 				FROM ". INA_CHALLENGE_USERS ."
-			WHERE user_from = '". $userdata['user_id'] ."'
+			WHERE user_from = '". $user->data['user_id'] ."'
 			AND user_to = '". $who ."'";
 	$result = $db->sql_query($sql);
 	$row = $db->sql_fetchrow($result);
@@ -464,20 +464,20 @@ function ChallengeSelected($who, $game)
 		{
 	$sql = "UPDATE ". INA_CHALLENGE_USERS ."
 			SET count = count + 1
-			WHERE user_from = '". $userdata['user_id'] ."'
+			WHERE user_from = '". $user->data['user_id'] ."'
 			AND user_to = '". $who ."'";
 	$db->sql_query($sql);
 		}
 	else
 		{
 	$sql = "INSERT INTO ". INA_CHALLENGE_USERS ."
-			VALUES ('". $who ."', '". $userdata['user_id'] ."', '1')";
+			VALUES ('". $who ."', '". $user->data['user_id'] ."', '1')";
 	$db->sql_query($sql);
 		}
 
 	$sql = "SELECT user
 				FROM ". INA_CHALLENGE ."
-			WHERE user = '". $userdata['user_id'] ."'";
+			WHERE user = '". $user->data['user_id'] ."'";
 	$result = $db->sql_query($sql);
 	$row = $db->sql_fetchrow($result);
 	$exists = $row['user'];
@@ -486,13 +486,13 @@ function ChallengeSelected($who, $game)
 		{
 	$sql = "UPDATE ". INA_CHALLENGE ."
 			SET count = count + 1
-			WHERE user = '". $userdata['user_id'] ."'";
+			WHERE user = '". $user->data['user_id'] ."'";
 	$db->sql_query($sql);
 		}
 	else
 		{
 	$sql = "INSERT INTO ". INA_CHALLENGE ."
-			VALUES ('". $userdata['user_id'] ."', '1')";
+			VALUES ('". $user->data['user_id'] ."', '1')";
 	$db->sql_query($sql);
 		}
 
@@ -544,7 +544,7 @@ function AdminDefaultOrder()
 
 function SetHeaderLinks()
 {
-	global $config, $userdata, $lang, $images;
+	global $config, $user, $lang, $images;
 	$links = '';
 
 	if (!$config['ina_disable_trophy_page'])
@@ -560,7 +560,7 @@ function SetHeaderLinks()
 	if (!$config['ina_disable_top5_page'])
 		$links .= '<tr><td width="8" align="left" valign="middle"><img src="' . $images['menu_sep'] . '" alt="" /></td>
 					<td class="genmed" align="left"><a href="activity.' . PHP_EXT . '?page=top">' . $lang['top_five_10'] . '</a></td></tr>';
-	if ($userdata['user_level'] == ADMIN)
+	if ($user->data['user_level'] == ADMIN)
 		{
 	$links = '<tr><td width="8" align="left" valign="middle"><img src="' . $images['menu_sep'] . '" alt="" /></td>
 				<td class="genmed" align="left"><a href="activity.' . PHP_EXT . '?page=trophy">' . $lang['trophy_page'] . '</a></td></tr>
@@ -588,7 +588,7 @@ function SetHeaderLinks()
 #============================ Function Altered In .9 Thanks To alphalogic ====
 function CheckGameImages($game_name, $proper_name)
 {
-	global $db, $config, $lang, $userdata;
+	global $db, $config, $lang, $user;
 
 	$sub_link = str_replace('//', '/', ACTIVITY_GAMES_PATH . $config['ina_default_g_path'] . '/' . $game_name . '/' . $game_name . '.gif');
 	$no_sub_link = str_replace('//', '/', ACTIVITY_GAMES_PATH . $config['ina_default_g_path'] . '/' . $game_name . '.gif');
@@ -653,12 +653,12 @@ function TrophyKingRankCheck()
 
 function Gamble($score, $id)
 {
-	global $db, $userdata;
+	global $db, $user;
 
 	$sql = "SELECT *
 			FROM ". INA_GAMBLE_GAMES ."
 			WHERE game_id = '". $id ."' AND
-			sender_id = '". $userdata['user_id'] ."' AND
+			sender_id = '". $user->data['user_id'] ."' AND
 			sender_playing = '1'";
 	$result = $db->sql_query($sql);
 	$row = $db->sql_fetchrow($result);
@@ -669,7 +669,7 @@ function Gamble($score, $id)
 	$sql = "UPDATE ". INA_GAMBLE_GAMES ."
 			SET sender_score = '". $score ."'
 			WHERE game_id = '". $id ."' AND
-			sender_id = '". $userdata['user_id'] ."' AND
+			sender_id = '". $user->data['user_id'] ."' AND
 			sender_playing = '1'";
 	$db->sql_query($sql);
 		}
@@ -677,7 +677,7 @@ function Gamble($score, $id)
 	$sql = "SELECT *
 			FROM ". INA_GAMBLE_GAMES ."
 			WHERE game_id = '$id' AND
-			reciever_id = '". $userdata['user_id'] ."' AND
+			reciever_id = '". $user->data['user_id'] ."' AND
 			reciever_playing = '1'";
 	$result = $db->sql_query($sql);
 	$row = $db->sql_fetchrow($result);
@@ -688,28 +688,28 @@ function Gamble($score, $id)
 	$sql = "UPDATE ". INA_GAMBLE_GAMES ."
 			SET reciever_score = '". $score ."'
 			WHERE game_id = '". $id ."' AND
-			reciever_id = '". $userdata['user_id'] ."' AND
+			reciever_id = '". $user->data['user_id'] ."' AND
 			reciever_playing = '1'";
 	$db->sql_query($sql);
 		}
 	return;
 }
 
-function UpdateUsersPage($user, $page)
+function UpdateUsersPage($target_user, $page)
 {
-	global $db, $userdata;
+	global $db, $user;
 
-	if ($userdata['ina_last_visit_page'] != $page)
+	if ($user->data['ina_last_visit_page'] != $page)
 		{
 	$sql = "UPDATE ". USERS_TABLE ."
 			SET ina_last_visit_page = '". $page ."'
-			WHERE user_id = '". $user ."'";
+			WHERE user_id = '". $target_user ."'";
 	$db->sql_query($sql);
 		}
 	return;
 }
 
-function CheckGamesPerDayMax($user, $username)
+function CheckGamesPerDayMax($target_user, $username)
 {
 	global $db, $config, $lang;
 
@@ -725,7 +725,7 @@ function CheckGamesPerDayMax($user, $username)
 		{
 	$sql = "SELECT ina_games_today
 			FROM ". USERS_TABLE ."
-			WHERE user_id = '". $user ."'";
+			WHERE user_id = '". $target_user ."'";
 	$result = $db->sql_query($sql);
 	$row = $db->sql_fetchrow($result);
 
@@ -736,7 +736,7 @@ function CheckGamesPerDayMax($user, $username)
 			{
 	$sql = "UPDATE ". USERS_TABLE ."
 			SET ina_games_today = ina_games_today + 1
-			WHERE user_id = '". $user ."'";
+			WHERE user_id = '". $target_user ."'";
 	$db->sql_query($sql);
 			}
 		}
@@ -756,25 +756,25 @@ function CheckGamesPerDayMax($user, $username)
 	return;
 }
 
-function InsertPlayingGame($user, $game_id)
+function InsertPlayingGame($target_user, $game_id)
 {
 	global $db;
 
 	$sql = "UPDATE ". USERS_TABLE ."
 			SET ina_game_playing = '". $game_id ."'
-			WHERE user_id = '". $user ."'";
+			WHERE user_id = '". $target_user ."'";
 	$db->sql_query($sql);
 
 	return;
 }
 
-function RemovePlayingGame($user)
+function RemovePlayingGame($target_user)
 {
 	global $db;
 
 	$sql = "UPDATE ". USERS_TABLE ."
 			SET ina_game_playing = '0'
-			WHERE user_id = '". $user ."'";
+			WHERE user_id = '". $target_user ."'";
 	$result = $db->sql_query($sql);
 
 	return;
@@ -806,7 +806,7 @@ function FormatScores($score)
 
 function PopupImages($game_name)
 {
-	global $db, $config, $lang, $userdata;
+	global $db, $config, $lang, $user;
 
 	$sql = "SELECT proper_name
 				FROM ". iNA_GAMES ."
@@ -829,13 +829,13 @@ function PopupImages($game_name)
 	return $game_link;
 }
 
-function UpdateUsersGames($user)
+function UpdateUsersGames($target_user)
 {
-	global $db, $userdata;
+	global $db, $user;
 
 	$sql = "UPDATE ". USERS_TABLE ."
 			SET ina_games_played = ina_games_played + '1'
-			WHERE user_id = '". $user ."'";
+			WHERE user_id = '". $target_user ."'";
 	$result = $db->sql_query($sql);
 
 	return;
@@ -968,7 +968,7 @@ function DeletedAMPUser($user_id, $username)
 	$result = $db->sql_query($sql);
 }
 
-function HallOfFamePass($user, $score, $game, $order)
+function HallOfFamePass($target_user, $score, $game, $order)
 {
 	global $db;
 
@@ -983,7 +983,7 @@ function HallOfFamePass($user, $score, $game, $order)
 	$cur_u = $data['current_user_id'];
 
 	$sql = "UPDATE ". INA_HOF ."
-			SET current_user_id = '". $user ."', current_score = '". $score ."', `current_date` = '". time() ."', old_user_id = '". $cur_u ."', old_score = '". $cur_s ."', `old_date` = '". $cur_d ."'
+			SET current_user_id = '". $target_user ."', current_score = '". $score ."', `current_date` = '". time() ."', old_user_id = '". $cur_u ."', old_score = '". $cur_s ."', `old_date` = '". $cur_d ."'
 			WHERE game_id = '". $game ."'";
 
 	if (($score > $cur_s) && (!$order))
@@ -997,7 +997,7 @@ function HallOfFamePass($user, $score, $game, $order)
 	$sql = "INSERT INTO ". INA_HOF ."
 			(current_user_id, current_score, `current_date`, game_id)
 			VALUES
-			('". $user ."', '". $score ."', '". time() ."', '". $game ."')";
+			('". $target_user ."', '". $score ."', '". time() ."', '". $game ."')";
 		$db->sql_query($sql);
 		}
 }
@@ -1026,7 +1026,7 @@ function ResetJackpot($game_id)
 
 function GameArrayLink($id, $parent, $popup, $win_width, $win_height, $type, $links)
 {
-	global $userdata, $lang;
+	global $user, $lang;
 
 	$link = '';
 	$switch = '';
@@ -1036,17 +1036,17 @@ function GameArrayLink($id, $parent, $popup, $win_width, $win_height, $type, $li
 	if (($parent) && ($switch == '1'))
 		$link .= '&nbsp;<a href="'. append_sid('activity.' . PHP_EXT . '?mode=game&amp;id='. $id .'&amp;parent=true') .'">'. $lang['same_window'] .'</a><br />';
 	if (($popup) && ($switch == '1'))
-		$link .= '&nbsp;<a href="#" onclick="popup_open(\'activity.' . PHP_EXT . '?mode=game&amp;id='. $id .'&amp;sid=' . $userdata['session_id'] .'\', \'New_Window\', \''. $win_width .'\', \''. $win_height .'\', \'no\'); blur(); return false;">' . $lang['new_window'] . '</a>';
+		$link .= '&nbsp;<a href="#" onclick="popup_open(\'activity.' . PHP_EXT . '?mode=game&amp;id='. $id .'&amp;sid=' . $user->data['session_id'] .'\', \'New_Window\', \''. $win_width .'\', \''. $win_height .'\', \'no\'); blur(); return false;">' . $lang['new_window'] . '</a>';
 	if (($parent) && ($switch == '2'))
 		$link = '<a href="'. append_sid('activity.' . PHP_EXT . '?mode=game&amp;id='. $id .'&amp;parent=true') .'">';
 	if (($popup) && ($switch == '2'))
-		$link = '<a href="#" onclick="popup_open(\'activity.' . PHP_EXT . '?mode=game&amp;id='. $id .'&amp;sid=' . $userdata['session_id'] .'\', \'New_Window\', \''. $win_width .'\', \''. $win_height .'\', \'no\'); blur(); return false;">';
+		$link = '<a href="#" onclick="popup_open(\'activity.' . PHP_EXT . '?mode=game&amp;id='. $id .'&amp;sid=' . $user->data['session_id'] .'\', \'New_Window\', \''. $win_width .'\', \''. $win_height .'\', \'no\'); blur(); return false;">';
 	if (($popup) && ($parent) && ($switch == '2'))
 		$link = '<a href="'. append_sid('activity.' . PHP_EXT . '?mode=game&amp;id='. $id .'&amp;parent=true') .'">';
 	if (($parent) && ($switch[0] == 3))
 		$link = '<a href="'. append_sid('activity.' . PHP_EXT . '?mode=game&amp;id='. $id .'&amp;parent=true') .'">' . $switch[1] .'</a>';
 	if (($popup) && ($switch[0] == 3))
-		$link = '<a href="#" onclick="popup_open(\'activity.' . PHP_EXT . '?mode=game&amp;id='. $id .'&amp;sid=' . $userdata['session_id'] .'\', \'New_Window\', \''. $win_width .'\', \''. $win_height .'\', \'no\'); blur(); return false;">'. $switch[1] .'</a>';
+		$link = '<a href="#" onclick="popup_open(\'activity.' . PHP_EXT . '?mode=game&amp;id='. $id .'&amp;sid=' . $user->data['session_id'] .'\', \'New_Window\', \''. $win_width .'\', \''. $win_height .'\', \'no\'); blur(); return false;">'. $switch[1] .'</a>';
 	if (($popup) && ($parent) && ($switch[0] == 3))
 		$link = '<a href="'. append_sid('activity.' . PHP_EXT . '?mode=game&amp;id='. $id .'&amp;parent=true') .'">' . $switch[1] .'</a>';
 
@@ -1064,7 +1064,7 @@ function GameArrayLink($id, $parent, $popup, $win_width, $win_height, $type, $li
 
 function GameSingleLink($id, $parent, $popup, $win_width, $win_height, $page, $one, $two, $three, $links)
 {
-	global $userdata;
+	global $user;
 
 	$link = '';
 	if (($parent) && ($popup))
@@ -1077,7 +1077,7 @@ function GameSingleLink($id, $parent, $popup, $win_width, $win_height, $page, $o
 	}
 	else
 	{
-		$link = str_replace($one, '<a href="javascript:popup_open(\'' . $page . PHP_EXT . '?mode=game&amp;id=' . $id . '&amp;sid=' . $userdata['session_id'] .'\',\'New_Window\',\''. $width .'\',\''. $height .'\',\'no\')">'. $two .'</a>', $three);
+		$link = str_replace($one, '<a href="javascript:popup_open(\'' . $page . PHP_EXT . '?mode=game&amp;id=' . $id . '&amp;sid=' . $user->data['session_id'] .'\',\'New_Window\',\''. $width .'\',\''. $height .'\',\'no\')">'. $two .'</a>', $three);
 	}
 
 	$any_links = explode(';', $links);
@@ -1095,16 +1095,16 @@ function GameSingleLink($id, $parent, $popup, $win_width, $win_height, $page, $o
 
 function GamesPassLength($page)
 {
-	global $userdata, $config, $lang, $db;
+	global $user, $config, $lang, $db;
 
 	#==== Drop the users pass 1 day, every day they play.
 	if (!$page)
 		{
-		if (($userdata['ina_games_pass_day'] != gmdate('Y-m-d')) && ($userdata['ina_games_pass'] > 0))
+		if (($user->data['ina_games_pass_day'] != gmdate('Y-m-d')) && ($user->data['ina_games_pass'] > 0))
 			{
 		$sql = "UPDATE ". USERS_TABLE ."
 				SET ina_games_pass = ina_games_pass - 1, ina_games_pass_day = '". gmdate('Y-m-d') ."'
-				WHERE user_id = '". $userdata['user_id'] ."'";
+				WHERE user_id = '". $user->data['user_id'] ."'";
 		$db->sql_query($sql);
 			}
 		}
@@ -1115,7 +1115,7 @@ function GamesPassLength($page)
 		#==== Is it active? Is points on?
 		if (($config['ina_game_pass_cost']) && ($config['ina_game_pass_length']) && ($config['use_rewards_mod']))
 			{
-		$user_pass = $userdata['ina_game_pass'];
+		$user_pass = $user->data['ina_game_pass'];
 
 		if ($config['use_point_system'])
 			$points_cost = $config['ina_game_pass_cost'] .' '. $config['points_name'];
@@ -1145,7 +1145,7 @@ function GamesPassLength($page)
 
 function UpdateGamePlayTime($time, $info)
 {
-	global $db, $userdata;
+	global $db, $user;
 
 	$info = explode(';;', $info);
 	$time_started = $info[0];
@@ -1156,13 +1156,13 @@ function UpdateGamePlayTime($time, $info)
 
 	$sql = "UPDATE ". USERS_TABLE ."
 			SET ina_time_playing = '". $final_entry ."'
-			WHERE user_id = '". $userdata['user_id'] ."'";
+			WHERE user_id = '". $user->data['user_id'] ."'";
 	$db->sql_query($sql);
 }
 
 function DisplayPlayingTime($page, $time)
 {
-	global $userdata, $lang;
+	global $user, $lang;
 
 	$time_spent = explode(';;', $time);
 	$math_start = $time_spent[1];
@@ -1203,7 +1203,7 @@ function Amod_Grab_Cat($cat_id, $cat_info)
 
 function Amod_Build_Topics($hof_data, $user_id, $user_trophies, $user_name, $user_char)
 {
-	global $config, $lang, $userdata;
+	global $config, $lang, $user;
 
 	unset($hof, $amod_stats, $char, $hof_link, $trophy_count, $trophy_holder, $trophy, $trophies, $show_trophies, $trophy_image);
 
@@ -1222,11 +1222,11 @@ function Amod_Build_Topics($hof_data, $user_id, $user_trophies, $user_name, $use
 
 	#==== Output Trophies
 	if (($config['ina_show_view_topic']) && ($user_trophies > 0) && ($user_id != ANONYMOUS))
-		$trophies = '<a href="#" onclick="popup_open(\'activity_trophy_popup.' . PHP_EXT . '?user=' . $user_id . '&amp;sid=' . $userdata['session_id'] . '\', \'New_Window\', \'400\', \'380\', \'yes\'); blur(); return false;">' . $lang['Trohpy'] . '</a>:&nbsp;&nbsp;' . $user_trophies;
+		$trophies = '<a href="#" onclick="popup_open(\'activity_trophy_popup.' . PHP_EXT . '?user=' . $user_id . '&amp;sid=' . $user->data['session_id'] . '\', \'New_Window\', \'400\', \'380\', \'yes\'); blur(); return false;">' . $lang['Trohpy'] . '</a>:&nbsp;&nbsp;' . $user_trophies;
 
 	#==== Output Character Link
 	if (($config['ina_char_show_viewtopic']) && ($user_char) && ($user_id != ANONYMOUS))
-		$char = '<a href="activity_char.' . PHP_EXT . '?mode=profile_char&amp;char='. $user_id .'&amp;sid=' . $userdata['session_id'] . '">'. $lang['amp_char_topic_link'] .'</a>';
+		$char = '<a href="activity_char.' . PHP_EXT . '?mode=profile_char&amp;char='. $user_id .'&amp;sid=' . $user->data['session_id'] . '">'. $lang['amp_char_topic_link'] .'</a>';
 
 	if ($trophies)
 		$amod_stats .= $trophies .'<br />';

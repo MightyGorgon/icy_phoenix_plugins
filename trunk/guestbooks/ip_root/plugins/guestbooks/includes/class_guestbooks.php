@@ -199,11 +199,11 @@ class class_guestbooks
 	*/
 	function check_user_flood($return = false)
 	{
-		global $db, $cache, $config, $userdata, $lang, $user_ip;
+		global $db, $cache, $config, $user, $lang;
 
-		if (($userdata['user_level'] != ADMIN) && ($userdata['user_level'] != MOD))
+		if (($user->data['user_level'] != ADMIN) && ($user->data['user_level'] != MOD))
 		{
-			$where_sql = ($userdata['user_id'] == ANONYMOUS) ? ("poster_ip = '$user_ip'") : ('poster_id = ' . $userdata['user_id']);
+			$where_sql = ($user->data['user_id'] == ANONYMOUS) ? ("poster_ip = '" . $db->sql_escape($user->ip) . "'") : ('poster_id = ' . $user->data['user_id']);
 			$sql = "SELECT MAX(post_time) AS last_post_time
 				FROM " . $this->guestbooks_posts_table . "
 				WHERE $where_sql";

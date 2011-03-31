@@ -23,8 +23,9 @@ if (!defined('PHP_EXT')) define('PHP_EXT', substr(strrchr(__FILE__, '.'), 1));
 include(IP_ROOT_PATH . 'common.' . PHP_EXT);
 
 // Start session management
-$userdata = session_pagestart($user_ip);
-init_userprefs($userdata);
+$user->session_begin();
+//$auth->acl($user->data);
+$user->setup();
 // End session management
 
 include(IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['activity']['dir'] . 'common.' . PHP_EXT);
@@ -152,7 +153,7 @@ while ($row = $db->sql_fetchrow($r))
 	}
 
 	$q1 =  "INSERT INTO ". iNA_SCORES ."
-					VALUES ('". $game_n ."', '". $userdata['username'] ."', '". $New_score ."', '". time() ."', 1, 0)";
+					VALUES ('". $game_n ."', '". $user->data['username'] ."', '". $New_score ."', '". time() ."', 1, 0)";
 	$db->sql_query($q1);
 
 	$q2 =  "SELECT game_name
@@ -165,7 +166,7 @@ while ($row = $db->sql_fetchrow($r))
 	if (!$exists)
 	{
 		$q3 =  "INSERT INTO ". INA_TROPHY ."
-			VALUES ('". $game_n ."', '". $userdata['user_id'] ."', '". $New_score ."', '". time() ."')";
+			VALUES ('". $game_n ."', '". $user->data['user_id'] ."', '". $New_score ."', '". time() ."')";
 		$db->sql_query($q3);
 	}
 
@@ -177,7 +178,7 @@ while ($row = $db->sql_fetchrow($r))
 /* Finished With Adding New Games Bug. */
 
 #==== Start: Specific User Settings
-$user_amod_settings = $userdata['ina_settings'];
+$user_amod_settings = $user->data['ina_settings'];
 $decifer_settings = explode(';;', $user_amod_settings);
 $decifer_info = explode('-', $decifer_settings[0]);
 $user_use_info = $decifer_info[1];
@@ -196,8 +197,8 @@ $user_use_online = $decifer_online[1];
 #==== End: Specific User Settings
 
 $meta_content['page_title'] = $lang['Activity'];
-$user_id = $userdata['user_id'];
-if (($config['ina_guest_play'] == '2') && !$userdata['session_logged_in'] && !$config['ina_force_registration'])
+$user_id = $user->data['user_id'];
+if (($config['ina_guest_play'] == '2') && !$user->data['session_logged_in'] && !$config['ina_force_registration'])
 {
 	redirect(append_sid(CMS_PAGE_LOGIN . '?redirect=activity.' . PHP_EXT, true));
 	/*
@@ -212,7 +213,7 @@ BanCheck();
 UpdateActivitySession();
 
 $sql = "DELETE FROM " . INA_CHEAT . "
-		WHERE player = '" . $userdata['user_id'] . "'";
+		WHERE player = '" . $user->data['user_id'] . "'";
 $db->sql_query($sql);
 
 $start = (isset($_GET['start'])) ? intval($_GET['start']) : 0;
@@ -262,7 +263,7 @@ else
 
 if ($mode != 'game')
 {
-	UpdateUsersPage($userdata['user_id'], $_SERVER['QUERY_STRING']);
+	UpdateUsersPage($user->data['user_id'], $_SERVER['QUERY_STRING']);
 }
 
 #==== Trophy Data Array ================================= |
@@ -319,7 +320,7 @@ $comment_data = $db->sql_fetchrowset($r);
 #==== Favorites Data Array ============================== |
 $q = "SELECT games
 		FROM " . INA_FAVORITES . "
-		WHERE user = '" . $userdata['user_id'] . "'";
+		WHERE user = '" . $user->data['user_id'] . "'";
 $r = $db->sql_query($q);
 $favorites_data = $db->sql_fetchrowset($r);
 
@@ -391,7 +392,7 @@ if (($mode == 'category_play') && (!$_GET['cat']))
 		'GAMES' => $total_games_here,
 		'GAMES_T' => $config['sitename'] . '\'s ' . $lang['admin_games'],
 		'GAMES_D' => $lang['main_cat_all_desc'],
-		'GAMES_I' => '<a href="activity.' . PHP_EXT . '?sid=' . $userdata['session_id'] . '"><img src="' . $config['ina_use_logo'] . '" alt="" /></a>'
+		'GAMES_I' => '<a href="activity.' . PHP_EXT . '?sid=' . $user->data['session_id'] . '"><img src="' . $config['ina_use_logo'] . '" alt="" /></a>'
 		)
 	);
 
@@ -517,11 +518,11 @@ if (($mode == 'category_play') && (!$_GET['cat']))
 		if (file_exists($cat_img) == 0)
 		{
 			$cat_img = '';
-			$cat_name = '<a href="activity.' . PHP_EXT . '?mode=category_play&amp;cat=' . $cat_id . '&amp;sid=' . $userdata['session_id'] . '">' . $cat_name . '</a>';
+			$cat_name = '<a href="activity.' . PHP_EXT . '?mode=category_play&amp;cat=' . $cat_id . '&amp;sid=' . $user->data['session_id'] . '">' . $cat_name . '</a>';
 		}
 		else
 		{
-			$cat_img = '<a href="activity.' . PHP_EXT . '?mode=category_play&amp;cat=' . $cat_id . '&amp;sid=' . $userdata['session_id'] . '"><img src="./' . $cat_img . '" alt="" /></a>';
+			$cat_img = '<a href="activity.' . PHP_EXT . '?mode=category_play&amp;cat=' . $cat_id . '&amp;sid=' . $user->data['session_id'] . '"><img src="./' . $cat_img . '" alt="" /></a>';
 			$cat_name = $cat_name;
 		}
 
@@ -556,7 +557,7 @@ else
 	}
 	else
 	{
-		$random_game = 'javascript:popup_open(\'activity.' . PHP_EXT . '?mode=game&amp;id=' . $row['game_id'] . '&amp;sid=' . $userdata['session_id'] . '\',\'New_Window\',\'' . $row['win_width'] . '\',\'' . $row['win_height'] . '\',\'no\')';
+		$random_game = 'javascript:popup_open(\'activity.' . PHP_EXT . '?mode=game&amp;id=' . $row['game_id'] . '&amp;sid=' . $user->data['session_id'] . '\',\'New_Window\',\'' . $row['win_width'] . '\',\'' . $row['win_height'] . '\',\'no\')';
 	}
 	$random_image = ACTIVITY_IMAGES_PATH . 'amod_random.gif';
 
@@ -628,11 +629,11 @@ else
 		)
 	);
 
-	$where_disabled = ($userdata['user_level'] == ADMIN) ? '' : "WHERE disabled > '0'" ;
+	$where_disabled = ($user->data['user_level'] == ADMIN) ? '' : "WHERE disabled > '0'" ;
 
 	if ($mode == 'game')
 	{
-		if (($config['ina_force_registration']) && ($userdata['user_id'] == ANONYMOUS))
+		if (($config['ina_force_registration']) && ($user->data['user_id'] == ANONYMOUS))
 		{
 			$gen_simple_header = true;
 			message_die(GENERAL_ERROR, $lang['force_registration']);
@@ -641,12 +642,12 @@ else
 		$game_id = (isset($_GET['id'])) ? intval($_GET['id']) : 0;
 		$cheat_var = time();
 
-		InsertPlayingGame($userdata['user_id'], $game_id);
+		InsertPlayingGame($user->data['user_id'], $game_id);
 
 		/* Start insert starting game */
 		$sql = "SELECT player
 				FROM ". INA_CHEAT ."
-				WHERE player = '". $userdata['user_id'] ."'";
+				WHERE player = '". $user->data['user_id'] ."'";
 		$result = $db->sql_query($sql);
 		$row = $db->sql_fetchrow($result);
 		$there = $row['player'];
@@ -654,21 +655,21 @@ else
 		if (!$there)
 		{
 			$sql = "INSERT INTO ". INA_CHEAT ."
-						VALUES ('". $game_id ."', '". $userdata['user_id'] ."')";
+						VALUES ('". $game_id ."', '". $user->data['user_id'] ."')";
 			$db->sql_query($sql);
 		}
 		else
 		{
 			$sql = "UPDATE ". INA_CHEAT ."
 					SET game_id = '". $game_id ."'
-					WHERE player = '". $userdata['user_id'] ."'";
+					WHERE player = '". $user->data['user_id'] ."'";
 			$db->sql_query($sql);
 		}
 		/* End insert starting game */
 
 		$sql = "SELECT user_id
 				FROM ". INA_LAST_GAME ."
-				WHERE user_id = '". $userdata['user_id'] ."'";
+				WHERE user_id = '". $user->data['user_id'] ."'";
 		$result = $db->sql_query($sql);
 		$row = $db->sql_fetchrow($result);
 		$exists = $row['user_id'];
@@ -676,14 +677,14 @@ else
 		if (!$exists)
 		{
 			$sql = "INSERT INTO ". INA_LAST_GAME ."
-						VALUES ('". $game_id ."', '". $userdata['user_id'] ."', '". time() ."')";
+						VALUES ('". $game_id ."', '". $user->data['user_id'] ."', '". time() ."')";
 			$db->sql_query($sql);
 		}
 		else
 		{
 			$sql = "UPDATE ". INA_LAST_GAME ."
 					SET game_id = '". $game_id ."', date = '". time() ."'
-					WHERE user_id = '". $userdata['user_id'] ."'";
+					WHERE user_id = '". $user->data['user_id'] ."'";
 			$db->sql_query($sql);
 		}
 
@@ -705,7 +706,7 @@ else
 
 		if ($config['use_point_system'] && $config['use_rewards_mod'])
 		{
-			if ($userdata['user_points'] >= $game_charge)
+			if ($user->data['user_points'] >= $game_charge)
 			{
 				subtract_points($user_id, $game_charge);
 			}
@@ -729,13 +730,13 @@ else
 			}
 		}
 
-		if ($userdata['ina_char_ge'] < $game_info['game_ge_cost'])
+		if ($user->data['ina_char_ge'] < $game_info['game_ge_cost'])
 		{
 			message_die(GENERAL_ERROR, $lang['ge_cost_game_error']);
 		}
 		else
 		{
-			AMP_Sub_GE($userdata['user_id'], $game_info['game_ge_cost']);
+			AMP_Sub_GE($user->data['user_id'], $game_info['game_ge_cost']);
 		}
 
 		$sql = "UPDATE ". iNA_GAMES ."
@@ -748,18 +749,18 @@ else
 
 		$q = "UPDATE ". SESSIONS_TABLE ."
 				SET session_page = '". CMS_PAGE_ACTIVITY_GAME ."'
-				WHERE session_user_id = '". $userdata['user_id'] ."'";
+				WHERE session_user_id = '". $user->data['user_id'] ."'";
 		$db->sql_query($q);
 
 		#==== Time spent playing games
-		$time_spent = explode(';;', $userdata['ina_time_playing']);
+		$time_spent = explode(';;', $user->data['ina_time_playing']);
 		$update_time = time();
 		$current_spent = ($time_spent[1] > 0) ? $time_spent[1] : 0;
 		$final = $update_time .';;'. $current_spent;
 
 		$q = "UPDATE ". USERS_TABLE ."
 				SET user_session_page = '". CMS_PAGE_ACTIVITY_GAME ."', ina_time_playing = '". $final ."'
-				WHERE user_id = '". $userdata['user_id'] ."'";
+				WHERE user_id = '". $user->data['user_id'] ."'";
 		$db->sql_query($q);
 
 		header('Location: '. $gamepath);
@@ -794,7 +795,7 @@ else
 
 				if (!$n_h_p)
 				{
-					$n_h_p = $userdata['user_id'];
+					$n_h_p = $user->data['user_id'];
 				}
 
 				$q2 = "INSERT INTO ". INA_TROPHY ."
@@ -826,7 +827,7 @@ else
 			$template->assign_vars(array('L_MONEY' => $lang['game_number']));
 		}
 
-		$where_clause = ($userdata['user_level'] == ADMIN) ? '' : "WHERE disabled = '1'";
+		$where_clause = ($user->data['user_level'] == ADMIN) ? '' : "WHERE disabled = '1'";
 		$drop_block = ($where_clause) ? "AND disabled = '1'" : '';
 
 		$q1 = "SELECT *
@@ -843,7 +844,7 @@ else
 			}
 			else
 			{
-				$game_i2 = 'javascript:popup_open(\'activity.' . PHP_EXT . '?mode=game&amp;id=' . $row['game_id'] . '&amp;sid=' . $userdata['session_id'] . '\',\'New_Window\',\'' . $row['win_width'] . '\',\'' . $row['win_height'] . '\',\'no\')';
+				$game_i2 = 'javascript:popup_open(\'activity.' . PHP_EXT . '?mode=game&amp;id=' . $row['game_id'] . '&amp;sid=' . $user->data['session_id'] . '\',\'New_Window\',\'' . $row['win_width'] . '\',\'' . $row['win_height'] . '\',\'no\')';
 			}
 			$game_n2 = $row['proper_name'];
 			$template->assign_block_vars('drop', array(
@@ -864,7 +865,7 @@ else
 		{
 			$template->assign_block_vars('cat', array(
 				'C_SELECT_1' => '(' . $row['total'] . ') ' . $row['cat_name'],
-				'C_SELECT_2' => 'activity.' . PHP_EXT . '?mode=category_play&amp;cat=' . $row['cat_id'] . '&amp;sid=' . $userdata['session_id']
+				'C_SELECT_2' => 'activity.' . PHP_EXT . '?mode=category_play&amp;cat=' . $row['cat_id'] . '&amp;sid=' . $user->data['session_id']
 				)
 			);
 		}
@@ -930,7 +931,7 @@ else
 			{
 				if (eregi('http://phpbb-amod.com/games/games/' . $game_rows[$i]['game_name'] . '.zip', $download_data[$j]["url"]))
 				{
-					$download_link = '<br /><b>&middot;</b> <a href="downloads.php?mode=download&amp;cid=910&amp;lid=' . $download_data[$j]['lid'] . '&amp;sid=' . $userdata['session_id'] . '" class="nav"><font color="#339933">Download This</font></a><br />';
+					$download_link = '<br /><b>&middot;</b> <a href="downloads.php?mode=download&amp;cid=910&amp;lid=' . $download_data[$j]['lid'] . '&amp;sid=' . $user->data['session_id'] . '" class="nav"><font color="#339933">Download This</font></a><br />';
 					break;
 				}
 			}
@@ -975,12 +976,12 @@ else
 			{
 				if (eregi(quotemeta('S'. $game_rows[$i]['game_id'] .'E'), $favorites_data[$j]['games']))
 				{
-					$favorites_link = '<a href="activity_favs.' . PHP_EXT . '?mode=del_fav&amp;game=' . $game_id . '&amp;sid=' . $userdata['session_id'] . '"><img src="' . ACTIVITY_IMAGES_PATH . 'r_favorite_game.jpg" alt="' . $lang['favorites_r_mouse_over'] . '" /></a>';
+					$favorites_link = '<a href="activity_favs.' . PHP_EXT . '?mode=del_fav&amp;game=' . $game_id . '&amp;sid=' . $user->data['session_id'] . '"><img src="' . ACTIVITY_IMAGES_PATH . 'r_favorite_game.jpg" alt="' . $lang['favorites_r_mouse_over'] . '" /></a>';
 					break;
 				}
 				else
 				{
-					$favorites_link = '<a href="activity_favs.' . PHP_EXT . '?mode=add_fav&amp;game=' . $game_id . '&amp;sid=' . $userdata['session_id'] . '"><img src="' . ACTIVITY_IMAGES_PATH . 'favorite_game.jpg" alt="' . $lang['favorites_mouse_over'] . '" /></a>';
+					$favorites_link = '<a href="activity_favs.' . PHP_EXT . '?mode=add_fav&amp;game=' . $game_id . '&amp;sid=' . $user->data['session_id'] . '"><img src="' . ACTIVITY_IMAGES_PATH . 'favorite_game.jpg" alt="' . $lang['favorites_mouse_over'] . '" /></a>';
 					break;
 				}
 			}
@@ -991,7 +992,7 @@ else
 			{
 				if ($game_rows[$i]['game_id'] == $rating_info[$j]['game_id'])
 				{
-					if ($rating_info[$j]['player'] == $userdata['user_id'])
+					if ($rating_info[$j]['player'] == $user->data['user_id'])
 					{
 						$rating_submit = str_replace('%R%', $rating_info[$j]['rating'], $lang['rating_text_line']);
 						break;
@@ -1028,9 +1029,9 @@ else
 
 			//if ($config['allow_smilies']) $game_desc = smilies_pass($game_desc);
 			global $bbcode;
-			$html_on = ($userdata['user_allowhtml'] && $config['allow_html']) ? 1 : 0 ;
-			$bbcode_on = ($userdata['user_allowbbcode'] && $config['allow_bbcode']) ? 1 : 0 ;
-			$smilies_on = ($userdata['user_allowsmile'] && $config['allow_smilies']) ? 1 : 0 ;
+			$html_on = ($user->data['user_allowhtml'] && $config['allow_html']) ? 1 : 0 ;
+			$bbcode_on = ($user->data['user_allowbbcode'] && $config['allow_bbcode']) ? 1 : 0 ;
+			$smilies_on = ($user->data['user_allowsmile'] && $config['allow_smilies']) ? 1 : 0 ;
 
 			$bbcode->allow_html = $html_on;
 			$bbcode->allow_bbcode = $bbcode_on;
@@ -1194,22 +1195,22 @@ else
 			}
 
 			$challenge = $config['ina_challenge'];
-			if (($challenge == '1') && ($t_player_id != ANONYMOUS) && ($userdata['user_id'] != ANONYMOUS))
+			if (($challenge == '1') && ($t_player_id != ANONYMOUS) && ($user->data['user_id'] != ANONYMOUS))
 			{
 				$challenge_link = '<br />' . $lang['separator'] . '&nbsp;<a href="#" onclick="popup_open(\'' . append_sid('activity_popup.' . PHP_EXT . '?mode=challenge&amp;g=' . $game_id . '&amp;' . POST_USERS_URL . '=' . $t_player_id) . '\', \'New_Window\', \'400\', \'200\', \'yes\')' . '; return false;">' . $lang['challenge_link_key'] . '</a>';
 			}
 
-			if ($challenge != '1' || $t_player_id == ANONYMOUS || $userdata['user_id'] == ANONYMOUS)
+			if ($challenge != '1' || $t_player_id == ANONYMOUS || $user->data['user_id'] == ANONYMOUS)
 			{
 				$challenge_link = '<br />'. $lang['separator'] .'&nbsp;'. $lang['challenge_link_key'];
 			}
 
-			if ($userdata['user_level'] == ADMIN)
+			if ($user->data['user_level'] == ADMIN)
 			{
-				$admin_edit = '<br />' . $lang['separator'] . '&nbsp;<a href="#" onclick="popup_open(\'' . ADM . '/admin_activity.' . PHP_EXT . '?mode=edit_games&amp;action=edit&amp;game=' . $game_id . '&amp;sid=' . $userdata['session_id'] . '\', \'New_Window\', \'550\', \'300\', \'yes\'); return false;">'. $lang['admin_edit_link'] .'</a>';
+				$admin_edit = '<br />' . $lang['separator'] . '&nbsp;<a href="#" onclick="popup_open(\'' . ADM . '/admin_activity.' . PHP_EXT . '?mode=edit_games&amp;action=edit&amp;game=' . $game_id . '&amp;sid=' . $user->data['session_id'] . '\', \'New_Window\', \'550\', \'300\', \'yes\'); return false;">'. $lang['admin_edit_link'] .'</a>';
 			}
 
-			if ($userdata['user_level'] != ADMIN)
+			if ($user->data['user_level'] != ADMIN)
 			{
 				$admin_edit = '';
 			}
@@ -1229,7 +1230,7 @@ else
 			}
 			$games_cost_line = $show_fees . $show_ge . $show_jack;
 
-			if (($config['ina_disable_comments_page']) && ($userdata['user_level'] != ADMIN))
+			if (($config['ina_disable_comments_page']) && ($user->data['user_level'] != ADMIN))
 			{
 				$comments_link = '';
 			}
@@ -1391,7 +1392,7 @@ else
 			'S_ORDER_SELECT' => $select_sort_order,
 			'S_MODE_ACTION' => $mode_action,
 			'U_TROPHY'		 => append_sid('activity_top_scores.' . PHP_EXT),
-			'U_GAMBLING' => '<a href="activity_gambling.' . PHP_EXT . '?sid=' . $userdata['session_id'] . '" class="nav">' . $lang['gambling_link_2'] . '</a>',
+			'U_GAMBLING' => '<a href="activity_gambling.' . PHP_EXT . '?sid=' . $user->data['session_id'] . '" class="nav">' . $lang['gambling_link_2'] . '</a>',
 
 			'L_CAT_PAGE' => $lang['category_listing_txt'],
 			'L_TROPHY' => $lang['trophy_page'],

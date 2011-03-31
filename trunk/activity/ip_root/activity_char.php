@@ -22,8 +22,9 @@ if (!defined('PHP_EXT')) define('PHP_EXT', substr(strrchr(__FILE__, '.'), 1));
 include(IP_ROOT_PATH . 'common.' . PHP_EXT);
 
 // Start session management
-$userdata = session_pagestart($user_ip);
-init_userprefs($userdata);
+$user->session_begin();
+//$auth->acl($user->data);
+$user->setup();
 // End session management
 
 include(IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['activity']['dir'] . 'common.' . PHP_EXT);
@@ -39,12 +40,12 @@ BanCheck();
 $mode = (isset($_GET['mode'])) ? $_GET['mode'] : $_POST['mode'];
 $action = (isset($_GET['action'])) ? $_GET['action'] : $_POST['action'];
 
-if ((!$mode) && ($userdata['ina_char_name']))
+if ((!$mode) && ($user->data['ina_char_name']))
 {
 	$mode = 'edit_char';
 }
 
-if ((!$mode) && (!$userdata['ina_char_name']))
+if ((!$mode) && (!$user->data['ina_char_name']))
 {
 	$mode = 'create_char';
 }
@@ -53,7 +54,7 @@ if ((!$mode) && (!$userdata['ina_char_name']))
 $meta_content['page_title'] = $lang['amp_char_' . $mode . '_page_title'];
 $link_name = !empty($meta_content['page_title']) ? $meta_content['page_title'] : '';
 $link_url = !empty($page_link) ? $page_link : '#';
-$char_shop_link = (($userdata['ina_char_name']) && ($userdata['user_id'] != ANONYMOUS)) ? '<a href="activity_char.' . PHP_EXT . '?mode=char_shop&amp;sid=' . $userdata['session_id'] . '">' . $lang['amp_char_goto_shop_link'] .'</a>' : '';
+$char_shop_link = (($user->data['ina_char_name']) && ($user->data['user_id'] != ANONYMOUS)) ? '<a href="activity_char.' . PHP_EXT . '?mode=char_shop&amp;sid=' . $user->data['session_id'] . '">' . $lang['amp_char_goto_shop_link'] .'</a>' : '';
 $nav_server_url = create_server_url();
 $breadcrumbs_address = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('activity.' . PHP_EXT) . '"' . (!empty($link_name) ? '' : ' class="nav-current"') . '>' . $lang['Activity'] . '</a>' . (!empty($link_name) ? ($lang['Nav_Separator'] . '<a class="nav-current" href="' . $link_url . '">' . $link_name . '</a>') : '');
 $breadcrumbs_links_right = $char_shop_link;
@@ -70,12 +71,12 @@ if ($mode == 'char_shop')
 }
 
 #==== Template Switches
-if (($mode == 'create_char' || !$mode) && (!$userdata['ina_char_name']))
+if (($mode == 'create_char' || !$mode) && (!$user->data['ina_char_name']))
 {
 	$template->assign_block_vars('create_char', array());
 }
 
-if (($mode == 'edit_char' || !$mode) && ($userdata['ina_char_name']))
+if (($mode == 'edit_char' || !$mode) && ($user->data['ina_char_name']))
 {
 	$template->assign_block_vars('edit_char', array());
 }
@@ -108,8 +109,8 @@ $template->assign_vars(array(
 
 if ($mode == 'char_shop')
 {
-	if (!$userdata['ina_char_name'])
-		redirect('activity_char.' . PHP_EXT .'?sid='. $userdata['session_id'], true);
+	if (!$user->data['ina_char_name'])
+		redirect('activity_char.' . PHP_EXT .'?sid='. $user->data['session_id'], true);
 
 	if ($action == 'save_settings')
 	{
@@ -153,48 +154,48 @@ if ($mode == 'char_shop')
 
 		#==== Total Up GE Spent
 		$total_spent = 0;
-		if (($name_bought_color) && (!eregi('c-', $userdata['ina_char_name_effects'])))
+		if (($name_bought_color) && (!eregi('c-', $user->data['ina_char_name_effects'])))
 			$total_spent += $name_change_costs[0];
-		if (($name_bought_shadow) && (!eregi('s-', $userdata['ina_char_name_effects'])))
+		if (($name_bought_shadow) && (!eregi('s-', $user->data['ina_char_name_effects'])))
 			$total_spent += $name_change_costs[1];
-		if (($name_bought_glow) && (!eregi('g-', $userdata['ina_char_name_effects'])))
+		if (($name_bought_glow) && (!eregi('g-', $user->data['ina_char_name_effects'])))
 			$total_spent += $name_change_costs[2];
-		if (($name_bold) && (!eregi('b-', $userdata['ina_char_name_effects'])))
+		if (($name_bold) && (!eregi('b-', $user->data['ina_char_name_effects'])))
 			$total_spent += $name_change_costs[3];
-		if (($name_italic) && (!eregi('i-', $userdata['ina_char_name_effects'])))
+		if (($name_italic) && (!eregi('i-', $user->data['ina_char_name_effects'])))
 			$total_spent += $name_change_costs[4];
-		if (($name_underline) && (!eregi('u-', $userdata['ina_char_name_effects'])))
+		if (($name_underline) && (!eregi('u-', $user->data['ina_char_name_effects'])))
 			$total_spent += $name_change_costs[5];
 
-		if (($saying_bought_color) && (!eregi('c-', $userdata['ina_char_saying_effects'])))
+		if (($saying_bought_color) && (!eregi('c-', $user->data['ina_char_saying_effects'])))
 			$total_spent += $saying_change_costs[0];
-		if (($saying_bought_shadow) && (!eregi('s-', $userdata['ina_char_saying_effects'])))
+		if (($saying_bought_shadow) && (!eregi('s-', $user->data['ina_char_saying_effects'])))
 			$total_spent += $saying_change_costs[1];
-		if (($saying_bought_glow) && (!eregi('g-', $userdata['ina_char_saying_effects'])))
+		if (($saying_bought_glow) && (!eregi('g-', $user->data['ina_char_saying_effects'])))
 			$total_spent += $saying_change_costs[2];
-		if (($saying_bold) && (!eregi('b-', $userdata['ina_char_saying_effects'])))
+		if (($saying_bold) && (!eregi('b-', $user->data['ina_char_saying_effects'])))
 			$total_spent += $saying_change_costs[3];
-		if (($saying_italic) && (!eregi('i-', $userdata['ina_char_saying_effects'])))
+		if (($saying_italic) && (!eregi('i-', $user->data['ina_char_saying_effects'])))
 			$total_spent += $saying_change_costs[4];
-		if (($saying_underline) && (!eregi('u-', $userdata['ina_char_saying_effects'])))
+		if (($saying_underline) && (!eregi('u-', $user->data['ina_char_saying_effects'])))
 			$total_spent += $saying_change_costs[5];
 
-		if (($title_bought_color) && (!eregi('c-', $userdata['ina_char_title_effects'])))
+		if (($title_bought_color) && (!eregi('c-', $user->data['ina_char_title_effects'])))
 			$total_spent += $title_change_costs[0];
-		if (($title_bought_shadow) && (!eregi('s-', $userdata['ina_char_title_effects'])))
+		if (($title_bought_shadow) && (!eregi('s-', $user->data['ina_char_title_effects'])))
 			$total_spent += $title_change_costs[1];
-		if (($title_bought_glow) && (!eregi('g-', $userdata['ina_char_title_effects'])))
+		if (($title_bought_glow) && (!eregi('g-', $user->data['ina_char_title_effects'])))
 			$total_spent += $title_change_costs[2];
-		if (($title_bold) && (!eregi('b-', $userdata['ina_char_title_effects'])))
+		if (($title_bold) && (!eregi('b-', $user->data['ina_char_title_effects'])))
 			$total_spent += $title_change_costs[3];
-		if (($title_italic) && (!eregi('i-', $userdata['ina_char_title_effects'])))
+		if (($title_italic) && (!eregi('i-', $user->data['ina_char_title_effects'])))
 			$total_spent += $title_change_costs[4];
-		if (($title_underline) && (!eregi('u-', $userdata['ina_char_title_effects'])))
+		if (($title_underline) && (!eregi('u-', $user->data['ina_char_title_effects'])))
 			$total_spent += $title_change_costs[5];
 
 		#==== Not enough GE?
-		if ($total_spent > $userdata['ina_char_ge'])
-			AMP_Error_Handler(2, $lang['amp_char_shop_not_enough_ge'], 'activity_char', '?mode=char_shop&amp;sid=' . $userdata['session_id']);
+		if ($total_spent > $user->data['ina_char_ge'])
+			AMP_Error_Handler(2, $lang['amp_char_shop_not_enough_ge'], 'activity_char', '?mode=char_shop&amp;sid=' . $user->data['session_id']);
 
 		$name_update = $title_update = $saying_update = '';
 		if (($name_bought_color) && ($name_what_color_c))
@@ -237,24 +238,24 @@ if ($mode == 'char_shop')
 			$saying_update .= 'u-,';
 
 		#==== Take some GE for this transaction!
-		AMP_Sub_GE($userdata['user_id'], $total_spent);
+		AMP_Sub_GE($user->data['user_id'], $total_spent);
 
 		$q = "UPDATE ". USERS_TABLE ."
 				SET ina_char_saying_effects = '". $saying_update ."', ina_char_title_effects = '". $title_update ."', ina_char_name_effects = '". $name_update ."'
-				WHERE user_id = '". $userdata['user_id'] ."'";
+				WHERE user_id = '". $user->data['user_id'] ."'";
 		$db->sql_query($q);
 
-		AMP_Error_Handler(1, $lang['amp_char_cp_success'], 'activity_char', '?mode=char_shop&amp;sid='. $userdata['session_id']);
+		AMP_Error_Handler(1, $lang['amp_char_cp_success'], 'activity_char', '?mode=char_shop&amp;sid='. $user->data['session_id']);
 	}
 
 	#==== Setup checkboxes for what user already has
-	$saying_bold_val = (eregi('b-', $userdata['ina_char_saying_effects'])) ? 'checked="checked"' : '';
-	$saying_italic_val = (eregi('i-', $userdata['ina_char_saying_effects'])) ? 'checked="checked"' : '';
-	$saying_under_val = (eregi('u-', $userdata['ina_char_saying_effects'])) ? 'checked="checked"' : '';
-	$saying_color_val = (eregi('c-', $userdata['ina_char_saying_effects'])) ? 'checked="checked"' : '';
-	$saying_glow_val = (eregi('g-', $userdata['ina_char_saying_effects'])) ? 'checked="checked"' : '';
-	$saying_shadow_val = (eregi('s-', $userdata['ina_char_saying_effects'])) ? 'checked="checked"' : '';
-	$saying_color_split = explode(',', $userdata['ina_char_saying_effects']);
+	$saying_bold_val = (eregi('b-', $user->data['ina_char_saying_effects'])) ? 'checked="checked"' : '';
+	$saying_italic_val = (eregi('i-', $user->data['ina_char_saying_effects'])) ? 'checked="checked"' : '';
+	$saying_under_val = (eregi('u-', $user->data['ina_char_saying_effects'])) ? 'checked="checked"' : '';
+	$saying_color_val = (eregi('c-', $user->data['ina_char_saying_effects'])) ? 'checked="checked"' : '';
+	$saying_glow_val = (eregi('g-', $user->data['ina_char_saying_effects'])) ? 'checked="checked"' : '';
+	$saying_shadow_val = (eregi('s-', $user->data['ina_char_saying_effects'])) ? 'checked="checked"' : '';
+	$saying_color_split = explode(',', $user->data['ina_char_saying_effects']);
 	for ($x = 0; $x < sizeof($saying_color_split); $x++)
 	{
 		if (eregi('c-', $saying_color_split[$x]))
@@ -276,13 +277,13 @@ if ($mode == 'char_shop')
 			break;
 	}
 
-	$title_bold_val = (eregi('b-', $userdata['ina_char_title_effects'])) ? 'checked="checked"' : '';
-	$title_italic_val = (eregi('i-', $userdata['ina_char_title_effects'])) ? 'checked="checked"' : '';
-	$title_under_val = (eregi('u-', $userdata['ina_char_title_effects'])) ? 'checked="checked"' : '';
-	$title_color_val = (eregi('c-', $userdata['ina_char_title_effects'])) ? 'checked="checked"' : '';
-	$title_glow_val = (eregi('g-', $userdata['ina_char_title_effects'])) ? 'checked="checked"' : '';
-	$title_shadow_val = (eregi('s-', $userdata['ina_char_title_effects'])) ? 'checked="checked"' : '';
-	$title_color_split = explode(',', $userdata['ina_char_title_effects']);
+	$title_bold_val = (eregi('b-', $user->data['ina_char_title_effects'])) ? 'checked="checked"' : '';
+	$title_italic_val = (eregi('i-', $user->data['ina_char_title_effects'])) ? 'checked="checked"' : '';
+	$title_under_val = (eregi('u-', $user->data['ina_char_title_effects'])) ? 'checked="checked"' : '';
+	$title_color_val = (eregi('c-', $user->data['ina_char_title_effects'])) ? 'checked="checked"' : '';
+	$title_glow_val = (eregi('g-', $user->data['ina_char_title_effects'])) ? 'checked="checked"' : '';
+	$title_shadow_val = (eregi('s-', $user->data['ina_char_title_effects'])) ? 'checked="checked"' : '';
+	$title_color_split = explode(',', $user->data['ina_char_title_effects']);
 	for ($x = 0; $x < sizeof($title_color_split); $x++)
 	{
 		if (eregi('c-', $title_color_split[$x]))
@@ -304,13 +305,13 @@ if ($mode == 'char_shop')
 			break;
 		}
 
-	$name_bold_val = (eregi('b-', $userdata['ina_char_name_effects'])) ? 'checked="checked"' : '';
-	$name_italic_val = (eregi('i-', $userdata['ina_char_name_effects'])) ? 'checked="checked"' : '';
-	$name_under_val = (eregi('u-', $userdata['ina_char_name_effects'])) ? 'checked="checked"' : '';
-	$name_color_val = (eregi('c-', $userdata['ina_char_name_effects'])) ? 'checked="checked"' : '';
-	$name_glow_val = (eregi('g-', $userdata['ina_char_name_effects'])) ? 'checked="checked"' : '';
-	$name_shadow_val = (eregi('s-', $userdata['ina_char_name_effects'])) ? 'checked="checked"' : '';
-	$name_color_split = explode(',', $userdata['ina_char_name_effects']);
+	$name_bold_val = (eregi('b-', $user->data['ina_char_name_effects'])) ? 'checked="checked"' : '';
+	$name_italic_val = (eregi('i-', $user->data['ina_char_name_effects'])) ? 'checked="checked"' : '';
+	$name_under_val = (eregi('u-', $user->data['ina_char_name_effects'])) ? 'checked="checked"' : '';
+	$name_color_val = (eregi('c-', $user->data['ina_char_name_effects'])) ? 'checked="checked"' : '';
+	$name_glow_val = (eregi('g-', $user->data['ina_char_name_effects'])) ? 'checked="checked"' : '';
+	$name_shadow_val = (eregi('s-', $user->data['ina_char_name_effects'])) ? 'checked="checked"' : '';
+	$name_color_split = explode(',', $user->data['ina_char_name_effects']);
 	for ($x = 0; $x < sizeof($name_color_split); $x++)
 	{
 		if (eregi('c-', $name_color_split[$x]))
@@ -424,13 +425,13 @@ if ($mode == 'char_shop')
 
 if ($mode == 'del_char')
 {
-	if (!$userdata['ina_char_name'])
-		AMP_Error_Handler(2, $lang['amp_char_cp_delete_error'], 'activity_char', '?sid='. $userdata['session_id']);
+	if (!$user->data['ina_char_name'])
+		AMP_Error_Handler(2, $lang['amp_char_cp_delete_error'], 'activity_char', '?sid='. $user->data['session_id']);
 
-	if ((isset($_GET['confirm'])) && ($userdata['ina_char_name']))
-		AMP_Delete_Char($userdata['user_id']);
+	if ((isset($_GET['confirm'])) && ($user->data['ina_char_name']))
+		AMP_Delete_Char($user->data['user_id']);
 
-	$extra = '<br /><br /><a href="activity_char.' . PHP_EXT . '?mode=del_char&amp;confirm=true&amp;sid=' . $userdata['session_id'] . '">'. $lang['amp_char_hof_member_y'] .'</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="activity_char.' . PHP_EXT . '?sid='. $userdata['session_id'] . '">'. $lang['amp_char_hof_member_n'] .'</a>';
+	$extra = '<br /><br /><a href="activity_char.' . PHP_EXT . '?mode=del_char&amp;confirm=true&amp;sid=' . $user->data['session_id'] . '">'. $lang['amp_char_hof_member_y'] .'</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="activity_char.' . PHP_EXT . '?sid='. $user->data['session_id'] . '">'. $lang['amp_char_hof_member_n'] .'</a>';
 	message_die(GENERAL_MESSAGE, $lang['amp_char_cp_delete_confirm'] . $extra);
 }
 
@@ -450,7 +451,7 @@ if ($mode == 'profile_char')
 
 if ($mode == 'create_char' || !$mode)
 {
-	if (!$userdata['ina_char_name'])
+	if (!$user->data['ina_char_name'])
 	{
 		#==== Gather Male Character Options
 		$m_dir = ACTIVITY_ROOT_PATH . 'amp_characters/male/';
@@ -546,36 +547,36 @@ if ((($mode == 'create_char') || ($mode == 'edit_char')) && ($action == 'save_ch
 		$error .= '<br />'. $lang['amp_char_cp_error_change'];
 
 	if ($error)
-		AMP_Error_Handler(2, $error, 'activity_char', '?sid='. $userdata['session_id']);
+		AMP_Error_Handler(2, $error, 'activity_char', '?sid='. $user->data['session_id']);
 
 	$male = ACTIVITY_ROOT_PATH . 'amp_characters/male/' . $char_img_m;
 	$female = ACTIVITY_ROOT_PATH . 'amp_characters/female/' . $char_img_f;
 
 	$char = ($char_gender == 1) ? $male : $female;
 	if ($mode == 'edit_char')
-		$char = ($char_change == 1) ? $char : $userdata['ina_char_img'];
+		$char = ($char_change == 1) ? $char : $user->data['ina_char_img'];
 
-		AMP_Update_Char($userdata['user_id'], $char_name, $char_age, $char_gender, $char, $char_from, $char_intrests, $char_title, $char_saying);
+		AMP_Update_Char($user->data['user_id'], $char_name, $char_age, $char_gender, $char, $char_from, $char_intrests, $char_title, $char_saying);
 }
 
-if ((!$mode) && ($userdata['ina_char_name']) || $mode == 'edit_char')
+if ((!$mode) && ($user->data['ina_char_name']) || $mode == 'edit_char')
 {
 
 	$template->assign_block_vars('edit_char.view', array(
-		'CHAR_PROFILE' => AMP_Profile_Char($userdata['user_id'], ''),
+		'CHAR_PROFILE' => AMP_Profile_Char($user->data['user_id'], ''),
 		'EDIT_EXP' => $lang['amp_char_edit_exp']
 		)
 	);
 
 	#==== Change character
 	$template->assign_block_vars('edit_char.edit', array(
-		'CHR_EDIT_EXP' => $lang['amp_char_cp_your_edits'] .' :: <a href="activity_char.' . PHP_EXT . '?mode=char_shop&amp;sid=' . $userdata['session_id'] . '">' . $lang['amp_char_goto_shop_link'] . '</a>'
+		'CHR_EDIT_EXP' => $lang['amp_char_cp_your_edits'] .' :: <a href="activity_char.' . PHP_EXT . '?mode=char_shop&amp;sid=' . $user->data['session_id'] . '">' . $lang['amp_char_goto_shop_link'] . '</a>'
 		)
 	);
 
 	if ($config['ina_char_change_char_cost'])
 	{
-		if ($config['ina_char_change_char_cost'] > $userdata['ina_char_ge'])
+		if ($config['ina_char_change_char_cost'] > $user->data['ina_char_ge'])
 		{
 			$template->assign_block_vars('edit_char.edit.off', array(
 				'ERROR' => $lang['amp_char_cp_not_enough_ge']
@@ -712,12 +713,12 @@ if ((!$mode) && ($userdata['ina_char_name']) || $mode == 'edit_char')
 	}
 
 	#==== Change gender
-	$male = ($userdata['ina_char_gender'] == 1) ? 'checked = "checked"' : '';
-	$female = ($userdata['ina_char_gender'] == 2) ? 'checked = "checked"' : '';
+	$male = ($user->data['ina_char_gender'] == 1) ? 'checked = "checked"' : '';
+	$female = ($user->data['ina_char_gender'] == 2) ? 'checked = "checked"' : '';
 
 	if ($config['ina_char_change_gender_cost'])
 	{
-		if ($config['ina_char_change_gender_cost'] > $userdata['ina_char_ge'])
+		if ($config['ina_char_change_gender_cost'] > $user->data['ina_char_ge'])
 			$change_gender_return = $lang['amp_char_cp_not_enough_ge'];
 		else
 			$change_gender_return = '<input type="radio" name="gender" value="1" '. $male .'> '. $lang['amp_char_cp_gender_m'] .'  <input type="radio" name="gender" value="2" '. $female .'> '. $lang['amp_char_cp_gender_f'];
@@ -729,74 +730,74 @@ if ((!$mode) && ($userdata['ina_char_name']) || $mode == 'edit_char')
 	#==== Change age
 	if ($config['ina_char_change_age_cost'])
 	{
-		if ($config['ina_char_change_age_cost'] > $userdata['ina_char_ge'])
+		if ($config['ina_char_change_age_cost'] > $user->data['ina_char_ge'])
 			$change_age_return = $lang['amp_char_cp_not_enough_ge'];
 		else
-			$change_age_return = '<input type="text" name="age" value="'. $userdata['ina_char_age'] .'" class="post" size="30">';
+			$change_age_return = '<input type="text" name="age" value="'. $user->data['ina_char_age'] .'" class="post" size="30">';
 	}
 	else
 	{
-		$change_age_return = '<input type="text" name="age" value="'. $userdata['ina_char_age'] .'" class="post" size="30">';
+		$change_age_return = '<input type="text" name="age" value="'. $user->data['ina_char_age'] .'" class="post" size="30">';
 	}
 	#==== Change name
 	if ($config['ina_char_change_name_cost'])
 	{
-		if ($config['ina_char_change_char_cost'] > $userdata['ina_char_ge'])
+		if ($config['ina_char_change_char_cost'] > $user->data['ina_char_ge'])
 			$change_name_return = $lang['amp_char_cp_not_enough_ge'];
 		else
-			$change_name_return = '<input type="text" name="name" value="'. $userdata['ina_char_name'] .'" class="post" size="30">';
+			$change_name_return = '<input type="text" name="name" value="'. $user->data['ina_char_name'] .'" class="post" size="30">';
 	}
 	else
 	{
-		$change_name_return = '<input type="text" name="name" value="'. $userdata['ina_char_name'] .'" class="post" size="30">';
+		$change_name_return = '<input type="text" name="name" value="'. $user->data['ina_char_name'] .'" class="post" size="30">';
 	}
 	#==== Change from
 	if ($config['ina_char_change_from_cost'])
 	{
-		if ($config['ina_char_change_from_cost'] > $userdata['ina_char_ge'])
+		if ($config['ina_char_change_from_cost'] > $user->data['ina_char_ge'])
 			$change_from_return = $lang['amp_char_cp_not_enough_ge'];
 		else
-			$change_from_return = '<input type="text" name="from" value="'. $userdata['ina_char_from'] .'" class="post" size="30">';
+			$change_from_return = '<input type="text" name="from" value="'. $user->data['ina_char_from'] .'" class="post" size="30">';
 	}
 	else
 	{
-		$change_from_return = '<input type="text" name="from" value="'. $userdata['ina_char_from'] .'" class="post" size="30">';
+		$change_from_return = '<input type="text" name="from" value="'. $user->data['ina_char_from'] .'" class="post" size="30">';
 	}
 	#==== Change intrests
 	if ($config['ina_char_change_intrests_cost'])
 	{
-		if ($config['ina_char_change_intrests_cost'] > $userdata['ina_char_ge'])
+		if ($config['ina_char_change_intrests_cost'] > $user->data['ina_char_ge'])
 			$change_intrests_return = $lang['amp_char_cp_not_enough_ge'];
 		else
-			$change_intrests_return = '<input type="text" name="intrests" value="'. $userdata['ina_char_intrests'] .'" class="post" size="30">';
+			$change_intrests_return = '<input type="text" name="intrests" value="'. $user->data['ina_char_intrests'] .'" class="post" size="30">';
 	}
 	else
 	{
-		$change_intrests_return = '<input type="text" name="intrests" value="'. $userdata['ina_char_intrests'] .'" class="post" size="30">';
+		$change_intrests_return = '<input type="text" name="intrests" value="'. $user->data['ina_char_intrests'] .'" class="post" size="30">';
 	}
 	#==== Change saying
 	if ($config['ina_char_change_saying_cost'])
 	{
-		if ($config['ina_char_change_saying_cost'] > $userdata['ina_char_ge'])
+		if ($config['ina_char_change_saying_cost'] > $user->data['ina_char_ge'])
 			$change_saying_return = $lang['amp_char_cp_not_enough_ge'];
 		else
-			$change_saying_return = '<input type="text" name="saying" value="'. $userdata['ina_char_saying'] .'" class="post" size="30">';
+			$change_saying_return = '<input type="text" name="saying" value="'. $user->data['ina_char_saying'] .'" class="post" size="30">';
 	}
 	else
 	{
-		$change_saying_return = '<input type="text" name="saying" value="'. $userdata['ina_char_saying'] .'" class="post" size="30">';
+		$change_saying_return = '<input type="text" name="saying" value="'. $user->data['ina_char_saying'] .'" class="post" size="30">';
 	}
 #==== Change title
 	if ($config['ina_char_change_title_cost'])
 	{
-		if ($config['ina_char_change_title_cost'] > $userdata['ina_char_ge'])
+		if ($config['ina_char_change_title_cost'] > $user->data['ina_char_ge'])
 			$change_title_return = $lang['amp_char_cp_not_enough_ge'];
 		else
-			$change_title_return = '<input type="text" name="title" value="'. $userdata['ina_char_title'] .'" class="post" size="30">';
+			$change_title_return = '<input type="text" name="title" value="'. $user->data['ina_char_title'] .'" class="post" size="30">';
 	}
 	else
 	{
-		$change_title_return = '<input type="text" name="title" value="'. $userdata['ina_char_title'] .'" class="post" size="30">';
+		$change_title_return = '<input type="text" name="title" value="'. $user->data['ina_char_title'] .'" class="post" size="30">';
 	}
 
 	$template->assign_block_vars('edit_char.edit.values', array(
@@ -834,7 +835,7 @@ $template->assign_vars(array(
 	'CHAR_TITLE' => $lang['amp_char_cp_title'],
 	'CHAR_SAYING' => $lang['amp_char_cp_saying'],
 	'CHAR_DELETE' => $lang['amp_char_cp_delete'],
-	'CHAR_CREATE_LINK' => (($userdata['ina_char_name']) && ($userdata['user_id'] != ANONYMOUS)) ? '' : '<a href="activity_char.' . PHP_EXT .'?mode=create_char&amp;sid='. $userdata['session_id'] . '">'. $lang['amp_char_create_char_link'] .'</a>',
+	'CHAR_CREATE_LINK' => (($user->data['ina_char_name']) && ($user->data['user_id'] != ANONYMOUS)) ? '' : '<a href="activity_char.' . PHP_EXT .'?mode=create_char&amp;sid='. $user->data['session_id'] . '">'. $lang['amp_char_create_char_link'] .'</a>',
 	'CHAR_SHOP_LINK' => $char_shop_link,
 
 	'CHAR_SUBMIT' => $lang['amp_char_cp_submit'],

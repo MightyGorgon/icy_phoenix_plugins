@@ -23,7 +23,7 @@ if (!defined('IN_ICYPHOENIX'))
 $template_to_parse = $class_plugins->get_tpl_file(ACTIVITY_TPL_PATH, 'activity_info_body.tpl');
 $template->set_filenames(array('activity_info_section' => $template_to_parse));
 
-$where_disabled = ($userdata['user_level'] == ADMIN) ? '' : "WHERE disabled > '0'" ;
+$where_disabled = ($user->data['user_level'] == ADMIN) ? '' : "WHERE disabled > '0'" ;
 
 /* Get last trophy game played */
 $q = "SELECT a.*, b.username
@@ -144,8 +144,8 @@ $top_player2 = str_replace('%t%', '<a href="' . append_sid('activity.' . PHP_EXT
 $top_player = $top_player2;
 
 /* Get all the info for the viewing user */
-$cpu_id = $userdata['user_id'];
-$cpu_username = colorize_username($userdata['user_id'], $userdata['username'], $userdata['user_color'], $userdata['user_active']);
+$cpu_id = $user->data['user_id'];
+$cpu_username = colorize_username($user->data['user_id'], $user->data['username'], $user->data['user_color'], $user->data['user_active']);
 
 $q = "SELECT *
 			FROM ". INA_LAST_GAME ."
@@ -180,7 +180,7 @@ if ($exists)
 
 $q = "SELECT COUNT(*) AS total
 			FROM ". iNA_SCORES ."
-		WHERE player = '". $userdata['username'] ."'";
+		WHERE player = '". $user->data['username'] ."'";
 $r = $db->sql_query($q);
 $row = $db->sql_fetchrow($r);
 $total_scores = $row['total'];
@@ -189,7 +189,7 @@ if (!$total_scores)
 
 $q = "SELECT SUM(count) AS total
 			FROM ". INA_CHALLENGE_USERS ."
-		WHERE user_from = '". $userdata['user_id'] ."'";
+		WHERE user_from = '". $user->data['user_id'] ."'";
 $r = $db->sql_query($q);
 $row = $db->sql_fetchrow($r);
 $total_challenges_sent = $row['total'];
@@ -198,7 +198,7 @@ if (!$total_challenges_sent)
 
 $q = "SELECT SUM(count) AS total
 			FROM ". INA_CHALLENGE_USERS ."
-		WHERE user_to = '". $userdata['user_id'] ."'";
+		WHERE user_to = '". $user->data['user_id'] ."'";
 $r = $db->sql_query($q);
 $row = $db->sql_fetchrow($r);
 $total_challenges_recieved = $row['total'];
@@ -207,21 +207,21 @@ if (!$total_challenges_recieved)
 
 $q = "SELECT COUNT(player) AS total
 			FROM ". INA_TROPHY_COMMENTS ."
-		WHERE player = '". $userdata['user_id'] ."'";
+		WHERE player = '". $user->data['user_id'] ."'";
 $r = $db->sql_query($q);
 $row = $db->sql_fetchrow($r);
 $total_comments_left = $row['total'];
 if (!$total_comments_left)
 	$total_comments_left = '0';
 
-if ($userdata['user_id'] != ANONYMOUS)
-	$users_link = colorize_username($userdata['user_id'], $userdata['username'], $userdata['user_color'], $userdata['user_active']);
-if ($userdata['user_id'] == ANONYMOUS)
+if ($user->data['user_id'] != ANONYMOUS)
+	$users_link = colorize_username($user->data['user_id'], $user->data['username'], $user->data['user_color'], $user->data['user_active']);
+if ($user->data['user_id'] == ANONYMOUS)
 	$users_link = $lang['Guest'];
 
-if ($userdata['user_id'] != ANONYMOUS)
-	$sent_link = '<b>' . $lang['separator_2'] . '</b>&nbsp;' . str_replace('%t%', '<a href="' . append_sid('activity.' . PHP_EXT . '?page=challenges&amp;mode=check_user&amp;' . POST_USERS_URL . '=' . $userdata['user_id']) . '" class="nav">' . $total_challenges_sent . '</a>', $lang['personal_info_challenges_1']);
-if ($userdata['user_id'] == ANONYMOUS)
+if ($user->data['user_id'] != ANONYMOUS)
+	$sent_link = '<b>' . $lang['separator_2'] . '</b>&nbsp;' . str_replace('%t%', '<a href="' . append_sid('activity.' . PHP_EXT . '?page=challenges&amp;mode=check_user&amp;' . POST_USERS_URL . '=' . $user->data['user_id']) . '" class="nav">' . $total_challenges_sent . '</a>', $lang['personal_info_challenges_1']);
+if ($user->data['user_id'] == ANONYMOUS)
 	$sent_link = '<b>' . $lang['separator_2'] . '</b>&nbsp;' . str_replace('%t%', $total_challenges_sent, $lang['personal_info_challenges_1']);
 
 /* Select info for last game played */
@@ -255,19 +255,19 @@ else
 
 $newest_game_played_link = $newlink2;
 $newest_game_played_title = $lang['personal_info_newest_game'];
-$lang_to_use = ($userdata['user_trophies'] == 1) ? $lang['personal_info_trophies_1'] : $lang['personal_info_trophies'];
+$lang_to_use = ($user->data['user_trophies'] == 1) ? $lang['personal_info_trophies_1'] : $lang['personal_info_trophies'];
 $game_lang 	 = ($total_scores == 1) ? $lang['personal_info_game_played'] : $lang['personal_info_games_played'];
 
-if ($userdata['user_trophies'] > 0)
-	$users_trophies = '<b>' . $lang['separator_2'] . '</b>&nbsp;' . str_replace('%t%', '<a href="' . append_sid('activity.' . PHP_EXT . '?page=trophy_search&amp;user=' . urlencode($userdata['username'])) . '" class="nav">' . $userdata['user_trophies'] . '</a>', $lang_to_use);
-if ($userdata['user_trophies'] < 1)
-	$users_trophies = '<b>'. $lang['separator_2'] .'</b>&nbsp;'. str_replace('%t%', $userdata['user_trophies'], $lang_to_use);
+if ($user->data['user_trophies'] > 0)
+	$users_trophies = '<b>' . $lang['separator_2'] . '</b>&nbsp;' . str_replace('%t%', '<a href="' . append_sid('activity.' . PHP_EXT . '?page=trophy_search&amp;user=' . urlencode($user->data['username'])) . '" class="nav">' . $user->data['user_trophies'] . '</a>', $lang_to_use);
+if ($user->data['user_trophies'] < 1)
+	$users_trophies = '<b>'. $lang['separator_2'] .'</b>&nbsp;'. str_replace('%t%', $user->data['user_trophies'], $lang_to_use);
 if ($config['use_cash_system'] || $config['use_allowance_system'])
 	$cash_fix = $config['default_reward_dbfield'];
 if (($config['use_rewards_mod']) && ($config['use_point_system']))
-	$onhand = '<b>' . $lang['separator_2'] . '</b>&nbsp;' . str_replace('%p%', number_format($userdata['user_points']) .' '. $config['points_name'], $lang['info_box_user_points']);
+	$onhand = '<b>' . $lang['separator_2'] . '</b>&nbsp;' . str_replace('%p%', number_format($user->data['user_points']) .' '. $config['points_name'], $lang['info_box_user_points']);
 if (($config['use_rewards_mod']) && ($config['use_cash_system'] ||
-	$config['use_allowance_system'])) $onhand = '<b>' . $lang['separator_2'] . '</b>&nbsp;' . str_replace('%p%', number_format($userdata[$cash_fix]) . ' ' . $config['ina_cash_name'], $lang['info_box_user_points']);
+	$config['use_allowance_system'])) $onhand = '<b>' . $lang['separator_2'] . '</b>&nbsp;' . str_replace('%p%', number_format($user->data[$cash_fix]) . ' ' . $config['ina_cash_name'], $lang['info_box_user_points']);
 if (!$config['use_rewards_mod'])
 	$onhand = '';
 
@@ -288,15 +288,15 @@ $template->assign_block_vars('info_box', array(
 	'TROPHY_TOP_HOLDER1' => '<br />' . $top_player,
 	'TROPHY_TOP_HOLDER' => $lang['info_box_top_trophy_holder'],
 	'USERNAME'	 => $users_link,
-	'TOTAL_GAMES_LINK' => '<b>' . $lang['separator_2'] . '</b>&nbsp;' . str_replace('%t%', '<a href="'. append_sid('activity.' . PHP_EXT . '?page=high_scores&amp;mode=highscore&amp;player_search=' . urlencode($userdata['username'])) . '" class="nav">' . $total_scores . '</a>', $game_lang),
-	'FAVORITES_LINK' => '<b>' . $lang['separator_2'] . '</b>&nbsp;<a href="activity_favs.' . PHP_EXT . '?sid=' . $userdata['session_id'] . '">'. $lang['favorites_info_link'] . '</a>' . $shoutbox_link,
+	'TOTAL_GAMES_LINK' => '<b>' . $lang['separator_2'] . '</b>&nbsp;' . str_replace('%t%', '<a href="'. append_sid('activity.' . PHP_EXT . '?page=high_scores&amp;mode=highscore&amp;player_search=' . urlencode($user->data['username'])) . '" class="nav">' . $total_scores . '</a>', $game_lang),
+	'FAVORITES_LINK' => '<b>' . $lang['separator_2'] . '</b>&nbsp;<a href="activity_favs.' . PHP_EXT . '?sid=' . $user->data['session_id'] . '">'. $lang['favorites_info_link'] . '</a>' . $shoutbox_link,
 	'TOTAL_CHALLENGES_SENT' => $sent_link,
 	'TOTAL_CHALLENGES_RECIEVED' => '<b>' . $lang['separator_2'] . '</b>&nbsp;' . str_replace('%t%', $total_challenges_recieved, $lang['personal_info_challenges_2']),
 	'TOTAL_COMMENTS_LEFT' => '<b>' . $lang['separator_2'] . '</b>&nbsp;' . str_replace('%t%', $total_comments_left, $lang['personal_info_comments']),
-	'TOTAL_TROPHIES_HELD' => $users_trophies . '<br /><b>' . $lang['separator_2'] . '</b>&nbsp;' . str_replace('%T%', number_format($userdata['ina_char_ge']), $lang['info_box_user_ge_points']),
+	'TOTAL_TROPHIES_HELD' => $users_trophies . '<br /><b>' . $lang['separator_2'] . '</b>&nbsp;' . str_replace('%T%', number_format($user->data['ina_char_ge']), $lang['info_box_user_ge_points']),
 	'LAST_GAME_PLAYED' => $newest_game_played_link,
 	'TOTAL_ONHAND_POINTS' => $onhand,
-	'TOTAL_TIME_IN_GAMES' => '<b>' . $lang['separator_2'] . '</b>&nbsp;' . DisplayPlayingTime(1, $userdata['ina_time_playing']),
+	'TOTAL_TIME_IN_GAMES' => '<b>' . $lang['separator_2'] . '</b>&nbsp;' . DisplayPlayingTime(1, $user->data['ina_time_playing']),
 
 	'L_NEWEST_TITLE' => $newest_game_played_title,
 	'L_INFO_TITLE' => $lang['info_box_title'],

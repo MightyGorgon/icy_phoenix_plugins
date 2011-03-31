@@ -24,10 +24,10 @@ if (!defined('IN_ICYPHOENIX'))
 VersionCheck();
 /*  End Version Check */
 
-$user_id = $userdata['user_id'];
+$user_id = $user->data['user_id'];
 if($config['ina_guest_play'] == "2")
 {
-if(!$userdata['session_logged_in'] && $user_id == ANONYMOUS)
+if(!$user->data['session_logged_in'] && $user_id == ANONYMOUS)
 	{
 $header_location = (@preg_match("/Microsoft|WebSTAR|Xitami/", getenv("SERVER_SOFTWARE"))) ? "Refresh: 0; URL=" : "Location: ";
 header($header_location . append_sid(CMS_PAGE_LOGIN . '?redirect=activity.' . PHP_EXT, true));
@@ -54,7 +54,7 @@ if($config['use_rewards_mod'])
 
 if($_GET['mode'] != 'game')
 {
-	UpdateUsersPage($userdata['user_id'], $_SERVER['REQUEST_URI']);
+	UpdateUsersPage($user->data['user_id'], $_SERVER['REQUEST_URI']);
 }
 
 if ($config['use_point_system'])

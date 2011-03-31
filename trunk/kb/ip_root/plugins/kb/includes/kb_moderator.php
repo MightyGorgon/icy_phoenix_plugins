@@ -32,10 +32,10 @@ $start = ($start < 0) ? 0 : $start;
 
 // Start auth check
 $kb_is_auth = array();
-$kb_is_auth = kb_auth(AUTH_ALL, $category_id, $userdata);
+$kb_is_auth = kb_auth(AUTH_ALL, $category_id, $user->data);
 // End of auth check
 
-if (!(($kb_is_auth['auth_delete'] || $kb_is_auth['auth_mod']) && $userdata['session_logged_in']))
+if (!(($kb_is_auth['auth_delete'] || $kb_is_auth['auth_mod']) && $user->data['session_logged_in']))
 {
 	$message = $lang['No_add'] . '<br /><br />' . sprintf($lang['Click_return_kb'], '<a href="' . append_sid(this_kb_mxurl()) . '">', '</a>') . '<br /><br />' . sprintf($lang['Click_return_index'], '<a href="' . append_sid(IP_ROOT_PATH . CMS_PAGE_FORUM) . '">', '</a>');
 	mx_message_die(GENERAL_MESSAGE, $message);
@@ -71,7 +71,7 @@ switch ($action)
 		$kb_comment = array();
 
 		// Populate the kb_comment variable
-		$kb_comment = kb_get_data($kb_row, $userdata);
+		$kb_comment = kb_get_data($kb_row, $user->data);
 
 		// Compose post header
 		$subject = $lang['KB_comment_prefix'] . $kb_comment['article_title'];

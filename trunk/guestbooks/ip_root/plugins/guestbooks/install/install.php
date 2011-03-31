@@ -38,7 +38,7 @@ $install_data = array(
 				`guestbook_id` smallint(5) unsigned NOT NULL DEFAULT '0',
 				`poster_id` mediumint(8) NOT NULL DEFAULT '0',
 				`post_time` int(11) NOT NULL DEFAULT '0',
-				`poster_ip` varchar(8) NOT NULL DEFAULT '',
+				`poster_ip` varchar(40) NOT NULL DEFAULT '',
 				`poster_email` varchar(255) DEFAULT NULL,
 				`post_username` varchar(255) DEFAULT NULL,
 				`post_subject` varchar(255) DEFAULT NULL,

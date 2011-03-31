@@ -22,8 +22,9 @@ if (!defined('IN_ICYPHOENIX'))
 }
 
 // Start session management
-$userdata = session_pagestart($user_ip);
-init_userprefs($userdata);
+$user->session_begin();
+//$auth->acl($user->data);
+$user->setup();
 // End session management
 
 //===========================================================================
@@ -68,7 +69,7 @@ else
 	$template->set_filenames(array('body' => 'flash_body.tpl'));
 
 	$template->assign_vars(array(
-		'USERNAME' => $userdata['username'],
+		'USERNAME' => $user->data['username'],
 		'PATH' => $game_path,
 		'S_GAME_ACTION' => append_sid('onlinegames_scores.' . PHP_EXT . '?mode=check_score&amp;game_name=' . urlencode($game_name))
 		)

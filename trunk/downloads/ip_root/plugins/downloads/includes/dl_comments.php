@@ -29,17 +29,17 @@ if ($action == 'save' && !$deny_post)
 
 	if ($config['allow_html'])
 	{
-		$html_on = $userdata['user_allowhtml'];
+		$html_on = $user->data['user_allowhtml'];
 	}
 
 	if ($config['allow_bbcode'])
 	{
-		$bbcode_on = $userdata['user_allowbbcode'];
+		$bbcode_on = $user->data['user_allowbbcode'];
 	}
 
 	if ($config['allow_smilies'])
 	{
-		$smilies_on = $userdata['user_allowsmile'];
+		$smilies_on = $user->data['user_allowsmile'];
 	}
 
 	$comment_text = stripslashes(prepare_message(addslashes(unprepare_message($comment_text)), $html_on, $bbcode_on, $smilies_on));
@@ -51,7 +51,7 @@ if ($action == 'save' && !$deny_post)
 	$description = $row['description'];
 	$db->sql_freeresult($result);
 
-	if ($index[$cat_id]['approve_comments'] && ($userdata['user_level'] != ADMIN) )
+	if ($index[$cat_id]['approve_comments'] && ($user->data['user_level'] != ADMIN) )
 	{
 		$approve = 1;
 	}
@@ -71,7 +71,7 @@ if ($action == 'save' && !$deny_post)
 	else
 	{
 		$sql = "INSERT INTO " . DL_COMMENTS_TABLE . " (id, cat_id, user_id, username, comment_time, comment_edit_time, comment_text, approve) VALUES
-			($df_id, $cat_id, " . $userdata['user_id'] . ", '" . $db->sql_escape($userdata['username']) . "', " . time() . ", " . time() . ", '" . $db->sql_escape($comment_text) . "', $approve)";
+			($df_id, $cat_id, " . $user->data['user_id'] . ", '" . $db->sql_escape($user->data['username']) . "', " . time() . ", " . time() . ", '" . $db->sql_escape($comment_text) . "', $approve)";
 		$db->sql_query($sql);
 		$comment_message = $lang['Dl_comment_added'];
 	}
@@ -118,9 +118,9 @@ if ($action == 'save' && !$deny_post)
 			$emailer = new emailer();
 
 			$emailer->headers('X-AntiAbuse: Board servername - ' . trim($config['server_name']));
-			$emailer->headers('X-AntiAbuse: User_id - ' . $userdata['user_id']);
-			$emailer->headers('X-AntiAbuse: Username - ' . $userdata['username']);
-			$emailer->headers('X-AntiAbuse: User IP - ' . decode_ip($user_ip));
+			$emailer->headers('X-AntiAbuse: User_id - ' . $user->data['user_id']);
+			$emailer->headers('X-AntiAbuse: Username - ' . $user->data['username']);
+			$emailer->headers('X-AntiAbuse: User IP - ' . $user_ip);
 
 			$emailer->use_template($email_template, $row['user_lang']);
 			$emailer->to($row['user_email']);
@@ -212,9 +212,9 @@ if (($action == 'edit' && $allow_manage) || ($action == 'post' && !$deny_post))
 	$db->sql_freeresult($result);
 
 	$description = stripslashes($row['description']);
-	$bbcode->allow_html = ($userdata['user_allowhtml'] && $config['allow_html']) ? true : false;
-	$bbcode->allow_bbcode = ($userdata['user_allowbbcode'] && $config['allow_bbcode']) ? true : false;
-	$bbcode->allow_smilies = ($userdata['user_allowsmile'] && $config['allow_smilies']) ? true : false;
+	$bbcode->allow_html = ($user->data['user_allowhtml'] && $config['allow_html']) ? true : false;
+	$bbcode->allow_bbcode = ($user->data['user_allowbbcode'] && $config['allow_bbcode']) ? true : false;
+	$bbcode->allow_smilies = ($user->data['user_allowsmile'] && $config['allow_smilies']) ? true : false;
 	$description = $bbcode->parse($description);
 	$description = str_replace("\n", "\n<br />\n", $description);
 
@@ -430,9 +430,9 @@ if ($action == 'view' || !$action)
 
 			$message = censor_text($message);
 
-			$bbcode->allow_html = ($userdata['user_allowhtml'] && $config['allow_html']) ? true : false;
-			$bbcode->allow_bbcode = ($userdata['user_allowbbcode'] && $config['allow_bbcode']) ? true : false;
-			$bbcode->allow_smilies = ($userdata['user_allowsmile'] && $config['allow_smilies']) ? true : false;
+			$bbcode->allow_html = ($user->data['user_allowhtml'] && $config['allow_html']) ? true : false;
+			$bbcode->allow_bbcode = ($user->data['user_allowbbcode'] && $config['allow_bbcode']) ? true : false;
+			$bbcode->allow_smilies = ($user->data['user_allowsmile'] && $config['allow_smilies']) ? true : false;
 			$message = $bbcode->parse($message);
 			$message = str_replace("\n", "\n<br />\n", $message);
 
@@ -466,7 +466,7 @@ if ($action == 'view' || !$action)
 				)
 			);
 
-			if (($poster_id == $userdata['user_id'] || $cat_auth['auth_mod'] || $index[$cat]['auth_mod'] || $userdata['user_level'] == ADMIN) && !$deny_post)
+			if (($poster_id == $user->data['user_id'] || $cat_auth['auth_mod'] || $index[$cat]['auth_mod'] || $user->data['user_level'] == ADMIN) && !$deny_post)
 			{
 				$template->assign_block_vars('comment_row.action_button', array());
 			}

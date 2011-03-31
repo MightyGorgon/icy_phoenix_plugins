@@ -259,7 +259,7 @@ if (($mode == 'main') || !$mode)
 	echo "</table>";
 /* Delete All Scores */
 	echo "<table class=\"forumline\" width=\"100%\" cellspacing=\"0\" border=\"0\">";
-	echo "<form name='truncate_scores' action='admin_activity." . PHP_EXT . "?sid=". $userdata['session_id'] ."' method=\"post\">";
+	echo "<form name='truncate_scores' action='admin_activity." . PHP_EXT . "?sid=". $user->data['session_id'] ."' method=\"post\">";
 	echo "	<tr>";
 	echo "		<td class=\"row2\" width=\"50%\" valign=\"top\">";
 	echo "			<span class=\"genmed\">";
@@ -1904,7 +1904,7 @@ if (($mode == 'main') || !$mode)
 				if (!$row1['game_name'])
 					{
 				$q2 = "INSERT INTO ". iNA_TROPHY ."
-						 VALUES ('". $row['game_name'] ."', '". $userdata['user_id'] ."', '1', '". time() ."')";
+						 VALUES ('". $row['game_name'] ."', '". $user->data['user_id'] ."', '1', '". time() ."')";
 				$db->sql_query($q2);
 					}
 			$i++;

@@ -220,7 +220,7 @@ if ($total_data)
 			'USERNAME' => ($row['user_id'] == ANONYMOUS) ? $lang['Guest'] : '<a href="' . append_sid(IP_ROOT_PATH . CMS_PAGE_PROFILE . '?mode=viewprofile&amp;' . POST_USERS_URL . '=' . $row['user_id']) . '">' . $row['username'] . '</a>',
 			'TRAFFIC' => ($row['traffic'] == -1) ? $lang['Dl_extern'] : $dl_mod->dl_size($row['traffic']),
 			'DIRECTION' => $direction,
-			'USER_IP' => decode_ip($row['user_ip']),
+			'USER_IP' => $row['user_ip'],
 			'BROWSER' => $row['browser'],
 			'TIME_STAMP' => create_date($config['default_dateformat'], $row['time_stamp'], $config['board_timezone']),
 			'ID' => $row['dl_id'],

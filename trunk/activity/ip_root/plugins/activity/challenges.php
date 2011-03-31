@@ -23,13 +23,13 @@ if (!defined('IN_ICYPHOENIX'))
 /* Start Restriction Checks */
 BanCheck();
 /* Start Game Disabled To Everyone Check */
-if(($config['ina_disable_everything']) && ($userdata['user_level'] != ADMIN))
+if(($config['ina_disable_everything']) && ($user->data['user_level'] != ADMIN))
 {
 	message_die(GENERAL_ERROR, $lang['restriction_check_3'], $lang['ban_error']);
 }
 /* End Game Disabled To Everyone Check */
 /* Start File Specific Disable */
-if(($config['ina_disable_challenges_page']) && ($userdata['user_level'] != ADMIN))
+if(($config['ina_disable_challenges_page']) && ($user->data['user_level'] != ADMIN))
 {
 	message_die(GENERAL_ERROR, $lang['disabled_page_error'], $lang['ban_error']);
 }
@@ -81,15 +81,15 @@ if (!$_GET['mode'])
 			{
 				$name = colorize_username($user_data[$b]['user_id'], $user_data[$b]['username'], $user_data[$b]['user_color'], $user_data[$b]['user_active'], true);
 				$count = number_format($challenge_data[$a]['count']);
-				$user = $challenge_data[$a]['user'];
+				$target_user = $challenge_data[$a]['user'];
 
-				if ($user == ANONYMOUS)
+				if ($target_user == ANONYMOUS)
 				{
 					$link = '&nbsp;&nbsp;&nbsp;' . $name;
 				}
 				else
 				{
-					$link = '&nbsp;&nbsp;&nbsp;<a href="activity.' . PHP_EXT . '?page=challenges&amp;mode=check_user&amp;' . POST_USERS_URL . '=' . $user . '&amp;sid=' . $userdata['session_id'] . '" style="text-decoration:none">' . $name . '</a>';
+					$link = '&nbsp;&nbsp;&nbsp;<a href="activity.' . PHP_EXT . '?page=challenges&amp;mode=check_user&amp;' . POST_USERS_URL . '=' . $target_user . '&amp;sid=' . $user->data['session_id'] . '" style="text-decoration:none">' . $name . '</a>';
 				}
 				$row_class = (!($i % 2)) ? 'row1' : 'row2';
 				$template->assign_block_vars('challenge_results', array(

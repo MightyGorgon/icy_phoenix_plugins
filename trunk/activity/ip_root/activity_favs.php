@@ -22,8 +22,9 @@ if (!defined('PHP_EXT')) define('PHP_EXT', substr(strrchr(__FILE__, '.'), 1));
 include(IP_ROOT_PATH . 'common.' . PHP_EXT);
 
 // Start session management
-$userdata = session_pagestart($user_ip);
-init_userprefs($userdata);
+$user->session_begin();
+//$auth->acl($user->data);
+$user->setup();
 // End session management
 
 include(IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['activity']['dir'] . 'common.' . PHP_EXT);
@@ -37,9 +38,9 @@ $link_name = !empty($meta_content['page_title']) ? $meta_content['page_title'] :
 $link_url = !empty($page_link) ? $page_link : '#';
 $breadcrumbs_address = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('activity.' . PHP_EXT) . '"' . (!empty($link_name) ? '' : ' class="nav-current"') . '>' . $lang['Activity'] . '</a>' . (!empty($link_name) ? ($lang['Nav_Separator'] . '<a class="nav-current" href="' . $link_url . '">' . $link_name . '</a>') : '');
 
-$user_id = $userdata['user_id'];
+$user_id = $user->data['user_id'];
 
-if (($config['ina_guest_play'] == '2') && !$userdata['session_logged_in'])
+if (($config['ina_guest_play'] == '2') && !$user->data['session_logged_in'])
 {
 	redirect(append_sid(CMS_PAGE_LOGIN . '?redirect=activity.' . PHP_EXT, true));
 	/*
@@ -68,7 +69,7 @@ if ($config['use_rewards_mod'])
 
 if($_GET['mode'] != 'game')
 {
-	UpdateUsersPage($userdata['user_id'], $_SERVER['REQUEST_URI']);
+	UpdateUsersPage($user->data['user_id'], $_SERVER['REQUEST_URI']);
 }
 
 if ($config['use_point_system'])
@@ -95,7 +96,7 @@ if ($config['use_gamelib'] == 0)
 if($_GET['mode'] == 'add_fav')
 {
 	$game = $_GET['game'];
-	$user = $userdata['user_id'];
+	$user = $user->data['user_id'];
 
 	$q = "SELECT *
 			FROM ". iNA_GAMES ."
@@ -124,7 +125,7 @@ if($_GET['mode'] == 'add_fav')
 
 	$q = "SELECT *
 			FROM ". INA_FAVORITES ."
-			WHERE user = '". $userdata['user_id'] ."'";
+			WHERE user = '". $user->data['user_id'] ."'";
 	$r = $db->sql_query($q);
 	$fav_data = $db->sql_fetchrow($r);
 
@@ -142,12 +143,12 @@ if($_GET['mode'] == 'add_fav')
 				VALUES ('". $user ."', 'S". $game ."E')";
 		$r = $db->sql_query($q);
 	}
-	message_die(GENERAL_MESSAGE, 'Game added to your favorites list!<br /><br />Click <a href="activity_favs.' . PHP_EXT . '?sid=' . $userdata['session_id'] . '" class="nav"><i>here</i></a> to view your favorites.', 'Success');
+	message_die(GENERAL_MESSAGE, 'Game added to your favorites list!<br /><br />Click <a href="activity_favs.' . PHP_EXT . '?sid=' . $user->data['session_id'] . '" class="nav"><i>here</i></a> to view your favorites.', 'Success');
 }
 elseif($_GET['mode'] == 'del_fav')
 {
 	$game = $_GET['game'];
-	$user = $userdata['user_id'];
+	$user = $user->data['user_id'];
 
 	$q = "SELECT *
 			FROM ". iNA_GAMES ."
@@ -176,11 +177,11 @@ elseif($_GET['mode'] == 'del_fav')
 					SET games = '". $new_list ."'
 					WHERE user = '". $user ."'";
 			$r = $db->sql_query($q);
-			message_die(GENERAL_MESSAGE, 'Game Removed<br /><br />Click <a href="activity_favs.' . PHP_EXT . '?sid=' . $userdata['session_id'] . '" class="nav"><i>here</i></a> to view your favorites..', 'Success');
+			message_die(GENERAL_MESSAGE, 'Game Removed<br /><br />Click <a href="activity_favs.' . PHP_EXT . '?sid=' . $user->data['session_id'] . '" class="nav"><i>here</i></a> to view your favorites..', 'Success');
 		}
 		else
 		{
-			message_die(GENERAL_ERROR, 'That Game Is Not On Your Favorites List.<br /><br />Click <a href="activity_favs.' . PHP_EXT . '?sid=' . $userdata['session_id'] . '" class="nav"><i>here</i></a> to view your favorites.', 'Error');
+			message_die(GENERAL_ERROR, 'That Game Is Not On Your Favorites List.<br /><br />Click <a href="activity_favs.' . PHP_EXT . '?sid=' . $user->data['session_id'] . '" class="nav"><i>here</i></a> to view your favorites.', 'Error');
 		}
 	}
 }
@@ -203,7 +204,7 @@ else
 	// Setup Favorites Array ------------------------------------------------------------ |
 	$q = "SELECT *
 			FROM ". INA_FAVORITES ."
-			WHERE user = '". $userdata['user_id'] ."'";
+			WHERE user = '". $user->data['user_id'] ."'";
 	$r = $db->sql_query($q);
 	$favorite_data = $db->sql_fetchrowset($r);
 	$fav_c = $db->sql_numrows($r);
@@ -236,7 +237,7 @@ else
 		'C_CAT_PAGE' => append_sid('activity.' . PHP_EXT . '?mode=category_play'),
 		'GAMELIB_LINK' => $gamelib_link,
 		'U_TROPHY'		 => append_sid('activity_top_scores.' . PHP_EXT),
-		'U_GAMBLING' => '<a href='activity_gambling.' . PHP_EXT . '?sid=' . $userdata['session_id'] . '' class='nav'>' . $lang['gambling_link_2'] . '</a>',
+		'U_GAMBLING' => '<a href='activity_gambling.' . PHP_EXT . '?sid=' . $user->data['session_id'] . '' class='nav'>' . $lang['gambling_link_2'] . '</a>',
 
 		'L_TROPHY' => $lang['trophy_page'],
 		'L_STATS' => $lang['stats'],
@@ -278,9 +279,9 @@ else
 				}
 
 				global $bbcode;
-				$html_on = ($userdata['user_allowhtml'] && $config['allow_html']) ? 1 : 0 ;
-				$bbcode_on = ($userdata['user_allowbbcode'] && $config['allow_bbcode']) ? 1 : 0 ;
-				$smilies_on = ($userdata['user_allowsmile'] && $config['allow_smilies']) ? 1 : 0 ;
+				$html_on = ($user->data['user_allowhtml'] && $config['allow_html']) ? 1 : 0 ;
+				$bbcode_on = ($user->data['user_allowbbcode'] && $config['allow_bbcode']) ? 1 : 0 ;
+				$smilies_on = ($user->data['user_allowsmile'] && $config['allow_smilies']) ? 1 : 0 ;
 
 				$bbcode->allow_html = $html_on;
 				$bbcode->allow_bbcode = $bbcode_on;
@@ -376,7 +377,7 @@ else
 					$cost = $lang['game_free'];
 				}
 
-				$remove_link = '<br /><br /><center><a href="activity_favs.' . PHP_EXT . '?mode=del_fav&amp;game=' . $fav_game_id . '&amp;sid=' . $userdata['session_id'] . '"><img src="' . ACTIVITY_IMAGES_PATH . 'r_favorite_game.jpg" alt="' . $lang['favorites_r_mouse_over'] . '" /></a></center>';
+				$remove_link = '<br /><br /><center><a href="activity_favs.' . PHP_EXT . '?mode=del_fav&amp;game=' . $fav_game_id . '&amp;sid=' . $user->data['session_id'] . '"><img src="' . ACTIVITY_IMAGES_PATH . 'r_favorite_game.jpg" alt="' . $lang['favorites_r_mouse_over'] . '" /></a></center>';
 				$game_link = CheckGameImages($fav_game_name, $fav_game_proper);
 				$image_link = GameArrayLink($fav_game_id, $fav_game_parent, $fav_game_popup, $fav_win_width, $fav_win_height, 2, '');
 				$games_cost_line = '<br />'. $lang['separator'] . $lang['cost'] .': '. $cost;

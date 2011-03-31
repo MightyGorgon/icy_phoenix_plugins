@@ -41,7 +41,7 @@ $s_hidden_vars = '<input type="hidden" name="mode" value="cat" /><input type="hi
 $template->assign_vars(array(
 	'QUICK_JUMP_ACTION' => $quick_nav_action,
 	'S_HIDDEN_VARS' => $s_hidden_vars,
-	//'SID' => $userdata['session_id'],
+	//'SID' => $user->data['session_id'],
 
 	'L_QUICK_NAV' => $lang['Quick_nav'],
 	'L_QUICK_JUMP' => $lang['Quick_jump'],

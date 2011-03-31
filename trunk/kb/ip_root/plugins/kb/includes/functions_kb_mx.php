@@ -52,7 +52,7 @@ if (!function_exists(mx_is_group_member))
 	// Also, adds all usergroups to userdata array
 	function mx_is_group_member($group_ids = '', $group_mod_mode = false)
 	{
-		global $userdata, $db;
+		global $user, $db;
 
 		if ($group_ids == '')
 		{
@@ -64,38 +64,38 @@ if (!function_exists(mx_is_group_member))
 		// Try to reuse usergroups result.
 		if ($group_mod_mode)
 		{
-			$userdata_key = 'mx_usergroups_mod' . $userdata['user_id'];
+			$userdata_key = 'mx_usergroups_mod' . $user->data['user_id'];
 
-			if (empty($userdata[$userdata_key]) )
+			if (empty($user->data[$userdata_key]) )
 			{
 				// Check if user is group moderator..
 				$sql = "SELECT gr.group_id
 						FROM " . GROUPS_TABLE . " gr, " . USER_GROUP_TABLE . " ugr
 						WHERE gr.group_id = ugr.group_id
-							AND gr.group_moderator = '" . $userdata['user_id'] . "'
+							AND gr.group_moderator = '" . $user->data['user_id'] . "'
 							AND ugr.user_pending = '0' ";
 				$result = $db->sql_query($sql);
 				$group_row = $db->sql_fetchrowset($result);
-				$userdata[$userdata_key_mod] = $group_row;
+				$user->data[$userdata_key_mod] = $group_row;
 			}
 		}
 		else
 		{
-			$userdata_key = 'mx_usergroups' . $userdata['user_id'];
+			$userdata_key = 'mx_usergroups' . $user->data['user_id'];
 
-			if (empty($userdata[$userdata_key]))
+			if (empty($user->data[$userdata_key]))
 			{
 				// Check if user is member of the proper group..
-				$sql = "SELECT group_id FROM " . USER_GROUP_TABLE . " WHERE user_id='" . $userdata['user_id'] . "' AND user_pending = 0";
+				$sql = "SELECT group_id FROM " . USER_GROUP_TABLE . " WHERE user_id='" . $user->data['user_id'] . "' AND user_pending = 0";
 				$result = $db->sql_query($sql);
 				$group_row = $db->sql_fetchrowset($result);
-				$userdata[$userdata_key] = $group_row;
+				$user->data[$userdata_key] = $group_row;
 			}
 		}
 
-		for ($i = 0; $i < sizeof($userdata[$userdata_key]); $i++)
+		for ($i = 0; $i < sizeof($user->data[$userdata_key]); $i++)
 		{
-			if (in_array($userdata[$userdata_key][$i]['group_id'], $group_ids_array))
+			if (in_array($user->data[$userdata_key][$i]['group_id'], $group_ids_array))
 			{
 				$is_member = true;
 				return $is_member;
@@ -331,7 +331,7 @@ if (!function_exists(mx_do_install_upgrade))
 
 	function mx_do_install_upgrade($sql = '', $main_install = false)
 	{
-		global $table_prefix, $mx_table_prefix, $userdata, $template, $lang, $db, $config, $_POST;
+		global $table_prefix, $mx_table_prefix, $user, $template, $lang, $db, $config, $_POST;
 
 		$inst_error = false;
 		$n = 0;

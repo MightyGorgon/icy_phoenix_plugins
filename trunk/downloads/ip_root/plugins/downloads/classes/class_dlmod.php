@@ -86,22 +86,22 @@ class dlmod
 	*/
 	function dlmod()
 	{
-		global $db, $config, $userdata, $enable_desc, $enable_rule;
+		global $db, $config, $user, $enable_desc, $enable_rule;
 
 		/*
 		* define the current user
 		*/
-		$this->user_level = $userdata['user_level'];
-		$this->user_id = $userdata['user_id'];
-		$this->user_ip = $userdata['session_ip'];
-		$this->user_regdate = $userdata['user_regdate'];
-		$this->user_dl_update_time = $userdata['user_dl_update_time'];
-		$this->user_traffic = $userdata['user_traffic'];
-		$this->user_download_counter = $userdata['user_download_counter'];
-		$this->user_logged_in = $userdata['session_logged_in'];
-		$this->user_posts = $userdata['user_posts'];
+		$this->user_level = $user->data['user_level'];
+		$this->user_id = $user->data['user_id'];
+		$this->user_ip = $user->data['session_ip'];
+		$this->user_regdate = $user->data['user_regdate'];
+		$this->user_dl_update_time = $user->data['user_dl_update_time'];
+		$this->user_traffic = $user->data['user_traffic'];
+		$this->user_download_counter = $user->data['user_download_counter'];
+		$this->user_logged_in = $user->data['session_logged_in'];
+		$this->user_posts = $user->data['user_posts'];
 		$this->user_client = strtolower($_SERVER['HTTP_USER_AGENT']);
-		$this->username = $userdata['username'];
+		$this->username = $user->data['username'];
 
 		/*
 		* read the basic configuration
@@ -200,7 +200,7 @@ class dlmod
 		*/
 		if ($this->user_id != ANONYMOUS && (intval($this->dl_config['delay_auto_traffic']) == 0 || (time() - $this->user_regdate) / 84600 > $this->dl_config['delay_auto_traffic']))
 		{
-			$user_auto_traffic_month = create_date('Ym', $userdata['user_dl_update_time'], $config['board_timezone']);
+			$user_auto_traffic_month = create_date('Ym', $user->data['user_dl_update_time'], $config['board_timezone']);
 			$current_traffic_month = create_date('Ym', time(), $config['board_timezone']);
 
 			if ($user_auto_traffic_month < $current_traffic_month)
@@ -955,10 +955,10 @@ class dlmod
 
 		if ($disp_art == 'url')
 		{
-			//$bbcode->allow_html = ($userdata['user_allowhtml'] && $config['allow_html']) ? true : false;
+			//$bbcode->allow_html = ($user->data['user_allowhtml'] && $config['allow_html']) ? true : false;
 			$bbcode->allow_html = false;
-			$bbcode->allow_bbcode = ($userdata['user_allowbbcode'] && $config['allow_bbcode']) ? true : false;
-			$bbcode->allow_smilies = ($userdata['user_allowsmile'] && $config['allow_smilies']) ? true : false;
+			$bbcode->allow_bbcode = ($user->data['user_allowbbcode'] && $config['allow_bbcode']) ? true : false;
+			$bbcode->allow_smilies = ($user->data['user_allowsmile'] && $config['allow_smilies']) ? true : false;
 			$temp_title = $bbcode->parse($temp_title);
 			$separator = '&nbsp;&raquo;&nbsp;';
 		}

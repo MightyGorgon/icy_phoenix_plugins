@@ -35,7 +35,7 @@ $meta_content['keywords'] = '';
 // Start auth check
 //
 	$kb_is_auth_all = array();
-	$kb_is_auth_all = kb_auth(AUTH_ALL, AUTH_LIST_ALL, $userdata);
+	$kb_is_auth_all = kb_auth(AUTH_ALL, AUTH_LIST_ALL, $user->data);
 	$kb_is_auth = $kb_is_auth_all[$category_id];
 
 // End of auth check

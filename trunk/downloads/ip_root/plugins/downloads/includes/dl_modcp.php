@@ -181,7 +181,7 @@ if (($action == 'save') && $submit)
 
 				$sql = "INSERT INTO " . DL_STATS_TABLE . "
 					(cat_id, id, user_id, username, traffic, direction, user_ip, browser, time_stamp) VALUES
-					($new_cat, $df_id, " . $userdata['user_id'] . ", '" . $db->sql_escape($userdata['username']) . "', " . $file_size . ", 2, '" . $userdata['session_ip'] . "', '" . $db->sql_escape($browser) . "', " . time() . ")";
+					($new_cat, $df_id, " . $user->data['user_id'] . ", '" . $db->sql_escape($user->data['username']) . "', " . $file_size . ", 2, '" . $db->sql_escape($user->data['session_ip']) . "', '" . $db->sql_escape($browser) . "', " . time() . ")";
 				$db->sql_query($sql);
 			}
 		}
@@ -218,10 +218,10 @@ if (($action == 'save') && $submit)
 
 		if (!$change_time)
 		{
-			$sql .= ", change_time = " . time() . ", change_user = " . $userdata['user_id'];
+			$sql .= ", change_time = " . time() . ", change_user = " . $user->data['user_id'];
 		}
 
-		if ($index[$cat_id]['allow_mod_desc'] || $userdata['user_level'] == ADMIN)
+		if ($index[$cat_id]['allow_mod_desc'] || $user->data['user_level'] == ADMIN)
 		{
 			$sql .= ", test = '" . $db->sql_escape($test) . "',
 				req = '" . $db->sql_escape($require) . "',
@@ -298,9 +298,9 @@ if (($action == 'save') && $submit)
 				$emailer = new emailer();
 
 				$emailer->headers('X-AntiAbuse: Board servername - ' . trim($config['server_name']));
-				$emailer->headers('X-AntiAbuse: User_id - ' . $userdata['user_id']);
-				$emailer->headers('X-AntiAbuse: Username - ' . $userdata['username']);
-				$emailer->headers('X-AntiAbuse: User IP - ' . decode_ip($user_ip));
+				$emailer->headers('X-AntiAbuse: User_id - ' . $user->data['user_id']);
+				$emailer->headers('X-AntiAbuse: Username - ' . $user->data['username']);
+				$emailer->headers('X-AntiAbuse: User IP - ' . $user_ip);
 
 				$emailer->use_template($email_template, $row['user_lang']);
 				$emailer->to($row['user_email']);
@@ -683,7 +683,7 @@ if ($action == 'edit')
 		$template->assign_block_vars('allow_edit_mod_desc', array());
 	}
 
-	if ($dl_config['use_hacklist'] && $userdata['user_level'] == ADMIN)
+	if ($dl_config['use_hacklist'] && $user->data['user_level'] == ADMIN)
 	{
 		$template->assign_block_vars('use_hacklist', array());
 	}
@@ -900,7 +900,7 @@ if ($action == 'approve')
 		$db->sql_query($sql);
 	}
 
-	$sql_access_cats = ($userdata['user_level'] == ADMIN) ? '' : ' AND cat IN (' . implode(',', $access_cat) . ')';
+	$sql_access_cats = ($user->data['user_level'] == ADMIN) ? '' : ' AND cat IN (' . implode(',', $access_cat) . ')';
 
 	$sql = "SELECT id FROM " . DOWNLOADS_TABLE . "
 		WHERE approve = 0
@@ -1006,7 +1006,7 @@ if ($action == 'capprove')
 		$db->sql_query($sql);
 	}
 
-	$sql_access_cats = ($userdata['user_level'] == ADMIN) ? '' : ' AND c.cat_id IN (' . implode(',', $access_cat) . ')';
+	$sql_access_cats = ($user->data['user_level'] == ADMIN) ? '' : ' AND c.cat_id IN (' . implode(',', $access_cat) . ')';
 
 	$sql = "SELECT c.dl_id FROM " . DL_COMMENTS_TABLE . " c
 		WHERE c.approve = 0
@@ -1115,7 +1115,7 @@ if (($action == 'manage') && $cat_id)
 {
 	$total_downloads = $index[$cat_id]['total'];
 
-	if ($sort && $userdata['user_level'] == ADMIN)
+	if ($sort && $user->data['user_level'] == ADMIN)
 	{
 		$per_page = $total_downloads;
 		$start = 0;
@@ -1124,13 +1124,13 @@ if (($action == 'manage') && $cat_id)
 	else
 	{
 		$per_page = $dl_config['dl_links_per_page'];
-		if ($userdata['user_level'] == ADMIN)
+		if ($user->data['user_level'] == ADMIN)
 		{
 			$template->assign_block_vars('order_button', array());
 		}
 	}
 
-	if ($userdata['user_level'] == ADMIN)
+	if ($user->data['user_level'] == ADMIN)
 	{
 		$template->assign_block_vars('sort_asc', array());
 	}
@@ -1175,8 +1175,8 @@ if (($action == 'manage') && $cat_id)
 			'DESCRIPTION' => $description,
 			'EDIT_IMG' => '<img src="' . $images['icon_edit'] . '" border="0" alt="" title="" />',
 
-			'U_UP' => ($userdata['user_level'] == ADMIN) ? append_sid('downloads.' . PHP_EXT . '?view=modcp&amp;action=manage&amp;fmove=-1&amp;sort=1&amp;df_id=' . $file_id . '&amp;cat_id=' . $cat_id) : '',
-			'U_DOWN' => ($userdata['user_level'] == ADMIN) ? append_sid('downloads.' . PHP_EXT . '?view=modcp&amp;action=manage&amp;fmove=1&amp;sort=1&amp;df_id=' . $file_id . '&amp;cat_id=' . $cat_id) : '',
+			'U_UP' => ($user->data['user_level'] == ADMIN) ? append_sid('downloads.' . PHP_EXT . '?view=modcp&amp;action=manage&amp;fmove=-1&amp;sort=1&amp;df_id=' . $file_id . '&amp;cat_id=' . $cat_id) : '',
+			'U_DOWN' => ($user->data['user_level'] == ADMIN) ? append_sid('downloads.' . PHP_EXT . '?view=modcp&amp;action=manage&amp;fmove=1&amp;sort=1&amp;df_id=' . $file_id . '&amp;cat_id=' . $cat_id) : '',
 			'U_EDIT' => append_sid('downloads.' . PHP_EXT . '?view=modcp&amp;action=edit&amp;df_id=' . $file_id . '&amp;cat_id=' . $cat_id),
 			'U_DOWNLOAD' => append_sid('downloads.' . PHP_EXT . '?view=detail&amp;df_id=' . $file_id)
 			)
@@ -1219,11 +1219,11 @@ if (($action == 'manage') && $cat_id)
 		'L_DOWNLOAD' => $lang['Dl_download'],
 		'L_SET' => $lang['Dl_edit'],
 		'L_EDIT' => $lang['Edit'],
-		'L_DL_UP' => ($sort && $userdata['user_level'] == ADMIN) ? $lang['Dl_up'] : '',
-		'L_DL_DOWN' => ($sort && $userdata['user_level'] == ADMIN) ? $lang['Dl_down'] : '',
+		'L_DL_UP' => ($sort && $user->data['user_level'] == ADMIN) ? $lang['Dl_up'] : '',
+		'L_DL_DOWN' => ($sort && $user->data['user_level'] == ADMIN) ? $lang['Dl_down'] : '',
 		'L_DL_SORT' => $lang['Dl_order'],
 		'L_DL_MODCP' => $lang['Dl_modcp_manage'],
-		'L_DL_ABC' => ($userdata['user_level'] == ADMIN) ? $lang['Sort'] . ' ASC' : '',
+		'L_DL_ABC' => ($user->data['user_level'] == ADMIN) ? $lang['Sort'] . ' ASC' : '',
 
 		'PAGINATION' => ($total_downloads > $dl_config['dl_links_per_page']) ? $pagination : '',
 
@@ -1234,7 +1234,7 @@ if (($action == 'manage') && $cat_id)
 		'U_NAV2' => append_sid('downloads.' . PHP_EXT . '?cat=' . $cat_id),
 		'U_NAV3' => append_sid('downloads.' . PHP_EXT . '?view=modcp&amp;cat_id=' . $cat_id),
 
-		'U_SORT_ASC' => ($userdata['user_level'] == ADMIN) ? append_sid('downloads.' . PHP_EXT . '?view=modcp&amp;action=manage&amp;fmove=ABC&amp;sort=' . (($sort) ? 1 : '') . '&amp;df_id=' . $file_id . '&amp;cat_id=' . $cat_id) : '',
+		'U_SORT_ASC' => ($user->data['user_level'] == ADMIN) ? append_sid('downloads.' . PHP_EXT . '?view=modcp&amp;action=manage&amp;fmove=ABC&amp;sort=' . (($sort) ? 1 : '') . '&amp;df_id=' . $file_id . '&amp;cat_id=' . $cat_id) : '',
 		'S_CAT_SELECT' => $s_cat_select,
 		'S_DL_MODCP_ACTION' => append_sid('downloads.' . PHP_EXT . '?view=modcp'),
 		'S_HIDDEN_FIELDS' => $s_hidden_fields

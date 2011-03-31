@@ -40,7 +40,7 @@ $mode = (isset($_GET['mode']) ? $_GET['mode'] : (isset($_POST['mode']) ? $_POST[
 
 if (!$mode)
 {
-	echo '<form name="save_char" method="post" action="admin_ina_char.' . PHP_EXT . '?mode=save&sid='. $userdata['session_id'] .'">';
+	echo '<form name="save_char" method="post" action="admin_ina_char.' . PHP_EXT . '?mode=save&sid='. $user->data['session_id'] .'">';
 	echo '<table align="center" width="100%" class="forumline">';
 	echo '	<tr>';
 	echo '		<th width="80%">';

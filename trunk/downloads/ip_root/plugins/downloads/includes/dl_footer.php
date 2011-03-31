@@ -112,7 +112,7 @@ if (sizeof($index) || $cat)
 	/*
 	* check if users can config something
 	*/
-	if ((!$dl_config['disable_email'] || !$dl_config['disable_popup'] || defined('CASH_TABLE')) && $userdata['user_id'] != ANONYMOUS)
+	if ((!$dl_config['disable_email'] || !$dl_config['disable_popup'] || defined('CASH_TABLE')) && $user->data['user_id'] != ANONYMOUS)
 	{
 		$template->assign_block_vars('switch_config_on', array(
 			'L_CONFIG' => $lang['Dl_config'],
@@ -205,12 +205,12 @@ if (sizeof($index) || $cat)
 				'REMAIN_TRAFFIC' => $remain_text_out)
 			);
 
-			$user_traffic = ($userdata['user_traffic'] > $remain_traffic) ? $remain_traffic : $userdata['user_traffic'];
+			$user_traffic = ($user->data['user_traffic'] > $remain_traffic) ? $remain_traffic : $user->data['user_traffic'];
 
 			$user_traffic_out = $dl_mod->dl_size($user_traffic, 2);
 
 			$template->assign_block_vars('userdata', array(
-				'ACCOUNT_TRAFFIC' => ($userdata['user_id'] != ANONYMOUS) ? sprintf($lang['Dl_account'], $user_traffic_out) : ''
+				'ACCOUNT_TRAFFIC' => ($user->data['user_id'] != ANONYMOUS) ? sprintf($lang['Dl_account'], $user_traffic_out) : ''
 				)
 			);
 		}

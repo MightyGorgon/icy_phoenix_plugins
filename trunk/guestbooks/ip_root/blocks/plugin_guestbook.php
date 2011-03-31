@@ -17,7 +17,7 @@ if(!function_exists('cms_plugin_guestbook_form'))
 {
 	function cms_plugin_guestbook_form()
 	{
-		global $db, $cache, $config, $template, $images, $lang, $userdata, $bbcode, $table_prefix, $block_id, $cms_config_vars;
+		global $db, $cache, $config, $template, $images, $lang, $user, $bbcode, $table_prefix, $block_id, $cms_config_vars;
 
 		if (empty($config['plugins']['guestbooks']['enabled']) || empty($config['plugins']['guestbooks']['dir']))
 		{
@@ -95,12 +95,12 @@ if(!function_exists('cms_plugin_guestbook_form'))
 			$guestbook_title = censor_text($guestbook_data['guestbook_title']);
 			//$guestbook_title = ((strlen($guestbook_title) > 55) ? (htmlspecialchars(substr(htmlspecialchars_decode($guestbook_title, ENT_COMPAT), 0, 52)) . '...') : $guestbook_title);
 			$bbcode->allow_html = false;
-			$bbcode->allow_bbcode = ($userdata['user_allowbbcode'] && $config['allow_bbcode']) ? true : false;
-			$bbcode->allow_smilies = ($userdata['user_allowsmile'] && $config['allow_smilies']) ? true : false;
+			$bbcode->allow_bbcode = ($user->data['user_allowbbcode'] && $config['allow_bbcode']) ? true : false;
+			$bbcode->allow_smilies = ($user->data['user_allowsmile'] && $config['allow_smilies']) ? true : false;
 			$guestbook_description = generate_text_for_display($guestbook_data['guestbook_description'], false, true, false, '999999');
 
 			$inputs_array = array();
-			$is_owner = ($userdata['user_id'] == $guestbook_data['guestbook_owner']) ? true : false;
+			$is_owner = ($user->data['user_id'] == $guestbook_data['guestbook_owner']) ? true : false;
 			$admin_allowed = (check_auth_level(AUTH_ADMIN) || $is_owner) ? true : false;
 			$input_allowed = (check_auth_level($guestbook_data['guestbook_auth_post']) || $is_owner) ? true : false;
 			$edit_allowed = (check_auth_level(AUTH_ADMIN) || $is_owner) ? true : false;
@@ -143,10 +143,10 @@ if(!function_exists('cms_plugin_guestbook_form'))
 					$guestbook_post_title = censor_text($items_array[$i]['post_subject']);
 					$guestbook_date = create_date_ip($config['default_dateformat'], $items_array[$i]['post_time'], $config['board_timezone']);
 
-					//$bbcode->allow_html = ($userdata['user_allowhtml'] && $config['allow_html'] && ($items_array[$i]['post_flags'] & OPTION_FLAG_HTML)) ? true : false;
+					//$bbcode->allow_html = ($user->data['user_allowhtml'] && $config['allow_html'] && ($items_array[$i]['post_flags'] & OPTION_FLAG_HTML)) ? true : false;
 					$bbcode->allow_html = false;
-					$bbcode->allow_bbcode = ($userdata['user_allowbbcode'] && $config['allow_bbcode'] && ($items_array[$i]['post_flags'] & OPTION_FLAG_BBCODE)) ? true : false;
-					$bbcode->allow_smilies = ($userdata['user_allowsmile'] && $config['allow_smilies'] && ($items_array[$i]['post_flags'] & OPTION_FLAG_SMILIES)) ? true : false;
+					$bbcode->allow_bbcode = ($user->data['user_allowbbcode'] && $config['allow_bbcode'] && ($items_array[$i]['post_flags'] & OPTION_FLAG_BBCODE)) ? true : false;
+					$bbcode->allow_smilies = ($user->data['user_allowsmile'] && $config['allow_smilies'] && ($items_array[$i]['post_flags'] & OPTION_FLAG_SMILIES)) ? true : false;
 					$guestbook_post = generate_text_for_display($items_array[$i]['post_text'], false, true, false, '999999');
 
 					$edit_link = '';
@@ -157,7 +157,7 @@ if(!function_exists('cms_plugin_guestbook_form'))
 
 					$post_append_url = $class_guestbooks->guestbook_id_var . '=' . $post_guestbook_id . '&amp;' . $class_guestbooks->post_id_var . '=' . $post_post_id;
 
-					$post_moderation_allowed = ($admin_allowed || (($items_array[$i]['poster_id'] != ANONYMOUS) && ($items_array[$i]['poster_id'] == $userdata['user_id']) && check_auth_level($guestbook_data['guestbook_auth_edit']))) ? true : false;
+					$post_moderation_allowed = ($admin_allowed || (($items_array[$i]['poster_id'] != ANONYMOUS) && ($items_array[$i]['poster_id'] == $user->data['user_id']) && check_auth_level($guestbook_data['guestbook_auth_edit']))) ? true : false;
 					if ($post_moderation_allowed)
 					{
 						$edit_link = append_sid($ip_root_path . CMS_PAGE_GUESTBOOK . '?' . $post_append_url . '&amp;mode=input&amp;action=edit');
@@ -217,7 +217,7 @@ if(!function_exists('cms_plugin_guestbook_form'))
 					'post_text' => array('post_type' => 'post', 'value' => $table_posts_fields['post_text']),
 				);
 
-				if (($userdata['user_id'] == ANONYMOUS) || ($action == 'edit'))
+				if (($user->data['user_id'] == ANONYMOUS) || ($action == 'edit'))
 				{
 					$table_fields_keys_extra = array(
 						'post_username' => array('post_type' => 'post', 'value' => $table_posts_fields['post_username']),
@@ -239,7 +239,7 @@ if(!function_exists('cms_plugin_guestbook_form'))
 				);
 			}
 
-			if (!$userdata['session_logged_in'])
+			if (!$user->data['session_logged_in'])
 			{
 				include_once(IP_ROOT_PATH . 'includes/class_captcha.' . PHP_EXT);
 				$class_captcha = new class_captcha();

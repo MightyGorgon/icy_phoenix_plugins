@@ -22,8 +22,9 @@ if (!defined('PHP_EXT')) define('PHP_EXT', substr(strrchr(__FILE__, '.'), 1));
 include(IP_ROOT_PATH . 'common.' . PHP_EXT);
 
 // Start session management
-$userdata = session_pagestart($user_ip);
-init_userprefs($userdata);
+$user->session_begin();
+//$auth->acl($user->data);
+$user->setup();
 // End session management
 
 include(IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['activity']['dir'] . 'common.' . PHP_EXT);
@@ -44,8 +45,8 @@ if (!$action)
 	$action = ($_POST['action']) ? $_POST['action'] : $_POST['action'];
 }
 
-$user_id = $userdata['user_id'];
-if (($config['ina_guest_play'] == '2') && !$userdata['session_logged_in'])
+$user_id = $user->data['user_id'];
+if (($config['ina_guest_play'] == '2') && !$user->data['session_logged_in'])
 {
 	redirect(append_sid(CMS_PAGE_LOGIN . '?redirect=activity.' . PHP_EXT, true));
 	/*
@@ -57,7 +58,7 @@ if (($config['ina_guest_play'] == '2') && !$userdata['session_logged_in'])
 
 function CheckReturnPath($id)
 {
-	global $lang, $config, $userdata;
+	global $lang, $config, $user;
 
 	if(($config['ina_use_rating_reward']) && ($config['ina_rating_reward'] > 0))
 	{
@@ -67,14 +68,14 @@ function CheckReturnPath($id)
 			{
 				include(IP_ROOT_PATH . 'includes/functions_points.' . PHP_EXT);
 				$points_name = $config['points_name'];
-				add_points($userdata['user_id'], $config['ina_rating_reward']);
+				add_points($user->data['user_id'], $config['ina_rating_reward']);
 				$msg = str_replace("%P%", $config['ina_rating_reward'] .'&nbsp;'. $points_name, $lang['rating_payout_message']);
 			}
 			if($config['use_cash_system'] || $config['use_allowance_system'])
 			{
 				include(IP_ROOT_PATH . 'includes/rewards_api.' . PHP_EXT);
 				$points_name = $config['ina_cash_name'];
-				add_reward($userdata['user_id'], $config['ina_rating_reward']);
+				add_reward($user->data['user_id'], $config['ina_rating_reward']);
 				$msg = str_replace("%P%", $config['ina_rating_reward'] .'&nbsp;'. $points_name, $lang['rating_payout_message']);
 			}
 		}
@@ -101,7 +102,7 @@ if ($mode == 'chat')
 
 	$template->assign_block_vars('chat', array());
 
-	if (!$config['ina_use_shoutbox'] || $userdata['user_id'] == ANONYMOUS)
+	if (!$config['ina_use_shoutbox'] || $user->data['user_id'] == ANONYMOUS)
 	{
 		message_die(GENERAL_ERROR, $lang['shoutbox_closed']);
 	}
@@ -122,9 +123,9 @@ if ($mode == 'chat')
 		$message = censor_text($message);
 
 		global $bbcode;
-		$html_on = ($userdata['user_allowhtml'] && $config['allow_html']) ? 1 : 0 ;
-		$bbcode_on = ($userdata['user_allowbbcode'] && $config['allow_bbcode']) ? 1 : 0 ;
-		$smilies_on = ($userdata['user_allowsmile'] && $config['allow_smilies']) ? 1 : 0 ;
+		$html_on = ($user->data['user_allowhtml'] && $config['allow_html']) ? 1 : 0 ;
+		$bbcode_on = ($user->data['user_allowbbcode'] && $config['allow_bbcode']) ? 1 : 0 ;
+		$smilies_on = ($user->data['user_allowsmile'] && $config['allow_smilies']) ? 1 : 0 ;
 
 		$bbcode->allow_html = $html_on;
 		$bbcode->allow_bbcode = $bbcode_on;
@@ -184,7 +185,7 @@ if ($mode == 'chat')
 
 		$q = "SELECT *
 				FROM ". INA_SESSIONS ."
-				WHERE playing_id = '". $userdata['user_id'] ."'";
+				WHERE playing_id = '". $user->data['user_id'] ."'";
 		$r = $db->sql_query($q);
 		$playing = $db->sql_fetchrow($r);
 		$is_playing = $playing['playing_id'];
@@ -204,9 +205,9 @@ if ($mode == 'chat')
 		$message = $to_add;
 
 		global $bbcode;
-		$html_on = ($userdata['user_allowhtml'] && $config['allow_html']) ? 1 : 0 ;
-		$bbcode_on = ($userdata['user_allowbbcode'] && $config['allow_bbcode']) ? 1 : 0 ;
-		$smilies_on = ($userdata['user_allowsmile'] && $config['allow_smilies']) ? 1 : 0 ;
+		$html_on = ($user->data['user_allowhtml'] && $config['allow_html']) ? 1 : 0 ;
+		$bbcode_on = ($user->data['user_allowbbcode'] && $config['allow_bbcode']) ? 1 : 0 ;
+		$smilies_on = ($user->data['user_allowsmile'] && $config['allow_smilies']) ? 1 : 0 ;
 
 		$bbcode->allow_html = $html_on;
 		$bbcode->allow_bbcode = $bbcode_on;
@@ -220,7 +221,7 @@ if ($mode == 'chat')
 			$message = addslashes(stripslashes($message));
 			$message = str_replace('%S%', '%s%', $message);
 			$message = str_replace('%E%', '%e%', $message);
-			$new_session = '%S%[b]' . $userdata['username'] . '[/b]: ' . $message . '%E%';
+			$new_session = '%S%[b]' . $user->data['username'] . '[/b]: ' . $message . '%E%';
 			$new_session .= $chat_session;
 			$new_session = addslashes(stripslashes($new_session));
 
@@ -234,7 +235,7 @@ if ($mode == 'chat')
 			$message = addslashes(stripslashes($message));
 			$message = str_replace('%S%', '%s%', $message);
 			$message = str_replace('%E%', '%e%', $message);
-			$new_session = '%S%[b]' . $userdata['username'] . '[/b]: ' . $message . '%E%';
+			$new_session = '%S%[b]' . $user->data['username'] . '[/b]: ' . $message . '%E%';
 			$new_session = addslashes(stripslashes($new_session));
 
 			$q = "INSERT INTO ". INA_CHAT ."
@@ -247,12 +248,12 @@ if ($mode == 'chat')
 		{
 			$q = "UPDATE ". USERS_TABLE ."
 					SET user_session_page = '". CMS_PAGE_ACTIVITY_GAME ."', ina_cheat_fix = '". $is_playing_g ."', playing_time = '". $is_playing_t ."'
-					WHERE user_id = '". $userdata['user_id'] ."'";
+					WHERE user_id = '". $user->data['user_id'] ."'";
 			$db->sql_query($q);
 
 			$q = "UPDATE ". SESSIONS_TABLE ."
 					SET session_page = '". CMS_PAGE_ACTIVITY_GAME ."'
-					WHERE session_user_id = '". $userdata['user_id'] ."'";
+					WHERE session_user_id = '". $user->data['user_id'] ."'";
 			$db->sql_query($q);
 		}
 	}
@@ -271,9 +272,9 @@ if ($mode == 'chat')
 		$message = censor_text($message);
 
 		global $bbcode;
-		$html_on = ($userdata['user_allowhtml'] && $config['allow_html']) ? 1 : 0 ;
-		$bbcode_on = ($userdata['user_allowbbcode'] && $config['allow_bbcode']) ? 1 : 0 ;
-		$smilies_on = ($userdata['user_allowsmile'] && $config['allow_smilies']) ? 1 : 0 ;
+		$html_on = ($user->data['user_allowhtml'] && $config['allow_html']) ? 1 : 0 ;
+		$bbcode_on = ($user->data['user_allowbbcode'] && $config['allow_bbcode']) ? 1 : 0 ;
+		$smilies_on = ($user->data['user_allowsmile'] && $config['allow_smilies']) ? 1 : 0 ;
 
 		$bbcode->allow_html = $html_on;
 		$bbcode->allow_bbcode = $bbcode_on;
@@ -330,12 +331,12 @@ if ($mode == 'challenge')
 	$who_id = ($_GET['u']) ? $_GET['u'] : $_GET['u'];
 	$game = ($_GET['g']) ? $_GET['g'] : $_GET['g'];
 
-	if ($who == $userdata['user_id'])
+	if ($who == $user->data['user_id'])
 	{
 		exit(1);
 	}
 
-	if ($userdata['user_id'] == ANONYMOUS || $who == ANONYMOUS)
+	if ($user->data['user_id'] == ANONYMOUS || $who == ANONYMOUS)
 	{
 		exit(2);
 	}
@@ -347,7 +348,7 @@ if ($mode == 'challenge')
 	$game = $returned_data[1];
 	$message_sent = $lang['pm_challenge_msg'];
 	$message_sent = $who .', '. $message_sent;
-	$message_sent = str_replace('%n%', $userdata['username'], $message_sent);
+	$message_sent = str_replace('%n%', $user->data['username'], $message_sent);
 	$message_sent = str_replace('%g%', $game, $message_sent);
 	$top = $lang['pm_msg_top'];
 	$middle = "<br />------------------------------------------------------------------<br />";
@@ -384,7 +385,7 @@ if ($mode == 'rate')
 		$q = "SELECT *
 				FROM ". INA_RATINGS ."
 				WHERE game_id = '". $game ."'
-				AND player = '". $userdata['user_id'] ."'";
+				AND player = '". $user->data['user_id'] ."'";
 		$r = $db -> sql_query($q);
 		$row = $db -> sql_fetchrow($r);
 
@@ -424,7 +425,7 @@ if ($mode == 'rate')
 			$q = "SELECT *
 					FROM ". INA_RATINGS ."
 					WHERE game_id = '". $game ."'
-					AND player = '". $userdata['user_id'] ."'";
+					AND player = '". $user->data['user_id'] ."'";
 			$r = $db -> sql_query($q);
 			$row = $db -> sql_fetchrow($r);
 			if ($row['player'])
@@ -435,7 +436,7 @@ if ($mode == 'rate')
 				message_die(GENERAL_ERROR, $lang['rating_page_7'], $lang['rating_page_error']);
 
 			$q = "INSERT INTO ". INA_RATINGS ."
-					VALUES ('". $game ."', '". $rating ."', '". time() ."', '". $userdata['user_id'] ."')";
+					VALUES ('". $game ."', '". $rating ."', '". time() ."', '". $user->data['user_id'] ."')";
 			$r = $db -> sql_query($q);
 
 	CheckReturnPath($cat_var_id);
@@ -444,7 +445,7 @@ if ($mode == 'rate')
 
 if ($mode == 'comments')
 {
-	if(($config['ina_disable_comments_page']) && ($userdata['user_level'] != ADMIN))
+	if(($config['ina_disable_comments_page']) && ($user->data['user_level'] != ADMIN))
 	{
 		message_die(GENERAL_ERROR, $lang['disabled_page_error'], $lang['ban_error']);
 	}
@@ -467,7 +468,7 @@ if ($mode == 'comments')
 		$q = "SELECT score
 				FROM ". iNA_SCORES ."
 				WHERE game_name = '". $game_for_comment ."'
-				AND player = '". $userdata['username'] ."'";
+				AND player = '". $user->data['username'] ."'";
 		$r = $db->sql_query($q);
 		$row = $db->sql_fetchrow($r);
 		$score = $row['score'];
@@ -500,7 +501,7 @@ if ($mode == 'comments')
 	$comment_left = addslashes(stripslashes($comment_left));
 
 	$sql = "INSERT INTO ". INA_TROPHY_COMMENTS ."
-			VALUES ('" . $game_for_comment . "', '" . $userdata['user_id'] . "', '" . $comment_left . "', '" . time() . "', '" . $score . "')";
+			VALUES ('" . $game_for_comment . "', '" . $user->data['user_id'] . "', '" . $comment_left . "', '" . time() . "', '" . $score . "')";
 		if (!$result = $db -> sql_query($sql))
 		{
 			message_die(GENERAL_ERROR, "Error Inserting Comment Information.", "", __LINE__, __FILE__, $sql);
@@ -613,7 +614,7 @@ if ($mode == 'comments')
 		}
 	}
 
-	$current_holder_score = ($userdata['user_level'] == ADMIN) ? '<a href="'. append_sid('activity_popup.' . PHP_EXT .'?mode=comments&amp;action=delete_comment&amp;game=' . $game_comment . '&amp;player=' . $current_holder_id) . '">' . FormatScores($current_holder_score) . '</a>' : FormatScores($current_holder_score);
+	$current_holder_score = ($user->data['user_level'] == ADMIN) ? '<a href="'. append_sid('activity_popup.' . PHP_EXT .'?mode=comments&amp;action=delete_comment&amp;game=' . $game_comment . '&amp;player=' . $current_holder_id) . '">' . FormatScores($current_holder_score) . '</a>' : FormatScores($current_holder_score);
 
 	$template->assign_block_vars('comments.main', array(
 		'MAIN_LEFT' => $lang['trophy_comment_11'],
@@ -651,7 +652,7 @@ if ($mode == 'comments')
 						break;
 					}
 				}
-			$comment_left_score = ($userdata['user_level'] == ADMIN) ? '<a href="' . append_sid('activity_popup.' . PHP_EXT . '?mode=comments&amp;action=delete_comment&amp;game=' . $game_comment . '&amp;player=' . $comment_left_id) . '">' . $comment_left_score . '</a>' : $comment_left_score;
+			$comment_left_score = ($user->data['user_level'] == ADMIN) ? '<a href="' . append_sid('activity_popup.' . PHP_EXT . '?mode=comments&amp;action=delete_comment&amp;game=' . $game_comment . '&amp;player=' . $comment_left_id) . '">' . $comment_left_score . '</a>' : $comment_left_score;
 
 			$template->assign_block_vars('comments.comment', array(
 				'TROPHY_HOLDER' => '<a href="'. append_sid(CMS_PAGE_PROFILE . '?mode=viewprofile&amp;' . POST_USERS_URL . '=' . $comment_left_id) . '">' . $comment_left_name . '</a>',
@@ -667,7 +668,7 @@ if ($mode == 'comments')
 			}
 		}
 
-if (($action == 'delete_comment') && ($userdata['user_level'] == ADMIN))
+if (($action == 'delete_comment') && ($user->data['user_level'] == ADMIN))
 	{
 	$g = ($_GET['game']) ? $_GET['game'] : $_GET['game'];
 	$n = ($_GET['player']) ? $_GET['player'] : $_GET['player'];

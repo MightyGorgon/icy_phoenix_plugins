@@ -210,7 +210,7 @@ function get_kb_nav($parent)
 
 function get_kb_articles($id = false, $approve, $block_name, $start = -1, $articles_in_cat = 0, $kb_is_auth = '')
 {
-	global $db, $config, $template, $images, $userdata, $lang, $is_block, $page_id, $is_admin;
+	global $db, $config, $template, $images, $user, $lang, $is_block, $page_id, $is_admin;
 	global $kb_news_sort_method_extra, $kb_news_sort_method, $kb_news_sort_par, $kb_config, $kb_is_auth;
 
 	$server_url = create_server_url();
@@ -275,7 +275,7 @@ function get_kb_articles($id = false, $approve, $block_name, $start = -1, $artic
 		$article_description = censor_text($article_description);
 		$article_title = censor_text($article_title);
 
-		if (($config['url_rw'] == true) || (($config['url_rw_guests'] == true) && ($userdata['user_id'] == ANONYMOUS)))
+		if (($config['url_rw'] == true) || (($config['url_rw_guests'] == true) && ($user->data['user_id'] == ANONYMOUS)))
 		{
 			$temp_url = append_sid (str_replace ('--', '-', make_url_friendly($article['article_title']) . '-kba' . $article_id . '.html'));
 		}
@@ -389,7 +389,7 @@ function get_kb_articles($id = false, $approve, $block_name, $start = -1, $artic
 
 function get_kb_stats($type = false, $approve, $block_name, $start = -1, $articles_in_cat = 0, $kb_is_auth)
 {
-	global $db, $config, $template, $images, $userdata, $lang, $is_block, $page_id, $is_admin;
+	global $db, $config, $template, $images, $user, $lang, $is_block, $page_id, $is_admin;
 
 	$server_url = create_server_url();
 
@@ -493,7 +493,7 @@ function get_kb_stats($type = false, $approve, $block_name, $start = -1, $articl
 			$delete_img = '<a href="' . $delete_url . '"><img src="' . $images['icon_delpost'] . '" alt="' . $lang['Delete'] . '" /></a>';
 			$delete = '<a href="' . $delete_url . '">' . $lang['Delete'] . '</a>';
 		}
-		elseif ($userdata['user_level'] == ADMIN)
+		elseif ($user->data['user_level'] == ADMIN)
 		{
 			$category = get_kb_cat($article_cat);
 			$category_name = $category['category_name'];
@@ -587,7 +587,7 @@ function update_kb_number($id, $change)
 
 function kb_notify($action, $message, $to_id, $from_id, $info = 'new')
 {
-	global $lang, $config, $kb_config, $db, $userdata;
+	global $lang, $config, $kb_config, $db, $user;
 
 	switch ($info)
 	{
@@ -628,18 +628,18 @@ function kb_notify($action, $message, $to_id, $from_id, $info = 'new')
 // wgErics good old insert_pm function
 function kb_insert_pm($to_id, $message, $subject, $from_id, $html_on = 0, $acro_auto_on = 1, $bbcode_on = 1, $smilies_on = 1)
 {
-	global $db, $config, $userdata, $lang, $user_ip;
+	global $db, $config, $user, $lang;
 
 	if (empty($from_id))
 	{
-		$from_id = $userdata['user_id'];
+		$from_id = $user->data['user_id'];
 	}
 
 	//get varibles ready
 	$to_id = intval($to_id);
 	$from_id = intval($from_id);
 	$msg_time = time();
-	$attach_sig = $userdata['user_attachsig'];
+	$attach_sig = $user->data['user_attachsig'];
 
 	// Why send PM to yourself???
 	if ($to_id == $from_id)
@@ -716,7 +716,7 @@ function kb_insert_pm($to_id, $message, $subject, $from_id, $html_on = 0, $acro_
 	}
 
 	$sql_info = "INSERT INTO " . PRIVMSGS_TABLE . " (privmsgs_type, privmsgs_subject, privmsgs_text, privmsgs_from_userid, privmsgs_to_userid, privmsgs_date, privmsgs_ip, privmsgs_enable_html, privmsgs_enable_bbcode, privmsgs_enable_smilies, privmsgs_enable_autolinks_acronyms, privmsgs_attach_sig)
-		VALUES (" . PRIVMSGS_NEW_MAIL . ", '" . $db->sql_escape($privmsg_subject) . "', '" . $db->sql_escape($privmsg_message) . "', " . $from_id . ", " . $to_userdata['user_id'] . ", $msg_time, '$user_ip', $html_on, $bbcode_on, $smilies_on, $acro_auto_on, $attach_sig)";
+		VALUES (" . PRIVMSGS_NEW_MAIL . ", '" . $db->sql_escape($privmsg_subject) . "', '" . $db->sql_escape($privmsg_message) . "', " . $from_id . ", " . $to_userdata['user_id'] . ", $msg_time, '" . $db->sql_escape($user->ip) . "', $html_on, $bbcode_on, $smilies_on, $acro_auto_on, $attach_sig)";
 	$result = $db->sql_query($sql_info);
 	{
 		message_die(GENERAL_ERROR, "Could not insert/update private message sent info.", "", __LINE__, __FILE__, $sql_info);
@@ -767,18 +767,18 @@ function kb_insert_pm($to_id, $message, $subject, $from_id, $html_on = 0, $acro_
 
 function kb_mailer($to_id, $message, $subject, $from_id, $html_on = 0, $acro_auto_on = 1, $bbcode_on = 1, $smilies_on = 1)
 {
-	global $db, $config, $userdata, $lang, $user_ip;
+	global $db, $config, $user, $lang;
 
 	if (!$from_id)
 	{
-		$from_id = $userdata['user_id'];
+		$from_id = $user->data['user_id'];
 	}
 
 	//get varibles ready
 	$to_id = intval($to_id);
 	$from_id = intval($from_id);
 	$msg_time = time();
-	$attach_sig = $userdata['user_attachsig'];
+	$attach_sig = $user->data['user_attachsig'];
 
 	//get to users info
 	$sql = "SELECT user_id, user_notify_pm, user_email, user_lang, user_active
@@ -837,7 +837,7 @@ function kb_mailer($to_id, $message, $subject, $from_id, $html_on = 0, $acro_aut
 
 function get_kb_cat_index($parent = 0)
 {
-	global $db, $template, $userdata, $is_block, $page_id, $kb_config, $kb_quick_nav;
+	global $db, $template, $user, $is_block, $page_id, $kb_config, $kb_quick_nav;
 
 	$sql = "SELECT *
 				FROM " . KB_CATEGORIES_TABLE . "
@@ -847,7 +847,7 @@ function get_kb_cat_index($parent = 0)
 
 	// Start auth check
 		$kb_is_auth_all = array();
-		$kb_is_auth_all = kb_auth(AUTH_ALL, AUTH_LIST_ALL, $userdata);
+		$kb_is_auth_all = kb_auth(AUTH_ALL, AUTH_LIST_ALL, $user->data);
 	// End of auth check
 
 	while ($category = $db->sql_fetchrow($result))
@@ -897,7 +897,7 @@ function get_kb_cat_subs($parent, $kb_is_auth_all = false)
 		// Start auth check
 		//
 			$kb_is_auth_all = array();
-			$kb_is_auth_all = kb_auth(AUTH_ALL, AUTH_LIST_ALL, $userdata);
+			$kb_is_auth_all = kb_auth(AUTH_ALL, AUTH_LIST_ALL, $user->data);
 
 		// End of auth check
 		//
@@ -1061,7 +1061,7 @@ function get_kb_cat_subs_list($auth_type, $parent, $select = 1, $selected = fals
 
 function get_kb_cat_list($auth_type, $id = 0, $select = 1, $selected = false, $kb_is_auth_all = false, $is_admin = false)
 {
-	global $db, $userdata;
+	global $db, $user;
 
 	$idfield = 'category_id';
 	$namefield = 'category_name';
@@ -1084,7 +1084,7 @@ function get_kb_cat_list($auth_type, $id = 0, $select = 1, $selected = false, $k
 	{
 		// Start auth check
 		$kb_is_auth_all = array();
-		$kb_is_auth_all = kb_auth(AUTH_ALL, AUTH_LIST_ALL, $userdata);
+		$kb_is_auth_all = kb_auth(AUTH_ALL, AUTH_LIST_ALL, $user->data);
 		// End of auth check
 	}
 
@@ -1206,7 +1206,7 @@ function get_kb_article_list($sel_id)
 // insert post for site updates, by netclectic - Adrian Cockburn
 function kb_insert_post($message, $subject, $forum_id, $user_id, $user_name, $user_attach_sig, $topic_id = '', $message_update_text = '', $topic_type = POST_NORMAL, $do_notification = false, $notify_user = false, $current_time = 0, $error_die_function = '', $html_on = 0, $acro_auto_on = 1, $bbcode_on = 1, $smilies_on = 1)
 {
-	global $db, $config, $userdata, $lang, $user_ip, $kb_config;
+	global $db, $config, $user, $lang, $kb_config;
 	// initialise some variables
 
 	$poll_title = '';
@@ -1243,7 +1243,7 @@ function kb_insert_post($message, $subject, $forum_id, $user_id, $user_name, $us
 		// insert the actual post text for our new post
 		$message_tmp = (($mode == 'newtopic') ? $message : $message_update_text);
 
-		$sql = "INSERT INTO " . POSTS_TABLE . " (topic_id, forum_id, poster_id, post_username, post_subject, post_text, post_time, poster_ip, enable_bbcode, enable_html, enable_smilies, enable_autolinks_acronyms, enable_sig) VALUES ($topic_id, $forum_id, " . $user_id . ", '$username', '$subject', '$message_tmp', $current_time, '$user_ip', $bbcode_on, $html_on, $smilies_on, $acro_auto_on, $user_attach_sig)";
+		$sql = "INSERT INTO " . POSTS_TABLE . " (topic_id, forum_id, poster_id, post_username, post_subject, post_text, post_time, poster_ip, enable_bbcode, enable_html, enable_smilies, enable_autolinks_acronyms, enable_sig) VALUES ($topic_id, $forum_id, " . $user_id . ", '$username', '$subject', '$message_tmp', $current_time, '" . $db->sql_escape($user->ip) . "', $bbcode_on, $html_on, $smilies_on, $acro_auto_on, $user_attach_sig)";
 		$db->sql_transaction('begin');
 		$db->sql_query($sql);
 		$post_id = $db->sql_nextid();
@@ -1342,7 +1342,7 @@ function this_kb_mxurl_search($args = '', $force_standalone_mode = false)
 
 function get_kb_comments($topic_id = '', $start = -1, $show_num_comments = 0)
 {
-	global $db, $cache, $config, $template, $images, $userdata, $lang, $bbcode, $is_block, $page_id;
+	global $db, $cache, $config, $template, $images, $user, $lang, $bbcode, $is_block, $page_id;
 
 	if ($topic_id == '')
 	{
@@ -1455,7 +1455,7 @@ function get_kb_comments($topic_id = '', $start = -1, $show_num_comments = 0)
 
 		if (!$config['allow_html'])
 		{
-			if ($user_sig != '' && $userdata['user_allowhtml'])
+			if ($user_sig != '' && $user->data['user_allowhtml'])
 			{
 				$user_sig = preg_replace('#(<)([\/]?.*?)(>)#is', "&lt;\\2&gt;", $user_sig);
 			}
@@ -1527,12 +1527,12 @@ function get_kb_comments($topic_id = '', $start = -1, $show_num_comments = 0)
 	}
 }
 
-function kb_get_data($row = '', $userdata = '', $kb_post_mode = 'add')
+function kb_get_data($row = '', $user_data = '', $kb_post_mode = 'add')
 {
 	global $db, $lang, $username, $kb_config;
 
 		// Debug checks
-		if (empty($row) || empty($userdata))
+		if (empty($row) || empty($user_data))
 		{
 			die('kb_get_data - empty pars');
 		}
@@ -1562,9 +1562,9 @@ function kb_get_data($row = '', $userdata = '', $kb_post_mode = 'add')
 		$kb_comment['article_author_sig'] = $kb_author_data['user_attachsig'];
 
 		// Article editor
-		$kb_comment['article_editor_id'] = $userdata['user_id'];
-		$kb_comment['article_editor'] = ($userdata['user_id'] != '-1') ? $userdata['username'] : (($username == '') ? $lang['Guest'] : stripslashes($username));
-		$kb_comment['article_editor_sig'] = ($userdata['user_id'] != '-1') ? $userdata['user_attachsig'] : '0';
+		$kb_comment['article_editor_id'] = $user_data['user_id'];
+		$kb_comment['article_editor'] = ($user_data['user_id'] != '-1') ? $user_data['username'] : (($username == '') ? $lang['Guest'] : stripslashes($username));
+		$kb_comment['article_editor_sig'] = ($user_data['user_id'] != '-1') ? $user_data['user_attachsig'] : '0';
 
 		// Debug checks
 		if ($kb_post_mode == 'edit' && $kb_config['use_comments'] && empty($kb_comment['topic_id']))

@@ -41,7 +41,7 @@ if (sizeof($kb_row) > 0)
 
 	// Start auth check
 	$kb_is_auth_all = array();
-	$kb_is_auth_all = kb_auth(AUTH_ALL, AUTH_LIST_ALL, $userdata);
+	$kb_is_auth_all = kb_auth(AUTH_ALL, AUTH_LIST_ALL, $user->data);
 	$kb_is_auth = $kb_is_auth_all[$article_category_id];
 	// End of auth check
 
@@ -221,7 +221,7 @@ if (!$print_version && !$reader_mode)
 }
 
 // edit
-if ((($userdata['user_id'] == $author_id) && $kb_is_auth['auth_edit']) || $kb_is_auth['auth_mod'])
+if ((($user->data['user_id'] == $author_id) && $kb_is_auth['auth_edit']) || $kb_is_auth['auth_mod'])
 {
 	$edit_url = append_sid(this_kb_mxurl('mode=edit&amp;k=' . $article_id));
 	$edit_img = '<a href="' . $edit_url . '"><img src="' . IP_ROOT_PATH . $images['icon_edit'] . '" alt="' . $lang['Edit_delete_post'] . '" title="' . $lang['Edit_delete_post'] . '" /></a>';
@@ -260,7 +260,7 @@ else
 	$kb_comment = array();
 
 	// Populate the kb_comment variable
-	$kb_comment = kb_get_data($kb_row, $userdata);
+	$kb_comment = kb_get_data($kb_row, $user->data);
 
 	// Compose post header
 	$subject = $lang['KB_comment_prefix'] . $kb_comment['article_title'];

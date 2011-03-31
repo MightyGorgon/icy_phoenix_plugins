@@ -53,7 +53,7 @@ if ($dl_ids)
 /*
 * check the current user for mod permissions
 */
-if (($userdata['user_level'] == ADMIN) || ($userdata['user_level'] == MOD))
+if (($user->data['user_level'] == ADMIN) || ($user->data['user_level'] == MOD))
 {
 	$allow_bug_mod = true;
 }
@@ -65,7 +65,7 @@ else
 /*
 * save new or edited bug report
 */
-if (($action == 'save') && $userdata['session_logged_in'])
+if (($action == 'save') && $user->data['session_logged_in'])
 {
 	$report_title = request_var('report_title', '', true);
 
@@ -95,14 +95,14 @@ if (($action == 'save') && $userdata['session_logged_in'])
 	$sql = "INSERT INTO " . DL_BUGS_TABLE . "
 		(df_id, report_title, report_text, report_file_ver, report_date, report_author_id, report_status_date, report_php, report_db, report_forum)
 		VALUES
-		($df_id, '" . $db->sql_escape($report_title) . "', '" . $db->sql_escape($report_text) . "', '" . $db->sql_escape($report_file_ver) . "', " . time() . ", " . $userdata['user_id'] . ", " . time() . ", '" . $db->sql_escape($report_php) . "', '" . $db->sql_escape($report_db) . "', '" . $db->sql_escape($report_forum) . "')";
+		($df_id, '" . $db->sql_escape($report_title) . "', '" . $db->sql_escape($report_text) . "', '" . $db->sql_escape($report_file_ver) . "', " . time() . ", " . $user->data['user_id'] . ", " . time() . ", '" . $db->sql_escape($report_php) . "', '" . $db->sql_escape($report_db) . "', '" . $db->sql_escape($report_forum) . "')";
 	$db->sql_query($sql);
 	$fav_id = $db->sql_nextid();
 
 	$sql = "INSERT INTO " . DL_BUG_HISTORY_TABLE . "
 		(df_id, report_id, report_his_type, report_his_date, report_his_value)
 		VALUES
-		($df_id, $fav_id, 'status', " . time() . ", '0:" . $db->sql_escape($userdata['username']) . "')";
+		($df_id, $fav_id, 'status', " . time() . ", '0:" . $db->sql_escape($user->data['username']) . "')";
 	$result = $db->sql_query($sql);
 
 	$message = $lang['Dl_bug_report_added'] . '<br /><br />' . sprintf($lang['Click_return_bug_tracker'], '<a href="' . append_sid('downloads.' . PHP_EXT . '?view=bug_tracker&amp;df_id=' . $df_id) . '">', '</a>');
@@ -132,7 +132,7 @@ if ($action == 'status' && $fav_id && $allow_bug_mod)
 	$sql = "INSERT INTO " . DL_BUG_HISTORY_TABLE . "
 		(df_id, report_id, report_his_type, report_his_date, report_his_value)
 		VALUES
-		($df_id, $fav_id, 'status', " . time() . ", '$new_status:" . $db->sql_escape($userdata['username']) . ":" . $db->sql_escape($new_status_text) . "')";
+		($df_id, $fav_id, 'status', " . time() . ", '$new_status:" . $db->sql_escape($user->data['username']) . ":" . $db->sql_escape($new_status_text) . "')";
 	$result = $db->sql_query($sql);
 
 	$sql = "UPDATE " . DL_BUGS_TABLE . "
@@ -141,7 +141,7 @@ if ($action == 'status' && $fav_id && $allow_bug_mod)
 	$result = $db->sql_query($sql);
 
 	// Send email to report author about new status if it will not be the current one
-	if ($report_author_id <> $userdata['user_id'])
+	if ($report_author_id <> $user->data['user_id'])
 	{
 		$sql = "SELECT user_email, user_lang FROM " . USERS_TABLE . "
 			WHERE user_id = $report_author_id";
@@ -183,9 +183,9 @@ if ($action == 'status' && $fav_id && $allow_bug_mod)
 		$emailer = new emailer();
 
 		$emailer->headers('X-AntiAbuse: Board servername - ' . trim($config['server_name']));
-		$emailer->headers('X-AntiAbuse: User_id - ' . $userdata['user_id']);
-		$emailer->headers('X-AntiAbuse: Username - ' . $userdata['username']);
-		$emailer->headers('X-AntiAbuse: User IP - ' . decode_ip($user_ip));
+		$emailer->headers('X-AntiAbuse: User_id - ' . $user->data['user_id']);
+		$emailer->headers('X-AntiAbuse: Username - ' . $user->data['username']);
+		$emailer->headers('X-AntiAbuse: User IP - ' . $user_ip);
 
 		$emailer->use_template('dl_bt_status', $user_lang);
 		$emailer->to($user_email);
@@ -194,7 +194,7 @@ if ($action == 'status' && $fav_id && $allow_bug_mod)
 		$emailer->assign_vars(array(
 			'SITENAME' => $config['sitename'],
 			'BOARD_EMAIL' => $config['board_email_sig'],
-			'USERNAME' => $userdata['username'],
+			'USERNAME' => $user->data['username'],
 			'REPORT_TITLE' => $report_title,
 			'STATUS' => $lang['Dl_report_status'][$report_status],
 			'STATUS_TEXT' => $status_text,
@@ -241,7 +241,7 @@ if (($action == 'assign') && $df_id && $fav_id && $allow_bug_mod)
 	$result = $db->sql_query($sql);
 
 	// Send email to new assigned user if it will not be the current one
-	if ($new_user_id <> $userdata['user_id'])
+	if ($new_user_id <> $user->data['user_id'])
 	{
 		$script_path = $config['script_path'];
 		$server_name = trim($config['server_name']);
@@ -266,9 +266,9 @@ if (($action == 'assign') && $df_id && $fav_id && $allow_bug_mod)
 		$emailer = new emailer();
 
 		$emailer->headers('X-AntiAbuse: Board servername - ' . trim($config['server_name']));
-		$emailer->headers('X-AntiAbuse: User_id - ' . $userdata['user_id']);
-		$emailer->headers('X-AntiAbuse: Username - ' . $userdata['username']);
-		$emailer->headers('X-AntiAbuse: User IP - ' . decode_ip($user_ip));
+		$emailer->headers('X-AntiAbuse: User_id - ' . $user->data['user_id']);
+		$emailer->headers('X-AntiAbuse: Username - ' . $user->data['username']);
+		$emailer->headers('X-AntiAbuse: User IP - ' . $user_ip);
 
 		$emailer->use_template('dl_bt_assign', $report_assign_user_lang);
 		$emailer->to($report_assign_user_email);
@@ -277,7 +277,7 @@ if (($action == 'assign') && $df_id && $fav_id && $allow_bug_mod)
 		$emailer->assign_vars(array(
 			'SITENAME' => $config['sitename'],
 			'BOARD_EMAIL' => $config['board_email_sig'],
-			'USERNAME' => $userdata['username'],
+			'USERNAME' => $user->data['username'],
 			'U_BUG_REPORT' => $server_url.'downloads.' . PHP_EXT . '?view=bug_tracker&action=detail&fav_id=' . $fav_id
 			)
 		);
@@ -325,12 +325,12 @@ if ($action == 'detail' && $fav_id)
 	$db->sql_freeresult($result);
 
 	// Change status in the report was new and a team member will open the details
-	if (!$report_status && ($userdata['user_level'] == ADMIN || $userdata['user_level'] == MOD))
+	if (!$report_status && ($user->data['user_level'] == ADMIN || $user->data['user_level'] == MOD))
 	{
 		$sql = "INSERT INTO " . DL_BUG_HISTORY_TABLE . "
 			(df_id, report_id, report_his_type, report_his_date, report_his_value)
 			VALUES
-			($report_file_id, $report_id, 'status', " . time() . ", '1:" . $userdata['username'] . "')";
+			($report_file_id, $report_id, 'status', " . time() . ", '1:" . $user->data['username'] . "')";
 		$result = $db->sql_query($sql);
 		$report_status = 1;
 		$report_status_date = time();
@@ -498,7 +498,7 @@ if ($action == 'detail' && $fav_id)
 			}
 			$db->sql_freeresult($result);
 			$s_select_assign_member .= '</select>';
-			$s_select_assign_member = str_replace('<option value="'.$userdata['user_id'] . '">', '<option value="'.$userdata['user_id'] . '" selected="selected">', $s_select_assign_member);
+			$s_select_assign_member = str_replace('<option value="'.$user->data['user_id'] . '">', '<option value="'.$user->data['user_id'] . '" selected="selected">', $s_select_assign_member);
 
 			$template->assign_vars(array(
 				'S_FORM_ASSIGN_ACTION' => append_sid('downloads.' . PHP_EXT . '?view=bug_tracker&amp;action=assign&amp;df_id=' . $report_file_id . '&amp;fav_id=' . $fav_id),
@@ -539,7 +539,7 @@ if ($action == 'detail' && $fav_id)
 /*
 * display form to add a bug report
 */
-if ($action == 'add' && $userdata['session_logged_in'])
+if ($action == 'add' && $user->data['session_logged_in'])
 {
 	$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'dl_bt_add.tpl');
 
@@ -717,7 +717,7 @@ if (!$action)
 
 		if ($bt_show == 'own')
 		{
-			$sql_where .= " AND report_author_id = " . $userdata['user_id'];
+			$sql_where .= " AND report_author_id = " . $user->data['user_id'];
 		}
 		else
 		{
@@ -726,7 +726,7 @@ if (!$action)
 
 		if ($bt_show == 'assign')
 		{
-			$sql_where .= " AND report_assign_id = " . $userdata['user_id'];
+			$sql_where .= " AND report_assign_id = " . $user->data['user_id'];
 		}
 		else
 		{
@@ -903,7 +903,7 @@ if (!$action)
 
 		if ($bt_show == 'own')
 		{
-			$sql_where .= (($sql_where) ? " AND " : " WHERE ") . " report_author_id = " . $userdata['user_id'];
+			$sql_where .= (($sql_where) ? " AND " : " WHERE ") . " report_author_id = " . $user->data['user_id'];
 		}
 		else
 		{
@@ -912,7 +912,7 @@ if (!$action)
 
 		if ($bt_show == 'assign')
 		{
-			$sql_where .= (($sql_where) ? " AND " : " WHERE ") . " report_assign_id = " . $userdata['user_id'];
+			$sql_where .= (($sql_where) ? " AND " : " WHERE ") . " report_assign_id = " . $user->data['user_id'];
 		}
 		else
 		{
@@ -951,12 +951,12 @@ if (!$action)
 
 		if ($bt_show == 'own')
 		{
-			$sql_where .= " AND report_author_id = " . $userdata['user_id'];
+			$sql_where .= " AND report_author_id = " . $user->data['user_id'];
 		}
 
 		if ($bt_show == 'assign')
 		{
-			$sql_where .= " AND report_assign_id = " . $userdata['user_id'];
+			$sql_where .= " AND report_assign_id = " . $user->data['user_id'];
 		}
 
 		if ($total_reports)
@@ -1083,7 +1083,7 @@ $template->assign_vars(array(
 	)
 );
 
-if ($userdata['session_logged_in'])
+if ($user->data['session_logged_in'])
 {
 	$template->assign_block_vars('add_new_report', array(
 		'L_ADD_REPORT' => $lang['New_post']

@@ -43,9 +43,9 @@ $template->assign_block_vars('main', array(
 	)
 );
 
-if($userdata['user_level'] == ADMIN)
+if($user->data['user_level'] == ADMIN)
 	$admin_where = '';
-if($userdata['user_level'] != ADMIN)
+if($user->data['user_level'] != ADMIN)
 	$admin_where = "AND user_allow_viewonline = '1'";
 
 $t = 1;

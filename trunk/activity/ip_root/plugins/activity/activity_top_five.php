@@ -28,7 +28,7 @@ VersionCheck();
 /* Start Ban Check */
 BanCheck();
 /* Start File Specific Disable */
-if(($userdata['user_level'] != ADMIN) && ($config['ina_disable_top5_page']))
+if(($user->data['user_level'] != ADMIN) && ($config['ina_disable_top5_page']))
 {
 	message_die(GENERAL_ERROR, $lang['disabled_page_error'], $lang['ban_error']);
 }
@@ -50,7 +50,7 @@ $template->set_filenames(array('body' => $template_to_parse));
 		'GAMBLE_WINNERS' => $lang['top_five_6'],
 		'TOP_TITLE' => $lang['top_five_7'],
 		'BOTTOM_TITLE' => $lang['top_five_8'],
-		'LINKS' => '<b>::</b> <a href="activity.' . PHP_EXT . '?sid='. $userdata['session_id'] .'" class="nav">'. $lang['top_five_9'] .'</a> <b>::</b> <a href="activity.' . PHP_EXT . '?page=top&amp;sid='. $userdata['session_id'] .'" class="nav">'. $lang['top_five_10'] .'</a> <b>::</b>',
+		'LINKS' => '<b>::</b> <a href="activity.' . PHP_EXT . '?sid='. $user->data['session_id'] .'" class="nav">'. $lang['top_five_9'] .'</a> <b>::</b> <a href="activity.' . PHP_EXT . '?page=top&amp;sid='. $user->data['session_id'] .'" class="nav">'. $lang['top_five_10'] .'</a> <b>::</b>',
 		'TITLE' => $config['sitename'] ."'". $lang['top_five_11'])
 			);
 
@@ -85,7 +85,7 @@ while ($row = $db->sql_fetchrow($r))
 
 	$template->assign_block_vars('trophy', array(
 		'TROPHY_TOP_HOLDER' => $t . '.&nbsp;' . $link,
-		'AMOUNT' => '<a href="activity.' . PHP_EXT . '?page=trophy_search&amp;user=' . urlencode($row['username']) . '&amp;sid=' . $userdata['session_id'] . '">' . number_format($row['user_trophies']) .'</a>'
+		'AMOUNT' => '<a href="activity.' . PHP_EXT . '?page=trophy_search&amp;user=' . urlencode($row['username']) . '&amp;sid=' . $user->data['session_id'] . '">' . number_format($row['user_trophies']) .'</a>'
 		)
 	);
 	$t++;
