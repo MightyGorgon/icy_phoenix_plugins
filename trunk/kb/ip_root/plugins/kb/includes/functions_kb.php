@@ -1358,9 +1358,9 @@ function get_kb_comments($topic_id = '', $start = -1, $show_num_comments = 0)
 		FROM " . POSTS_TABLE . " p, " . USERS_TABLE . " u
 		WHERE p.topic_id = $topic_id
 			AND u.user_id = p.poster_id
-			ORDER BY p.post_time $post_time_order";
+			ORDER BY p.post_time ASC";
 
-	if ($start > -1 && $show_num_comments > 0)
+	if (($start > -1) && ($show_num_comments > 0))
 	{
 		$sql .= " LIMIT $start, $show_num_comments ";
 	}
