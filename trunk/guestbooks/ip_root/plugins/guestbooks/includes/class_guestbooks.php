@@ -95,7 +95,6 @@ class class_guestbooks
 			$order_sql = " ORDER BY " . (!empty($order_by) ? $order_by : "p.post_time ASC");
 			$limit_sql = (!empty($n_items) ? (" LIMIT " . (!empty($start) ? ($start . ", " . $n_items) : ($n_items . " "))) : "");
 
-			$topics = array();
 			$sql = "SELECT p.*" . $sql_select_extra . "
 							FROM " . $this->guestbooks_posts_table . " p" . $sql_from_extra . "
 							WHERE p.guestbook_id = " . $guestbook_id
@@ -122,7 +121,6 @@ class class_guestbooks
 
 		if (!empty($post_id))
 		{
-			$topics = array();
 			$sql = "SELECT p.*
 							FROM " . $this->guestbooks_posts_table . " p
 							WHERE p.post_id = " . $post_id;
