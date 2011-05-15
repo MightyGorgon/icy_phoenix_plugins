@@ -521,16 +521,16 @@ switch ($mode)
 			$category_link = '<a href="' . $temp_url . '" class="gen">' . $category_name . '</a>';
 
 			$temp_url = append_sid(KB_ADM_PATH . 'admin_kb_cat.' . PHP_EXT . '?mode=edit&amp;cat=' . $category_id);
-			$edit = '<a href="' . $temp_url . '"><img src="../images/cms/b_edit.png" alt="' . $lang['Edit'] . '"></a>';
+			$edit = '<a href="' . $temp_url . '"><img src="' . IP_ROOT_PATH . $images['cms_icon_edit'] . '" alt="' . $lang['Edit'] . '"></a>';
 
 			$temp_url = append_sid(KB_ADM_PATH . 'admin_kb_cat.' . PHP_EXT . '?mode=delete&amp;cat=' . $category_id);
-			$delete = '<a href="' . $temp_url . '"><img src="../images/cms/b_delete.png" alt="' . $lang['Delete'] . '"></a>';
+			$delete = '<a href="' . $temp_url . '"><img src="' . IP_ROOT_PATH . $images['cms_icon_delete'] . '" alt="' . $lang['Delete'] . '"></a>';
 
 			$temp_url = append_sid(KB_ADM_PATH . 'admin_kb_cat.' . PHP_EXT . '?mode=up&amp;cat=' . $category_id);
-			$up = '<a href="' . $temp_url . '"><img src="../images/cms/arrow_up.png" alt="' . $lang['Move_up'] . '"></a>';
+			$up = '<a href="' . $temp_url . '"><img src="' . IP_ROOT_PATH . $images['cms_arrow_up'] . '" alt="' . $lang['MOVE_UP'] . '"></a>';
 
 			$temp_url = append_sid(KB_ADM_PATH . 'admin_kb_cat.' . PHP_EXT . '?mode=down&amp;cat=' . $category_id);
-			$down = '<a href="' . $temp_url . '"><img src="../images/cms/arrow_down.png" alt="' . $lang['Move_down'] . '"></a>';
+			$down = '<a href="' . $temp_url . '"><img src="' . IP_ROOT_PATH . $images['cms_arrow_down'] . '" alt="' . $lang['MOVE_DOWN'] . '"></a>';
 
 			$row_class = (!($ss % 2)) ? $theme['td_class1'] : $theme['td_class2'];
 

@@ -58,11 +58,10 @@ switch ($mode)
 		if (($search_id == '') || ($search_keywords != ''))
 		{
 
-			$stopword_array = @file(IP_ROOT_PATH . 'language/lang_' . $config['default_lang'] . '/search_stopwords.txt');
-			$synonym_array = @file(IP_ROOT_PATH . 'language/lang_' . $config['default_lang'] . '/search_synonyms.txt');
+			stopwords_synonyms_init();
 
 			$split_search = array();
-			$split_search = (!strstr($multibyte_charset, $lang['ENCODING'])) ? split_words(clean_words('search', stripslashes($search_keywords), $stopword_array, $synonym_array), 'search') : split(' ', $search_keywords);
+			$split_search = (!strstr($multibyte_charset, $lang['ENCODING'])) ? split_words(clean_words('search', stripslashes($search_keywords), $stopwords_array, $synonyms_array), 'search') : split(' ', $search_keywords);
 
 			$search_msg_only = (!$search_fields) ? "AND m.title_match = 0" : ((strstr($multibyte_charset, $lang['ENCODING'])) ? '' : '');
 
@@ -293,9 +292,9 @@ switch ($mode)
 				$highlight_match[] = '#\b(' . str_replace("*", "([\w]+)?", $split_word) . ')\b#is';
 				$highlight_active .= " " . $split_word;
 
-				for ($k = 0; $k < sizeof($synonym_array); $k++)
+				for ($k = 0; $k < sizeof($synonyms_array); $k++)
 				{
-					list($replace_synonym, $match_synonym) = split(' ', trim(strtolower($synonym_array[$k])));
+					list($replace_synonym, $match_synonym) = split(' ', trim(strtolower($synonyms_array[$k])));
 
 					if ($replace_synonym == $split_word)
 					{

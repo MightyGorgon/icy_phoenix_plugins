@@ -658,7 +658,7 @@ function kb_insert_pm($to_id, $message, $subject, $from_id, $html_on = 0, $acro_
 	if (!$result)
 	{
 		$error = true;
-		$error_msg = $lang['No_such_user'];
+		$error_msg = $lang['NO_USER'];
 	}
 
 	$to_userdata = $db->sql_fetchrow($result);
@@ -791,7 +791,7 @@ function kb_mailer($to_id, $message, $subject, $from_id, $html_on = 0, $acro_aut
 	if (!$result)
 	{
 		$error = true;
-		$error_msg = $lang['No_such_user'];
+		$error_msg = $lang['NO_USER'];
 	}
 
 	$to_userdata = $db->sql_fetchrow($result);
@@ -982,10 +982,10 @@ function get_kb_cat_subs_admin($parent, $select = 1, $indent, $ss)
 		$delete2 = '<a href="' . $temp_url . '" class="gen">' . $lang['Delete'] . '</a>';
 
 		$temp_url = append_sid('admin_kb_cat.' . PHP_EXT . '?mode=up&amp;cat=' . $category_id2);
-		$up2 = '<a href="' . $temp_url . '" class="gen">' . $lang['Move_up'] . '</a>';
+		$up2 = '<a href="' . $temp_url . '" class="gen">' . $lang['MOVE_UP'] . '</a>';
 
 		$temp_url = append_sid(IP_ROOT_PATH . ADM . '/admin_kb_cat.' . PHP_EXT . '?mode=down&amp;cat=' . $category_id2);
-		$down2 = '<a href="' . $temp_url . '" class="gen">' . $lang['Move_down'] . '</a>';
+		$down2 = '<a href="' . $temp_url . '" class="gen">' . $lang['MOVE_DOWN'] . '</a>';
 
 		$row_class = (!($ss % 2)) ? $theme['td_class1'] : $theme['td_class2'];
 

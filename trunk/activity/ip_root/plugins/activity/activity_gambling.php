@@ -303,7 +303,8 @@ if (!defined('IN_ICYPHOENIX'))
 			$exists = $db->sql_fetchrow($r);
 			if (!$exists['user_id'])
 			{
-				message_die(GENERAL_ERROR, $lang['No_such_user'], $lang['error']);
+				if (!defined('STATUS_404')) define('STATUS_404', true);
+				message_die(GENERAL_ERROR, $lang['NO_USER'], $lang['error']);
 			}
 			else
 			{

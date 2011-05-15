@@ -189,7 +189,7 @@ function send_challenge_pm($dest_user, $subject, $message)
 		if (!$result)
 		{
 			$error = true;
-			$error_msg = $lang['No_such_user'];
+			$error_msg = $lang['NO_USER'];
 		}
 		$to_userdata = $db->sql_fetchrow($result);
 

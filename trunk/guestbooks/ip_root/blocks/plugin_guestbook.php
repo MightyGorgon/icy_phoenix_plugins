@@ -161,10 +161,10 @@ if(!function_exists('cms_plugin_guestbook_form'))
 					if ($post_moderation_allowed)
 					{
 						$edit_link = append_sid($ip_root_path . CMS_PAGE_GUESTBOOK . '?' . $post_append_url . '&amp;mode=input&amp;action=edit');
-						$edit_img = '<a href="' . $edit_link . '"><img src="' . $ip_root_path . 'images/cms/b_edit.png" alt="' . $lang['EDIT'] . '" title="' . $lang['EDIT'] . '" /></a>';
+						$edit_img = '<a href="' . $edit_link . '"><img src="' . $ip_root_path . $images['cms_icon_edit'] . '" alt="' . $lang['EDIT'] . '" title="' . $lang['EDIT'] . '" /></a>';
 
 						$delete_link = append_sid($ip_root_path . CMS_PAGE_GUESTBOOK . '?' . $post_append_url . '&amp;mode=delete');
-						$delete_img = '<a href="' . $delete_link . '"><img src="' . $ip_root_path . 'images/cms/b_delete.png" alt="' . $lang['DELETE'] . '" title="' . $lang['DELETE'] . '" /></a>';
+						$delete_img = '<a href="' . $delete_link . '"><img src="' . $ip_root_path . $images['cms_icon_delete'] . '" alt="' . $lang['DELETE'] . '" title="' . $lang['DELETE'] . '" /></a>';
 					}
 
 					$class = ($i % 2) ? $theme['td_class1'] : $theme['td_class2'];

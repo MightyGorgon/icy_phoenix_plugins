@@ -205,13 +205,13 @@ else
 
 			//$view_link = append_sid(THIS_FILE . '?mode=view&amp;' . $item_id . '=' . $items_array[$i][$item_id]);
 			$view_link = append_sid(CMS_PAGE_GUESTBOOK . '?' . $class_guestbooks->guestbook_id_var . '=' . $items_array[$i][$item_id]);
-			$view_img = '<a href="' . $view_link . '"><img src="' . IP_ROOT_PATH . 'images/cms/b_preview.png" alt="' . $lang['GUESTBOOK_VIEW'] . '" title="' . $lang['GUESTBOOK_VIEW'] . '" /></a>';
+			$view_img = '<a href="' . $view_link . '"><img src="' . IP_ROOT_PATH . $images['cms_icon_preview'] . '" alt="' . $lang['GUESTBOOK_VIEW'] . '" title="' . $lang['GUESTBOOK_VIEW'] . '" /></a>';
 
 			$edit_link = append_sid(THIS_FILE . '?mode=input&amp;action=edit&amp;' . $item_id . '=' . $items_array[$i][$item_id]);
-			$edit_img = '<a href="' . $edit_link . '"><img src="' . IP_ROOT_PATH . 'images/cms/b_edit.png" alt="' . $lang['EDIT'] . '" title="' . $lang['EDIT'] . '" /></a>';
+			$edit_img = '<a href="' . $edit_link . '"><img src="' . IP_ROOT_PATH . $images['cms_icon_edit'] . '" alt="' . $lang['EDIT'] . '" title="' . $lang['EDIT'] . '" /></a>';
 
 			$delete_link = append_sid(THIS_FILE . '?mode=delete&amp;' . $item_id . '=' . $items_array[$i][$item_id]);
-			$delete_img = '<a href="' . $delete_link . '"><img src="' . IP_ROOT_PATH . 'images/cms/b_delete.png" alt="' . $lang['DELETE'] . '" title="' . $lang['DELETE'] . '" /></a>';
+			$delete_img = '<a href="' . $delete_link . '"><img src="' . IP_ROOT_PATH . $images['cms_icon_delete'] . '" alt="' . $lang['DELETE'] . '" title="' . $lang['DELETE'] . '" /></a>';
 
 			$class = ($i % 2) ? $theme['td_class1'] : $theme['td_class2'];
 
