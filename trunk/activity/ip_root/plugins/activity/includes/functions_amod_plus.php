@@ -798,9 +798,13 @@ function FormatScores($score)
 	$score_check_2 = round($score_check[1], 5);
 
 	if ($score_check_2 == '00')
+	{
 		$new_score = $score_check_1;
+	}
 	else
-		$new_score = $score_check_1 .'.'. $score_check_2;
+	{
+		$new_score = $score_check_1 . '.' . $score_check_2;
+	}
 	return $new_score;
 }
 

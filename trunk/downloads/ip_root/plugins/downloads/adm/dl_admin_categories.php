@@ -324,7 +324,7 @@ if($action == 'edit' || $action == 'add')
 
 	$template->pparse('category');
 
-	include('./page_footer_admin.' . PHP_EXT);
+	include(IP_ROOT_PATH . ADM . '/page_footer_admin.' . PHP_EXT);
 }
 elseif($action == 'save_cat')
 {
@@ -543,7 +543,7 @@ elseif($action == 'delete')
 
 		$template->pparse('confirm_body');
 
-		include('./page_footer_admin.' . PHP_EXT);
+		include(IP_ROOT_PATH . ADM . '/page_footer_admin.' . PHP_EXT);
 	}
 	else
 	{
@@ -578,7 +578,7 @@ elseif($action == 'delete_stats')
 
 		$template->pparse('confirm_body');
 
-		include('./page_footer_admin.' . PHP_EXT);
+		include(IP_ROOT_PATH . ADM . '/page_footer_admin.' . PHP_EXT);
 	}
 
 	if($cat_id == 'all')
@@ -624,7 +624,7 @@ elseif($action == 'delete_comments')
 
 		$template->pparse('confirm_body');
 
-		include('./page_footer_admin.' . PHP_EXT);
+		include(IP_ROOT_PATH . ADM . '/page_footer_admin.' . PHP_EXT);
 	}
 
 	if($cat_id == 'all')
