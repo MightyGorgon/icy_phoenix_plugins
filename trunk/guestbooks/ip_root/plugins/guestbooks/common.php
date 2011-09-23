@@ -37,8 +37,6 @@ if (!defined('CMS_PAGE_GUESTBOOK'))
 	define('GUESTBOOKS_TPL_PATH', '../../' . GUESTBOOKS_PLUGIN_PATH . 'templates/');
 	define('GUESTBOOKS_ADM_PATH', IP_ROOT_PATH . GUESTBOOKS_PLUGIN_PATH . ADM . '/');
 	define('GUESTBOOKS_ADM_TPL_PATH', '../../' . GUESTBOOKS_PLUGIN_PATH . ADM . '/templates/');
-
-	setup_extra_lang(array('lang_guestbooks'), GUESTBOOKS_ROOT_PATH . 'language/');
 }
 
 if (!class_exists('bbcode'))
@@ -54,6 +52,7 @@ if (!class_exists('class_plugins'))
 	include(IP_ROOT_PATH . 'includes/class_plugins.' . PHP_EXT);
 }
 $class_plugins = new class_plugins();
+$class_plugins->setup_lang($config['plugins'][$plugin_name]['dir']);
 
 if (!class_exists('class_form'))
 {
