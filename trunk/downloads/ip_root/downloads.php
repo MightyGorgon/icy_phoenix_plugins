@@ -275,7 +275,7 @@ if ($view == 'todo')
 		$meta_content['description'] = '';
 		$meta_content['keywords'] = '';
 		$nav_server_url = create_server_url();
-		$breadcrumbs_address = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>' . $lang['Nav_Separator'] . '<a class="nav-current" href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT . '?view=todo') . '">' . $lang['Dl_mod_todo'] . '</a>';
+		$breadcrumbs['address'] = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>' . $lang['Nav_Separator'] . '<a class="nav-current" href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT . '?view=todo') . '">' . $lang['Dl_mod_todo'] . '</a>';
 
 		$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'dl_todo_body.tpl');
 
@@ -341,7 +341,7 @@ if (($view == 'broken') && $df_id && $cat_id && ($user->data['session_logged_in'
 			$result = $db->sql_query($sql);
 
 			$nav_server_url = create_server_url();
-			$breadcrumbs_address = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '" class="nav-current">' . $lang['Downloads'] . '</a>';
+			$breadcrumbs['address'] = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '" class="nav-current">' . $lang['Downloads'] . '</a>';
 
 			$s_hidden_fields = '<input type="hidden" name="cat_id" value="' . $cat_id . '" />';
 			$s_hidden_fields .= '<input type="hidden" name="df_id" value="' . $df_id . '" />';
@@ -524,7 +524,7 @@ if ($view == 'bug_tracker')
 			$meta_content['description'] = '';
 			$meta_content['keywords'] = '';
 			$nav_server_url = create_server_url();
-			$breadcrumbs_address = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>' . $lang['Nav_Separator'] . '<a class="nav-current" href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT . '?view=bug_tracker') . '">' . $lang['Dl_bug_tracker'] . '</a>';
+			$breadcrumbs['address'] = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>' . $lang['Nav_Separator'] . '<a class="nav-current" href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT . '?view=bug_tracker') . '">' . $lang['Dl_bug_tracker'] . '</a>';
 			include(IP_ROOT_PATH . DL_PLUGIN_PATH . 'includes/dl_bug_tracker.' . PHP_EXT);
 		}
 		else
@@ -550,7 +550,7 @@ if ($view == 'stat')
 	$meta_content['description'] = '';
 	$meta_content['keywords'] = '';
 	$nav_server_url = create_server_url();
-	$breadcrumbs_address = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>' . $lang['Nav_Separator'] . '<a class="nav-current" href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT . '?view=stat') . '">' . $lang['Dl_stats'] . '</a>';
+	$breadcrumbs['address'] = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>' . $lang['Nav_Separator'] . '<a class="nav-current" href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT . '?view=stat') . '">' . $lang['Dl_stats'] . '</a>';
 	include(IP_ROOT_PATH . DL_PLUGIN_PATH . 'includes/dl_stats.' . PHP_EXT);
 }
 elseif ($view == 'user_config')
@@ -580,7 +580,7 @@ elseif ($view == 'user_config')
 	$meta_content['description'] = '';
 	$meta_content['keywords'] = '';
 	$nav_server_url = create_server_url();
-	$breadcrumbs_address = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>' . $lang['Nav_Separator'] . '<a class="nav-current" href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT . '?view=user_config') . '">' . $lang['Dl_config'] . '</a>';
+	$breadcrumbs['address'] = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>' . $lang['Nav_Separator'] . '<a class="nav-current" href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT . '?view=user_config') . '">' . $lang['Dl_config'] . '</a>';
 	include(IP_ROOT_PATH . DL_PLUGIN_PATH . 'includes/dl_user_config.' . PHP_EXT);
 }
 elseif ($view == 'detail')
@@ -652,7 +652,7 @@ elseif ($view == 'detail')
 	$meta_content['description'] = '';
 	$meta_content['keywords'] = '';
 	$nav_server_url = create_server_url();
-	$breadcrumbs_address = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>' . $lang['Nav_Separator'] . '<a class="nav-current" href="#">' . $dl_files['description'] . '</a>';
+	$breadcrumbs['address'] = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>' . $lang['Nav_Separator'] . '<a class="nav-current" href="#">' . $dl_files['description'] . '</a>';
 	include(IP_ROOT_PATH . DL_PLUGIN_PATH . 'includes/dl_details.' . PHP_EXT);
 }
 elseif ($view == 'search')
@@ -663,7 +663,7 @@ elseif ($view == 'search')
 	$meta_content['description'] = '';
 	$meta_content['keywords'] = '';
 	$nav_server_url = create_server_url();
-	$breadcrumbs_address = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>' . $lang['Nav_Separator'] . '<a class="nav-current" href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT . '?view=search') . '">' . $lang['Search'] . '</a>';
+	$breadcrumbs['address'] = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>' . $lang['Nav_Separator'] . '<a class="nav-current" href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT . '?view=search') . '">' . $lang['Search'] . '</a>';
 	include(IP_ROOT_PATH . DL_PLUGIN_PATH . 'includes/dl_search.' . PHP_EXT);
 }
 elseif ($view == 'popup')
@@ -1055,7 +1055,7 @@ elseif ($view == 'upload')
 	$meta_content['description'] = '';
 	$meta_content['keywords'] = '';
 	$nav_server_url = create_server_url();
-	$breadcrumbs_address = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>' . $lang['Nav_Separator'] . '<a class="nav-current" href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT . '?view=upload') . '">' . $lang['Dl_upload'] . '</a>';
+	$breadcrumbs['address'] = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>' . $lang['Nav_Separator'] . '<a class="nav-current" href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT . '?view=upload') . '">' . $lang['Dl_upload'] . '</a>';
 	include(IP_ROOT_PATH . DL_PLUGIN_PATH . 'includes/dl_upload.' . PHP_EXT);
 }
 elseif ($view == 'modcp')
@@ -1283,7 +1283,7 @@ if (($view == 'overall') && sizeof($index))
 	$meta_content['description'] = '';
 	$meta_content['keywords'] = '';
 	$nav_server_url = create_server_url();
-	$breadcrumbs_address = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>' . $lang['Nav_Separator'] . '<a class="nav-current" href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT . '?view=overall') . '">' . $lang['Dl_overview'] . '</a>';
+	$breadcrumbs['address'] = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>' . $lang['Nav_Separator'] . '<a class="nav-current" href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT . '?view=overall') . '">' . $lang['Dl_overview'] . '</a>';
 
 	$sql = "SELECT dl_id, user_id FROM " . DL_RATING_TABLE;
 	$result = $db->sql_query($sql);
@@ -1481,7 +1481,7 @@ if (empty($view) && !$inc_module)
 	$meta_content['description'] = '';
 	$meta_content['keywords'] = '';
 	$nav_server_url = create_server_url();
-	$breadcrumbs_address = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>' . (($dl_nav != '') ? ('<a class="nav-current" href="#">' . $dl_nav . '</a>'): '');
+	$breadcrumbs['address'] = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>' . (($dl_nav != '') ? ('<a class="nav-current" href="#">' . $dl_nav . '</a>'): '');
 	$path_dl_array = array();
 
 	$user_id = $user->data['user_id'];

@@ -433,7 +433,7 @@ if ($action == 'delete' && $cat_id)
 			* output confirmation page
 			*/
 			$nav_server_url = create_server_url();
-			$breadcrumbs_address = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>';
+			$breadcrumbs['address'] = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>';
 
 			$template->assign_block_vars('delete_files_confirm', array());
 
@@ -649,7 +649,7 @@ if ($action == 'edit')
 	$meta_content['description'] = '';
 	$meta_content['keywords'] = '';
 	$nav_server_url = create_server_url();
-	$breadcrumbs_address = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>';
+	$breadcrumbs['address'] = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>';
 	page_header($meta_content['page_title'], true);
 
 	$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'dl_edit_body.tpl');
@@ -918,7 +918,7 @@ if ($action == 'approve')
 	$meta_content['description'] = '';
 	$meta_content['keywords'] = '';
 	$nav_server_url = create_server_url();
-	$breadcrumbs_address = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>';
+	$breadcrumbs['address'] = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>';
 	page_header($meta_content['page_title'], true);
 
 	$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'dl_modcp_approve.tpl');
@@ -1024,7 +1024,7 @@ if ($action == 'capprove')
 	$meta_content['description'] = '';
 	$meta_content['keywords'] = '';
 	$nav_server_url = create_server_url();
-	$breadcrumbs_address = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>';
+	$breadcrumbs['address'] = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>';
 	page_header($meta_content['page_title'], true);
 
 	$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'dl_modcp_capprove.tpl');
@@ -1144,7 +1144,7 @@ if (($action == 'manage') && $cat_id)
 	$meta_content['description'] = '';
 	$meta_content['keywords'] = '';
 	$nav_server_url = create_server_url();
-	$breadcrumbs_address = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>';
+	$breadcrumbs['address'] = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>';
 	page_header($meta_content['page_title'], true);
 
 	$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'dl_modcp_manage.tpl');

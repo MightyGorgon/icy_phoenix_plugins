@@ -52,7 +52,7 @@ if (isset($_GET['page']))
 		$page_link = append_sid('activity.' . PHP_EXT . '?page=trophy');
 		$bc_link_name = $lang['trophy_count_link'];
 		$bc_link_url = append_sid('activity.' . PHP_EXT . '?page=trophy_holders');
-		$breadcrumbs_links_right = '<span class="gensmall"><a href="' . $bc_link_url . '"">' . $bc_link_name . '</a></span>';
+		$breadcrumbs['bottom_right_links'] = '<span class="gensmall"><a href="' . $bc_link_url . '"">' . $bc_link_name . '</a></span>';
 		$page_to_load = (ACTIVITY_ROOT_PATH . 'activity_top_scores.' . PHP_EXT);
 	}
 	if ($what_page == 'trophy_search')
@@ -68,7 +68,7 @@ if (isset($_GET['page']))
 		$page_name = $lang['trophy_holder'];
 		$bc_link_name = $lang['trophy_holder'];
 		$bc_link_url = append_sid('activity.' . PHP_EXT . '?page=trophy');
-		$breadcrumbs_links_right = '<span class="gensmall"><a href="' . $bc_link_url . '"">' . $bc_link_name . '</a></span>';
+		$breadcrumbs['bottom_right_links'] = '<span class="gensmall"><a href="' . $bc_link_url . '"">' . $bc_link_name . '</a></span>';
 		$page_to_load = (ACTIVITY_ROOT_PATH . 'activity_trophy_holders.' . PHP_EXT);
 	}
 	if ($what_page == 'gambling')
@@ -76,7 +76,7 @@ if (isset($_GET['page']))
 		$page_name = $lang['page_title_gambling'];
 		$bc_link_name = $lang['trophy_holder'];
 		$bc_link_url = append_sid('activity.' . PHP_EXT . '?page=trophy');
-		$breadcrumbs_links_right = '<span class="gensmall"><a href="' . append_sid('activity.' . PHP_EXT . '?page=gambling&amp;mode=stats') . '"">' . $lang['gambling_link_3'] . '</a>&nbsp;&bull;&nbsp;<a href="' . append_sid('activity.' . PHP_EXT . '?page=gambling') . '"">' . $lang['gambling_link_2'] . '</a></span>';
+		$breadcrumbs['bottom_right_links'] = '<span class="gensmall"><a href="' . append_sid('activity.' . PHP_EXT . '?page=gambling&amp;mode=stats') . '"">' . $lang['gambling_link_3'] . '</a>&nbsp;&bull;&nbsp;<a href="' . append_sid('activity.' . PHP_EXT . '?page=gambling') . '"">' . $lang['gambling_link_2'] . '</a></span>';
 		$page_to_load = (ACTIVITY_ROOT_PATH . 'activity_gambling.' . PHP_EXT);
 	}
 	if ($what_page == 'top')
@@ -117,7 +117,7 @@ if (isset($_GET['page']))
 	$link_name = !empty($meta_content['page_title']) ? $meta_content['page_title'] : '';
 	$link_url = !empty($page_link) ? $page_link : '#';
 	$nav_server_url = create_server_url();
-	$breadcrumbs_address = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('activity.' . PHP_EXT) . '"' . (!empty($link_name) ? '' : ' class="nav-current"') . '>' . $lang['Activity'] . '</a>' . (!empty($link_name) ? ($lang['Nav_Separator'] . '<a class="nav-current" href="' . $link_url . '">' . $link_name . '</a>') : '');
+	$breadcrumbs['address'] = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('activity.' . PHP_EXT) . '"' . (!empty($link_name) ? '' : ' class="nav-current"') . '>' . $lang['Activity'] . '</a>' . (!empty($link_name) ? ($lang['Nav_Separator'] . '<a class="nav-current" href="' . $link_url . '">' . $link_name . '</a>') : '');
 
 	#==== Load The Header
 	page_header($meta_content['page_title'], true);

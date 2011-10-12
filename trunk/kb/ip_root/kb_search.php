@@ -267,7 +267,7 @@ switch ($mode)
 		if (!$is_block)
 		{
 			$nav_server_url = create_server_url();
-			$breadcrumbs_address = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('kb.' . PHP_EXT) . '">' . $lang['KB_title'] . '</a>' . $lang['Nav_Separator'] . '<a class="nav-current" href="#">' .  $l_search_matches . '</a>';
+			$breadcrumbs['address'] = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('kb.' . PHP_EXT) . '">' . $lang['KB_title'] . '</a>' . $lang['Nav_Separator'] . '<a class="nav-current" href="#">' .  $l_search_matches . '</a>';
 			page_header($meta_content['page_title'], true);
 		}
 
@@ -368,7 +368,7 @@ switch ($mode)
 		if (!$is_block)
 		{
 			$nav_server_url = create_server_url();
-			$breadcrumbs_address = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('kb.' . PHP_EXT) . '">' . $lang['KB_title'] . '</a>' . $lang['Nav_Separator'] . '<a class="nav-current" href="#">' .  $lang['Search_query'] . '</a>';
+			$breadcrumbs['address'] = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('kb.' . PHP_EXT) . '">' . $lang['KB_title'] . '</a>' . $lang['Nav_Separator'] . '<a class="nav-current" href="#">' .  $lang['Search_query'] . '</a>';
 			page_header($meta_content['page_title'], true);
 		}
 

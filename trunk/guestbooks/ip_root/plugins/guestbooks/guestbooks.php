@@ -42,19 +42,18 @@ if ((in_array($mode, array('input', 'save')) && !$admin_allowed && ((($action ==
 $meta_content['page_title'] = $lang['GUESTBOOKS_PAGE'];
 $meta_content['description'] = $lang['GUESTBOOKS_PAGE'];
 $meta_content['keywords'] = $lang['GUESTBOOKS_PAGE'];
-$breadcrumbs_links_right = '';
+$breadcrumbs['bottom_right_links'] = '';
 if ($input_allowed)
 {
-	$breadcrumbs_links_left = '';
-	$breadcrumbs_links_right .= (($breadcrumbs_links_right != '') ? ('&nbsp;' . MENU_SEP_CHAR . '&nbsp;') : '') . '<a href="' . append_sid(THIS_FILE . '?mode=input') . '">' . $lang['GUESTBOOK_ADD'] . '</a>';
+	$breadcrumbs['bottom_left_links'] = '';
+	$breadcrumbs['bottom_right_links'] .= (($breadcrumbs['bottom_right_links'] != '') ? ('&nbsp;' . MENU_SEP_CHAR . '&nbsp;') : '') . '<a href="' . append_sid(THIS_FILE . '?mode=input') . '">' . $lang['GUESTBOOK_ADD'] . '</a>';
 }
-$breadcrumbs_links_right .= (($breadcrumbs_links_right != '') ? ('&nbsp;' . MENU_SEP_CHAR . '&nbsp;') : '') . '<a href="' . append_sid(THIS_FILE) . '">' . $lang['GUESTBOOKS_LINK_ALL'] . '</a>';
+$breadcrumbs['bottom_right_links'] .= (($breadcrumbs['bottom_right_links'] != '') ? ('&nbsp;' . MENU_SEP_CHAR . '&nbsp;') : '') . '<a href="' . append_sid(THIS_FILE) . '">' . $lang['GUESTBOOKS_LINK_ALL'] . '</a>';
 
 if ($mode == 'save')
 {
 	$current_time = time();
 	$class_form->create_inputs_array($table_fields, $inputs_array, $current_time, $item_id, $mode, $action);
-	$inputs_array = array_map('htmlspecialchars_decode', $inputs_array);
 
 	// EXTRA ASSIGNMENTS - BEGIN
 	$inputs_array['guestbook_owner'] = empty($inputs_array['guestbook_owner']) ? ANONYMOUS : $class_form->get_user_id($inputs_array['guestbook_owner']);
@@ -98,6 +97,7 @@ elseif ($mode == 'delete')
 	$inputs_array[$item_id] = request_var($item_id, 0);
 	if ($inputs_array[$item_id] > 0)
 	{
+		$class_guestbooks->remove_all_posts($inputs_array[$item_id]);
 		$class_db->delete_item($inputs_array[$item_id]);
 		$message = $lang['DB_ITEM_REMOVED'] . '<br /><br />' . sprintf($lang['DB_ITEM_CLICK_RETURN_ITEMS'], '<a href="' . append_sid(THIS_FILE) . '">', '</a>');
 	}
@@ -146,7 +146,6 @@ elseif ($mode == 'input')
 		'S_HIDDEN_FIELDS' => $s_hidden_fields
 		)
 	);
-
 }
 elseif ($mode == 'view')
 {
@@ -159,7 +158,7 @@ elseif ($mode == 'view')
 	}
 
 	// Page Title - BEGIN
-	$item_title = htmlspecialchars($items_row['guestbook_title']);
+	$item_title = $items_row['guestbook_title'];
 	$meta_content['page_title'] = (!empty($item_title) ? (strip_tags($item_title) . ' - ') : '') . $meta_content['page_title'];
 	// Page Title - END
 
@@ -174,7 +173,6 @@ elseif ($mode == 'view')
 		'EXTRA_CONTENT_BOTTOM' => (!empty($extra_content_bottom) ? $extra_content_bottom : ''),
 		)
 	);
-
 }
 else
 {

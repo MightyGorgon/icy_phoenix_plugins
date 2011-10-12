@@ -201,7 +201,7 @@ if (!$is_block || $print_version)
 {
 	$nav_server_url = create_server_url();
 	$breadcrumbs_path = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('kb.' . PHP_EXT) . '"' . (($path_kb != '') ? '' : ' class="nav-current"') . '>' . $lang['KB_title'] . '</a>' . (($path_kb != '') ? $path_kb : '');
-	$breadcrumbs_address = $breadcrumbs_path . $lang['Nav_Separator'] . '<a class="nav-current" href="#">' . $article_title . '</a>';
+	$breadcrumbs['address'] = $breadcrumbs_path . $lang['Nav_Separator'] . '<a class="nav-current" href="#">' . $article_title . '</a>';
 	page_header($meta_content['page_title'], true);
 }
 

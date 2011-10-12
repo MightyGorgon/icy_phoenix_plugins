@@ -163,7 +163,7 @@ if ($action == 'delete' && $allow_manage)
 		$l_confirm = $lang['Confirm_delete'];
 
 		$nav_server_url = create_server_url();
-		$breadcrumbs_address = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>';
+		$breadcrumbs['address'] = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>';
 
 		$template->assign_vars(array(
 			'MESSAGE_TITLE' => $lang['Information'],
@@ -253,7 +253,7 @@ if (($action == 'edit' && $allow_manage) || ($action == 'post' && !$deny_post))
 	$meta_content['description'] = '';
 	$meta_content['keywords'] = '';
 	$nav_server_url = create_server_url();
-	$breadcrumbs_address = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>' . $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT . '?cat=' . $cat_id) . '">' . $cat_name . '</a>' . $lang['Nav_Separator'] . '<a class="nav-current" href="#">' . $description . '</a>';
+	$breadcrumbs['address'] = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>' . $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT . '?cat=' . $cat_id) . '">' . $cat_name . '</a>' . $lang['Nav_Separator'] . '<a class="nav-current" href="#">' . $description . '</a>';
 
 	page_header($meta_content['page_title'], true);
 
@@ -380,7 +380,7 @@ if ($action == 'view' || !$action)
 		$meta_content['description'] = '';
 		$meta_content['keywords'] = '';
 		$nav_server_url = create_server_url();
-		$breadcrumbs_address = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>' . $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT . '?cat=' . $cat_id) . '">' . $cat_name . '</a>' . $lang['Nav_Separator'] . '<a class="nav-current" href="#">' . $description . '</a>';
+		$breadcrumbs['address'] = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT) . '">' . $lang['Downloads'] . '</a>' . $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('downloads.' . PHP_EXT . '?cat=' . $cat_id) . '">' . $cat_name . '</a>' . $lang['Nav_Separator'] . '<a class="nav-current" href="#">' . $description . '</a>';
 
 		page_header($meta_content['page_title'], true);
 

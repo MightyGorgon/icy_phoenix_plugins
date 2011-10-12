@@ -75,7 +75,7 @@ if (!isset($parse_header) || ($parse_header != false))
 	$meta_content['keywords'] = '';
 	if (!$is_block)
 	{
-		$breadcrumbs_address = $breadcrumbs_path;
+		$breadcrumbs['address'] = $breadcrumbs_path;
 		page_header($meta_content['page_title'], true);
 	}
 }

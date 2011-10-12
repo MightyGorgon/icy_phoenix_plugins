@@ -56,8 +56,8 @@ $link_name = !empty($meta_content['page_title']) ? $meta_content['page_title'] :
 $link_url = !empty($page_link) ? $page_link : '#';
 $char_shop_link = (($user->data['ina_char_name']) && ($user->data['user_id'] != ANONYMOUS)) ? '<a href="activity_char.' . PHP_EXT . '?mode=char_shop&amp;sid=' . $user->data['session_id'] . '">' . $lang['amp_char_goto_shop_link'] .'</a>' : '';
 $nav_server_url = create_server_url();
-$breadcrumbs_address = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('activity.' . PHP_EXT) . '"' . (!empty($link_name) ? '' : ' class="nav-current"') . '>' . $lang['Activity'] . '</a>' . (!empty($link_name) ? ($lang['Nav_Separator'] . '<a class="nav-current" href="' . $link_url . '">' . $link_name . '</a>') : '');
-$breadcrumbs_links_right = $char_shop_link;
+$breadcrumbs['address'] = $lang['Nav_Separator'] . '<a href="' . $nav_server_url . append_sid('activity.' . PHP_EXT) . '"' . (!empty($link_name) ? '' : ' class="nav-current"') . '>' . $lang['Activity'] . '</a>' . (!empty($link_name) ? ($lang['Nav_Separator'] . '<a class="nav-current" href="' . $link_url . '">' . $link_name . '</a>') : '');
+$breadcrumbs['bottom_right_links'] = $char_shop_link;
 
 #==== Setup What .tpl To Use
 if ($mode == 'create_char' || $mode == 'edit_char' || $mode == 'del_char' || $mode == 'profile_char' || !$mode)

@@ -49,7 +49,9 @@ $install_data = array(
 				KEY `guestbook_id` (`guestbook_id`),
 				KEY `poster_id` (`poster_id`),
 				KEY `post_time` (`post_time`)
-			);"
+			);",
+			"INSERT INTO `" . $table_prefix . "cms_layout_special` (`page_id`, `locked`, `name`, `filename`, `template`, `global_blocks`, `page_nav`, `config_vars`, `view`, `groups`) VALUES('guestbooks', 0, 'Guestbooks', 'guestbooks.php', '', 0, 1, '', 0, '');",
+			"INSERT INTO `" . $table_prefix . "cms_layout_special` (`page_id`, `locked`, `name`, `filename`, `template`, `global_blocks`, `page_nav`, `config_vars`, `view`, `groups`) VALUES('guestbook', 0, 'Guestbook', 'guestbook.php', '', 0, 1, '', 0, '');"
 		),
 		'functions' => array(),
 	),
@@ -60,7 +62,9 @@ $uninstall_data = array(
 	'sql' => array(
 		"DELETE FROM " . PLUGINS_CONFIG_TABLE . " WHERE config_name LIKE \"guestbooks_%\";",
 		"DROP TABLE `" . $table_prefix . "guestbooks`;",
-		"DROP TABLE `" . $table_prefix . "guestbooks_posts`;"
+		"DROP TABLE `" . $table_prefix . "guestbooks_posts`;",
+		"DELETE FROM `" . $table_prefix . "cms_layout_special` WHERE page_id = 'guestbooks';",
+		"DELETE FROM `" . $table_prefix . "cms_layout_special` WHERE page_id = 'guestbook';"
 	),
 	'functions' => array(),
 );

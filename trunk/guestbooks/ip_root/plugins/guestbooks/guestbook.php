@@ -58,13 +58,15 @@ $input_allowed = (check_auth_level($guestbook_data['guestbook_auth_post']) || $i
 $edit_allowed = (check_auth_level(AUTH_ADMIN) || $is_owner) ? true : false;
 $input_post_allowed = ($admin_allowed || check_auth_level($guestbook_data['guestbook_auth_post'])) ? true : false;
 $edit_post_allowed = ($admin_allowed || check_auth_level($guestbook_data['guestbook_auth_edit'])) ? true : false;
+$delete_post_allowed = ($admin_allowed || check_auth_level($guestbook_data['guestbook_auth_delete'])) ? true : false;
 
 include(IP_ROOT_PATH . 'includes/common_forms.' . PHP_EXT);
 
 $is_auth = true;
-if (in_array($mode, array('input', 'save')) && !$admin_allowed && ((($action == 'add') && !$input_post_allowed) || (($action == 'edit') && !$edit_post_allowed)))
+if (!$admin_allowed)
 {
-	$is_auth = false;
+	$is_auth = (in_array($mode, array('input', 'save')) && ((($action == 'add') && !$input_post_allowed) || (($action == 'edit') && !$edit_post_allowed))) ? false : $is_auth;
+	$is_auth = (in_array($mode, array('delete')) && !$delete_post_allowed) ? false : $is_auth;
 }
 
 if (!$is_auth)
@@ -77,13 +79,13 @@ if (!$is_auth)
 $meta_content['page_title'] = $lang['GUESTBOOKS_PAGE'];
 $meta_content['description'] = $lang['GUESTBOOKS_PAGE'];
 $meta_content['keywords'] = $lang['GUESTBOOKS_PAGE'];
-$breadcrumbs_links_right = '';
+$breadcrumbs['bottom_right_links'] = '';
 if ($input_allowed)
 {
-	$breadcrumbs_links_left = '';
-	$breadcrumbs_links_right .= (($breadcrumbs_links_right != '') ? ('&nbsp;' . MENU_SEP_CHAR . '&nbsp;') : '') . '<a href="' . append_sid(THIS_FILE . '?' . $class_guestbooks->guestbook_id_var . '=' . $guestbook_id . '&amp;mode=input') . '">' . $lang['GUESTBOOKS_LINK_POST_MESSAGE'] . '</a>';
+	$breadcrumbs['bottom_left_links'] = '';
+	$breadcrumbs['bottom_right_links'] .= (($breadcrumbs['bottom_right_links'] != '') ? ('&nbsp;' . MENU_SEP_CHAR . '&nbsp;') : '') . '<a href="' . append_sid(THIS_FILE . '?' . $class_guestbooks->guestbook_id_var . '=' . $guestbook_id . '&amp;mode=input') . '">' . $lang['GUESTBOOKS_LINK_POST_MESSAGE'] . '</a>';
 }
-$breadcrumbs_links_right .= (($breadcrumbs_links_right != '') ? ('&nbsp;' . MENU_SEP_CHAR . '&nbsp;') : '') . '<a href="' . append_sid(THIS_FILE . '?' . $class_guestbooks->guestbook_id_var . '=' . $guestbook_id) . '">' . $lang['GUESTBOOK_PAGE'] . '</a>';
+$breadcrumbs['bottom_right_links'] .= (($breadcrumbs['bottom_right_links'] != '') ? ('&nbsp;' . MENU_SEP_CHAR . '&nbsp;') : '') . '<a href="' . append_sid(THIS_FILE . '?' . $class_guestbooks->guestbook_id_var . '=' . $guestbook_id) . '">' . $lang['GUESTBOOK_PAGE'] . '</a>';
 
 if ($mode == 'save')
 {
@@ -165,9 +167,10 @@ if ($mode == 'save')
 
 		if (!$user->data['session_logged_in'])
 		{
+			// Clean old sessions and old confirm codes
+			$user->confirm_gc();
 			include_once(IP_ROOT_PATH . 'includes/class_captcha.' . PHP_EXT);
 			$class_captcha = new class_captcha();
-			$class_captcha->clear_confirm_table();
 			$class_captcha->check_attempts(false);
 			$captcha_result = $class_captcha->check_code();
 			if ($captcha_result['error'])

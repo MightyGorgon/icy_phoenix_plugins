@@ -46,7 +46,7 @@ class class_guestbooks
 
 		$this->guestbook_id_append = (!empty($this->guestbook_id) ? ($this->guestbook_id_var . '=' . $this->guestbook_id) : '');
 		$this->post_id_append = (!empty($this->post_id) ? ($this->post_id_var . '=' . $this->post_id) : '');
-		$this->post_id_append_url = (!empty($this->post_id) ? ('#gp' . $this->post_id) : '');
+		$this->post_id_append_url = (!empty($this->post_id) ? ('#' . $this->post_id_var . $this->post_id) : '');
 
 		return true;
 	}
@@ -186,7 +186,24 @@ class class_guestbooks
 	{
 		global $db;
 
+		$post_id = (int) $post_id;
+
 		$sql = "DELETE FROM " . $this->guestbooks_posts_table . " WHERE post_id = " . $post_id;
+		$result = $db->sql_query($sql);
+
+		return true;
+	}
+
+	/*
+	* Remove all posts for the same guestbook id
+	*/
+	function remove_all_posts($guestbook_id)
+	{
+		global $db;
+
+		$guestbook_id = (int) $guestbook_id;
+
+		$sql = "DELETE FROM " . $this->guestbooks_posts_table . " WHERE guestbook_id = " . $guestbook_id;
 		$result = $db->sql_query($sql);
 
 		return true;
