@@ -2760,7 +2760,7 @@ class AJAXChat {
 
 	function getLangCode() {
 		// Get the langCode from request or cookie:
-		$langCodeCookie = isset($_COOKIE[$this->getConfig('sessionName').'_lang']) ? $_COOKIE[$this->getConfig('sessionName').'_lang'] : null;
+		$langCodeCookie = isset($_COOKIE[$this->getConfig('sessionName') . '_lang']) ? $_COOKIE[$this->getConfig('sessionName') . '_lang'] : null;
 		$langCode = $this->getRequestVar('lang') ? $this->getRequestVar('lang') : $langCodeCookie;
 		// Check if the langCode is valid:
 		if(!in_array($langCode, $this->getConfig('langAvailable'))) {
