@@ -194,9 +194,9 @@ while ($row = $db->sql_fetchrow($r))
 $t = 1;
 $q = "SELECT COUNT(sender_id) AS total, sender_id
 		FROM ". INA_GAMBLE ."
-		GROUP BY sender_id
-			 ORDER BY total DESC
-			 LIMIT 0, 5";
+			GROUP BY sender_id
+			ORDER BY total DESC
+			LIMIT 0, 5";
 $r = $db->sql_query($q);
 while ($row = $db->sql_fetchrow($r))
 {

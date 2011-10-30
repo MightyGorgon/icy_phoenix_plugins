@@ -54,17 +54,11 @@ if (!class_exists('class_plugins'))
 $class_plugins = new class_plugins();
 $class_plugins->setup_lang($config['plugins'][$plugin_name]['dir']);
 
-if (!class_exists('class_form'))
-{
-	include(IP_ROOT_PATH . 'includes/class_form.' . PHP_EXT);
-}
-$class_form = new class_form();
+if (!class_exists('class_form')) include(IP_ROOT_PATH . 'includes/class_form.' . PHP_EXT);
+if (empty($class_form)) $class_form = new class_form();
 
-if (!class_exists('class_db'))
-{
-	include(IP_ROOT_PATH . 'includes/class_db.' . PHP_EXT);
-}
-$class_db = new class_db();
+if (!class_exists('class_db')) include(IP_ROOT_PATH . 'includes/class_db.' . PHP_EXT);
+if (empty($class_db)) $class_db = new class_db();
 
 if (!class_exists('class_guestbooks'))
 {

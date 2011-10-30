@@ -36,8 +36,8 @@ if (empty($class_plugins))
 }
 $class_plugins->setup_lang($config['plugins'][$plugin_name]['dir']);
 
-include(IP_ROOT_PATH . 'includes/class_form.' . PHP_EXT);
-$class_form = new class_form();
+if (!class_exists('class_form')) include(IP_ROOT_PATH . 'includes/class_form.' . PHP_EXT);
+if (empty($class_form)) $class_form = new class_form();
 
 include_once(FEEDBACK_ROOT_PATH . 'includes/functions_feedback.' . PHP_EXT);
 
