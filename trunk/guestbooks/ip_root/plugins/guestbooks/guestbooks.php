@@ -236,7 +236,7 @@ else
 		}
 		$db->sql_freeresult($result);
 
-		$total_items = $class_db->get_total_items();
+		$total_items = $class_db->get_total_items('', $filter_item, $filter_item_value);
 		$pagination = generate_pagination(append_sid(THIS_FILE . '?' . $url_full_append), $total_items, $n_items, $start) . '&nbsp;';
 		$template->assign_vars(array(
 			'PAGINATION' => $pagination,
