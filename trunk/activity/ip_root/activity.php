@@ -1327,7 +1327,7 @@ else
 					$sort_order = $d[1];
 				}
 				$total_games = $total['total'];
-				$pagination = generate_pagination('activity.' . PHP_EXT . '?order=' . $page_order . '&amp;type=' . $sort_order, $total_games, $finish, $start) . '&nbsp;';
+				$pagination = generate_pagination('activity.' . PHP_EXT . '?order=' . $page_order . '&amp;type=' . $sort_order, $total_games, $finish, $start);
 				$page_number = sprintf($lang['Page_of'], (floor($start / $finish) + 1), ceil($total_games / $finish));
 			}
 		}
