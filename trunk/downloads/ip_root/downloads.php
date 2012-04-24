@@ -1682,7 +1682,7 @@ if (empty($view) && !$inc_module)
 
 		if ($total_downloads)
 		{
-			$pagination = generate_pagination('downloads.' . PHP_EXT . '?cat=' . $cat . '&amp;sort_by=' . $sort_by . '&amp;order=' . $order, $total_downloads, $dl_config['dl_links_per_page'], $start) . '&nbsp;';
+			$pagination = generate_pagination('downloads.' . PHP_EXT . '?cat=' . $cat . '&amp;sort_by=' . $sort_by . '&amp;order=' . $order, $total_downloads, $dl_config['dl_links_per_page'], $start);
 
 			$template->assign_vars(array(
 				'PAGINATION' => $pagination,
