@@ -34,7 +34,7 @@ $settings_data = array(
 		'type' => 'LIST_RADIO',
 		'default' => 1,
 		'values' => $this->list_yes_no,
-		),
+	),
 
 	'guestbooks_config_02' => array(
 		'lang_key' => 'GUESTBOOKS_CONFIG_02',
@@ -42,7 +42,7 @@ $settings_data = array(
 		'type' => 'LIST_RADIO',
 		'default' => 0,
 		'values' => $this->list_yes_no,
-		),
+	),
 
 );
 
