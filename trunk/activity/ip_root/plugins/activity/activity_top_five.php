@@ -156,10 +156,10 @@ $db->sql_freeresult($result);
 
 $t = 1;
 $q = "SELECT SUM(count) AS total, user_from
-		FROM ". INA_CHALLENGE_USERS ."
+		FROM " . INA_CHALLENGE_USERS . "
 		GROUP BY user_from
-			ORDER BY total DESC
-			LIMIT 0, 5";
+		ORDER BY total DESC
+		LIMIT 0, 5";
 $r = $db->sql_query($q);
 while ($row = $db->sql_fetchrow($r))
 {
