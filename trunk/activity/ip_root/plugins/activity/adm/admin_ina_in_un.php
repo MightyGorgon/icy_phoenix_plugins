@@ -164,7 +164,7 @@ if(($mode == 'main') || !$mode)
 
 	if (($mode == 'upgrading') || ($mode == 'fresh_install') || ($mode == 'remove'))
 		{
-		if ((($mode == 'fresh_install') || ($mode == 'remove')) && ($mode != 'upgrading'))
+		if ((($mode == 'remove')) && ($mode != 'upgrading'))
 			{
 	$sql = array();
 	$sql[] = "DROP TABLE IF EXISTS ". iNA .", ". iNA_GAMES .", ". iNA_SCORES .", ". iNA_TOP_SCORES .", ". iNA_BAN .", ". iNA_CHEAT .", ". iNA_CAT .", ". iNA_CAT_DATA .", ". iNA_CHALLENGE .", ". iNA_CHALLENGE_USERS .", ". iNA_TROPHY_COMMENTS .", ". iNA_SESSIONS .", ". iNA_LAST_PLAYED .", ". iNA_GAMBLE .", ". iNA_GAMBLE_PROGRESS .", ". iNA_RATING .", ". iNA_FAVORITES .", ". iNA_HOF .", ". iNA_CHAT ."";
