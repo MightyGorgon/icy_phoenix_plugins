@@ -18,7 +18,7 @@ $sql[] = "CREATE TABLE ". iNA_SCORES ." (
 	`user_plays` int(6) default '0',
 	`play_time` int(11) default '0',
 	`date` int(11) default NULL
-	) TYPE=MyISAM;";
+	)";
 
 
 ALTER TABLE `phpbb_ina_scores` ADD `user_plays` int(6) default '0' AFTER `score`;
