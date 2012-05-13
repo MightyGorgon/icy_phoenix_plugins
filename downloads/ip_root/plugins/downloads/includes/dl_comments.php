@@ -418,6 +418,7 @@ if ($action == 'view' || !$action)
 			$template->assign_block_vars('comment_button', array());
 		}
 
+		$row_class = '';
 		for($i = 0; $i < $total_comments; $i++)
 		{
 			$poster_id = $comment_row[$i]['user_id'];
@@ -452,8 +453,7 @@ if ($action == 'view' || !$action)
 			$u_delete_comment = append_sid('downloads.' . PHP_EXT . '?view=comment&amp;action=delete&amp;cat_id=' . $cat_id . '&amp;df_id=' . $df_id . '&amp;dl_id=' . $dl_id);
 			$u_edit_comment = append_sid('downloads.' . PHP_EXT . '?view=comment&amp;action=edit&amp;cat_id=' . $cat_id . '&amp;df_id=' . $df_id . '&amp;dl_id=' . $dl_id);
 
-			$row_class = ( !($i % 2) ) ? $theme['td_class1'] : $theme['td_class2'];
-
+			$row_class = ip_zebra_rows($row_class);
 			$template->assign_block_vars('comment_row', array(
 				'ROW_CLASS' => $row_class,
 				'EDITED_BY' => $edited_by,

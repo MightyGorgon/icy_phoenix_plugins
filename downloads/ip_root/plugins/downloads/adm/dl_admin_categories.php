@@ -734,6 +734,7 @@ $tree_dl = array();
 $dl_mod = new dlmod();
 $index = $dl_mod->full_index();
 
+$row_class = '';
 foreach (array_keys($index) as $key)
 {
 	$cat_id = $key;
@@ -775,8 +776,7 @@ foreach (array_keys($index) as $key)
 		$comments_total++;
 	}
 
-	$row_class = ( !($i % 2) ) ? $theme['td_class1'] : $theme['td_class2'];
-
+	$row_class = ip_zebra_rows($row_class);
 	$template->assign_block_vars('categories', array(
 		'L_DELETE_STATS' => $l_delete_stats,
 		'L_DELETE_COMMENTS' => $l_delete_comments,

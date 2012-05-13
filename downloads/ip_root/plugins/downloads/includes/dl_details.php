@@ -136,6 +136,7 @@ if ($index[$cat_id]['comments'] && $dl_mod->cat_auth_comment_read($cat_id))
 
 		if ($dl_config['latest_comments'])
 		{
+			$row_class = '';
 			$i = 0;
 			while ($row = $db->sql_fetchrow($result))
 			{
@@ -175,8 +176,7 @@ if ($index[$cat_id]['comments'] && $dl_mod->cat_auth_comment_read($cat_id))
 
 				$post_time = create_date($config['default_dateformat'], $comment_time, $config['board_timezone']);
 
-				$row_class = (!($i % 2)) ? $theme['td_class1'] : $theme['td_class2'];
-
+				$row_class = ip_zebra_rows($row_class);
 				$template->assign_block_vars('comment_block.complete.comment_row', array(
 					'ROW_CLASS' => $row_class,
 					'EDITED_BY' => $edited_by,
@@ -331,17 +331,15 @@ $bbcode->allow_smilies = ($user->data['user_allowsmile'] && $config['allow_smili
 $mod_desc = $bbcode->parse($mod_desc);
 $mod_desc = str_replace("\n", "\n<br />\n", $mod_desc);
 
-$row_class = (!($i % 2)) ? $theme['td_class1'] : $theme['td_class2'];
-
 /*
 * Hacklist
 */
 if ($dl_files['hacklist'] && $dl_config['use_hacklist'])
 {
 	$template->assign_block_vars('hacklist', array(
-		'HACK_AUTHOR' => ( $hack_author_email != '' ) ? '<a href="mailto:' . $hack_author_email . '">' . $hack_author . '</a>' : $hack_author,
-		'HACK_AUTHOR_WEBSITE' => ( $hack_author_website != '' ) ? '<a href="'.$hack_author_website.'" target="_blank">' . $lang['Website'] . '</a>' : 'n/a',
-		'HACK_DL_URL' => ( $hack_dl_url != '' ) ? '<a href="'.$hack_dl_url.'">' . $lang['Dl_download'] . '</a>' : 'n/a'
+		'HACK_AUTHOR' => ($hack_author_email != '') ? '<a href="mailto:' . $hack_author_email . '">' . $hack_author . '</a>' : $hack_author,
+		'HACK_AUTHOR_WEBSITE' => ($hack_author_website != '') ? '<a href="' . $hack_author_website . '" target="_blank">' . $lang['Website'] . '</a>' : 'n/a',
+		'HACK_DL_URL' => ($hack_dl_url != '') ? '<a href="' . $hack_dl_url . '">' . $lang['Dl_download'] . '</a>' : 'n/a'
 		)
 	);
 

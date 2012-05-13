@@ -121,10 +121,11 @@ if ($action == '' || $action == 'edit')
 		ORDER BY ban_id";
 	$result = $db->sql_query($sql);
 
+	$row_class = '';
 	$i = 0;
 	while ($row = $db->sql_fetchrow($result))
 	{
-		$row_class = (($i % 2)) ? $theme['td_class1'] : $theme['td_class2'];
+		$row_class = ip_zebra_rows($row_class);
 
 		$ban_id = $row['ban_id'];
 		$user_id = $row['user_id'];

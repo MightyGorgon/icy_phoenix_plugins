@@ -848,6 +848,7 @@ if ($action == '')
 		ORDER BY sort";
 	$result = $db->sql_query($sql);
 
+	$row_class = '';
 	$i = 0;
 	while ($row = $db->sql_fetchrow($result))
 	{
@@ -908,8 +909,7 @@ if ($action == '')
 		$dl_move_up = append_sid('admin_downloads.' . PHP_EXT . '?submod=files&amp;action=downloads_order&amp;move=15&amp;df_id=' . $file_id . '&amp;cat_id=' . $cat_id);
 		$dl_move_down = append_sid('admin_downloads.' . PHP_EXT . '?submod=files&amp;action=downloads_order&amp;move=-15&amp;df_id=' . $file_id . '&amp;cat_id=' . $cat_id);
 
-		$row_class = ( !($i % 2) ) ? $theme['td_class1'] : $theme['td_class2'];
-
+		$row_class = ip_zebra_rows($row_class);
 		$template->assign_block_vars('downloads', array(
 			'U_FILE_EDIT' => $dl_edit,
 			'U_FILE_DELETE' => $dl_delete,

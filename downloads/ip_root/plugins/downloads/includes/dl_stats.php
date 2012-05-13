@@ -58,6 +58,7 @@ if (sizeof($index))
 		$total_top_ten = $db->sql_numrows($result);
 		if ($total_top_ten > 0)
 		{
+			$row_class = '';
 			$i = 0;
 			$dl_pos = 1;
 			while ($row = $db->sql_fetchrow($result))
@@ -76,8 +77,7 @@ if (sizeof($index))
 				$user_link = ($row['down_user'] == ANONYMOUS) ? $lang['Guest'] : colorize_username($row['down_user'], $row['username'], $row['user_color'], $row['user_active']);
 				$user_name = ($row['down_user'] == ANONYMOUS) ? $lang['Guest'] : $row['username'];
 
-				$row_class = (!($i % 2)) ? $theme['td_class1'] : $theme['td_class2'];
-
+				$row_class = ip_zebra_rows($row_class);
 				$template->assign_block_vars('top_ten_latest', array(
 					'POS' => $dl_pos,
 					'DESCRIPTION' => $description,
@@ -112,6 +112,7 @@ if (sizeof($index))
 		$total_top_ten = $db->sql_numrows($result);
 		if ($total_top_ten > 0)
 		{
+			$row_class = '';
 			$i = 0;
 			$dl_pos = 1;
 			while ($row = $db->sql_fetchrow($result))
@@ -130,8 +131,7 @@ if (sizeof($index))
 				$user_link = ($row['add_user'] == ANONYMOUS) ? $lang['Guest'] : colorize_username($row['add_user'], $row['username'], $row['user_color'], $row['user_active']);
 				$user_name = ($row['add_user'] == ANONYMOUS) ? $lang['Guest'] : $row['username'];
 
-				$row_class = (!($i % 2)) ? $theme['td_class1'] : $theme['td_class2'];
-
+				$row_class = ip_zebra_rows($row_class);
 				$template->assign_block_vars('top_ten_uploads', array(
 					'POS' => $dl_pos,
 					'DESCTIPTION' => $description,
@@ -164,6 +164,7 @@ if (sizeof($index))
 		$total_top_ten = $db->sql_numrows($result);
 		if ($total_top_ten > 0)
 		{
+			$row_class = '';
 			$i = 0;
 			$dl_pos = 1;
 			while ($row = $db->sql_fetchrow($result))
@@ -178,8 +179,7 @@ if (sizeof($index))
 
 				$file_link = append_sid('downloads.' . PHP_EXT . '?view=detail&amp;df_id=' . $file_id);
 
-				$row_class = (!($i % 2)) ? $theme['td_class1'] : $theme['td_class2'];
-
+				$row_class = ip_zebra_rows($row_class);
 				$template->assign_block_vars('top_ten_dl_cur_month', array(
 					'POS' => $dl_pos,
 					'DESCRIPTION' => $description,
@@ -210,6 +210,7 @@ if (sizeof($index))
 		$total_top_ten = $db->sql_numrows($result);
 		if ($total_top_ten > 0)
 		{
+			$row_class = '';
 			$i = 0;
 			$dl_pos = 1;
 			while ($row = $db->sql_fetchrow($result))
@@ -224,8 +225,7 @@ if (sizeof($index))
 
 				$file_link = append_sid('downloads.' . PHP_EXT . '?view=detail&amp;df_id=' . $file_id);
 
-				$row_class = (!($i % 2)) ? $theme['td_class1'] : $theme['td_class2'];
-
+				$row_class = ip_zebra_rows($row_class);
 				$template->assign_block_vars('top_ten_dl_overall', array(
 					'POS' => $dl_pos,
 					'DESCRIPTION' => $description,
@@ -256,6 +256,7 @@ if (sizeof($index))
 		$total_top_ten = $db->sql_numrows($result);
 		if ($total_top_ten > 0)
 		{
+			$row_class = '';
 			$i = 0;
 			$dl_pos = 1;
 			while ($row = $db->sql_fetchrow($result))
@@ -270,8 +271,7 @@ if (sizeof($index))
 
 				$file_link = append_sid('downloads.' . PHP_EXT . '?view=detail&amp;df_id=' . $file_id);
 
-				$row_class = (!($i % 2)) ? $theme['td_class1'] : $theme['td_class2'];
-
+				$row_class = ip_zebra_rows($row_class);
 				$template->assign_block_vars('top_ten_traffic_cur_month', array(
 					'POS' => $dl_pos,
 					'DESCRIPTION' => $description,
@@ -302,6 +302,7 @@ if (sizeof($index))
 		$total_top_ten = $db->sql_numrows($result);
 		if ($total_top_ten > 0)
 		{
+			$row_class = '';
 			$i = 0;
 			$dl_pos = 1;
 			while ($row = $db->sql_fetchrow($result))
@@ -316,8 +317,7 @@ if (sizeof($index))
 
 				$file_link = append_sid('downloads.' . PHP_EXT . '?view=detail&amp;df_id=' . $file_id);
 
-				$row_class = (!($i % 2)) ? $theme['td_class1'] : $theme['td_class2'];
-
+				$row_class = ip_zebra_rows($row_class);
 				$template->assign_block_vars('top_ten_traffic_overall', array(
 					'POS' => $dl_pos,
 					'DESCRIPTION' => $description,
@@ -356,6 +356,7 @@ if (sizeof($index))
 		$total_top_ten = $db->sql_numrows($result);
 		if ($total_top_ten > 0)
 		{
+			$row_class = '';
 			$i = 0;
 			$dl_pos = 1;
 			while ($row = $db->sql_fetchrow($result))
@@ -363,8 +364,7 @@ if (sizeof($index))
 				$user_link = ($row['user_id'] == ANONYMOUS) ? $lang['Guest'] : colorize_username($row['user_id'], $row['user_username'], $row['user_color'], $row['user_active']);
 				$user_name = ($row['user_id'] == ANONYMOUS) ? $lang['Guest'] : $row['username'];
 
-				$row_class = (!($i % 2)) ? $theme['td_class1'] : $theme['td_class2'];
-
+				$row_class = ip_zebra_rows($row_class);
 				$template->assign_block_vars('top_ten_dl_counts', array(
 					'POS' => $dl_pos,
 					'USER_NAME' => $user_name,
@@ -397,6 +397,7 @@ if (sizeof($index))
 		$total_top_ten = $db->sql_numrows($result);
 		if ($total_top_ten > 0)
 		{
+			$row_class = '';
 			$i = 0;
 			$dl_pos = 1;
 			while ($row = $db->sql_fetchrow($result))
@@ -405,8 +406,7 @@ if (sizeof($index))
 				$user_name = ($row['user_id'] == ANONYMOUS) ? $lang['Guest'] : $row['username'];
 				$dl_traffic = $dl_mod->dl_size($row['dl_traffic']);
 
-				$row_class = (!($i % 2)) ? $theme['td_class1'] : $theme['td_class2'];
-
+				$row_class = ip_zebra_rows($row_class);
 				$template->assign_block_vars('top_ten_dl_traffic', array(
 					'POS' => $dl_pos,
 					'USER_NAME' => $user_name,
@@ -439,6 +439,7 @@ if (sizeof($index))
 		$total_top_ten = $db->sql_numrows($result);
 		if ($total_top_ten > 0)
 		{
+			$row_class = '';
 			$i = 0;
 			$dl_pos = 1;
 			while ($row = $db->sql_fetchrow($result))
@@ -446,8 +447,7 @@ if (sizeof($index))
 				$user_link = ($row['user_id'] == ANONYMOUS) ? $lang['Guest'] : colorize_username($row['user_id'], $row['user_username'], $row['user_color'], $row['user_active']);
 				$user_name = ($row['user_id'] == ANONYMOUS) ? $lang['Guest'] : $row['username'];
 
-				$row_class = (!($i % 2)) ? $theme['td_class1'] : $theme['td_class2'];
-
+				$row_class = ip_zebra_rows($row_class);
 				$template->assign_block_vars('top_ten_up_counts', array(
 					'POS' => $dl_pos,
 					'USER_NAME' => $user_name,
@@ -480,6 +480,7 @@ if (sizeof($index))
 		$total_top_ten = $db->sql_numrows($result);
 		if ($total_top_ten > 0)
 		{
+			$row_class = '';
 			$i = 0;
 			$dl_pos = 1;
 			while ($row = $db->sql_fetchrow($result))
@@ -488,8 +489,7 @@ if (sizeof($index))
 				$user_name = ($row['user_id'] == ANONYMOUS) ? $lang['Guest'] : $row['username'];
 				$dl_traffic = $dl_mod->dl_size($row['dl_traffic']);
 
-				$row_class = (!($i % 2)) ? $theme['td_class1'] : $theme['td_class2'];
-
+				$row_class = ip_zebra_rows($row_class);
 				$template->assign_block_vars('top_ten_up_traffic', array(
 					'POS' => $dl_pos,
 					'USER_NAME' => $user_name,

@@ -105,11 +105,13 @@ if ($_GET['mode'] == 'check_game_listing')
 	echo '	</tr>';
 	if (sizeof($match_array) > 0)
 	{
+		$row_class = '';
 		for ($x = 0; $x < sizeof($match_array); $x++)
 		{
+			$row_class = ip_zebra_rows($row_class);
 			echo '	<tr>';
-			echo '		<td align="left" width="100%" class="'. (($x % 2) ? $theme['td_class2'] : $theme['td_class1']) .'">';
-			echo			 $match_array[$x];
+			echo '		<td align="left" width="100%" class="'. $row_class .'">';
+			echo 			$match_array[$x];
 			echo '		</td>';
 			echo '	</tr>';
 		}
@@ -124,16 +126,18 @@ if ($_GET['mode'] == 'check_game_listing')
 	}
 	echo '	<tr>';
 	echo '		<th width="100%">';
-	echo			 $not_listed;
+	echo 			$not_listed;
 	echo '		</th>';
 	echo '	</tr>';
 	if (sizeof($mis_match_array) > 0)
 	{
+		$row_class = '';
 		for ($x = 0; $x < sizeof($mis_match_array); $x++)
 		{
+			$row_class = ip_zebra_rows($row_class);
 			echo '	<tr>';
-			echo '		<td align="left" width="100%" class="'.(($x % 2) ? $theme['td_class2'] : $theme['td_class1']) .'">';
-			echo			 $mis_match_array[$x];
+			echo '		<td align="left" width="100%" class="' . $row_class .'">';
+			echo 			$mis_match_array[$x];
 			echo '		</td>';
 			echo '	</tr>';
 		}
@@ -153,10 +157,12 @@ if ($_GET['mode'] == 'check_game_listing')
 	echo '	</tr>';
 	if (sizeof($not_listed_array) > 0)
 	{
+		$row_class = '';
 		for ($x = 0; $x < sizeof($not_listed_array); $x++)
 		{
+			$row_class = ip_zebra_rows($row_class);
 			echo '	<tr>';
-			echo '		<td class="'. (($x % 2) ? $theme['td_class2'] : $theme['td_class1']) .'" width="100%">';
+			echo '		<td class="' . $row_class .'" width="100%">';
 			echo			 $not_listed_array[$x];
 			echo '		</td>';
 			echo '	</tr>';

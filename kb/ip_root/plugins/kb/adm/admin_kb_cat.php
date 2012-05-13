@@ -509,6 +509,7 @@ switch ($mode)
 					WHERE parent = 0 ORDER BY cat_order ASC";
 		$cat_result = $db->sql_query($sql);
 
+		$row_class = '';
 		$ss = 0;
 		while ($category = $db->sql_fetchrow($cat_result))
 		{
@@ -532,8 +533,7 @@ switch ($mode)
 			$temp_url = append_sid(KB_ADM_PATH . 'admin_kb_cat.' . PHP_EXT . '?mode=down&amp;cat=' . $category_id);
 			$down = '<a href="' . $temp_url . '"><img src="' . IP_ROOT_PATH . $images['cms_arrow_down'] . '" alt="' . $lang['MOVE_DOWN'] . '"></a>';
 
-			$row_class = (!($ss % 2)) ? $theme['td_class1'] : $theme['td_class2'];
-
+			$row_class = ip_zebra_rows($row_class);
 			$template->assign_block_vars('catrow', array('CATEGORY' => $category_link,
 				'CAT_DESCRIPTION' => $category_details,
 				'CAT_ARTICLES' => $category_articles,

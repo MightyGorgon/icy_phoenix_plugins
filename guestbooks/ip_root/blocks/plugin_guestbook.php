@@ -134,6 +134,7 @@ if(!function_exists('cms_plugin_guestbook_form'))
 			}
 			else
 			{
+				$row_class = '';
 				for ($i = 0; $i < $page_items; $i++)
 				{
 					$post_guestbook_id = $items_array[$i]['guestbook_id'];
@@ -167,10 +168,9 @@ if(!function_exists('cms_plugin_guestbook_form'))
 						$delete_img = '<a href="' . $delete_link . '"><img src="' . $ip_root_path . $images['cms_icon_delete'] . '" alt="' . $lang['DELETE'] . '" title="' . $lang['DELETE'] . '" /></a>';
 					}
 
-					$class = ($i % 2) ? $theme['td_class1'] : $theme['td_class2'];
-
+					$row_class = ip_zebra_rows($row_class);
 					$template->assign_block_vars('guestbook_posts', array(
-						'CLASS' => $class,
+						'CLASS' => $row_class,
 						'POST_ID' => $post_post_id,
 
 						'POSTER' => $guestbook_poster,

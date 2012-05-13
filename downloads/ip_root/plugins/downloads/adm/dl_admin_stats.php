@@ -199,6 +199,7 @@ if ($total_data)
 		LIMIT $start, " . $dl_config['dl_links_per_page'];
 	$result = $db->sql_query($sql);
 
+	$row_class = '';
 	$i = 0;
 	while ($row = $db->sql_fetchrow($result))
 	{
@@ -214,6 +215,7 @@ if ($total_data)
 				$direction = $lang['Dl_download'];
 		}
 
+		$row_class = ip_zebra_rows($row_class);
 		$template->assign_block_vars('dl_stat_row', array(
 			'CAT_NAME' => $row['cat_name'],
 			'DESCRIPTION' => $row['description'],
@@ -225,7 +227,7 @@ if ($total_data)
 			'TIME_STAMP' => create_date($config['default_dateformat'], $row['time_stamp'], $config['board_timezone']),
 			'ID' => $row['dl_id'],
 
-			'ROW_CLASS' => ($i % 2) ? $theme['td_class1'] : $theme['td_class2'],
+			'ROW_CLASS' => $row_class,
 
 			'U_CAT_LINK' => append_sid(IP_ROOT_PATH . 'downloads.' . PHP_EXT . '?cat=' . $row['cat_id']),
 			'U_DL_LINK' => append_sid(IP_ROOT_PATH . 'downloads.' . PHP_EXT . '?view=detail&amp;df_id='.$row['id'])

@@ -186,14 +186,16 @@ if ($total_favorites)
 		)
 	);
 
+	$row_class = '';
 	$i = 0;
 	while ($row = $db->sql_fetchrow($result))
 	{
 		$path_dl_array = array();
 		$dl_nav = $dl_mod->dl_nav($row['cat'], 'url').'&nbsp;&raquo;&nbsp;';
 
+		$row_class = ip_zebra_rows($row_class);
 		$template->assign_block_vars('fav_block.favorite_row', array(
-			'ROW_CLASS' => ($i % 2) ? $theme['td_class1'] : $theme['td_class2'],
+			'ROW_CLASS' => $row_class,
 			'DL_ID' => $row['fav_id'],
 			'DL_CAT' => $dl_nav,
 			'DOWNLOAD' => $row['description'],

@@ -195,6 +195,7 @@ else
 	}
 	else
 	{
+		$row_class = '';
 		for ($i = 0; $i < $page_items; $i++)
 		{
 			$guestbook_poster = colorize_username($items_array[$i]['guestbook_user_id_create'], $items_array[$i]['username'], $items_array[$i]['user_color'], $items_array[$i]['user_active']);
@@ -211,10 +212,9 @@ else
 			$delete_link = append_sid(THIS_FILE . '?mode=delete&amp;' . $item_id . '=' . $items_array[$i][$item_id]);
 			$delete_img = '<a href="' . $delete_link . '"><img src="' . IP_ROOT_PATH . $images['cms_icon_delete'] . '" alt="' . $lang['DELETE'] . '" title="' . $lang['DELETE'] . '" /></a>';
 
-			$class = ($i % 2) ? $theme['td_class1'] : $theme['td_class2'];
-
+			$row_class = ip_zebra_rows($row_class);
 			$template->assign_block_vars('guestbooks', array(
-				'CLASS' => $class,
+				'CLASS' => $row_class,
 				//'ROW_NUMBER' => $i + 1,
 				'ROW_NUMBER' => $items_array[$i][$item_id],
 

@@ -226,6 +226,7 @@ switch ($mode)
 		$sql = "SELECT * FROM " . KB_TYPES_TABLE;
 		$cat_result = $db->sql_query($sql);
 
+		$row_class = '';
 		while ($type = $db->sql_fetchrow($cat_result))
 		{
 			$type_id = $type['id'];
@@ -239,8 +240,7 @@ switch ($mode)
 			//$delete = '<a href="' . $temp_url . '"><img src="' . $images['icon_delpost'] . '" alt="' . $lang['Delete'] . '"></a>';
 			$delete = '<a href="' . $temp_url . '">' . $lang['Delete'] . '</a>';
 
-			$row_class = (!($i % 2)) ? $theme['td_class1'] : $theme['td_class2'];
-
+			$row_class = ip_zebra_rows($row_class);
 			$template->assign_block_vars('typerow', array(
 				'TYPE' => $type_name,
 				'U_EDIT' => $edit,

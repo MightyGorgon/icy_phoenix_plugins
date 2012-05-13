@@ -780,6 +780,7 @@ if (!$action)
 
 			$template->assign_block_vars('bug_tracker_file_head', array());
 
+			$row_class = '';
 			while ($row = $db->sql_fetchrow($result))
 			{
 				$report_id = $row['report_id'];
@@ -809,8 +810,7 @@ if (!$action)
 				$report_text = (strlen($report_text) > 200) ? substr($report_text, 0, 200) . ' [ ... ]' : $report_text;
 				$report_text = str_replace("\n", "<br />", $report_text);
 
-				$row_class = (($i % 2)) ? $theme['td_class1'] : $theme['td_class2'];
-
+				$row_class = ip_zebra_rows($row_class);
 				$template->assign_block_vars('bug_tracker_file', array(
 					'ROW_CLASS' => $row_class,
 
@@ -983,6 +983,7 @@ if (!$action)
 
 			$template->assign_block_vars('bug_tracker_list_head', array());
 
+			$row_class = '';
 			while ($row = $db->sql_fetchrow($result))
 			{
 				$report_id = $row['report_id'];
@@ -1002,8 +1003,7 @@ if (!$action)
 				$report_title = censor_text($report_title);
 				$report_file_ver = censor_text($report_file_ver);
 
-				$row_class = (($i % 2)) ? $theme['td_class1'] : $theme['td_class2'];
-
+				$row_class = ip_zebra_rows($row_class);
 				$template->assign_block_vars('bug_tracker_list', array(
 					'ROW_CLASS' => $row_class,
 

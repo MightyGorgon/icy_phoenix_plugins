@@ -31,7 +31,8 @@ $install_data = array(
 		),
 		'functions' => array(),
 	),
-	'1.0.1' => array(),
+	'1.0.1' => array(
+		'sql' => array(),
 		'functions' => array(),
 	)
 );

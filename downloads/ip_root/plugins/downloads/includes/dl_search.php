@@ -125,6 +125,7 @@ if ($search_keywords != '' && !$search_author)
 			LIMIT $start, " . $config['topics_per_page'];
 		$result = $db->sql_query($sql);
 
+		$row_class = '';
 		$i = 0;
 		while ($row = $db->sql_fetchrow($result))
 		{
@@ -153,8 +154,7 @@ if ($search_keywords != '' && !$search_author)
 			$long_desc = $bbcode->parse(stripslashes($row['long_desc']));
 			//$long_desc = str_replace("\n", "\n<br />\n", $long_desc);
 
-			$row_class = (!($i % 2)) ? $theme['td_class1'] : $theme['td_class2'];
-
+			$row_class = ip_zebra_rows($row_class);
 			$template->assign_block_vars('searchresults', array(
 				'ROW_CLASS' => $row_class,
 				'STATUS' => $status,
@@ -251,6 +251,7 @@ elseif ($search_author)
 			LIMIT $start, " . $config['topics_per_page'];
 		$result = $db->sql_query($sql);
 
+		$row_class = '';
 		$i = 0;
 		while ($row = $db->sql_fetchrow($result))
 		{
@@ -279,8 +280,7 @@ elseif ($search_author)
 			$long_desc = $bbcode->parse(stripslashes($row['long_desc']));
 			//$long_desc = str_replace("\n", "\n<br />\n", $long_desc);
 
-			$row_class = (!($i % 2)) ? $theme['td_class1'] : $theme['td_class2'];
-
+			$row_class = ip_zebra_rows($row_class);
 			$template->assign_block_vars('searchresults', array(
 				'ROW_CLASS' => $row_class,
 				'STATUS' => $status,

@@ -115,10 +115,11 @@ if ($action == '')
 		ORDER BY extention";
 	$result = $db->sql_query($sql);
 
+	$row_class = '';
 	$i = 0;
 	while ($row = $db->sql_fetchrow($result))
 	{
-		$row_class = (($i % 2)) ? $theme['td_class1'] : $theme['td_class2'];
+		$row_class = ip_zebra_rows($row_class);
 		$extention = $row['extention'];
 		$template->assign_block_vars('extention_row', array(
 			'ROW_CLASS' => $row_class,

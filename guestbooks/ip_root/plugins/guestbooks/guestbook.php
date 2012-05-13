@@ -352,6 +352,7 @@ else
 	}
 	else
 	{
+		$row_class = '';
 		for ($i = 0; $i < $page_items; $i++)
 		{
 			$post_guestbook_id = $items_array[$i]['guestbook_id'];
@@ -385,10 +386,9 @@ else
 				$delete_img = '<a href="' . $delete_link . '"><img src="' . IP_ROOT_PATH . $images['cms_icon_delete'] . '" alt="' . $lang['DELETE'] . '" title="' . $lang['DELETE'] . '" /></a>';
 			}
 
-			$class = ($i % 2) ? $theme['td_class1'] : $theme['td_class2'];
-
+			$row_class = ip_zebra_rows($row_class);
 			$template->assign_block_vars('posts', array(
-				'CLASS' => $class,
+				'CLASS' => $row_class,
 				'POST_ID' => $post_post_id,
 
 				'POSTER' => $guestbook_poster,

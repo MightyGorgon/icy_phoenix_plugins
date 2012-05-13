@@ -963,6 +963,7 @@ function get_kb_cat_subs_admin($parent, $select = 1, $indent, $ss)
 
 	$result = $db->sql_query($sql);
 
+	$row_class = '';
 	while ($category2 = $db->sql_fetchrow($result))
 	{
 		$category_details2 = $category2['category_details'];
@@ -987,8 +988,7 @@ function get_kb_cat_subs_admin($parent, $select = 1, $indent, $ss)
 		$temp_url = append_sid(IP_ROOT_PATH . ADM . '/admin_kb_cat.' . PHP_EXT . '?mode=down&amp;cat=' . $category_id2);
 		$down2 = '<a href="' . $temp_url . '" class="gen">' . $lang['MOVE_DOWN'] . '</a>';
 
-		$row_class = (!($ss % 2)) ? $theme['td_class1'] : $theme['td_class2'];
-
+		$row_class = ip_zebra_rows($row_class);
 		$template->assign_block_vars('catrow.subrow', array(
 				'CATEGORY' => $category2,
 				'CATEGORY_XS' => $temp_url,

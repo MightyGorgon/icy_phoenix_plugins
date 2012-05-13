@@ -931,6 +931,7 @@ if ($action == 'approve')
 		LIMIT $start, " . $dl_config['dl_links_per_page'];
 	$result = $db->sql_query($sql);
 
+	$row_class = '';
 	$i = 0;
 	while ($row = $db->sql_fetchrow($result))
 	{
@@ -943,8 +944,7 @@ if ($action == 'approve')
 		$description = stripslashes($row['description']);
 		$file_id = $row['id'];
 
-		$row_class = (!($i % 2)) ? $theme['td_class1'] : $theme['td_class2'];
-
+		$row_class = ip_zebra_rows($row_class);
 		$template->assign_block_vars('approve_row', array(
 			'ROW_CLASS' => $row_class,
 			'CAT_NAME' => $cat_name,
@@ -1039,6 +1039,7 @@ if ($action == 'capprove')
 		LIMIT $start, " . $dl_config['dl_links_per_page'];
 	$result = $db->sql_query($sql);
 
+	$row_class = '';
 	$i = 0;
 	while ($row = $db->sql_fetchrow($result))
 	{
@@ -1057,8 +1058,7 @@ if ($action == 'capprove')
 		$comment_username = $row['username'];
 		$comment_user_link = ($comment_user_id == ANONYMOUS) ? $lang['Guest'] : colorize_username($comment_user_id);
 
-		$row_class = (!($i % 2)) ? $theme['td_class1'] : $theme['td_class2'];
-
+		$row_class = ip_zebra_rows($row_class);
 		$template->assign_block_vars('approve_row', array(
 			'ROW_CLASS' => $row_class,
 			'CAT_NAME' => $cat_name,
@@ -1157,6 +1157,7 @@ if (($action == 'manage') && $cat_id)
 		LIMIT $start, $per_page";
 	$result = $db->sql_query($sql);
 
+	$row_class = '';
 	$i = 0;
 	while ($row = $db->sql_fetchrow($result))
 	{
@@ -1165,8 +1166,7 @@ if (($action == 'manage') && $cat_id)
 
 		$mini_icon = $dl_mod->mini_status_file($cat_id, $file_id);
 
-		$row_class = (!($i % 2)) ? $theme['td_class1'] : $theme['td_class2'];
-
+		$row_class = ip_zebra_rows($row_class);
 		$template->assign_block_vars('manage_row', array(
 			'ROW_CLASS' => $row_class,
 			'CAT_NAME' => $cat_name,

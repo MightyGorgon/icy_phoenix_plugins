@@ -383,6 +383,7 @@ else
 					LIMIT " . $start . ", " . $config['topics_per_page'];
 	$result = $db->sql_query($sql, 0, 'feedback_');
 
+	$row_class = '';
 	$feedback_counter = 0;
 	while ($row = $db->sql_fetchrow($result))
 	{
@@ -420,10 +421,9 @@ else
 		$delete_link = append_sid(PLUGINS_FEEDBACK_FILE . '?mode=delete&amp;feedback_id=' . $row['feedback_id']);
 		$delete_img = '&nbsp;<a href="' . $delete_link . '"><img src="' . $images['icon_delpost'] . '" alt="' . $lang['DELETE'] . '" title="' . $lang['DELETE'] . '" /></a>&nbsp;';
 
-		$class = ($feedback_counter % 2) ? $theme['td_class1'] : $theme['td_class2'];
-
+		$row_class = ip_zebra_rows($row_class);
 		$template->assign_block_vars('feedback', array(
-			'CLASS' => $class,
+			'CLASS' => $row_class,
 			'ROW_NUMBER' => $feedback_counter,
 			'DATE' => create_date_ip($config['default_dateformat'], $feedback_time, $config['board_timezone']),
 			'TRANSACTION' => $feedback_transaction,
