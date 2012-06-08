@@ -97,8 +97,8 @@ while($row = $db -> sql_fetchrow($r))
 	$icq = ($row1['user_icq']) ? '<a href="http://wwp.icq.com/scripts/contact.dll?msgto='. $row1['user_icq'] .'"><img src="' . $images['icon_icq'] .'" alt="'. $lang['ICQ'] .'" title="' . $lang['ICQ'] .'" border="0" /></a>' : '';
 	$www = ($row1['user_website']) ? '<a href="'. $row1['user_website'] .'" target="_userwww"><img src="'. $images['icon_www'] . '" alt="'. $lang['Visit_website'] .'" title="'. $lang['Visit_website'] .'" border="0" /></a>' : '';
 	//$mailto = ($config['board_email_form']) ? append_sid(CMS_PAGE_PROFILE . '?mode=email&amp;' . POST_USERS_URL . '=' . $row1['user_id']) : 'mailto:' . $row1['user_email'];
-	$mailto = ($config['board_email_form'] && !empty($row1['user_viewemail'])) ? append_sid(CMS_PAGE_PROFILE . '?mode=email&amp;' . POST_USERS_URL . '=' . $row1['user_id']) : '';
-	$mail = ($row1['user_email'] && !empty($row1['user_viewemail'])) ? '<a href="' . $mailto . '"><img src="'. $images['icon_email'] .'" alt="'. $lang['Send_email'] .'" title="' . $lang['Send_email'] . '" border="0" /></a>' : '';
+	$mailto = ($config['board_email_form'] && !empty($row1['user_allow_viewemail'])) ? append_sid(CMS_PAGE_PROFILE . '?mode=email&amp;' . POST_USERS_URL . '=' . $row1['user_id']) : '';
+	$mail = ($row1['user_email'] && !empty($row1['user_allow_viewemail'])) ? '<a href="' . $mailto . '"><img src="'. $images['icon_email'] .'" alt="'. $lang['Send_email'] .'" title="' . $lang['Send_email'] . '" border="0" /></a>' : '';
 	$pmto = append_sid(CMS_PAGE_PRIVMSG . '?mode=post&amp;' . POST_USERS_URL . '=' . $row1[user_id]);
 	$pm = '<a href="' . $pmto . '"><img src="' . $images['icon_pm'] . '" alt="' . $lang['Send_private_message'] . '" title="' . $lang['Send_private_message'] . '" /></a>';
 	$pro = append_sid(CMS_PAGE_PROFILE . '?mode=viewprofile&amp;' . POST_USERS_URL . '=' . $row1[user_id]);
