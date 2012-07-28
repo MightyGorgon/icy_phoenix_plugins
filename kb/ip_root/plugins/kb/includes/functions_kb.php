@@ -730,11 +730,8 @@ function kb_insert_pm($to_id, $message, $subject, $from_id, $html_on = 0, $acro_
 
 	if ($to_userdata['user_notify_pm'] && !empty($to_userdata['user_email']) && $to_userdata['user_active'])
 	{
-		$script_name = preg_replace('/^\/?(.*?)\/?$/', "\\1", trim($config['script_path']));
-		$script_name = ($script_name != '') ? $script_name . '/privmsg.' . PHP_EXT : CMS_PAGE_PRIVMSG;
-		$server_name = trim($config['server_name']);
-		$server_protocol = ($config['cookie_secure']) ? 'https://' : 'http://';
-		$server_port = ($config['server_port'] <> 80) ? ':' . trim($config['server_port']) . '/' : '/';
+		$server_url = create_server_url();
+		$privmsg_url = $server_url . CMS_PAGE_PRIVMSG;
 
 		include(IP_ROOT_PATH . 'includes/emailer.' . PHP_EXT);
 		$emailer = new emailer();
@@ -749,7 +746,7 @@ function kb_insert_pm($to_id, $message, $subject, $from_id, $html_on = 0, $acro_
 			'SITENAME' => $config['sitename'],
 			'EMAIL_SIG' => $email_sig,
 
-			'U_INBOX' => $server_protocol . $server_name . $server_port . $script_name . '?folder=inbox'
+			'U_INBOX' => $privmsg_url . '?folder=inbox'
 			)
 		);
 
@@ -816,12 +813,6 @@ function kb_mailer($to_id, $message, $subject, $from_id, $html_on = 0, $acro_aut
 		$error = true;
 		$error_msg .= ((!empty($error_msg)) ? '<br />' : '') . $lang['Empty_message'];
 	}
-
-	$script_name = preg_replace('/^\/?(.*?)\/?$/', "\\1", trim($config['script_path']));
-	$script_name = ($script_name != '') ? $script_name . '/privmsg.' . PHP_EXT : CMS_PAGE_PRIVMSG;
-	$server_name = trim($config['server_name']);
-	$server_protocol = ($config['cookie_secure']) ? 'https://' : 'http://';
-	$server_port = ($config['server_port'] <> 80) ? ':' . trim($config['server_port']) . '/' : '/';
 
 	include(IP_ROOT_PATH . 'includes/emailer.' . PHP_EXT);
 	$emailer = new emailer();
