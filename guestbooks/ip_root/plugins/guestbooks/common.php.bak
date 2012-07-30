@@ -39,7 +39,7 @@ if (!defined('CMS_PAGE_GUESTBOOK'))
 	define('GUESTBOOKS_ADM_TPL_PATH', '../../' . GUESTBOOKS_PLUGIN_PATH . ADM . '/templates/');
 }
 
-if (!class_exists('bbcode') || empty($bbcode))
+if (!class_exists('bbcode'))
 {
 	include(IP_ROOT_PATH . 'includes/bbcode.' . PHP_EXT);
 }
