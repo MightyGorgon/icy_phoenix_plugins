@@ -48,6 +48,8 @@ class CustomAJAXChat extends AJAXChat
 	{
 		global $user;
 
+		$redirect_url = ('plugins/chat/index.' . PHP_EXT) . (($this->getRequestVar('view') == 'logs') ? '?view=logs' : '');
+
 		switch($tag)
 		{
 
@@ -55,27 +57,10 @@ class CustomAJAXChat extends AJAXChat
 				return $this->_requestVars['sid'];
 
 			case 'FORUM_LOGIN_URL':
-				if($user->data['session_logged_in'])
-				{
-					return (($this->getRequestVar('view') == 'logs') ? (IP_ROOT_PATH . 'plugins/chat/index.' . PHP_EXT . '?view=logs') : (IP_ROOT_PATH . 'plugins/chat/index.' . PHP_EXT));
-					//return ($this->getRequestVar('view') == 'logs') ? ('./index.' . PHP_EXT . '?view=logs') : ('./index.' . PHP_EXT);
-				}
-				else
-				{
-					return IP_ROOT_PATH . 'login_ip.php';
-					//return '../../login_ip.php';
-				}
+				return IP_ROOT_PATH . CMS_PAGE_LOGIN;
 
 			case 'REDIRECT_URL':
-				if($user->data['session_logged_in'])
-				{
-					return '';
-				}
-				else
-				{
-					return (($this->getRequestVar('view') == 'logs') ? (IP_ROOT_PATH . 'plugins/chat/index.' . PHP_EXT . '?view=logs') : (IP_ROOT_PATH . 'plugins/chat/index.' . PHP_EXT));
-					//return ($this->getRequestVar('view') == 'logs') ? ('./index.' . PHP_EXT . '?view=logs') : ('./index.' . PHP_EXT);
-				}
+				return $redirect_url;
 
 			default:
 				return null;

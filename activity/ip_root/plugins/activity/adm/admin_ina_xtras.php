@@ -1376,61 +1376,74 @@ if (($mode == 'main') || !$mode)
 		}
 
 	if($mode == "scores_update")
+	{
+		$sql = "DROP TABLE " . $table_prefix . "scores_fixer";
+		$db->sql_return_on_error(true);
+		$r = $db->sql_query($sql);
+		$db->sql_return_on_error(false);
+
+		$sql = "CREATE TABLE " . $table_prefix . "scores_fixer
+				(`game_name` varchar(255) default NULL,
+				`player` varchar(40) default NULL,
+				`score` FLOAT(10,2) DEFAULT '0' NOT NULL,
+				`user_plays` int(6) default '0',
+				`play_time` int(11) default '0',
+				`date` int(11) default NULL)";
+		$db->sql_return_on_error(true);
+		$r = $db->sql_query($sql);
+		$db->sql_return_on_error(false);
+
+		$f = 0;
+
+		$q = "SELECT *
+				FROM " . iNA_SCORES . "
+				GROUP BY player, game_name";
+		$r = $db->sql_query($q);
+		while($row = $db->sql_fetchrow($r))
 		{
-	$sql = "CREATE TABLE ". $table_prefix ."scores_fixer
-			(`game_name` varchar(255) default NULL,
-			`player` varchar(40) default NULL,
-			`score` FLOAT(10,2) DEFAULT '0' NOT NULL,
-			`date` int(11) default NULL)";
-	$r = $db->sql_query($sql);
+			$game_name = $row['game_name'];
+			$score = $row['score'];
+			$player = $row['player'];
+			$date = $row['date'];
+			$user_plays = $row['user_plays'];
+			$play_time = $row['play_time'];
 
-	$f = 0;
+			$q3 = "INSERT INTO " . $table_prefix . "scores_fixer
+					VALUES ('" . $db->sql_escape($game_name) . "', '". $db->sql_escape($player) ."', '" . $db->sql_escape($score) . "', '$user_plays', '$play_time', '$date')";
+			$r3 = $db->sql_query($q3);
 
-	$q = "SELECT *
-			FROM ". iNA_SCORES ."
-			GROUP BY player, game_name";
-	$r = $db->sql_query($q);
-	while($row = $db->sql_fetchrow($r))
-		{
-	$game_name = $row['game_name'];
-	$score = $row['score'];
-	$player = $row['player'];
-	$date = $row['date'];
-
-	$q3 = "INSERT INTO ". $table_prefix ."scores_fixer
-			 VALUES ('$game_name', '". $db->sql_escape($player) ."', '$score', '$date')";
-	$r3 = $db->sql_query($q3);
-
-	$f++;
+			$f++;
 		}
 
-	$q = "TRUNCATE ". iNA_SCORES;
-	$r = $db->sql_query($q);
+		$q = "TRUNCATE " . iNA_SCORES;
+		$r = $db->sql_query($q);
 
-	$f = 0;
+		$f = 0;
 
-	$q = "SELECT *
-			FROM ". $table_prefix ."scores_fixer";
-	$r = $db->sql_query($q);
-	while($row = $db->sql_fetchrow($r))
+		$q = "SELECT *
+				FROM ". $table_prefix ."scores_fixer";
+		$r = $db->sql_query($q);
+		while($row = $db->sql_fetchrow($r))
 		{
-	$game_name = $row['game_name'];
-	$score = $row['score'];
-	$player = $row['player'];
-	$date = $row['date'];
+			$game_name = $row['game_name'];
+			$score = $row['score'];
+			$player = $row['player'];
+			$date = $row['date'];
+			$user_plays = $row['user_plays'];
+			$play_time = $row['play_time'];
 
-	$q3 = "INSERT INTO ". iNA_SCORES ."
-			 VALUES ('$game_name', '". $db->sql_escape($player) ."', '$score', '$date')";
-	$r3 = $db->sql_query($q3);
+			$q3 = "INSERT INTO " . iNA_SCORES . "
+						VALUES ('" . $db->sql_escape($game_name) . "', '". $db->sql_escape($player) ."', '" . $db->sql_escape($score) . "', '$user_plays', '$play_time', '$date')";
+			$r3 = $db->sql_query($q3);
 
-	$f++;
+			$f++;
 		}
 
-	$q = "DROP TABLE ". $table_prefix ."scores_fixer";
-	$r = $db->sql_query($q);
+		$q = "DROP TABLE ". $table_prefix ."scores_fixer";
+		$r = $db->sql_query($q);
 
-	message_die(GENERAL_MESSAGE, $f . $lang['scores_updated'], $lang['success_message']);
-		}
+		message_die(GENERAL_MESSAGE, $f . $lang['scores_updated'], $lang['success_message']);
+	}
 
 	if($mode == "del_comments")
 		{
