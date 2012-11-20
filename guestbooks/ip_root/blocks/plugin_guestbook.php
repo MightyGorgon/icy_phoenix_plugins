@@ -255,8 +255,7 @@ if(!function_exists('cms_plugin_guestbook_form'))
 				'GUESTBOOK_ID_VAR' => $class_guestbooks->guestbook_id_var,
 				'GUESTBOOK_POST_ID_VAR' => $class_guestbooks->post_id_var,
 
-				'TITLE' => $guestbook_title,
-				'DESCRIPTION' => $guestbook_description,
+				'GUESTBOOK_DESCRIPTION' => $guestbook_description,
 
 				'S_ADMIN_ALLOWED' => ($admin_allowed ? true : false),
 				'S_INPUT_ALLOWED' => ($input_allowed ? true : false),

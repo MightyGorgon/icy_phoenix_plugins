@@ -246,7 +246,7 @@ switch($mode)
 			'L_REMOVE' => $lang['Remove'],
 			'L_SET' => $lang['Set'],
 
-			'TITLE' => sprintf($lang['Mod_usercash'],$profiledata['username']),
+			'CASH_TITLE' => sprintf($lang['Mod_usercash'],$profiledata['username']),
 
 			'TARGET' => $profiledata['username'],
 			'DONATER' => $user->data['username']

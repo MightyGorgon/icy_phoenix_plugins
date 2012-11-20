@@ -10,7 +10,7 @@
 </head>
 
 <body>
-<a name="top"></a>
+<a name="top" id="top"></a>
 
 <table class="forumline" width="100%" cellspacing="0">
 <tr>

@@ -187,7 +187,7 @@ if ($mode == 'save')
 	$cms_redirect = request_var('cms_redirect', '', true);
 	if (!empty($cms_redirect))
 	{
-		redirect(append_sid(IP_ROOT_PATH . $cms_redirect . ((strpos($cms_redirect, '?') !== false) ? '&' : '?') . $class_guestbooks->post_id_var . '=' . $post_id . '#' . $class_guestbooks->post_id_var . $post_id, true));
+		redirect(append_sid($cms_redirect . ((strpos($cms_redirect, '?') !== false) ? '&' : '?') . $class_guestbooks->post_id_var . '=' . $post_id . '#' . $class_guestbooks->post_id_var . $post_id, true));
 	}
 
 	$message .= '<br /><br />' . sprintf($lang['CLICK_RETURN_POST'], '<a href="' . append_sid(THIS_FILE . '?' . $class_guestbooks->guestbook_id_var . '=' . $guestbook_id . '&amp;' . $class_guestbooks->post_id_var . '=' . $post_id . '#' . $class_guestbooks->post_id_var . $post_id) . '">', '</a>');
@@ -472,8 +472,7 @@ $template->assign_vars(array(
 	'GUESTBOOK_ID_VAR' => $class_guestbooks->guestbook_id_var,
 	'GUESTBOOK_POST_ID_VAR' => $class_guestbooks->post_id_var,
 
-	'TITLE' => $guestbook_title,
-	'DESCRIPTION' => $guestbook_description,
+	'GUESTBOOK_DESCRIPTION' => $guestbook_description,
 
 	'L_PAGE_NAME' => $meta_content['page_title'],
 	'L_ITEM_TITLE' => !empty($item_title) ? $item_title : false,

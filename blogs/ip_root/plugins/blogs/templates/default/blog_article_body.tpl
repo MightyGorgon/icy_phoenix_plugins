@@ -16,7 +16,7 @@
 
 <br clear="all" /><br />
 <div style="margin: 0 auto; padding: 10px; text-align: left;">
-<div><!-- IF S_EDIT_ALLOWED --><span style="float: right; text-align: right;">{S_EDIT}&nbsp;{S_DELETE}</span><!-- ENDIF --><h2 style="line-height: 120%;"><a id="{BLOG_TOPIC_ID_VAR}{TOPIC_ID}" href="{U_VIEW}" style="text-decoration: none;">{TITLE}</a></h2></div>
+<div><!-- IF S_EDIT_ALLOWED --><span style="float: right; text-align: right;">{S_EDIT}&nbsp;{S_DELETE}</span><!-- ENDIF --><h2 style="line-height: 120%;"><a id="{BLOG_TOPIC_ID_VAR}{TOPIC_ID}" href="{U_VIEW}" style="text-decoration: none;">{BLOG_TITLE}</a></h2></div>
 <div class="post-details" style="margin: 0px;">{POSTED_BY}&nbsp;&bull;&nbsp;{L_BLOGS_POST_COMMENTS}&nbsp;{COMMENTS}</div><br /><br />
 <div class="post-text">{ARTICLE}</div><br /><br /><br />
 </div>

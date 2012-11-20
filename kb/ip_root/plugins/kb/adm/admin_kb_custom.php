@@ -124,21 +124,21 @@ switch ($mode)
 
 if ($mode == 'add')
 {
-	$s_hidden_fields = '<input type="hidden" name="mode" value="addfield">';
+	$s_hidden_fields = '<input type="hidden" name="mode" value="addfield" />';
 }
 elseif ($mode == 'addfield' || $mode == 'editfield')
 {
-	$s_hidden_fields = '<input type="hidden" name="field_type" value="' . $field_type . '">';
-	$s_hidden_fields .= '<input type="hidden" name="field_id" value="' . $field_id . '">';
-	$s_hidden_fields .= '<input type="hidden" name="mode" value="do_add">';
+	$s_hidden_fields = '<input type="hidden" name="field_type" value="' . $field_type . '" />';
+	$s_hidden_fields .= '<input type="hidden" name="field_id" value="' . $field_id . '" />';
+	$s_hidden_fields .= '<input type="hidden" name="mode" value="do_add" />';
 }
 elseif ($mode == 'edit')
 {
-	$s_hidden_fields = '<input type="hidden" name="mode" value="editfield">';
+	$s_hidden_fields = '<input type="hidden" name="mode" value="editfield" />';
 }
 elseif ($mode == 'delete')
 {
-	$s_hidden_fields = '<input type="hidden" name="mode" value="do_delete">';
+	$s_hidden_fields = '<input type="hidden" name="mode" value="do_delete" />';
 }
 
 $template->assign_vars(array(

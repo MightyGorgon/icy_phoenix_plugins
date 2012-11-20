@@ -428,7 +428,7 @@ elseif ($mode == 'view')
 		'BLOG_ID' => $blog_id,
 		'TOPIC_ID' => $topic_id,
 
-		'TITLE' => $blog_title,
+		'BLOG_TITLE' => $blog_title,
 		'POSTER' => $blog_poster,
 		'LAST_POSTER' => $blog_last_poster,
 		'DATE' => $blog_date,

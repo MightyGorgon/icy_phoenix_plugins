@@ -3,7 +3,7 @@
 <br clear="all" />
 <div style="margin: 0 auto; padding: 10px; text-align: left;">
 <div class="topic-title-hide-flow-header" style="text-align: left;"><h2><a href="{U_GUESTBOOK_TITLE}" style="text-decoration: none;">{L_GUESTBOOK_TITLE}</a></h2></div>
-<div class="post-text">{DESCRIPTION}</div><br /><br /><br />
+<div class="post-text">{GUESTBOOK_DESCRIPTION}</div><br /><br /><br />
 </div>
 
 <br clear="all" /><br />

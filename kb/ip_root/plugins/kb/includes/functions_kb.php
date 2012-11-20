@@ -1732,7 +1732,7 @@ function kb_magic_img($img)
 	if ($img)
 	{
 		// Also fix already tagged links
-		// $img = preg_replace("/<img src=(.*?)(|border(.*?)|alt(.*?))>/ie", "'<br /><br /><div style="text-align:center;"><img src='.stripslashes(\"\\1\").' width=\"'.makeImgWidth(trim(stripslashes(\"\\1\"))).'\" ></div><br />'", $img);
+		// $img = preg_replace("/<img src=(.*?)(|border(.*?)|alt(.*?))>/ie", "'<br /><br /><div style="text-align: center;"><img src='.stripslashes(\"\\1\").' width=\"'.makeImgWidth(trim(stripslashes(\"\\1\"))).'\" ></div><br />'", $img);
 		$img = preg_replace("/<img src=(.*?)>/ie", "(substr_count(\"\\1\", \"smiles\") > 0) ? '<img src='.stripslashes(\"\\1\").'>' :
 
 		'<div style=\"overflow: hidden; margin: 0px; padding: 0px; float: left;\">

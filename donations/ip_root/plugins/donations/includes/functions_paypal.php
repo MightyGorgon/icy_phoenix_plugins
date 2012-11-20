@@ -443,13 +443,13 @@ class paypal_class extends currency_exchange
 				if ($user->data['is_bot'])
 				{
 					// If the user is a bot, we do not proceed, send the bot back to home page
-					redirect(append_sid(IP_ROOT_PATH . CMS_PAGE_HOME));
+					redirect(append_sid(CMS_PAGE_HOME));
 				}
 
 				// Force the user to login before we continue
 				$page_array = array();
 				$page_array = extract_current_page(IP_ROOT_PATH);
-				redirect(append_sid(IP_ROOT_PATH . CMS_PAGE_LOGIN . '?redirect=' . str_replace(('.' . PHP_EXT . '?'), ('.' . PHP_EXT . '&'), $page_array['page']), true));
+				redirect(append_sid( CMS_PAGE_LOGIN . '?redirect=' . str_replace(('.' . PHP_EXT . '?'), ('.' . PHP_EXT . '&'), $page_array['page']), true));
 			}
 
 			// If the user is not an administrator, we cannot continue
