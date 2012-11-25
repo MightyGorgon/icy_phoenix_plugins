@@ -56,7 +56,7 @@ $kb_is_auth = array();
 $kb_is_auth = kb_auth(AUTH_ALL, $category_id, $user->data);
 // End of auth check
 
-$meta_content['page_title'] = $kb_post_mode == 'add' ? $lang['Add_article'] : $lang['Edit_article'];
+$meta_content['page_title'] = ($kb_post_mode == 'add') ? $lang['Add_article'] : $lang['Edit_article'];
 $meta_content['description'] = '';
 $meta_content['keywords'] = '';
 
@@ -105,6 +105,10 @@ if ($submit)
 	// Check message
 	if (!empty($article_text))
 	{
+		if ($html_on)
+		{
+			$article_text = htmlspecialchars_decode($article_text);
+		}
 		$article_text = prepare_message($article_text, $html_on, $bbcode_on, $smilies_on);
 	}
 

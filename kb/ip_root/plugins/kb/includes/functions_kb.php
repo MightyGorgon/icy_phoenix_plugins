@@ -284,7 +284,7 @@ function get_kb_articles($id = false, $approve, $block_name, $start = -1, $artic
 			$temp_url = append_sid(IP_ROOT_PATH . 'kb.' . PHP_EXT . '?mode=article&amp;k=' . $article_id);
 		}
 		//$temp_url = append_sid(IP_ROOT_PATH . 'kb.' . PHP_EXT . '?mode=article&amp;k=' . $article_id);
-		$article = '<a href="' . $temp_url . '" class="gen">' . $article_title . '</a>';
+		$article_link = '<a href="' . $temp_url . '" class="gen">' . $article_title . '</a>';
 
 		$approve = '';
 		$delete = '';
@@ -345,7 +345,7 @@ function get_kb_articles($id = false, $approve, $block_name, $start = -1, $artic
 			}
 		}
 
-		if ($article['article_rating'] == 0 || $article['article_totalvotes'] == 0)
+		if (($article['article_rating'] == 0) || ($article['article_totalvotes'] == 0))
 		{
 			$rating = 0;
 			$rating_votes = 0;
@@ -361,7 +361,7 @@ function get_kb_articles($id = false, $approve, $block_name, $start = -1, $artic
 		// if (ns_auth_item($article_cat, $type_id) && ns_auth_cat($article_cat))
 		// {
 		$template->assign_block_vars($block_name, array(
-			'ARTICLE' => $article,
+			'ARTICLE' => $article_link,
 			'ARTICLE_DESCRIPTION' => $article_description,
 			'ARTICLE_TYPE' => $article_type,
 			'ARTICLE_DATE' => $article_date,
