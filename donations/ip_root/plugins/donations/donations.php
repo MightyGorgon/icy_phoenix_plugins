@@ -15,9 +15,10 @@ if (!defined('IN_ICYPHOENIX'))
 
 // COMMON INCLUDES AND OPTIONS - BEGIN
 $inputs_array = array();
-$admin_allowed = check_auth_level(AUTH_FOUNDER) ? true : false;
-$input_allowed = check_auth_level(AUTH_FOUNDER) ? true : false;
-$edit_allowed = check_auth_level(AUTH_FOUNDER) ? true : false;
+$donations_admin_auth = (!empty($plugin_config['donations_founder_manage']) ? AUTH_FOUNDER : AUTH_ADMIN);
+$admin_allowed = check_auth_level($donations_admin_auth) ? true : false;
+$input_allowed = check_auth_level($donations_admin_auth) ? true : false;
+$edit_allowed = check_auth_level($donations_admin_auth) ? true : false;
 
 // EXTRA DB OVERLAY - BEGIN
 $sql_select_extra = ", u.username as user_username, u.user_active, u.user_color, u.user_color_group, u.user_email, u.user_website";

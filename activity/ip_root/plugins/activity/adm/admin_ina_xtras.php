@@ -1409,7 +1409,7 @@ if (($mode == 'main') || !$mode)
 			$play_time = $row['play_time'];
 
 			$q3 = "INSERT INTO " . $table_prefix . "scores_fixer
-					VALUES ('" . $db->sql_escape($game_name) . "', '". $db->sql_escape($player) ."', '" . $db->sql_escape($score) . "', '$user_plays', '$play_time', '$date')";
+					VALUES ('" . $db->sql_escape($game_name) . "', '". $db->sql_escape($player) ."', '" . $db->sql_escape($score) . "', '" . $db->sql_escape($user_plays) . "', '" . $db->sql_escape($play_time) . "', '" . $db->sql_escape($date) . "')";
 			$r3 = $db->sql_query($q3);
 
 			$f++;
@@ -1433,7 +1433,7 @@ if (($mode == 'main') || !$mode)
 			$play_time = $row['play_time'];
 
 			$q3 = "INSERT INTO " . iNA_SCORES . "
-						VALUES ('" . $db->sql_escape($game_name) . "', '". $db->sql_escape($player) ."', '" . $db->sql_escape($score) . "', '$user_plays', '$play_time', '$date')";
+						VALUES ('" . $db->sql_escape($game_name) . "', '". $db->sql_escape($player) ."', '" . $db->sql_escape($score) . "', '" . $db->sql_escape($user_plays) . "', '" . $db->sql_escape($play_time) . "', '" . $db->sql_escape($date) . "')";
 			$r3 = $db->sql_query($q3);
 
 			$f++;
@@ -1446,20 +1446,20 @@ if (($mode == 'main') || !$mode)
 	}
 
 	if($mode == "del_comments")
-		{
-	$q = "TRUNCATE ". $table_prefix ."ina_trophy_comments";
-	$r = $db->sql_query($q);
-	message_die(GENERAL_MESSAGE, $lang['all_comments_deleted'], $lang['success_message']);
-		}
+	{
+		$q = "TRUNCATE ". $table_prefix ."ina_trophy_comments";
+		$r = $db->sql_query($q);
+		message_die(GENERAL_MESSAGE, $lang['all_comments_deleted'], $lang['success_message']);
+	}
 
 	if($mode == "reset_jackpots")
-		{
-	$q = "UPDATE ". iNA_GAMES ."
-			SET jackpot = '". $config['ina_jackpot_pool'] ."'
-			WHERE jackpot <> '". $config['ina_jackpot_pool'] ."'";
-	$db->sql_query($q);
-	message_die(GENERAL_MESSAGE, $lang['reset_jackpot_success'], $lang['success_message']);
-		}
+	{
+		$q = "UPDATE ". iNA_GAMES ."
+				SET jackpot = '". $config['ina_jackpot_pool'] ."'
+				WHERE jackpot <> '". $config['ina_jackpot_pool'] ."'";
+		$db->sql_query($q);
+		message_die(GENERAL_MESSAGE, $lang['reset_jackpot_success'], $lang['success_message']);
+	}
 
 	if($mode == "trophies_update")
 		{
