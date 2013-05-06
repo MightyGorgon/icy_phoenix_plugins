@@ -235,7 +235,7 @@ switch ($mode)
 
 				$sql = "DELETE
 				FROM " . TOPICS_WATCH_TABLE . "
-				WHERE topic_id = $topic";
+				WHERE topic_id = " . (int) $topic;
 				$db->sql_query($sql);
 				$db->sql_transaction('commit');
 
