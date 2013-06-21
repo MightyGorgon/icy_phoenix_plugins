@@ -40,7 +40,7 @@
 
 <!-- IF S_INPUT_ALLOWED -->
 <div class="css-button-wrap">
-<div class="forumline css-button-left"><div class="row1h css-button-body" onclick="window.location.href='{U_ITEM_ADD}'"><img src="{IMG_CMS_ICON_ADD}" alt="{L_BLOG_LINK_POST_ARTICLE}" title="{L_BLOG_LINK_POST_ARTICLE}" />&nbsp;<b>{L_BLOG_LINK_POST_ARTICLE}</b>&nbsp;</div></div>
+<div class="forumline css-button-left"><div class="row1h css-button-body" data-href="{U_ITEM_ADD}"><img src="{IMG_CMS_ICON_ADD}" alt="{L_BLOG_LINK_POST_ARTICLE}" title="{L_BLOG_LINK_POST_ARTICLE}" />&nbsp;<b>{L_BLOG_LINK_POST_ARTICLE}</b>&nbsp;</div></div>
 </div>
 <!-- ENDIF -->
 
