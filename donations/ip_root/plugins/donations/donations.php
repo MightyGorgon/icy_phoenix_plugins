@@ -21,7 +21,7 @@ $input_allowed = check_auth_level($donations_admin_auth) ? true : false;
 $edit_allowed = check_auth_level($donations_admin_auth) ? true : false;
 
 // EXTRA DB OVERLAY - BEGIN
-$sql_select_extra = ", u.username as user_username, u.user_active, u.user_color, u.user_color_group, u.user_email, u.user_website";
+$sql_select_extra = ", u.username as user_username, u.user_active, u.user_color, u.group_id, u.user_email, u.user_website";
 $sql_from_extra = ", " . USERS_TABLE . " u";
 $sql_where_extra = "u.user_id = i.user_id";
 // EXTRA DB OVERLAY - END
