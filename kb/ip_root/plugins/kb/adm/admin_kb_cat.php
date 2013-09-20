@@ -32,40 +32,22 @@ if (!empty($setmodules))
 if (!defined('IP_ROOT_PATH')) define('IP_ROOT_PATH', './../../../');
 if (!defined('PHP_EXT')) define('PHP_EXT', substr(strrchr(__FILE__, '.'), 1));
 require(IP_ROOT_PATH . 'adm/pagestart.' . PHP_EXT);
-
+include_once(IP_ROOT_PATH . 'includes/functions_selects.' . PHP_EXT);
 include(IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['kb']['dir'] . 'common.' . PHP_EXT);
 
 if (!function_exists('get_forums'))
 {
 	function get_forums($sel_id = 0)
 	{
-		global $db;
-
-		$forum_types = array(FORUM_POST);
-		$forums_array = get_forums_ids($forum_types, true);
-
 		$forumlist = '<select name="forum_id">';
-
 		if ($sel_id == 0)
 		{
 			$forumlist .= '<option value="0" selected >Select a Forum!</option>';
 		}
-
-		foreach ($forums_array as $forum)
-		{
-			if ($sel_id == $forum['forum_id'])
-			{
-				$status = 'selected';
-			}
-			else
-			{
-				$status = '';
-			}
-			$forumlist .= '<option value="' . $forum['forum_id'] . '" ' . $status . '>' . htmlspecialchars(stripslashes(strip_tags($forum['forum_name']))) . '</option>';
-		}
-
+		
+		$forumlist .= get_tree_option($sel_id);
+		
 		$forumlist .= '</select>';
-
 		return $forumlist;
 	}
 }
