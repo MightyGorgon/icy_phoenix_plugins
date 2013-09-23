@@ -241,7 +241,9 @@ switch ($mode)
 
 				if (!empty($forum_id))
 				{
-					sync('forum', $forum_id);
+					if (!class_exists('class_mcp')) include(IP_ROOT_PATH . 'includes/class_mcp.' . PHP_EXT);
+					if (empty($class_mcp)) $class_mcp = new class_mcp();
+					$class_mcp->sync('forum', $forum_id);
 				}
 			}
 

@@ -1274,11 +1274,9 @@ function kb_insert_post($message, $subject, $forum_id, $user_id, $user_name, $us
 		}
 		// End if mode is update_only
 
-		if (!function_exists('sync_topic_details'))
-		{
-			@include_once(IP_ROOT_PATH . 'includes/functions_post.' . PHP_EXT);
-		}
-		sync_topic_details($topic_id, $forum_id, false, false);
+		if (!class_exists('class_mcp')) include(IP_ROOT_PATH . 'includes/class_mcp.' . PHP_EXT);
+		if (empty($class_mcp)) $class_mcp = new class_mcp();
+		$class_mcp->sync_topic_details($topic_id, $forum_id, false, false);
 	}
 
 	// Start KB addon - update original post --------------------------------------------------
@@ -1371,8 +1369,9 @@ function get_kb_comments($topic_id = '', $start = -1, $show_num_comments = 0)
 	else
 	{
 		include_once(IP_ROOT_PATH . ATTACH_MOD_PATH . 'includes/functions_delete.' . PHP_EXT);
-		include_once(IP_ROOT_PATH . 'includes/functions_admin.' . PHP_EXT);
-		sync('topic', $topic_id);
+		if (!class_exists('class_mcp')) include(IP_ROOT_PATH . 'includes/class_mcp.' . PHP_EXT);
+		if (empty($class_mcp)) $class_mcp = new class_mcp();
+		$class_mcp->sync('topic', $topic_id);
 		mx_message_die(GENERAL_MESSAGE, $lang['No_posts_topic']);
 	}
 
