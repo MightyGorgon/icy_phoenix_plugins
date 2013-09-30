@@ -9,7 +9,7 @@
 	<td class="row1h row-forum" height="46" ><span class="forumlink">{catrow.CATEGORY}</span><br /><span class="genmed">{catrow.CAT_DESCRIPTION}</span></td>
 	<td class="row2 row-center"><span class="genmed">{catrow.CAT_ARTICLES}</span></td>
 	-->
-	<td class="row1h{catrow.forumrow.XS_NEW} row-left" data-href="{catrow.CATEGORY_XS}" height="46">
+	<td class="row1h{catrow.forumrow.XS_NEW} row-left" onclick="window.location.href='{catrow.CATEGORY_XS}'" height="46">
 		<span class="forumlink">{catrow.CATEGORY}</span><br />
 		<span class="genmed">{catrow.CAT_DESCRIPTION}</span>
 	</td>

@@ -290,20 +290,18 @@ if($action == 'edit' || $action == 'add')
 
 	$db->sql_freeresult($result);
 
-	$sql = "SELECT group_id, group_name FROM " . GROUPS_TABLE . "
-		WHERE group_single_user <> " . TRUE . "
-		ORDER BY group_name";
-	$result = $db->sql_query($sql);
+	$groups_data = get_groups_data(false, false, array());
 
-	$total_groups = $db->sql_numrows($result);
+	$total_groups = sizeof($groups_data);
+
 	if ($total_groups)
 	{
 		$template->assign_block_vars('group_block', array());
 
-		while( $row = $db->sql_fetchrow($result) )
+		foreach ($groups_data as $group_data)
 		{
-			$group_id = $row['group_id'];
-			$group_name = $row['group_name'];
+			$group_id = $group_data['group_id'];
+			$group_name = $group_data['group_name'];
 
 			$auth_view_group = ($group_auth[$group_id]['auth_view']) ? 'checked="checked"' : '';
 			$auth_dl_group = ($group_auth[$group_id]['auth_dl']) ? 'checked="checked"' : '';
@@ -420,13 +418,10 @@ elseif($action == 'save_cat')
 		WHERE cat_id = $cat_id";
 	$result = $db->sql_query($sql);
 
-	$sql = "SELECT group_id FROM " . GROUPS_TABLE . "
-		WHERE group_single_user <> " . TRUE;
-	$result = $db->sql_query($sql);
-
-	while( $row = $db->sql_fetchrow($result) )
+	$groups_data = get_groups_data(false, false, array());
+	foreach($groups_data as $group_data)
 	{
-		$group_id = $row['group_id'];
+		$group_id = $group_data['group_id'];
 
 		$auth_view = intval($auth_view_set[$group_id]);
 		$auth_dl = intval($auth_dl_set[$group_id]);

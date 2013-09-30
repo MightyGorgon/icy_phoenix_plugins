@@ -142,21 +142,20 @@ if ($submit)
 
 			if ($traffic_bytes)
 			{
-				$sql = "SELECT ug.user_id FROM " . USER_GROUP_TABLE . " ug, " . GROUPS_TABLE . " g
-					WHERE ug.group_id = g.group_id
-					AND g.group_single_user <> " . TRUE . "
-					AND ug.user_pending <> " . TRUE . "
-					AND g.group_id = $group_id";
-				$result = $db->sql_query($sql);
+				if (!function_exists('get_users_in_group'))
+				{
+					include(IP_ROOT_PATH . 'includes/functions_groups.' . PHP_EXT);
+				}
+				$users_array = get_users_in_group($group_id);
 
 				$user_ids = array();
-
-				while ( $row = $db->sql_fetchrow($result) )
+				if (!empty($users_array))
 				{
-					$user_ids[] = $row['user_id'];
+					foreach ($users_array as $dl_user_data)
+					{
+						$user_ids[] = $dl_user_data['user_id'];
+					}
 				}
-
-				$db->sql_freeresult($result);
 
 				if (sizeof($user_ids))
 				{
@@ -186,15 +185,11 @@ if ($submit)
 
 		case 'auto':
 
-			$sql = "SELECT *
-				FROM " . GROUPS_TABLE . "
-				WHERE group_single_user <> " . TRUE . "
-				ORDER BY group_name";
-			$result = $db->sql_query($sql);
+			$groups_data = get_groups_data(false, false, array());
 
-			while($row = $db->sql_fetchrow($result))
+			foreach ($groups_data as $group_data)
 			{
-				$group_id = $row['group_id'];
+				$group_id = $group_data['group_id'];
 				$group_dl_auto_traffic = request_var('group_dl_auto_traffic', 0);
 				$data_group_range = request_var('data_group_range', '', true);
 
@@ -264,9 +259,11 @@ if ($submit)
 
 $template->set_filenames(array('traffic' => DL_ADM_TPL_PATH . 'dl_traffic_body.tpl'));
 
+$groups_data = get_groups_data(true, false, array());
+$total_groups = sizeof($groups_data);
+
 $sql = "SELECT group_id, group_name, group_dl_auto_traffic
 	FROM " . GROUPS_TABLE . "
-	WHERE group_single_user <> " . TRUE . "
 	ORDER BY group_name";
 $result = $db->sql_query($sql);
 
@@ -277,9 +274,9 @@ if ($total_groups)
 
 	$s_select_list = '<select name="' . POST_GROUPS_URL . '">';
 
-	while ($row = $db->sql_fetchrow($result))
+	foreach ($groups_data as $group_data)
 	{
-		$group_dl_auto_traffic = ($row['group_dl_auto_traffic']) ? $row['group_dl_auto_traffic'] : 0;
+		$group_dl_auto_traffic = ($group_data['group_dl_auto_traffic']) ? $group_data['group_dl_auto_traffic'] : 0;
 
 		if ($group_dl_auto_traffic > 1073741823)
 		{
@@ -315,8 +312,8 @@ if ($total_groups)
 		}
 
 		$template->assign_block_vars('group_row',array(
-			'GROUP_ID' => $row['group_id'],
-			'GROUP_NAME' => $row['group_name'],
+			'GROUP_ID' => $group_data['group_id'],
+			'GROUP_NAME' => $group_data['group_name'],
 			'GROUP_DL_AUTO_TRAFFIC' => $group_traffic,
 			'GROUP_DATA_RANGE_B' => $group_data_range_b,
 			'GROUP_DATA_RANGE_KB' => $group_data_range_kb,
@@ -325,11 +322,10 @@ if ($total_groups)
 			)
 		);
 
-		$s_select_list .= '<option value="' . $row['group_id'] . '">' . $row['group_name'] . '</option>';
+		$s_select_list .= '<option value="' . $group_data['group_id'] . '">' . $group_data['group_name'] . '</option>';
 	}
 	$s_select_list .= '</select>';
 }
-$db->sql_freeresult($result);
 
 $user_dl_auto_traffic = $dl_config['user_dl_auto_traffic'];
 

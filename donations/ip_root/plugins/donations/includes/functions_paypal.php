@@ -28,7 +28,8 @@ class currency_exchange
 {
 	private $rates = array();
 
-	private $exchange_url = 'http://www.ecb.int/stats/eurofxref/eurofxref-daily.xml';
+	//private $exchange_url = 'http://www.ecb.int/stats/eurofxref/eurofxref-daily.xml';
+	private $exchange_url = 'http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml';
 
 	/**
 	* Log error messages

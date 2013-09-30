@@ -79,16 +79,8 @@ else
 				)
 			);
 		// Get the list of phpBB usergroups
-		$sql = "SELECT group_id, group_name
-				FROM " . GROUPS_TABLE . "
-				WHERE group_single_user <> " . true . "
-				ORDER BY group_name ASC";
-		$result = $db->sql_query($sql);
+		$groups_data = get_groups_data(false, false, array());
 
-		while ($kb_row = $db->sql_fetchrow($result))
-		{
-			$groupdata[] = $kb_row;
-		}
 		// Get info of this cat
 		$sql = "SELECT category_id, category_name, auth_view_groups, auth_post_groups, auth_rate_groups, auth_comment_groups, auth_edit_groups, auth_delete_groups, auth_approval_groups, auth_approval_edit_groups, auth_moderator_groups
 				FROM " . KB_CATEGORIES_TABLE . "
@@ -107,19 +99,19 @@ else
 
 		$moderator_groups = @explode(',', $thiscat['auth_moderator_groups']);
 
-		for ($i = 0; $i < sizeof($groupdata); $i++)
+		for ($i = 0; $i < sizeof($groups_data); $i++)
 		{
-			$template->assign_block_vars('grouprow', array('GROUP_ID' => $groupdata[$i]['group_id'],
-				'GROUP_NAME' => $groupdata[$i]['group_name'],
-				'VIEW_CHECKED' => (in_array($groupdata[$i]['group_id'], $view_groups)) ? 'checked="checked"' : '',
-				'POST_CHECKED' => (in_array($groupdata[$i]['group_id'], $post_groups)) ? 'checked="checked"' : '',
-				'RATE_CHECKED' => (in_array($groupdata[$i]['group_id'], $rate_groups)) ? 'checked="checked"' : '',
-				'COMMENT_CHECKED' => (in_array($groupdata[$i]['group_id'], $comment_groups)) ? 'checked="checked"' : '',
-				'EDIT_CHECKED' => (in_array($groupdata[$i]['group_id'], $edit_groups)) ? 'checked="checked"' : '',
-				'DELETE_CHECKED' => (in_array($groupdata[$i]['group_id'], $delete_groups)) ? 'checked="checked"' : '',
-				// 'APPROVAL_CHECKED' => (in_array($groupdata[$i]['group_id'], $approval_groups)) ? 'checked="checked"' : '',
-				// 'APPROVAL_EDIT_CHECKED' => (in_array($groupdata[$i]['group_id'], $approval_edit_groups)) ? 'checked="checked"' : '',
-				'MODERATOR_CHECKED' => (in_array($groupdata[$i]['group_id'], $moderator_groups)) ? 'checked="checked"' : '',
+			$template->assign_block_vars('grouprow', array('GROUP_ID' => $groups_data[$i]['group_id'],
+				'GROUP_NAME' => $groups_data[$i]['group_name'],
+				'VIEW_CHECKED' => (in_array($groups_data[$i]['group_id'], $view_groups)) ? 'checked="checked"' : '',
+				'POST_CHECKED' => (in_array($groups_data[$i]['group_id'], $post_groups)) ? 'checked="checked"' : '',
+				'RATE_CHECKED' => (in_array($groups_data[$i]['group_id'], $rate_groups)) ? 'checked="checked"' : '',
+				'COMMENT_CHECKED' => (in_array($groups_data[$i]['group_id'], $comment_groups)) ? 'checked="checked"' : '',
+				'EDIT_CHECKED' => (in_array($groups_data[$i]['group_id'], $edit_groups)) ? 'checked="checked"' : '',
+				'DELETE_CHECKED' => (in_array($groups_data[$i]['group_id'], $delete_groups)) ? 'checked="checked"' : '',
+				// 'APPROVAL_CHECKED' => (in_array($groups_data[$i]['group_id'], $approval_groups)) ? 'checked="checked"' : '',
+				// 'APPROVAL_EDIT_CHECKED' => (in_array($groups_data[$i]['group_id'], $approval_edit_groups)) ? 'checked="checked"' : '',
+				'MODERATOR_CHECKED' => (in_array($groups_data[$i]['group_id'], $moderator_groups)) ? 'checked="checked"' : '',
 				)
 			);
 		}

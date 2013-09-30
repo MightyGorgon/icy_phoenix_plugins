@@ -319,7 +319,11 @@ class dlmod
 		/*
 		* get the user permissions
 		*/
-		$auth_perm = $auth_cat = $cat_auth_array = $group_ids = $group_perm_ids = array();
+		$auth_perm = array();
+		$auth_cat = array();
+		$cat_auth_array = array();
+		$group_ids = array();
+		$group_perm_ids = array();
 
 		$sql = "SELECT * FROM " . DL_AUTH_TABLE;
 		$result = $db->sql_query($sql);
@@ -348,19 +352,17 @@ class dlmod
 				sort($auth_cat);
 			}
 
-			$sql = "SELECT g.group_id FROM " . GROUPS_TABLE . " g, " . USER_GROUP_TABLE . " ug
-				WHERE g.group_id IN (" . implode(', ', $group_perm_ids) . ")
-					AND g.group_id = ug.group_id
-					AND ug.user_id = " . $this->user_id . "
-					AND g.group_single_user <> " . TRUE . "
-					AND ug.user_pending <> " . TRUE;
-			$result = $db->sql_query($sql);
-
-			while ($row = $db->sql_fetchrow($result))
+			$groups_data_user = get_groups_data_user($this->user_id, true, true, $group_perm_ids);
+			if (!empty($groups_data_user))
 			{
-				$group_ids[] = $row['group_id'];
+				foreach ($groups_data_user as $group_data)
+				{
+					if (empty($group_data['user_pending']))
+					{
+						$group_ids[] = $group_data['group_id'];
+					}
+				}
 			}
-			$db->sql_freeresult($result);
 
 			for ($i = 0; $i < sizeof($auth_cat); $i++)
 			{
@@ -1555,6 +1557,11 @@ class dlmod
 				WHERE user_id <> " . ANONYMOUS . "
 					AND user_id <> " . $this->user_id;
 			$result = $db->sql_query($sql);
+			while ($row = $db->sql_fetchrow($result))
+			{
+				$user_ids .= ($user_ids == '') ? $row['user_id'] : ', ' . $row['user_id'];
+			}
+			$db->sql_freeresult($result);
 		}
 		else
 		{
@@ -1579,22 +1586,19 @@ class dlmod
 			}
 			$db->sql_freeresult($result);
 
-			$groups = implode(', ', $group_ids);
-
-			$sql = "SELECT ug.user_id FROM " . GROUPS_TABLE . " g, " . USER_GROUP_TABLE . " ug
-				WHERE g.group_id = ug.group_id
-					AND ug.user_id <> " . $this->user_id . "
-					AND g.group_id IN ($groups)
-					AND g.group_single_user <> " . TRUE . "
-					AND ug.user_pending <> " . TRUE;
-			$result = $db->sql_query($sql);
+			$groups_data_user = get_groups_data_user($this->user_id, true, true, $group_ids);
+			if (!empty($groups_data_user))
+			{
+				foreach ($groups_data_user as $group_data)
+				{
+					if (empty($group_data['user_pending']))
+					{
+						// Mighty Gorgon: don't ask me why they coded this way...
+						$user_ids .= ($user_ids == '') ? $this->user_id : ', ' . $this->user_id;
+					}
+				}
+			}
 		}
-
-		while ($row = $db->sql_fetchrow($result))
-		{
-			$user_ids .= ($user_ids == '') ? $row['user_id'] : ', '.$row['user_id'];
-		}
-		$db->sql_freeresult($result);
 
 		return $user_ids;
 	}

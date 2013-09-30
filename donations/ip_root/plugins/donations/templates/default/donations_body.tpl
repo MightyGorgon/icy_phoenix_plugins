@@ -2,9 +2,9 @@
 
 <div class="css-button-wrap">
 
-<div class="forumline css-button-left"><div class="row1h css-button-body" data-href="{U_DONATE}"><img src="{IMG_CMS_ICON_DOLLAR}" alt="{L_MG_DONATE}" title="{L_MG_DONATE}" />&nbsp;<b>{L_MG_DONATE}</b>&nbsp;</div></div>
+<div class="forumline css-button-left"><div class="row1h css-button-body" onclick="window.location.href='{U_DONATE}'"><img src="{IMG_CMS_ICON_DOLLAR}" alt="{L_MG_DONATE}" title="{L_MG_DONATE}" />&nbsp;<b>{L_MG_DONATE}</b>&nbsp;</div></div>
 <!-- IF S_INPUT_ALLOWED -->
-<div class="forumline css-button-left"><div class="row1h css-button-body" data-href="{U_ITEM_ADD}"><img src="{IMG_CMS_ICON_ADD}" alt="{L_DONATION_ADD}" title="{L_DONATION_ADD}" />&nbsp;<b>{L_DONATION_ADD}</b>&nbsp;</div></div>
+<div class="forumline css-button-left"><div class="row1h css-button-body" onclick="window.location.href='{U_ITEM_ADD}'"><img src="{IMG_CMS_ICON_ADD}" alt="{L_DONATION_ADD}" title="{L_DONATION_ADD}" />&nbsp;<b>{L_DONATION_ADD}</b>&nbsp;</div></div>
 <!-- ENDIF -->
 
 </div>
@@ -74,9 +74,9 @@
 
 <div class="css-button-wrap">
 
-<div class="forumline css-button-left"><div class="row1h css-button-body" data-href="{U_DONATE}"><img src="{IMG_CMS_ICON_DOLLAR}" alt="{L_MG_DONATE}" title="{L_MG_DONATE}" />&nbsp;<b>{L_MG_DONATE}</b>&nbsp;</div></div>
+<div class="forumline css-button-left"><div class="row1h css-button-body" onclick="window.location.href='{U_DONATE}'"><img src="{IMG_CMS_ICON_DOLLAR}" alt="{L_MG_DONATE}" title="{L_MG_DONATE}" />&nbsp;<b>{L_MG_DONATE}</b>&nbsp;</div></div>
 <!-- IF S_INPUT_ALLOWED -->
-<div class="forumline css-button-left"><div class="row1h css-button-body" data-href="{U_ITEM_ADD}"><img src="{IMG_CMS_ICON_ADD}" alt="{L_DONATION_ADD}" title="{L_DONATION_ADD}" />&nbsp;<b>{L_DONATION_ADD}</b>&nbsp;</div></div>
+<div class="forumline css-button-left"><div class="row1h css-button-body" onclick="window.location.href='{U_ITEM_ADD}'"><img src="{IMG_CMS_ICON_ADD}" alt="{L_DONATION_ADD}" title="{L_DONATION_ADD}" />&nbsp;<b>{L_DONATION_ADD}</b>&nbsp;</div></div>
 <!-- ENDIF -->
 
 </div>

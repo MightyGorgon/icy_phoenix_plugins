@@ -39,15 +39,23 @@ if (!function_exists('get_forums'))
 {
 	function get_forums($sel_id = 0)
 	{
+		global $tree, $lang;
+
 		$forumlist = '<select name="forum_id">';
+
 		if ($sel_id == 0)
 		{
-			$forumlist .= '<option value="0" selected >Select a Forum!</option>';
+			$forumlist .= '<option value="0" selected >' . $lang['Select_forum'] . '</option>';
 		}
-		
+
+		if (!function_exists('get_tree_option'))
+		{
+			include(IP_ROOT_PATH . 'includes/functions_categories_hierarchy.' . PHP_EXT);
+		}
 		$forumlist .= get_tree_option($sel_id);
-		
+
 		$forumlist .= '</select>';
+
 		return $forumlist;
 	}
 }

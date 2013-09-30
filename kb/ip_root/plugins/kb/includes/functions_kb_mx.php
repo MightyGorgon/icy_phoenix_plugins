@@ -66,7 +66,7 @@ if (!function_exists(mx_is_group_member))
 		{
 			$userdata_key = 'mx_usergroups_mod' . $user->data['user_id'];
 
-			if (empty($user->data[$userdata_key]) )
+			if (empty($user->data[$userdata_key]))
 			{
 				// Check if user is group moderator..
 				$sql = "SELECT gr.group_id
