@@ -39,19 +39,14 @@ if (!defined('CMS_PAGE_GUESTBOOK'))
 	define('GUESTBOOKS_ADM_TPL_PATH', '../../' . GUESTBOOKS_PLUGIN_PATH . ADM . '/templates/');
 }
 
-if (!class_exists('bbcode') || empty($bbcode))
-{
-	include(IP_ROOT_PATH . 'includes/bbcode.' . PHP_EXT);
-}
+if (!class_exists('bbcode')) include(IP_ROOT_PATH . 'includes/bbcode.' . PHP_EXT);
+if (empty($bbcode)) $bbcode = new bbcode();
 $bbcode->allow_html = ($config['allow_html'] ? true : false);
 $bbcode->allow_bbcode = ($config['allow_bbcode'] ? true : false);
 $bbcode->allow_smilies = ($config['allow_smilies'] ? true : false);
 
-if (!class_exists('class_plugins'))
-{
-	include(IP_ROOT_PATH . 'includes/class_plugins.' . PHP_EXT);
-}
-$class_plugins = new class_plugins();
+if (!class_exists('class_plugins')) include(IP_ROOT_PATH . 'includes/class_plugins.' . PHP_EXT);
+if (empty($class_plugins)) $class_plugins = new class_plugins();
 $class_plugins->setup_lang($config['plugins'][$plugin_name]['dir']);
 
 if (!class_exists('class_form')) include(IP_ROOT_PATH . 'includes/class_form.' . PHP_EXT);

@@ -46,13 +46,13 @@
 	<td class="{donations.CLASS} row-center" style="background: none;" nowrap="nowrap">{donations.DATE}</td>
 	<td class="{donations.CLASS} row-center" style="background: none;" nowrap="nowrap">{donations.USERNAME}</td>
 	<!-- IF IS_PROSILVER -->
-	<td class="{donations.CLASS} row-center" style="background: none;"><!-- IF donations.U_WEBSITE --><ul class="profile-icons" style="padding-left: 10px;"><li class="web-icon"><a href="{donations.U_WEBSITE}" target="_blank"><span>{L_WEBSITE}</span></a></li></ul><!-- ELSE -->&nbsp;<!-- ENDIF --></td>
+	<td class="{donations.CLASS} row-center" style="background: none;"><!-- IF donations.U_WEBSITE --><ul class="profile-icons" style="padding-left: 10px;"><li class="web-icon"><a href="{donations.U_WEBSITE}" rel="nofollow" target="_blank"><span>{L_WEBSITE}</span></a></li></ul><!-- ELSE -->&nbsp;<!-- ENDIF --></td>
 	<!-- ELSE -->
 	<td class="{donations.CLASS} row-center" style="background: none;" nowrap="nowrap"><span class="post-buttons-single">{donations.WEBSITE}</span></td>
 	<!-- ENDIF -->
 	<!-- IF S_ADMIN_ALLOWED -->
 	<!-- IF IS_PROSILVER -->
-	<td class="{donations.CLASS} row-center" style="background: none;" nowrap="nowrap"><!-- IF donations.U_EMAIL --><ul class="profile-icons" style="padding-left: 10px;"><li class="email-icon"><a href="{donations.U_EMAIL}"><span>{L_EMAIL}</span></a></li></ul><!-- ELSE -->&nbsp;<!-- ENDIF --></td>
+	<td class="{donations.CLASS} row-center" style="background: none;" nowrap="nowrap"><!-- IF donations.U_EMAIL --><ul class="profile-icons" style="padding-left: 10px;"><li class="email-icon"><a href="{donations.U_EMAIL}" rel="nofollow"><span>{L_EMAIL}</span></a></li></ul><!-- ELSE -->&nbsp;<!-- ENDIF --></td>
 	<!-- ELSE -->
 	<td class="{donations.CLASS} row-center" style="background: none;" nowrap="nowrap"><span class="post-buttons-single">{donations.EMAIL}</span></td>
 	<!-- ENDIF -->

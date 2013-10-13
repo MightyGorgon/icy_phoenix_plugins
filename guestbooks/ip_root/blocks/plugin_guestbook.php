@@ -19,7 +19,8 @@ if(!function_exists('cms_plugin_guestbook_form'))
 	{
 		global $db, $cache, $config, $template, $images, $lang, $user, $bbcode, $table_prefix, $block_id, $cms_config_vars;
 
-		if (empty($config['plugins']['guestbooks']['enabled']) || empty($config['plugins']['guestbooks']['dir']))
+		$plugin_name = 'guestbooks';
+		if (empty($config['plugins'][$plugin_name]['enabled']) || empty($config['plugins'][$plugin_name]['dir']))
 		{
 			$template->assign_vars(array(
 				'GUESTBOOK_DISABLED' => true,
@@ -32,7 +33,7 @@ if(!function_exists('cms_plugin_guestbook_form'))
 		{
 			$template->_tpldata['guestbook_posts.'] = array();
 
-			include(IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['guestbooks']['dir'] . 'common.' . PHP_EXT);
+			include(IP_ROOT_PATH . PLUGINS_PATH . $config['plugins'][$plugin_name]['dir'] . 'common.' . PHP_EXT);
 
 			if (!function_exists('generate_text_for_display'))
 			{

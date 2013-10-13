@@ -36,8 +36,8 @@ $settings_basename = $plugin_name;
 $acp_file = IP_ROOT_PATH . PLUGINS_PATH . $config['plugins'][$plugin_name]['dir'] . ADM . '/' . basename(__FILE__);
 // SETTINGS - END
 
-include(IP_ROOT_PATH . 'includes/class_plugins.' . PHP_EXT);
-$class_plugins = new class_plugins();
+if (!class_exists('class_plugins')) include(IP_ROOT_PATH . 'includes/class_plugins.' . PHP_EXT);
+if (empty($class_plugins)) $class_plugins = new class_plugins();
 $class_plugins->setup_lang($config['plugins'][$plugin_name]['dir']);
 
 $plugin_config = $class_plugins->get_plugin_config($plugin_name . '_', false);

@@ -30,16 +30,17 @@ define('DONATIONS_TPL_PATH', '../../' . DONATIONS_PLUGIN_PATH . 'templates/');
 define('DONATIONS_ADM_PATH', IP_ROOT_PATH . DONATIONS_PLUGIN_PATH . ADM . '/');
 define('DONATIONS_ADM_TPL_PATH', '../../' . DONATIONS_PLUGIN_PATH . ADM . '/templates/');
 
-include(IP_ROOT_PATH . 'includes/class_plugins.' . PHP_EXT);
-$class_plugins = new class_plugins();
-$class_plugins->setup_lang($config['plugins'][$plugin_name]['dir']);
-
-$plugin_config = $class_plugins->get_plugin_config($plugin_name . '_', false);
-
-include(IP_ROOT_PATH . 'includes/bbcode.' . PHP_EXT);
+if (!class_exists('bbcode')) include(IP_ROOT_PATH . 'includes/bbcode.' . PHP_EXT);
+if (empty($bbcode)) $bbcode = new bbcode();
 $bbcode->allow_html = ($config['allow_html'] ? true : false);
 $bbcode->allow_bbcode = ($config['allow_bbcode'] ? true : false);
 $bbcode->allow_smilies = ($config['allow_smilies'] ? true : false);
+
+if (!class_exists('class_plugins')) include(IP_ROOT_PATH . 'includes/class_plugins.' . PHP_EXT);
+if (empty($class_plugins)) $class_plugins = new class_plugins();
+$class_plugins->setup_lang($config['plugins'][$plugin_name]['dir']);
+
+$plugin_config = $class_plugins->get_plugin_config($plugin_name . '_', false);
 
 if (!class_exists('class_form')) include(IP_ROOT_PATH . 'includes/class_form.' . PHP_EXT);
 if (empty($class_form)) $class_form = new class_form();

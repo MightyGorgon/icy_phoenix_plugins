@@ -211,7 +211,7 @@ else
 			$donation_email_link = (!empty($donation_email) ? ('&nbsp;<a href="mailto:' . $donation_email . '" target="_blank"><img src="' . $images['icon_email'] . '" alt="' . $lang['EMAIL'] . '" title="' . $donation_email . '" /></a>&nbsp;') : '&nbsp;');
 
 			$donation_website = (!empty($items_array[$i]['payer_website']) ? $items_array[$i]['payer_website'] : (!empty($items_array[$i]['user_website']) ? $items_array[$i]['user_website'] : ''));
-			$donation_website_link = (!empty($donation_website) ? ('&nbsp;<a href="' . $donation_website . '" target="_blank"><img src="' . $images['icon_www'] . '" alt="' . $lang['WEBSITE'] . '" title="' . $donation_website . '" /></a>&nbsp;') : '&nbsp;');
+			$donation_website_link = (!empty($donation_website) ? ('&nbsp;<a href="' . $donation_website . '" rel="nofollow" target="_blank"><img src="' . $images['icon_www'] . '" alt="' . $lang['WEBSITE'] . '" title="' . $donation_website . '" /></a>&nbsp;') : '&nbsp;');
 			if (!empty($items_array[$i]['payer_website_sponsor']) && !empty($items_array[$i]['payer_website_text']))
 			{
 				$donation_website_link = (!empty($donation_website) ? ('&nbsp;<a href="' . $donation_website . '" target="_blank" title="' . $items_array[$i]['payer_website_text'] . '">' . $items_array[$i]['payer_website_text'] . '</a>&nbsp;') : '&nbsp;');

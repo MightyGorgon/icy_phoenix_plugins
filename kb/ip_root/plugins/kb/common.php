@@ -20,11 +20,13 @@ define('KB_TPL_PATH', '../../' . KB_PLUGIN_PATH . 'templates/');
 define('KB_ADM_PATH', IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['kb']['dir'] . ADM . '/');
 define('KB_ADM_TPL_PATH', '../../' . PLUGINS_PATH . $config['plugins']['kb']['dir'] . ADM . '/templates/');
 
-include(IP_ROOT_PATH . 'includes/class_plugins.' . PHP_EXT);
-$class_plugins = new class_plugins();
+if (!class_exists('bbcode')) include(IP_ROOT_PATH . 'includes/bbcode.' . PHP_EXT);
+if (empty($bbcode)) $bbcode = new bbcode();
+
+if (!class_exists('class_plugins')) include(IP_ROOT_PATH . 'includes/class_plugins.' . PHP_EXT);
+if (empty($class_plugins)) $class_plugins = new class_plugins();
 
 include_once(IP_ROOT_PATH . 'includes/functions_post.' . PHP_EXT);
-include_once(IP_ROOT_PATH . 'includes/bbcode.' . PHP_EXT);
 include_once(IP_ROOT_PATH . 'includes/functions_search.' . PHP_EXT);
 
 include(KB_ROOT_PATH . 'includes/kb_constants.' . PHP_EXT);

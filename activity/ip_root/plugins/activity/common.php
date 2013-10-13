@@ -48,13 +48,12 @@ define('INA_FAVORITES', $table_prefix . 'ina_favorites');
 define('INA_HOF', $table_prefix . 'ina_hall_of_fame');
 define('INA_CHAT', $table_prefix . 'ina_chat');
 
-if (empty($class_plugins))
-{
-	include(IP_ROOT_PATH . 'includes/class_plugins.' . PHP_EXT);
-	$class_plugins = new class_plugins();
-}
+if (!class_exists('class_plugins')) include(IP_ROOT_PATH . 'includes/class_plugins.' . PHP_EXT);
+if (empty($class_plugins)) $class_plugins = new class_plugins();
 
-include_once(IP_ROOT_PATH . 'includes/bbcode.' . PHP_EXT);
+if (!class_exists('bbcode')) include(IP_ROOT_PATH . 'includes/bbcode.' . PHP_EXT);
+if (empty($bbcode)) $bbcode = new bbcode();
+
 include_once(IP_ROOT_PATH . 'includes/functions_admin.' . PHP_EXT);
 
 $mem_limit = check_mem_limit();
