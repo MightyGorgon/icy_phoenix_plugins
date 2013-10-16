@@ -47,10 +47,12 @@ $co_ord = explode('_', htmlspecialchars($_GET['tile']));
 $redirect = '<meta http-equiv = "refresh" content = "3;url = ' . append_sid('sudoku.' . PHP_EXT) . '">';
 $games = array();
 $points = array();
-$admin_tools = ($user->data['user_level'] == ADMIN) ? '|| <a href="' . append_sid('sudoku.' . PHP_EXT . '?&amp;mode=resynch') . '" class="nav">' . $lang['sudoku_resynch'] . '</a> || <a href="' . append_sid('sudoku.' . PHP_EXT . '?&amp;mode=reset_game') . '" class="nav">' . $lang['sudoku_reset_game'] . '</a>' : '';
+$admin_tools = ($user->data['user_level'] == ADMIN) ? '|| <a href="' . append_sid('sudoku.' . PHP_EXT . '?&amp;mode=resynch') . '" class="nav">' . $lang['sudoku_resynch'] . '</a> || <a href="' . append_sid(SUDOKU_MAIN_FILE . '?&amp;mode=reset_game') . '" class="nav">' . $lang['sudoku_reset_game'] . '</a>' : '';
 // Set template Vars
+
 $template->assign_vars(array(
-	'SUDOKU_VERSION' => sprintf($lang['Sudoku_Version'], $config['sudoku_version'], $latest_pack),
+	'S_SUDOKU_FILE' => SUDOKU_MAIN_FILE,
+	'SUDOKU_VERSION' => sprintf($lang['Sudoku_Version'], $sudoku_config['plugin_version'], $latest_pack),
 	'L_SUBMIT' => $lang['Submit'],
 	'INSTRUCTIONS' => $lang['sudoku_instructions'],
 	'HOW_TO' => $lang['sudoku_howto'],
@@ -67,7 +69,7 @@ $template->assign_vars(array(
 	'LEAD_CURRENT_GAME' => $lang['sudoku_lead_current_game'],
 	'PLACE' => $lang['sudoku_place'],
 	// navigation
-	'RESET' => '<a href="' . append_sid('sudoku.' . PHP_EXT . '?mode=reset') . '" class="nav">' . $lang['sudoku_reset_grid'] . '</a>',
+	'RESET' => '<a href="' . append_sid(SUDOKU_MAIN_FILE . '?mode=reset') . '" class="nav">' . $lang['sudoku_reset_grid'] . '</a>',
 	'ADMIN_TOOLS' => $admin_tools
 	)
 );
@@ -94,7 +96,7 @@ if ($mode == 'reset_game')
 	{
 		$template->assign_vars(array(
 			'MESSAGE_TITLE' => $lang['sudoku_reset_game'],
-			'S_CONFIRM_ACTION' => append_sid('sudoku.' . PHP_EXT . '?mode=reset_game'),
+			'S_CONFIRM_ACTION' => append_sid(SUDOKU_MAIN_FILE . '?mode=reset_game'),
 			'MESSAGE_TEXT' => $lang['sudoku_reset_game_text'],
 			'L_YES' => $lang['Yes'],
 			'L_NO' => $lang['No'],
@@ -125,7 +127,7 @@ if ($mode == 'reset_game')
 	$db->sql_query($sql);
 
 	// let them know the good news
-	$redirect='<meta http-equiv="refresh" content="3;url=' . append_sid('sudoku.' . PHP_EXT . '?#grid') . '">';
+	$redirect='<meta http-equiv="refresh" content="3;url=' . append_sid(SUDOKU_MAIN_FILE . '?#grid') . '">';
 	message_die(GENERAL_MESSAGE,$lang['sudoku_rest_game_success'] . $redirect);
 }
 
@@ -135,7 +137,7 @@ if ($mode == 'buy')
 	{
 		$template->assign_vars(array(
 			'MESSAGE_TITLE' => $lang['sudoku_buy_number'],
-			'S_CONFIRM_ACTION' => append_sid('sudoku.' . PHP_EXT . '?mode=buy&amp;p=' . $pack . '&amp;n=' . $num),
+			'S_CONFIRM_ACTION' => append_sid(SUDOKU_MAIN_FILE . '?mode=buy&amp;p=' . $pack . '&amp;n=' . $num),
 			'MESSAGE_TEXT' => $lang['sudoku_confirm_buy_text'],
 			'L_YES' => $lang['Yes'],
 			'L_NO' => $lang['No'],
@@ -203,7 +205,7 @@ if ($mode == 'buy')
 	AND user_id = " . $user->data['user_id'];
 	$db->sql_query($sql);
 
-	$redirect='<meta http-equiv="refresh" content="3;url=' . append_sid('sudoku.' . PHP_EXT . '?#grid') . '">';
+	$redirect='<meta http-equiv="refresh" content="3;url=' . append_sid(SUDOKU_MAIN_FILE . '?#grid') . '">';
 	message_die(GENERAL_MESSAGE,$lang['sudoku_ran_success'] . $redirect);
 }
 
@@ -349,7 +351,7 @@ if ($mode == 'reset')
 	{
 		$template->assign_vars(array(
 		'MESSAGE_TITLE' => $lang['sudoku_confirm_reset'],
-		'S_CONFIRM_ACTION' => append_sid('sudoku.' . PHP_EXT . '?mode=reset'),
+		'S_CONFIRM_ACTION' => append_sid(SUDOKU_MAIN_FILE . '?mode=reset'),
 		'MESSAGE_TEXT' => $lang['sudoku_confirm_reset_text'],
 		'L_YES' => $lang['Yes'],
 		'L_NO' => $lang['No'],
@@ -541,7 +543,7 @@ if (!in_array('x', $line[0]) && !in_array('x', $line[1]) && !in_array('x', $line
 		AND game_num = $num
 		";
 		$db->sql_query($sql);
-		$new_redirect='<meta http-equiv="refresh" content="6;url=' . append_sid('sudoku.' . PHP_EXT) . '">';
+		$new_redirect='<meta http-equiv="refresh" content="6;url=' . append_sid(SUDOKU_MAIN_FILE) . '">';
 		$message=sprintf($lang['sudoku_wrong_numbers'], $bad_numbers, $points_minus) . $new_redirect;
 		message_die(GENERAL_MESSAGE, $message);
 	}
@@ -653,8 +655,9 @@ $template->assign_vars(array(
 	'WHO_IS_ONLINE' => $lang['sudoku_who_is_online'],
 	'ONLINE_EXPLAIN' => $lang['sudoku_online_explain'],
 	'SUDOKU_GAME_STATS' => sprintf($lang['sudoku_game_stats'], number_format($alltime_players), number_format($alltime_played)),
-	'BUY_NUMBER' => '<a href="' . append_sid('sudoku.' . PHP_EXT . '?&amp;mode=buy&amp;p=' . $pack . '&amp;n=' . $num) . '" class="nav">' . $lang['sudoku_buy_number'] . '</a>',
+	'BUY_NUMBER' => '<a href="' . append_sid(SUDOKU_MAIN_FILE . '?&amp;mode=buy&amp;p=' . $pack . '&amp;n=' . $num) . '" class="nav">' . $lang['sudoku_buy_number'] . '</a>',
 
+	'S_SUDOKU_FILE' => SUDOKU_MAIN_FILE,
 	'L_TOTAL_USERS_ONLINE' => sprintf($lang['sudoku_total_online'], number_format($s_users_online_today)),
 	'L_LOGGED_IN_USER_LIST' => $lang['sudoku_logged_in_list'],
 	'L_TODAY_USER_LIST' => $s_users_today_disp,
@@ -662,6 +665,7 @@ $template->assign_vars(array(
 	)
 );
 
-full_page_generation(SUDOKU_TPL_PATH . 'sudoku.tpl', $lang['SUDOKU'], '', '');
+$template_to_parse = $class_plugins->get_tpl_file(SUDOKU_TPL_PATH, 'sudoku.tpl');
+full_page_generation($template_to_parse, $lang['SUDOKU'], '', '');
 
 ?>

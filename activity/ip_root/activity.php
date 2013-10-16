@@ -16,6 +16,7 @@
 */
 
 define('IN_ACTIVITY', true);
+define('ROBOTS_NOINDEX', true);
 define('CTRACKER_DISABLED', true);
 define('IN_ICYPHOENIX', true);
 if (!defined('IP_ROOT_PATH')) define('IP_ROOT_PATH', './');

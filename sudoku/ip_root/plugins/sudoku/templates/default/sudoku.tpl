@@ -12,7 +12,7 @@
 <tr>
 	<td class="row1" width="50%">
 		<div style="text-align: center; width: 100%; margin: 0 auto; clear: both;"><span class="gen"><a name="grid" href="#grid">{GAME_INFO}</a></span></div><br />
-		<form id="sudoku_frm" action="sudoku.php" method="post">
+		<form id="sudoku_frm" action="{S_SUDOKU_FILE}" method="post">
 		<center>
 		<table class="forumline-no2" cellspacing="0" cellpadding="0" border="0">
 		<tr>
