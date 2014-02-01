@@ -130,7 +130,7 @@ if (($view == 'code') && $code)
 	header("Pragma: no-cache");
 	header("Cache-Control: no-store, no-cache, max-age=0, must-revalidate");
 	header("Content-Type: image/jpeg");
-	imagejpeg($im, '', 80);
+	imagejpeg($im, null, 80);
 	imagedestroy($im);
 	exit;
 }

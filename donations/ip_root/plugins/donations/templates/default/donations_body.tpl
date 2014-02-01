@@ -46,9 +46,9 @@
 	<td class="{donations.CLASS} row-center" style="background: none;" nowrap="nowrap">{donations.DATE}</td>
 	<td class="{donations.CLASS} row-center" style="background: none;" nowrap="nowrap">{donations.USERNAME}</td>
 	<!-- IF IS_PROSILVER -->
-	<td class="{donations.CLASS} row-center" style="background: none;"><!-- IF donations.U_WEBSITE --><ul class="profile-icons" style="padding-left: 10px;"><li class="web-icon"><a href="{donations.U_WEBSITE}" rel="nofollow" target="_blank"><span>{L_WEBSITE}</span></a></li></ul><!-- ELSE -->&nbsp;<!-- ENDIF --></td>
+	<td class="{donations.CLASS} row-center" style="background: none;"><!-- IF donations.TEXT_LINK -->{donations.WEBSITE}<!-- ELSE --><!-- IF donations.U_WEBSITE --><ul class="profile-icons" style="padding-left: 10px;"><li class="web-icon"><a href="{donations.U_WEBSITE}" rel="nofollow" target="_blank"><span>{L_WEBSITE}</span></a></li></ul><!-- ELSE -->&nbsp;<!-- ENDIF --><!-- ENDIF --></td>
 	<!-- ELSE -->
-	<td class="{donations.CLASS} row-center" style="background: none;" nowrap="nowrap"><span class="post-buttons-single">{donations.WEBSITE}</span></td>
+	<td class="{donations.CLASS} row-center" style="background: none;" nowrap="nowrap"><span class="post-buttons-single"><!-- IF donations.WEBSITE -->{donations.WEBSITE}<!-- ELSE -->&nbsp;<!-- ENDIF --></span></td>
 	<!-- ENDIF -->
 	<!-- IF S_ADMIN_ALLOWED -->
 	<!-- IF IS_PROSILVER -->

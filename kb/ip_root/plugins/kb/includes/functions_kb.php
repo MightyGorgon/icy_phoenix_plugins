@@ -1407,27 +1407,7 @@ function get_kb_comments($topic_id = '', $start = -1, $show_num_comments = 0)
 		$poster_rank = $user_ranks['rank_01_html'];
 		$rank_image = $user_ranks['rank_01_img_html'];
 
-		$poster_avatar = '';
-		if ($postrow[$i]['user_avatar_type'] && ($poster_id != ANONYMOUS) && $postrow[$i]['user_allowavatar'])
-		{
-			switch($postrow[$i]['user_avatar_type'])
-			{
-				case USER_AVATAR_UPLOAD:
-					$poster_avatar = ($config['allow_avatar_upload']) ? '<img src="' . $config['avatar_path'] . '/' . $postrow[$i]['user_avatar'] . '" alt="" />' : '';
-					break;
-				case USER_AVATAR_REMOTE:
-					$poster_avatar = resize_avatar($poster_id, $postrow[$i]['user_level'], $postrow[$i]['user_avatar']);
-					break;
-				case USER_AVATAR_GALLERY:
-					$poster_avatar = ($config['allow_avatar_local']) ? '<img src="' . $config['avatar_gallery_path'] . '/' . $postrow[$i]['user_avatar'] . '" alt="" />' : '';
-					break;
-			}
-		}
-
-		if ($poster_avatar == '')
-		{
-			$poster_avatar = get_default_avatar($poster_id);
-		}
+		$poster_avatar = user_get_avatar($postrow[$i]['user_id'], $postrow[$i]['user_level'], $postrow[$i]['user_avatar'], $postrow[$i]['user_avatar_type'], $postrow[$i]['user_allowavatar']);
 
 		// Handle anon users posting with usernames
 

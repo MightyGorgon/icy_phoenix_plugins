@@ -167,7 +167,8 @@ class currency_exchange
 		}
 		else
 		{
-			$error = $debug = array();
+			$error = array();
+			$debug = array();
 
 			if (!array_key_exists($from_currency, $this->rates))
 			{
@@ -182,9 +183,11 @@ class currency_exchange
 			if ($plugin_config['donations_debug'])
 			{
 				$debug = $this->rates;
+				// Force Log Error only if Debug enabled!
+				$this->log_error(implode('<br />', $error), true, E_USER_NOTICE, $debug);
 			}
 
-			$this->log_error(implode('<br />', $error), true, E_USER_NOTICE, $debug);
+			return $amount;
 		}
 	}
 
@@ -563,6 +566,12 @@ class paypal_class extends currency_exchange
 				$minimum_amount = $this->convert_currency($plugin_config['donations_default_currency'], $this->data['mc_currency'], $plugin_config['donations_donate_minimum']);
 			}
 
+			// If the user donated more than minimum amount, enable automatically URL display
+			if ($this->data['mc_gross'] >= $minimum_amount)
+			{
+				$this->data['payer_website_display'] = 1;
+			}
+
 			// If they meet or exceed the minimum amount, add the user to the supporters group and set as default.
 			if (!$anonymous_user && ($this->data['mc_gross'] >= $minimum_amount))
 			{
@@ -717,6 +726,7 @@ class paypal_class extends currency_exchange
 			'payment_time' => $this->data['payment_time'],
 			'mc_currency' => $this->data['mc_currency'],
 			'payment_date' => $this->data['payment_date'],
+			'payer_website_display' => !empty($this->data['payer_website_display']) ? 1 : 0,
 
 			'payer_id' => $this->data['payer_id'],
 			'payer_email' => $this->data['payer_email'],

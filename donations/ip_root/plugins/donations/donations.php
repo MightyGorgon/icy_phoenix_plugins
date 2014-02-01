@@ -200,6 +200,10 @@ else
 	}
 	else
 	{
+		include_once(DONATIONS_ROOT_PATH . 'includes/functions_paypal.' . PHP_EXT);
+		$donate = new paypal_class();
+		$donation_minimum_amount = $plugin_config['donations_donate_minimum'];
+
 		$row_class = '';
 		for ($i = 0; $i < $page_items; $i++)
 		{
@@ -210,11 +214,26 @@ else
 			$donation_email = (!empty($items_array[$i]['payer_email']) ? $items_array[$i]['payer_email'] : (!empty($items_array[$i]['user_email']) ? $items_array[$i]['user_email'] : ''));
 			$donation_email_link = (!empty($donation_email) ? ('&nbsp;<a href="mailto:' . $donation_email . '" target="_blank"><img src="' . $images['icon_email'] . '" alt="' . $lang['EMAIL'] . '" title="' . $donation_email . '" /></a>&nbsp;') : '&nbsp;');
 
-			$donation_website = (!empty($items_array[$i]['payer_website']) ? $items_array[$i]['payer_website'] : (!empty($items_array[$i]['user_website']) ? $items_array[$i]['user_website'] : ''));
-			$donation_website_link = (!empty($donation_website) ? ('&nbsp;<a href="' . $donation_website . '" rel="nofollow" target="_blank"><img src="' . $images['icon_www'] . '" alt="' . $lang['WEBSITE'] . '" title="' . $donation_website . '" /></a>&nbsp;') : '&nbsp;');
-			if (!empty($items_array[$i]['payer_website_sponsor']) && !empty($items_array[$i]['payer_website_text']))
+			$donation_amount = $items_array[$i]['payment_gross'];
+			if (!empty($items_array[$i]['mc_currency']) && ($items_array[$i]['mc_currency'] != $plugin_config['donations_default_currency']))
 			{
-				$donation_website_link = (!empty($donation_website) ? ('&nbsp;<a href="' . $donation_website . '" target="_blank" title="' . $items_array[$i]['payer_website_text'] . '">' . $items_array[$i]['payer_website_text'] . '</a>&nbsp;') : '&nbsp;');
+				// If the payer currency is not the default currency, convert the default currency to the payer currency to determine if they paid the minimum in that currency.
+				$donation_amount = $donate->convert_currency($plugin_config['donations_default_currency'], $items_array[$i]['mc_currency'], $items_array[$i]['payment_gross']);
+				$donation_amount = round($donation_amount, 2);
+			}
+
+			$donation_website = '';
+			$donation_website_link = '';
+			if (!empty($items_array[$i]['payer_website_display']))
+			{
+				$donation_website = (!empty($items_array[$i]['payer_website']) ? $items_array[$i]['payer_website'] : (!empty($items_array[$i]['user_website']) ? $items_array[$i]['user_website'] : ''));
+				$donation_website_text = (!empty($items_array[$i]['payer_website_text']) ? $items_array[$i]['payer_website_text'] : $donation_website);
+				// 0 = image, 1 = text link
+				$display_text_link = !empty($items_array[$i]['payer_website_link_type']) ? true : false;
+				if (!empty($donation_website))
+				{
+					$donation_website_link = '&nbsp;<a href="' . $donation_website . '" title="' . $donation_website_text . '"' . (!empty($items_array[$i]['payer_website_sponsor']) ? ' rel="nofollow"' : '') . ' target="_blank">' . ($display_text_link ? $donation_website_text : ('<img src="' . $images['icon_www'] . '" alt="' . $donation_website_text . '" />')) . '</a>&nbsp;';
+				}
 			}
 
 			$view_link = append_sid(THIS_FILE . '?mode=view&amp;' . $item_id . '=' . $items_array[$i][$item_id]);
@@ -237,9 +256,10 @@ else
 				'USERNAME' => $donation_username,
 				'WEBSITE' => $donation_website_link,
 				'U_WEBSITE' => $donation_website,
+				'TEXT_LINK' => $display_text_link,
 				'EMAIL' => $donation_email_link,
 				'U_EMAIL' => $donation_email,
-				'AMOUNT' => $items_array[$i]['payment_gross'],
+				'AMOUNT' => $donation_amount,
 
 				'U_VIEW' => $view_link,
 				'S_VIEW' => $view_img,

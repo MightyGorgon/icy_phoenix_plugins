@@ -83,7 +83,15 @@ $install_data = array(
 	'1.0.2' => array(
 		'sql' => array(
 			"ALTER TABLE `" . $table_prefix . "donations_data` ADD `payer_website_text` varchar(255) NOT NULL AFTER `payer_website`;",
-			"ALTER TABLE `" . $table_prefix . "donations_data` ADD `payer_website_sponsor` tinyint(1) unsigned NOT NULL default '0' AFTER `payer_website_text`;",
+			"ALTER TABLE `" . $table_prefix . "donations_data` ADD `payer_website_sponsor` tinyint(1) unsigned NOT NULL default '1' AFTER `payer_website_text`;",
+		),
+		'functions' => array(),
+	),
+	'1.0.3' => array(
+		'sql' => array(
+			"ALTER TABLE `" . $table_prefix . "donations_data` CHANGE `payer_website_sponsor` `payer_website_sponsor` tinyint(1) unsigned NOT NULL default '1';",
+			"ALTER TABLE `" . $table_prefix . "donations_data` ADD `payer_website_link_type` tinyint(1) unsigned NOT NULL default '0' AFTER `payer_website_sponsor`;",
+			"ALTER TABLE `" . $table_prefix . "donations_data` ADD `payer_website_display` tinyint(1) unsigned NOT NULL default '0' AFTER `payer_website_link_type`;",
 		),
 		'functions' => array(),
 	)

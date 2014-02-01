@@ -19,6 +19,6 @@ $plugin_details = array();
 $plugin_details['config'] = 'donations';
 $plugin_details['name'] = $lang['PLUGIN_DONATIONS'];
 $plugin_details['description'] = $lang['PLUGIN_DONATIONS_EXPLAIN'];
-$plugin_details['version'] = '1.0.2';
+$plugin_details['version'] = '1.0.3';
 
 ?>
