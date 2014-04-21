@@ -539,7 +539,7 @@ if ($action == 'detail' && $fav_id)
 /*
 * display form to add a bug report
 */
-if ($action == 'add' && $user->data['session_logged_in'])
+if (($action == 'add') && $user->data['session_logged_in'])
 {
 	$template_to_parse = $class_plugins->get_tpl_file(DL_TPL_PATH, 'dl_bt_add.tpl');
 

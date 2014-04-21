@@ -39,7 +39,7 @@ if (!sizeof($index) && $action != 'save_cat')
 	$action = 'add';
 }
 
-if($action == 'edit' || $action == 'add')
+if(($action == 'edit') || ($action == 'add'))
 {
 	$s_hidden_fields = '<input type="hidden" name="action" value="save_cat" />';
 

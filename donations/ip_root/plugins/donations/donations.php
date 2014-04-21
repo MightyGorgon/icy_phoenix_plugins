@@ -88,7 +88,7 @@ if ($mode == 'save')
 	else
 	{
 		// Re-assign action just in case the above condition is not verified!
-		$action == 'add';
+		$action = 'add';
 
 		// If it is a new insert, we need to unset the $item_id, because it will be automatically incremented by the DB
 		unset($inputs_array[$item_id]);
@@ -139,7 +139,7 @@ elseif ($mode == 'input')
 	else
 	{
 		// Re-assign action just in case the above condition is not verified!
-		$action == 'add';
+		$action = 'add';
 	}
 
 	$template_to_parse = 'items_add_body.tpl';

@@ -192,7 +192,7 @@ if ($mode == 'save')
 	else
 	{
 		// Re-assign action just in case the above condition is not verified!
-		$action == 'add';
+		$action = 'add';
 
 		$article_data['topic_last_poster_id'] = $current_user_id;
 		$article_data['topic_last_post_time'] = $current_time;
@@ -301,7 +301,7 @@ elseif ($mode == 'input')
 		else
 		{
 			// Re-assign action just in case the above conditions are not verified!
-			$action == 'add';
+			$action = 'add';
 		}
 
 		if ($items_row_processed && empty($items_row))
@@ -312,7 +312,7 @@ elseif ($mode == 'input')
 	else
 	{
 		// Re-assign action just in case the above condition is not verified!
-		$action == 'add';
+		$action = 'add';
 	}
 
 	$s_hidden_fields = build_hidden_fields(array(

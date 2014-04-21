@@ -129,7 +129,7 @@ if ($mode == 'save')
 	else
 	{
 		// Re-assign action just in case the above condition is not verified!
-		$action == 'add';
+		$action = 'add';
 		$sql = "INSERT INTO " . PLUGINS_FEEDBACK_TABLE . " (feedback_time, feedback_transaction, feedback_rating, feedback_description, feedback_url, feedback_topic_id, feedback_user_id_from, feedback_user_id_to)
 			VALUES ('" . $feedback_time . "', '" . $feedback_transaction . "', '" . $feedback_rating . "', '" . $feedback_description . "', '" . $feedback_url . "', '" . $feedback_topic_id . "', '" . $feedback_user_id_from . "', '" . $feedback_user_id_to . "')";
 		$message = $lang['FEEDBACK_ADDED'];
@@ -210,7 +210,7 @@ elseif ($mode == 'input')
 	else
 	{
 		// Re-assign action just in case the above condition is not verified!
-		$action == 'add';
+		$action = 'add';
 		$feedback_time = time();
 
 		$feedback_transaction = 0;
