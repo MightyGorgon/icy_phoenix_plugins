@@ -1,15 +1,15 @@
 <form action="{S_CONFIG_ACTION}" method="post">
 <br /><center><span class="gen"><b>.: {L_GAMES} :.</b></span></center>
-<table class="forumline" width="100%" cellpadding="0" cellspacing="0" border="0">
+<table class="forumline">
 	<tr>
-		<th width="5%">{L_MONEY}</th>
-		<th width="15%">{L_BUTTON}</th>
+		<th class="tw5pct">{L_MONEY}</th>
+		<th class="tw15pct">{L_BUTTON}</th>
 		<th width="55%">{L_DESC}</th>
-		<th width="5%">{L_REWARD}</th>
-		<th width="10%">{L_BONUS}</th>
-		<th width="5%">{L_FLASH}</th>
-		<th width="5%">{L_SCORE}</th>
-		<th width="5%">{L_GAMELIB}</th>
+		<th class="tw5pct">{L_REWARD}</th>
+		<th class="tw10pct">{L_BONUS}</th>
+		<th class="tw5pct">{L_FLASH}</th>
+		<th class="tw5pct">{L_SCORE}</th>
+		<th class="tw5pct">{L_GAMELIB}</th>
 		<th width="5%" colspan="2">{L_ACTION}</th>
 	</tr>
 

@@ -39,8 +39,8 @@ function checkForm()
 <!-- INCLUDE overall_header.tpl -->
 
 <!-- INCLUDE ../../plugins/links/templates/default/links_leftblock.tpl -->
-	<td width="100%" nowrap="nowrap" valign="top">
-	{IMG_THL}{IMG_THC}<span class="forumlink">{L_LINK_TITLE1}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+	<td width="100%" nowrap="nowrap">
+	{IMG_THL}{IMG_THC}<span class="forumlink">{L_LINK_TITLE1}</span>{IMG_THR}<table class="forumlinenb">
 	<tr>
 		<td class="cat" align="right" nowrap="nowrap" colspan="5">
 		<form method="post" action="{U_SITE_SEARCH}">
@@ -53,8 +53,8 @@ function checkForm()
 	</tr>
 	<!-- BEGIN linkrow -->
 	<tr>
-		<td valign="top" align="right" class="row1">&nbsp;{linkrow.LINK_LOGO}&nbsp;</td>
-		<td class="row1h{catrow.forumrow.XS_NEW} row-forum" width="100%" data-href="{linkrow.LINK_URL}">
+		<td align="right" class="row1">&nbsp;{linkrow.LINK_LOGO}&nbsp;</td>
+		<td class="row1h{catrow.forumrow.XS_NEW} row-forum tw100pct" data-href="{linkrow.LINK_URL}">
 			<span class="forumlink"><a href="{linkrow.LINK_URL}" class="forumlink">{linkrow.LINK_TITLE}</a></span>
 			<br /><span class="genmed">{linkrow.LINK_DESC}</span>
 		</td>
@@ -65,10 +65,10 @@ function checkForm()
 	<!-- END linkrow -->
 	</table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
 	<br />
-	<table class="empty-table" width="100%" cellspacing="0" cellpadding="0" border="0">
+	<table>
 	<tr>
-		<td align="left" valign="top"><span class="gensmall">{PAGE_NUMBER}</span></td>
-		<td align="right"><span class="gensmall">{S_TIMEZONE}</span><br /><span class="pagination">{PAGINATION}</span></td>
+		<td><span class="gensmall">{PAGE_NUMBER}</span></td>
+		<td class="tdalignr"><span class="gensmall">{S_TIMEZONE}</span><br /><span class="pagination">{PAGINATION}</span></td>
 	</tr>
 	</table>
 	</td>

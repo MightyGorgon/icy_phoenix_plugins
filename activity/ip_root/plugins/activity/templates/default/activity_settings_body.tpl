@@ -10,7 +10,7 @@
 	</div>
 </div>
 <form name="save_this" method="post" action="activity.php?page=settings">
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_games_settings_link}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_games_settings_link}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
 	<td align="left" valign="bottom" width="50%" class="row1"><span class="genmed">{L_GAMES}</span></td>
 	<td align="left" valign="bottom" width="50%" class="row2"><span class="genmed">{V_GAMES}</span></td>

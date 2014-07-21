@@ -11,23 +11,23 @@ function select_switch(status)
 </script>
 
 <form action="{S_CONFIG_ACTION}" method="post" name="user_dl_settings">
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_CONFIGURATION_TITLE}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_CONFIGURATION_TITLE}</span>{IMG_THR}<table class="forumlinenb">
 <!-- BEGIN no_dl_popup_notify -->
 <tr>
 	<td class="row2" width="10%" rowspan="3"><span class="gen"><b>{L_DOWNLOAD_POPUP}</b></span></td>
-	<td class="row1" width="50%"><span class="gen">{L_ALLOW_NEW_DOWNLOAD_POPUP}</span></td>
+	<td class="row1 tw50pct"><span class="gen">{L_ALLOW_NEW_DOWNLOAD_POPUP}</span></td>
 	<td class="row2" width="40%"><span class="gen"><input type="radio" name="user_allow_new_download_popup" value="1" {ALLOW_NEW_DOWNLOAD_POPUP_YES}/>&nbsp;{L_YES}
 		&nbsp;&nbsp;&nbsp;<input type="radio" name="user_allow_new_download_popup" value="0" {ALLOW_NEW_DOWNLOAD_POPUP_NO}/>&nbsp;{L_NO}</span>
 	</td>
 </tr>
 <tr>
-	<td class="row1" width="50%"><span class="gen">{L_ALLOW_FAV_DOWNLOAD_POPUP}</span></td>
+	<td class="row1 tw50pct"><span class="gen">{L_ALLOW_FAV_DOWNLOAD_POPUP}</span></td>
 	<td class="row2" width="40%"><span class="gen"><input type="radio" name="user_allow_fav_download_popup" value="1" {ALLOW_FAV_DOWNLOAD_POPUP_YES}/>&nbsp;{L_YES}
 		&nbsp;&nbsp;&nbsp;<input type="radio" name="user_allow_fav_download_popup" value="0" {ALLOW_FAV_DOWNLOAD_POPUP_NO}/>&nbsp;{L_NO}</span>
 	</td>
 </tr>
 <tr>
-	<td class="row1" width="50%"><span class="gen">{L_DOWNLOAD_NOTIFY_TYPE}</span></td>
+	<td class="row1 tw50pct"><span class="gen">{L_DOWNLOAD_NOTIFY_TYPE}</span></td>
 	<td class="row2" width="40%"><span class="gen"><input type="radio" name="user_dl_note_type" value="1" {USER_DL_NOTE_TYPE_POPUP}/>&nbsp;{L_DOWNLOAD_NOTIFY_TYPE_POPUP}
 		&nbsp;&nbsp;&nbsp;<input type="radio" name="user_dl_note_type" value="0" {USER_DL_NOTE_TYPE_MESSAGE}/>&nbsp;{L_DOWNLOAD_NOTIFY_TYPE_MESSAGE}</span>
 	</td>
@@ -36,13 +36,13 @@ function select_switch(status)
 <!-- BEGIN no_dl_email_notify -->
 <tr>
 	<td class="row2" width="10%" rowspan="2"><span class="gen"><b>{L_DOWNLOAD_EMAIL}</b></span></td>
-	<td class="row1" width="50%"><span class="gen">{L_ALLOW_NEW_DOWNLOAD_EMAIL}</span></td>
+	<td class="row1 tw50pct"><span class="gen">{L_ALLOW_NEW_DOWNLOAD_EMAIL}</span></td>
 	<td class="row2" width="40%"><span class="gen"><input type="radio" name="user_allow_new_download_email" value="1" {ALLOW_NEW_DOWNLOAD_EMAIL_YES}/>&nbsp;{L_YES}
 		&nbsp;&nbsp;&nbsp;<input type="radio" name="user_allow_new_download_email" value="0" {ALLOW_NEW_DOWNLOAD_EMAIL_NO}/>&nbsp;{L_NO}</span>
 	</td>
 </tr>
 <tr>
-	<td class="row1" width="50%"><span class="gen"><b>{L_ALLOW_FAV_DOWNLOAD_EMAIL}</b></span></td>
+	<td class="row1 tw50pct"><span class="gen"><b>{L_ALLOW_FAV_DOWNLOAD_EMAIL}</b></span></td>
 	<td class="row2" width="40%"><span class="gen"><input type="radio" name="user_allow_fav_download_email" value="1" {ALLOW_FAV_DOWNLOAD_EMAIL_YES}/>&nbsp;{L_YES}
 		&nbsp;&nbsp;&nbsp;<input type="radio" name="user_allow_fav_download_email" value="0" {ALLOW_FAV_DOWNLOAD_EMAIL_NO}/>&nbsp;{L_NO}</span>
 	</td>
@@ -65,7 +65,7 @@ function select_switch(status)
 </tr>
 <!-- END exchange_row -->
 <tr>
-	<td class="cat" colspan="3" align="center">
+	<td class="cat tdalignc" colspan="3">
 		{S_HIDDEN_FIELDS}
 		<input type="submit" name="submit" value="{L_SUBMIT}" class="mainoption" />
 		&nbsp;&nbsp;<input type="reset" value="{L_RESET}" class="liteoption" />
@@ -78,10 +78,10 @@ function select_switch(status)
 <br />
 
 <form action="{fav_block.S_FORM_ACTION}" method="post" name="user_dl_favorites">
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_CONFIGURATION_TITLE}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_CONFIGURATION_TITLE}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
 	<th width="90%">{fav_block.L_DOWNLOAD}</th>
-	<th width="10%">{fav_block.L_DELETE}</th>
+	<th class="tw10pct">{fav_block.L_DELETE}</th>
 </tr>
 <!-- BEGIN favorite_row -->
 <tr>
@@ -94,7 +94,7 @@ function select_switch(status)
 
 <table border="0" width="100%">
 <tr>
-	<td align="right" nowrap="nowrap">
+	<td class="tdalignr tdnw">
 		<a href="javascript:select_switch(true);" class="gensmall">{fav_block.L_MARK_ALL}</a>&nbsp;&bull;&nbsp;<a href="javascript:select_switch(false);" class="gensmall">{fav_block.L_UNMARK_ALL}</a>
 	</td>
 </tr>

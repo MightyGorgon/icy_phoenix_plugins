@@ -1,9 +1,9 @@
 <!-- BEGIN challenge -->
-{IMG_THL}{IMG_THC}<span class="forumlink">{challenge.TOTAL_SENT}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{challenge.TOTAL_SENT}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
-	<th width="20%">{challenge.CHALLENGE_SPOT}</th>
-	<th width="40%">{challenge.CHALLENGE_NAME}</th>
-	<th width="40%">{challenge.CHALLENGE_COUNT}</th>
+	<th class="tw20pct">{challenge.CHALLENGE_SPOT}</th>
+	<th class="tw40pct">{challenge.CHALLENGE_NAME}</th>
+	<th class="tw40pct">{challenge.CHALLENGE_COUNT}</th>
 </tr>
 <!-- END challenge -->
 
@@ -16,16 +16,16 @@
 <!-- END challenge_results -->
 
 <!-- BEGIN challenge -->
-<tr><th width="100%" colspan="3">&nbsp;</th></tr>
+<tr><th colspan="3">&nbsp;</th></tr>
 </table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
 <!-- END challenge -->
 
 <!-- BEGIN user -->
-{IMG_THL}{IMG_THC}<span class="forumlink">{user.USER}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{user.USER}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
-	<th width="20%">{user.RANKING}</th>
-	<th width="40%">{user.USER_TO}</th>
-	<th width="40%">{user.USER_TO_COUNT}</th>
+	<th class="tw20pct">{user.RANKING}</th>
+	<th class="tw40pct">{user.USER_TO}</th>
+	<th class="tw40pct">{user.USER_TO_COUNT}</th>
 </tr>
 <!-- END user -->
 
@@ -38,6 +38,6 @@
 <!-- END user_array -->
 
 <!-- BEGIN user -->
-<tr><th width="100%" colspan="3">&nbsp;</th></tr>
+<tr><th colspan="3">&nbsp;</th></tr>
 </table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
 <!-- END user -->

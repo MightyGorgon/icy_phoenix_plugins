@@ -9,43 +9,43 @@
 		&nbsp;
 	</div>
 </div>
-<table width="100%" align="center">
+<table>
 <tr>
-	<td align="center" width="100%">
+	<td class="tw100pct tdalignc">
 		<br clear="all">
-		{IMG_THL}{IMG_THC}<span class="forumlink">{L_hof_link}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+		{IMG_THL}{IMG_THC}<span class="forumlink">{L_hof_link}</span>{IMG_THR}<table class="forumlinenb">
 			<tr>
-				<th align="center" valign="middle" width="20%">{ONE}</th>
-				<th align="center" valign="middle" width="25%">{TWO}</th>
+				<th class="tw20pct tdaligc tvalignm">{ONE}</th>
+				<th class="tw25pct tdaligc tvalignm">{TWO}</th>
 			</tr>
 		<!-- BEGIN hof_left -->
 			<tr>
-				<td class="row1 row-center" width="20%"><span class="genmed">{hof_left.ONE}</span></td>
-				<td class="row1" align="left" width="25%"><span class="genmed">{hof_left.TWO}<br />{hof_left.THREE}<br />{hof_left.FOUR}</span></td>
+				<td class="row1 row-center"><span class="genmed">{hof_left.ONE}</span></td>
+				<td class="row1"><span class="genmed">{hof_left.TWO}<br />{hof_left.THREE}<br />{hof_left.FOUR}</span></td>
 			</tr>
 			<tr>
 				<td class="row1 row-center"><span class="genmed"><b>{hof_left.FIVE}</b></span></td>
-				<td class="row1" align="left" width="25%"><span class="genmed">{hof_left.SIX}<br />{hof_left.SEVEN}<br />{hof_left.EIGHT}</span></td>
+				<td class="row1"><span class="genmed">{hof_left.SIX}<br />{hof_left.SEVEN}<br />{hof_left.EIGHT}</span></td>
 			</tr>
 		<!-- END hof_left -->
 
 		<!-- BEGIN hof_right -->
 			<tr>
-				<td class="row1 row-center" width="20%"><span class="genmed">{hof_right.ONE}</span></td>
-				<td class="row1" align="left" width="25%"><span class="genmed">{hof_right.TWO}<br />{hof_right.THREE}<br />{hof_right.FOUR}</span></td>
+				<td class="row1 row-center"><span class="genmed">{hof_right.ONE}</span></td>
+				<td class="row1"><span class="genmed">{hof_right.TWO}<br />{hof_right.THREE}<br />{hof_right.FOUR}</span></td>
 			</tr>
 			<tr>
-				<td class="row1 row-center" width="20%"><span class="genmed">{hof_right.FIVE}</span></td>
-				<td class="row1" align="left" width="25%"><span class="genmed">{hof_right.SIX}<br />{hof_right.SEVEN}<br />{hof_right.EIGHT}</span></td>
+				<td class="row1 row-center"><span class="genmed">{hof_right.FIVE}</span></td>
+				<td class="row1"><span class="genmed">{hof_right.SIX}<br />{hof_right.SEVEN}<br />{hof_right.EIGHT}</span></td>
 			</tr>
 		<!-- END hof_right -->
-		<tr><th width="100%" colspan="2">&nbsp;</th></tr>
+		<tr><th colspan="2">&nbsp;</th></tr>
 		</table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
 		<br clear="all">
-		<table width="100%" cellspacing="0" cellpadding="0" border="0">
+		<table>
 			<tr>
-				<td align="left" width="50%"><span class="genmed">{PAGE_1}</span></td>
-				<td align="right" width="50%"><span class="genmed">{PAGE_2}</span></td>
+				<td class="tw50pct"><span class="genmed">{PAGE_1}</span></td>
+				<td class="tw50pct tdalignr"><span class="genmed">{PAGE_2}</span></td>
 			</tr>
 		</table>
 	</td>

@@ -2,14 +2,14 @@
 
 <!-- BEGIN chat -->
 <!-- BEGIN history -->
-{IMG_THL}{IMG_THC}<span class="forumlink">{chat.history.TITLE}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{chat.history.TITLE}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
 	<td class="row1">
 	<form method="post" name="refresh" action="activity_popup.php?mode=chat&amp;action=view">
 		<input type="submit" class="liteoption" value="{chat.history.REFRESH}" onchange="document.refresh.submit()" />
 	</form>
 	</td>
-	<td class="row1" width="100%">
+	<td class="row1 tw100pct">
 	<form name="history_chat">
 		<select name="history" onchange="if(options[selectedIndex].value)window.location.href=(options[selectedIndex].value)">
 			<option value="" class="post">{DEFAULT}</option>
@@ -22,14 +22,14 @@
 	</td>
 </tr>
 {chat.history.CHAT}
-<tr><th width="100%" colspan="2">&nbsp;</th></tr>
+<tr><th colspan="2">&nbsp;</th></tr>
 </table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
 <!-- END history -->
 <!-- BEGIN view -->
-{IMG_THL}{IMG_THC}<span class="forumlink">Chat</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
-<tr><th width="100%" colspan="3">{chat.view.TITLE}</th></tr>
+{IMG_THL}{IMG_THC}<span class="forumlink">Chat</span>{IMG_THR}<table class="forumlinenb">
+<tr><th colspan="3">{chat.view.TITLE}</th></tr>
 <tr>
-	<td class="row1" width="60%">
+	<td class="row1 tw60pct">
 	<form method="post" name="add_chat" action="activity_popup.php?mode=chat">
 		<input type="hidden" value="add" name="action">
 		<input type="text" value="" size="30" name="msg" class="post">
@@ -54,18 +54,18 @@
 	</td>
 </tr>
 {chat.view.CHAT}
-<tr><th width="100%" colspan="3">&nbsp;</th></tr>
+<tr><th colspan="3">&nbsp;</th></tr>
 </table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
 <!-- END view -->
 <!-- END chat -->
 <!-- BEGIN rate -->
 <!-- BEGIN main -->
 <form method="post" name="sub_rate" action="activity_popup.php?mode=rate">
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_RATE}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_RATE}</span>{IMG_THR}<table class="forumlinenb">
 <tr><th colspan="2" width="100%">{rate.main.TITLE}</th></tr>
 <tr>
 	<td class="row2" width="50%" nowrap="nowrap"><span class="post-text">{rate.main.CHOICES}</span></td>
-	<td align="center" valign="middle" width="50%" class="row2">
+	<td class="tdalignc tvalignm" width="50%" class="row2">
 		<select name="rating">
 			<option selected value="">{rate.main.DEFAULT_RATE}</option>
 			<option value="1">1</option>
@@ -95,7 +95,7 @@
 
 <!-- BEGIN comments -->
 <!-- BEGIN main -->
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_COMMENTS}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_COMMENTS}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
 	<th width="25%" align="center">{comments.main.MAIN_NAME}</th>
 		<th width="15%" align="center">{comments.main.MAIN_LEFT}</th>
@@ -122,16 +122,16 @@
 </tr>
 <!-- END comment -->
 <!-- BEGIN main -->
-<tr><th width="100%" colspan="5">&nbsp;</th></tr>
+<tr><th colspan="5">&nbsp;</th></tr>
 </table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
 <!-- END main -->
 
 
 	<!-- BEGIN post_comment -->
 <form method="post" action="{comments.post_comment.POST_LINK}">
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_COMMENTS}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
-<tr><th width="100%">{comments.post_comment.POST_TITLE}</th></tr>
-<tr><td align="center"><br />{comments.post_comment.POST_IMAGE}<br /><br /></td></tr>
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_COMMENTS}</span>{IMG_THR}<table class="forumlinenb">
+<tr><th class="tw100pct">{comments.post_comment.POST_TITLE}</th></tr>
+<tr><td class="tdalignc"><br />{comments.post_comment.POST_IMAGE}<br /><br /></td></tr>
 <tr>
 	<td class="row2 row-center">
 		<span class="genmed">
@@ -151,50 +151,50 @@
 <!-- END comments -->
 
 <!-- BEGIN challenge -->
-{IMG_THL}{IMG_THC}<span class="forumlink">{challenge.TITLE}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{challenge.TITLE}</span>{IMG_THR}<table class="forumlinenb">
 <tr><td class="row2 row-center" valign="top" width="100%"><div class="post-text">{challenge.MSG}</div></td></tr>
-<tr><th width="100%">&nbsp;</th></tr>
+<tr><th class="tw100pct">&nbsp;</th></tr>
 </table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
 <!-- END challenge -->
 
 <!-- BEGIN info -->
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_INFO}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
-<tr><th colspan="2" align="center">{info.L_TITLE}</th></tr>
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_INFO}</span>{IMG_THR}<table class="forumlinenb">
+<tr><th colspan="2">{info.L_TITLE}</th></tr>
 <tr>
 	<td class="row1 row-center" width="50%" ><img src ="./{info.PATH}/{info.NAME}.gif" align="middle"></td>
 	<td class="row1"><span class="gen">{info.DESC}</span></td>
 </tr>
 <tr>
-	<td class="row2" align="left"><span class="gen">{info.L_CATEGORY}</td>
+	<td class="row2"><span class="gen">{info.L_CATEGORY}</td>
 	<td class="row1"><span class="gen">{info.CATEGORY}</span></td>
 </tr>
 <tr>
-	<td class="row2" align="left"><span class="gen">{info.L_PLAYED}</span></td>
+	<td class="row2"><span class="gen">{info.L_PLAYED}</span></td>
 	<td class="row1"><span class="gen">{info.PLAYED}</span></td>
 </tr>
 <tr>
-	<td class="row2" align="left"><span class="gen">{info.L_COST}</span></td>
+	<td class="row2"><span class="gen">{info.L_COST}</span></td>
 	<td class="row1"><span class="gen">{info.COST}</span></td>
 </tr>
 <tr>
-	<td class="row2" align="left"><span class="gen">{info.L_BORROWED}</span></td>
+	<td class="row2"><span class="gen">{info.L_BORROWED}</span></td>
 	<td class="row1"><span class="gen">{info.BORROWED}</span></td>
 </tr>
 <tr>
-	<td class="row2" align="left"><span class="gen">{info.L_BONUS}</span></td>
+	<td class="row2"><span class="gen">{info.L_BONUS}</span></td>
 	<td class="row1"><span class="gen">{info.BONUS}</span></td>
 </tr>
 <tr>
-	<td class="row2" align="left"><span class="gen">{info.L_PLAYER}</span></td>
+	<td class="row2"><span class="gen">{info.L_PLAYER}</span></td>
 	<td class="row1"><span class="gen">{info.BEST_PLAYER}</span></td>
 </tr>
 <tr>
-	<td class="row2" align="left"><span class="gen">{info.L_SCORE}</span></td>
+	<td class="row2"><span class="gen">{info.L_SCORE}</span></td>
 	<td class="row1"><span class="gen">{info.BEST_SCORE}</span></td>
 </tr>
 <tr><th colspan="2">{info.L_TITLE_2}</th></tr>
 <tr><td class="row2" colspan="2"><span class="gen">{info.INSTRUCTIONS}</span></td></tr>
-<tr><th width="100%" colspan="2">&nbsp;</th></tr>
+<tr><th colspan="2">&nbsp;</th></tr>
 </table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
 <!-- END info -->
 

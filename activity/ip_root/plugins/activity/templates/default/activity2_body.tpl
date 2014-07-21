@@ -8,9 +8,9 @@
 	</div>
 </div>{IMG_TBR}
 </form>
-<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<table>
 <tr>
-	<td id="var_width" width="160" valign="top" align="left" style="padding-right:7px;">
+	<td id="var_width" class="tvalignt tdalignl tw160px" style="padding-right: 7px;">
 		<div id="quick_links_games2" style="padding-top: 5px; display: none; margin-left: 0px; text-align: left;position: relative;float: left;"><a href="javascript:ShowHide('quick_links_games','quick_links_games2','quick_links_games');setWidth('var_width',160);" title="{L_SHOW} {L_QUICK_LINKS_GAMES}"><img src="{IMG_NAV_MENU_APPLICATION}" alt="{L_SHOW} {L_QUICK_LINKS_GAMES}" /></a></div>
 		<div id="quick_links_games">
 <script type="text/javascript">
@@ -27,10 +27,10 @@ if(GetCookie(tmp) == '2')
 {IMG_THL}{IMG_THC}
 <!-- &nbsp;[<a href="javascript:ShowHide('quick_links_games','quick_links_games2','quick_links_games');setWidth('var_width',16);" title="{L_HIDE} {L_QUICK_LINKS_GAMES}">{L_HIDE}</a>] -->
 <img class="max-min-right" style="padding-top: 3px;" src="{IMG_MINIMISE}" onclick="ShowHide('quick_links_games','quick_links_games2','quick_links_games');setWidth('var_width',16);" alt="{L_SHOW}" />
-<span class="forumlink">{L_QUICK_LINKS_GAMES}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+<span class="forumlink">{L_QUICK_LINKS_GAMES}</span>{IMG_THR}<table class="forumlinenb">
 
 <tr>
-	<th style="cursor: pointer;" align="left" onclick="ShowHide('main_links_games','main_links_games2','main_links_games');">
+	<th style="cursor: pointer; text-align: left;" onclick="ShowHide('main_links_games','main_links_games2','main_links_games');">
 		<img src="{IMG_NAV_MENU_GAMES}" alt="{L_STATISTICS}" title="{L_STATISTICS}" />&nbsp;
 		<a href="#" onclick="return false;" title="{L_STATISTICS}" class="nav-menu-link"><b>{L_STATISTICS}</b></a>
 	</th>
@@ -38,13 +38,13 @@ if(GetCookie(tmp) == '2')
 <tr>
 	<td class="row5">
 		<div id="main_links_games2" class="nav-menu">
-			<table class="forumline-no2" width="100%" cellspacing="0" cellpadding="2" border="0">
+			<table class="forumline-no2 p2px">
 				<!-- BEGIN links_check -->
 				{links_check.LINKS}
 				<!-- END links_check -->
 				<tr>
-					<td align="left" width="8">{IMG_NAV_MENU_SEP}</td>
-					<td class="genmed" align="left"><a href="{RANDOM_GAME}">{RANDOM_LINK}</a></td>
+					<td class="tw8px">{IMG_NAV_MENU_SEP}</td>
+					<td class="genmed tdalignl"><a href="{RANDOM_GAME}">{RANDOM_LINK}</a></td>
 				</tr>
 			</table>
 		</div>
@@ -62,7 +62,7 @@ if(GetCookie(tmp) == '2')
 	</td>
 </tr>
 <tr>
-	<th style="cursor: pointer;" align="left" onclick="ShowHide('games_links','games_links2','games_links');">
+	<th style="cursor: pointer; text-align: left;" onclick="ShowHide('games_links','games_links2','games_links');">
 		<img src="{IMG_NAV_MENU_GAMES_ALT}" alt="{L_GAMES}" title="{L_GAMES}" />&nbsp;
 		<a href="#" onclick="return false;" title="{L_GAMES}" class="nav-menu-link"><b>{L_GAMES}</b></a>
 	</th>
@@ -70,9 +70,9 @@ if(GetCookie(tmp) == '2')
 <tr>
 	<td class="row5">
 		<div id="games_links2" class="nav-menu">
-			<table class="forumline-no2" width="100%" cellspacing="0" cellpadding="2" border="0">
+			<table class="forumline-no2 p2px">
 				<tr>
-					<td width="8" align="left" valign="middle">
+					<td class="tvalignm tdalignl tw8px">
 					<form action="{S_ACTION}">
 							<span class="genmed">
 							<select onchange="if(options[selectedIndex].value)window.location.href=(options[selectedIndex].value)">
@@ -87,7 +87,7 @@ if(GetCookie(tmp) == '2')
 					</td>
 				</tr>
 				<tr>
-					<td width="8" align="left" valign="middle">
+					<td class="tvalignm tdalignl tw8px">
 					<form action="{S_ACTION}">
 					<span class="genmed">
 						<select onchange="if(options[selectedIndex].value)window.location.href=(options[selectedIndex].value)">
@@ -121,7 +121,7 @@ if(GetCookie(tmp) == '2')
 </table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
 		</div>
 	</td>
-	<td valign="top">
+	<td>
 
 {ACTIVITY_INFO_SECTION}
 
@@ -131,12 +131,12 @@ if(GetCookie(tmp) == '2')
 
 <!-- BEGIN games_on -->
 <div id="games_h" style="display: none;">
-	{IMG_THL}{IMG_THC}<img class="max-min-right" style="padding-top: 3px;" src="{IMG_MAXIMISE}" onclick="ShowHide('games','games_h','games');" alt="{L_SHOW}" /><span class="forumlink">{L_GAMES}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+	{IMG_THL}{IMG_THC}<img class="max-min-right" style="padding-top: 3px;" src="{IMG_MAXIMISE}" onclick="ShowHide('games','games_h','games');" alt="{L_SHOW}" /><span class="forumlink">{L_GAMES}</span>{IMG_THR}<table class="forumlinenb">
 	<tr><td class="row1g row-center">&nbsp;</td></tr>
 	</table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
 </div>
 <div id="games">
-	{IMG_THL}{IMG_THC}<img class="max-min-right" style="padding-top: 3px;" src="{IMG_MINIMISE}" onclick="ShowHide('games','games_h','games');" alt="{L_HIDE}" /><span class="forumlink">{L_GAMES}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+	{IMG_THL}{IMG_THC}<img class="max-min-right" style="padding-top: 3px;" src="{IMG_MINIMISE}" onclick="ShowHide('games','games_h','games');" alt="{L_HIDE}" /><span class="forumlink">{L_GAMES}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
 	<th class="th" width="20%">{L_GAMES}</th>
 	<th class="th" width="15%">{L_T_HOLDER}</th>
@@ -202,10 +202,10 @@ if(GetCookie(tmp) == '2')
 </tr>
 </table>
 <!-- BEGIN games_on -->
-<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<table>
 <tr>
-	<td align="left"><span class="gen"><!-- IF PAGE_NUMBER -->{PAGE_NUMBER}<!-- ELSE -->&nbsp;<!-- ENDIF --></span></td>
-	<td align="right"><span class="pagination"><!-- IF PAGINATION -->{PAGINATION}<!-- ELSE -->&nbsp;<!-- ENDIF --></span></td>
+	<td><span class="gen"><!-- IF PAGE_NUMBER -->{PAGE_NUMBER}<!-- ELSE -->&nbsp;<!-- ENDIF --></span></td>
+	<td class="tdalignr"><span class="pagination"><!-- IF PAGINATION -->{PAGINATION}<!-- ELSE -->&nbsp;<!-- ENDIF --></span></td>
 </tr>
 </table>
 <!-- END games_on -->

@@ -24,7 +24,7 @@ function showfemalesedit()
 
 <!-- BEGIN create_char -->
 <form name="creation_page" method="post" action="activity_char.php">
-{IMG_THL}{IMG_THC}<span class="forumlink">{CHAR_OPTIONS}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{CHAR_OPTIONS}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
 	<th width="50%">{CHAR_OPTIONS_M}</th>
 	<th width="50%">{CHAR_OPTIONS_F}</th>
@@ -97,25 +97,25 @@ function showfemalesedit()
 <!-- END create_char -->
 
 <!-- BEGIN edit_char -->
-<table align="center" width="100%"><tr><td align="center" width="100%">{USERS}</td></tr></table>
+<table align="center" width="100%"><tr><td class="tw100pct tdalignc">{USERS}</td></tr></table>
 <!-- BEGIN view -->
 
-<table class="forumline" width="100%" cellspacing="0" cellpadding="0" border="0">
+<table class="forumline">
 <tr><td class="row3" width="100%"><span class="genmed">{edit_char.view.EDIT_EXP}</span></td></tr>
 </table>
 
-<table class="forumline" width="100%" cellspacing="0" cellpadding="0" border="0">
+<table class="forumline">
 <tr><td class="row3" width="100%"><span class="genmed">{edit_char.view.CHAR_PROFILE}</span></td></tr>
 </table>
 <!-- END view -->
 
 <!-- BEGIN edit -->
 <form name="edit_page" method="post" action="activity_char.php">
-<table class="forumline" width="100%" cellspacing="0" cellpadding="0" border="0">
+<table class="forumline">
 <tr><td class="row3" width="100%"><span class="genmed">{edit_char.edit.CHR_EDIT_EXP}</span></td></tr>
 </table>
-<table class="forumline" width="100%" cellspacing="0" cellpadding="0" border="0">
-<tr><th align="center" width="100%" colspan="2">{CHAR_OPTIONS}</th></tr>
+<table class="forumline">
+<tr><th colspan="2">{CHAR_OPTIONS}</th></tr>
 <tr>
 	<td class="row2 row-center" width="50%"><span class="genmed">{CHAR_OPTIONS_M}</span></td>
 	<td class="row2 row-center" width="50%"><span class="genmed">{CHAR_OPTIONS_F}</span></td>
@@ -214,8 +214,8 @@ function showfemalesedit()
 
 <!-- BEGIN profile_char -->
 <!-- BEGIN data -->
-<table width="100%" align="center" valign="top">
-<tr><td align="left" width="100%"><span class="genmed"><a href="{U_PORTAL}" class="nav">{L_HOME}</a> :: <a href="{U_ACTIVITY}" class="nav">{L_ACTIVITY}</a></span></td></tr>
+<table>
+<tr><td class="tw100pct"><span class="genmed"><a href="{U_PORTAL}" class="nav">{L_HOME}</a> :: <a href="{U_ACTIVITY}" class="nav">{L_ACTIVITY}</a></span></td></tr>
 </table>
 {profile_char.data.CHAR_PROFILE}
 <!-- END data -->

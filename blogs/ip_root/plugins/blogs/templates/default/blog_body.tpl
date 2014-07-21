@@ -2,8 +2,8 @@
 
 <!-- IF NO_BLOG_ARTICLES -->
 
-<br clear="all" />
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_BLOGS_PAGE}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+<br class="clear" />
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_BLOGS_PAGE}</span>{IMG_THR}<table class="forumlinenb">
 <tr><th>{L_MG_BLOGS}</th></tr>
 <tr><td class="row1 row-center">{L_NO_BLOG_ARTICLES}</td></tr>
 <tr><td class="cat">&nbsp;</td></tr>
@@ -11,9 +11,9 @@
 
 <!-- ELSE -->
 
-<!-- IF L_ITEM_TITLE --><br clear="all" /><div class="topic-title-hide-flow-header" style="text-align: left;"><h2><a href="{U_ITEM_TITLE}" style="text-decoration: none;">{L_ITEM_TITLE}</a></h2></div><br /><!-- ENDIF -->
+<!-- IF L_ITEM_TITLE --><br class="clear" /><div class="topic-title-hide-flow-header" style="text-align: left;"><h2><a href="{U_ITEM_TITLE}" style="text-decoration: none;">{L_ITEM_TITLE}</a></h2></div><br /><!-- ENDIF -->
 
-<br clear="all" />
+<br class="clear" />
 
 <!-- BEGIN articles -->
 <div class="forumlinenb" style="margin: 0 auto;">
@@ -21,12 +21,12 @@
 <div><!-- IF S_EDIT_ALLOWED --><span style="float: right; text-align: right;">{articles.S_EDIT}&nbsp;{articles.S_DELETE}</span><!-- ENDIF --><h3 style="line-height: 120%;"><a id="blt{articles.TOPIC_ID}" href="{articles.U_VIEW}" style="text-decoration: none;">{articles.TITLE}</a></h3></div>
 <div class="post-details" style="margin: 0px;">{articles.POSTED_BY}&nbsp;&bull;&nbsp;{L_BLOGS_POST_COMMENTS}&nbsp;{articles.COMMENTS}</div><br /><br />
 <div class="post-text">{articles.ARTICLE}</div>
-<br clear="all" /><br /><br />
+<br class="clear" /><br /><br />
 </div>
 </div>
 <!-- <div style="margin: 0 auto; padding-left: 60px; padding-right: 60px;"><hr /></div> -->
 
-<br clear="all" />
+<br class="clear" />
 <!-- END articles -->
 
 <!-- IF PAGINATION -->
@@ -44,7 +44,7 @@
 </div>
 <!-- ENDIF -->
 
-<br clear="all" />
+<br class="clear" />
 <br /><br />
 
 <!-- INCLUDE overall_footer.tpl -->

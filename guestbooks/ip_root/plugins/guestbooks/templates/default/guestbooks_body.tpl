@@ -8,8 +8,8 @@
 
 <!-- IF NO_GUESTBOOKS -->
 
-<br clear="all" />
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_GUESTBOOKS_PAGE}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+<br class="clear" />
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_GUESTBOOKS_PAGE}</span>{IMG_THR}<table class="forumlinenb">
 <tr><th>{L_MG_GUESTBOOKS}</th></tr>
 <tr><td class="row1 row-center">{L_NO_GUESTBOOKS}</td></tr>
 <tr><td class="cat">&nbsp;</td></tr>
@@ -23,11 +23,11 @@
 	{S_HIDDEN_FIELDS}<input type="submit" name="submit" value="{L_SUBMIT}" class="liteoption" />
 </div>
 </form>
-<br clear="all" />
+<br class="clear" />
 
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_PAGE_NAME}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_PAGE_NAME}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
-	<th width="30">#</th>
+	<th class="tw30px">#</th>
 	<th>{L_GUESTBOOKS_TITLE}</th>
 	<th>{L_GUESTBOOKS_STATUS}</th>
 	<th>{L_GUESTBOOKS_TIME_UPDATE}</th>
@@ -59,7 +59,7 @@
 </div>
 <!-- ENDIF -->
 
-<br clear="all" />
+<br class="clear" />
 <br /><br />
 
 <!-- ENDIF -->

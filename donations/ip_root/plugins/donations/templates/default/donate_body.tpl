@@ -4,7 +4,7 @@
 
 <form action="{S_DONATE_ACTION}" method="post" id="donate">
 
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_MG_DONATIONS}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_MG_DONATIONS}</span>{IMG_THR}<table class="forumlinenb">
 <tr><th>&nbsp;</th></tr>
 <tr>
 	<td class="row1">

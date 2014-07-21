@@ -12,7 +12,7 @@ function select_switch(status)
 </script>
 
 <form action="{S_MANAGE_ACTION}" method="post" name="create_dir">
-<table class="forumline" width="100%" cellspacing="0" cellpadding="0">
+<table class="forumline">
 <tr><th colspan="2">{L_DL_MANAGE}</th></tr>
 <tr>
 	<td class="row1" width="70%"><span class="gensmall">{L_DL_MANAGE_EXPLAIN}</span></td>
@@ -38,7 +38,7 @@ function select_switch(status)
 
 <br />
 
-<table class="forumline" width="100%" cellspacing="0" cellpadding="0">
+<table class="forumline">
 <tr><td class="row3" colspan="4"><span class="nav">{DL_NAVI}</span></td></tr>
 <!-- BEGIN dirs_row -->
 <tr>

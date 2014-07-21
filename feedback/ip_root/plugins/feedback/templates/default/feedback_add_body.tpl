@@ -1,7 +1,7 @@
 <!-- INCLUDE overall_header.tpl -->
 
 <form name="feedback_add" action="{S_FEEDBACK_ACTION}" method="post">
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_MG_FEEDBACK}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_MG_FEEDBACK}</span>{IMG_THR}<table class="forumlinenb">
 <tr><td class="row1" colspan="2"><span class="gen"><b>{L_FEEDBACK_RULES}</b></span></td></tr>
 <!-- IF S_ADMIN_ALLOWED -->
 <tr>
@@ -23,7 +23,7 @@
 <!-- ENDIF -->
 <tr>
 	<td class="row1"><span class="gen"><b>{L_FEEDBACK_TRANSACTION}</b></span></td>
-	<!-- <td class="row1"><input type="text" name="feedback_transaction" tabindex="2" class="post" style="text-align:left;" value="{TRANSACTION}" size="40" maxlength="255" /></td> -->
+	<!-- <td class="row1"><input type="text" name="feedback_transaction" tabindex="2" class="post" style="text-align: left;" value="{TRANSACTION}" size="40" maxlength="255" /></td> -->
 	<td class="row1">{TRANSACTION_SELECT}</td>
 </tr>
 <tr>

@@ -1,4 +1,4 @@
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_services_page_title}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_services_page_title}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
 	<th align="center" width="70%">{LEFT_TITLE}</th>
 	<th align="center" width="30%">{RIGHT_TITLE}</th>
@@ -117,5 +117,5 @@
 	<td class="row2"><span class="genmed">{L_ORDER}</span></td>
 	<td class="row2 row-center"><span class="genmed">{ORDER}</span></td>
 </tr>
-<tr><th width="100%" colspan="2">&nbsp;</th></tr>
+<tr><th colspan="2">&nbsp;</th></tr>
 </table>{IMG_TFL}{IMG_TFC}{IMG_TFR}

@@ -97,9 +97,9 @@ if ($_GET['mode'] == 'check_game_listing')
 		}
 	}
 
-	echo '<table width="100%" class="forumline" align="center">';
+	echo '<table class="forumline">';
 	echo '	<tr>';
-	echo '		<th width="100%">';
+	echo '		<th>';
 	echo			 $match;
 	echo '		</th>';
 	echo '	</tr>';
@@ -110,7 +110,7 @@ if ($_GET['mode'] == 'check_game_listing')
 		{
 			$row_class = ip_zebra_rows($row_class);
 			echo '	<tr>';
-			echo '		<td align="left" width="100%" class="'. $row_class .'">';
+			echo '		<td class="'. $row_class .'">';
 			echo 			$match_array[$x];
 			echo '		</td>';
 			echo '	</tr>';
@@ -119,13 +119,13 @@ if ($_GET['mode'] == 'check_game_listing')
 	else
 	{
 		echo '	<tr>';
-		echo '		<td align="left" width="100%" class="row2">';
+		echo '		<td class="row2">';
 		echo '			No matches.';
 		echo '		</td>';
 		echo '	</tr>';
 	}
 	echo '	<tr>';
-	echo '		<th width="100%">';
+	echo '		<th>';
 	echo 			$not_listed;
 	echo '		</th>';
 	echo '	</tr>';
@@ -136,7 +136,7 @@ if ($_GET['mode'] == 'check_game_listing')
 		{
 			$row_class = ip_zebra_rows($row_class);
 			echo '	<tr>';
-			echo '		<td align="left" width="100%" class="' . $row_class .'">';
+			echo '		<td class="' . $row_class .'">';
 			echo 			$mis_match_array[$x];
 			echo '		</td>';
 			echo '	</tr>';
@@ -145,13 +145,13 @@ if ($_GET['mode'] == 'check_game_listing')
 	else
 	{
 		echo '	<tr>';
-		echo '		<td align="left" width="100%" class="row2">';
+		echo '		<td class="row2">';
 		echo '			No matches.';
 		echo '		</td>';
 		echo '	</tr>';
 	}
 	echo '	<tr>';
-	echo '		<th width="100%">';
+	echo '		<th class="tw100pct">';
 	echo			 $mis_match;
 	echo '		</th>';
 	echo '	</tr>';
@@ -162,7 +162,7 @@ if ($_GET['mode'] == 'check_game_listing')
 		{
 			$row_class = ip_zebra_rows($row_class);
 			echo '	<tr>';
-			echo '		<td class="' . $row_class .'" width="100%">';
+			echo '		<td class="' . $row_class .'">';
 			echo			 $not_listed_array[$x];
 			echo '		</td>';
 			echo '	</tr>';
@@ -171,7 +171,7 @@ if ($_GET['mode'] == 'check_game_listing')
 	else
 	{
 		echo '	<tr>';
-		echo '		<td class="row2" width="100%">';
+		echo '		<td class="row2">';
 		echo '			No matches.';
 		echo '		</td>';
 		echo '	</tr>';
@@ -187,7 +187,7 @@ if ($_GET['mode'] == 'check_game_listing')
 
 if (($mode == 'main') || !$mode)
 		{
-	echo "<table class=\"forumline\" width=\"100%\" cellspacing=\"0\" border=\"0\">";
+	echo "<table class=\"forumline\">";
 	echo "	<tr>";
 	echo "		<th colspan=\"2\">";
 	echo "			". $lang['activity_xtras'];
@@ -195,9 +195,9 @@ if (($mode == 'main') || !$mode)
 	echo "	</tr>";
 	echo "</table>";
 	echo "<br /><br />";
-	echo "<table class=\"forumline\" width=\"100%\" cellspacing=\"0\" border=\"0\">";
+	echo "<table class=\"forumline\">";
 	echo "	<tr>";
-	echo "		<td class=\"row2 row-center\" width=\"100%\" valign=\"top\">";
+	echo "		<td class=\"row2 row-center\">";
 	echo "			<span class=\"genmed\">";
 	echo "				". $lang['admin_xtras_game_link_msg'];
 	echo "			</span>";
@@ -206,14 +206,14 @@ if (($mode == 'main') || !$mode)
 	echo "</table>";
 	echo "<br />";
 /* Deletion */
-	echo "<table class=\"forumline\" width=\"100%\" cellspacing=\"0\" border=\"0\">";
+	echo "<table class=\"forumline\">";
 	echo "	<tr>";
 	echo "		<th colspan=\"2\">";
 	echo "				". $lang['auto_delete'];
 	echo "		</th>";
 	echo "	</tr>";
 	echo "</table>";
-	echo "<table class=\"forumline\" width=\"100%\" cellspacing=\"0\" border=\"0\">";
+	echo "<table class=\"forumline\">";
 	echo "<form name='adjust' action=\"$link\" method=\"post\">";
 
 	$auto_status = $config['ina_delete'];
@@ -229,7 +229,7 @@ if (($mode == 'main') || !$mode)
 	$off = "checked='checked'";
 		}
 
-	echo "<table class=\"forumline\" width=\"100%\" cellspacing=\"0\" border=\"0\">";
+	echo "<table class=\"forumline\">";
 	echo "	<tr>";
 	echo "		<td class=\"row2 row-center\" width=\"50%\" valign=\"top\">";
 	echo "			<span class=\"genmed\">";
@@ -256,7 +256,7 @@ if (($mode == 'main') || !$mode)
 	echo "</table>";
 	echo "</form>";
 	echo "<br />";
-	echo "<table class=\"forumline\" width=\"100%\" cellspacing=\"0\" border=\"0\">";
+	echo "<table class=\"forumline\">";
 	echo "	<tr>";
 	echo "		<th colspan=\"2\">";
 	echo "				". $lang['bug_fixers'];
@@ -264,7 +264,7 @@ if (($mode == 'main') || !$mode)
 	echo "	</tr>";
 	echo "</table>";
 /* Delete All Scores */
-	echo "<table class=\"forumline\" width=\"100%\" cellspacing=\"0\" border=\"0\">";
+	echo "<table class=\"forumline\">";
 	echo "<form name='truncate_scores' action='admin_activity." . PHP_EXT . "?sid=". $user->data['session_id'] ."' method=\"post\">";
 	echo "	<tr>";
 	echo "		<td class=\"row2\" width=\"50%\" valign=\"top\">";
@@ -284,7 +284,7 @@ if (($mode == 'main') || !$mode)
 	echo "</form>";
 	echo '<br />';
 /* Hall Of Fame */
-	echo "<table class=\"forumline\" width=\"100%\" cellspacing=\"0\" border=\"0\">";
+	echo "<table class=\"forumline\">";
 	echo "<form name='phof' action=\"$link\" method=\"post\">";
 	echo "	<tr>";
 	echo "		<td class=\"row2\" width=\"50%\" valign=\"top\">";
@@ -299,7 +299,7 @@ if (($mode == 'main') || !$mode)
 	echo "	</tr>";
 	echo "</form>";
 /* Re-Sync */
-	echo "<table class=\"forumline\" width=\"100%\" cellspacing=\"0\" border=\"0\">";
+	echo "<table class=\"forumline\">";
 	echo "<form name='resync' action=\"$link\" method=\"post\">";
 	echo "	<tr>";
 	echo "		<td class=\"row2\" width=\"50%\" valign=\"top\">";
@@ -382,7 +382,7 @@ if (($mode == 'main') || !$mode)
 	echo "<br /><br />";
 /* Config Values */
 	echo "<form name='config' action=\"$link\" method=\"post\">";
-	echo "<table class=\"forumline\" width=\"100%\" cellspacing=\"0\" border=\"0\">";
+	echo "<table class=\"forumline\">";
 	echo "	<tr>";
 	echo "		<th colspan=\"2\">";
 	echo "				". $lang['extra_config_values'];
@@ -390,7 +390,7 @@ if (($mode == 'main') || !$mode)
 	echo "	</tr>";
 	echo "</table>";
 
-	echo "<table class=\"forumline\" width=\"100%\" cellspacing=\"0\" border=\"0\">";
+	echo "<table class=\"forumline\">";
 	echo "	<tr>";
 	echo "		<td class=\"row2\" width=\"50%\" valign=\"top\">";
 	echo "			<span class=\"genmed\">";
@@ -922,7 +922,7 @@ if (($mode == 'main') || !$mode)
 	echo "	</tr>";
 	echo "</table>";
 /* Toggle Values */
-	echo "<table class=\"forumline\" width=\"100%\" cellspacing=\"0\" border=\"0\">";
+	echo "<table class=\"forumline\">";
 	echo "	<tr>";
 	echo "		<th colspan=\"2\">";
 	echo "				". $lang['extra_toggle_values'];
@@ -930,7 +930,7 @@ if (($mode == 'main') || !$mode)
 	echo "	</tr>";
 	echo "</table>";
 
-	echo "<table class=\"forumline\" width=\"100%\" cellspacing=\"0\" border=\"0\">";
+	echo "<table class=\"forumline\">";
 	echo "	<tr>";
 	echo "		<td width='50%' align='center' valign='top' class='row2'>";
 

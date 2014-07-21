@@ -39,11 +39,11 @@ window.status = "{BEST_USER_SCORE}";
 		&nbsp;
 	</div>
 </div>
-<table class="forumline" width="100%" cellspacing="0" cellpadding="0" border="0">
+<table class="forumline">
 <tr><td class="row-header"><span>{L_GAME}</span></td></tr>
 <tr>
 	<td>
-		<table width="760" align="center" cellspacing="0" cellpadding="0" border="0">
+		<table class="talignc tw760px">
 		<tr>
 			<td width="565" valign="top">
 				<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=5,0,0,0" id="inetangel" name="activitygame" width="{WIDTH}" height="{HEIGHT}">
@@ -54,7 +54,7 @@ window.status = "{BEST_USER_SCORE}";
 				</object>
 			</td>
 			<td width="190" valign="top">
-				<table class="forumline" width="180" align="center" cellspacing="0" cellpadding="0" border="0">
+				<table class="forumline tw200px">
 				<tr><th colspan="2"><img src="{T_IMAGE}" alt="" />&nbsp;&nbsp;{T_HOLDER}&nbsp;&nbsp;<img src="{T_IMAGE}" alt="" /></th></tr>
 				<tr><td class="spaceRow" colspan="2"><img src="{SPACER}" height="3" alt="" /></td></tr>
 				<tr><td class="row1 row-center"><span class="gensmall"><b>{T_HOLDER_1}</b></span></td></tr>
@@ -71,7 +71,7 @@ window.status = "{BEST_USER_SCORE}";
 				<tr><td class="row1 row-center"><b>{U_PLAY_POPUP}</b></td></tr>
 				</table>
 				<br /><br />
-				<table class="forumline" width="180" align="center" cellspacing="0" cellpadding="0" border="0">
+				<table class="forumline tw200px">
 				<tr><th colspan="2" align="center" valign="middle">{R_TITLE}</th></tr>
 				<tr><td class="spaceRow" colspan="2"><img src="{SPACER}" height="3" alt="" /></td></tr>
 				<!-- BEGIN runner -->

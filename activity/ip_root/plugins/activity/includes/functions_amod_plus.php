@@ -545,39 +545,39 @@ function SetHeaderLinks()
 	$links = '';
 
 	if (!$config['ina_disable_trophy_page'])
-		$links .= '<tr><td width="8" align="left" valign="middle"><img src="' . $images['menu_sep'] . '" alt="" /></td>
-					<td class="genmed" align="left"><a href="activity.' . PHP_EXT . '?page=trophy">' . $lang['trophy_page'] . '</a></td></tr>';
+		$links .= '<tr><td class="tvalignm tdalignl tw8px"><img src="' . $images['menu_sep'] . '" alt="" /></td>
+					<td class="genmed tdalignl"><a href="activity.' . PHP_EXT . '?page=trophy">' . $lang['trophy_page'] . '</a></td></tr>';
 	if (!$config['ina_disable_challenges_page'])
-		$links .= '<tr><td width="8" align="left" valign="middle"><img src="' . $images['menu_sep'] . '" alt="" /></td>
-					<td class="genmed" align="left"><a href="activity.' . PHP_EXT . '?page=challenges">' . $lang['challenge_Link'] . '</a></td></tr>';
+		$links .= '<tr><td class="tvalignm tdalignl tw8px"><img src="' . $images['menu_sep'] . '" alt="" /></td>
+					<td class="genmed tdalignl"><a href="activity.' . PHP_EXT . '?page=challenges">' . $lang['challenge_Link'] . '</a></td></tr>';
 	if (!$config['ina_disable_gamble_page'])
-		$links .= '<tr><td width="8" align="left" valign="middle"><img src="' . $images['menu_sep'] . '" alt="" /></td>
-					<td class="genmed" align="left"><a href="activity.' . PHP_EXT . '?page=gambling">' . $lang['gambling_link_2'] . '</a></td>
+		$links .= '<tr><td class="tvalignm tdalignl tw8px"><img src="' . $images['menu_sep'] . '" alt="" /></td>
+					<td class="genmed tdalignl"><a href="activity.' . PHP_EXT . '?page=gambling">' . $lang['gambling_link_2'] . '</a></td>
 						</tr>';
 	if (!$config['ina_disable_top5_page'])
-		$links .= '<tr><td width="8" align="left" valign="middle"><img src="' . $images['menu_sep'] . '" alt="" /></td>
-					<td class="genmed" align="left"><a href="activity.' . PHP_EXT . '?page=top">' . $lang['top_five_10'] . '</a></td></tr>';
+		$links .= '<tr><td class="tvalignm tdalignl tw8px"><img src="' . $images['menu_sep'] . '" alt="" /></td>
+					<td class="genmed tdalignl"><a href="activity.' . PHP_EXT . '?page=top">' . $lang['top_five_10'] . '</a></td></tr>';
 	if ($user->data['user_level'] == ADMIN)
 		{
-	$links = '<tr><td width="8" align="left" valign="middle"><img src="' . $images['menu_sep'] . '" alt="" /></td>
-				<td class="genmed" align="left"><a href="activity.' . PHP_EXT . '?page=trophy">' . $lang['trophy_page'] . '</a></td></tr>
-				<tr><td width="8" align="left" valign="middle"><img src="' . $images['menu_sep'] . '" alt="" /></td>
-				<td class="genmed" align="left"><a href="activity.' . PHP_EXT . '?page=challenges">' . $lang['challenge_Link'] . '</a></td></tr>
-				<tr><td width="8" align="left" valign="middle"><img src="' . $images['menu_sep'] . '" alt="" /></td>
-				<td class="genmed" align="left"><a href="activity.' . PHP_EXT . '?page=gambling">' . $lang['gambling_link_2'] . '</a></td></tr>
-				<tr><td width="8" align="left" valign="middle"><img src="' . $images['menu_sep'] . '" alt="" /></td>
-				<td class="genmed" align="left"><a href="activity.' . PHP_EXT . '?page=top">' . $lang['top_five_10'] . '</a></td></tr>';
+	$links = '<tr><td class="tvalignm tdalignl tw8px"><img src="' . $images['menu_sep'] . '" alt="" /></td>
+				<td class="genmed tdalignl"><a href="activity.' . PHP_EXT . '?page=trophy">' . $lang['trophy_page'] . '</a></td></tr>
+				<tr><td class="tvalignm tdalignl tw8px"><img src="' . $images['menu_sep'] . '" alt="" /></td>
+				<td class="genmed tdalignl"><a href="activity.' . PHP_EXT . '?page=challenges">' . $lang['challenge_Link'] . '</a></td></tr>
+				<tr><td class="tvalignm tdalignl tw8px"><img src="' . $images['menu_sep'] . '" alt="" /></td>
+				<td class="genmed tdalignl"><a href="activity.' . PHP_EXT . '?page=gambling">' . $lang['gambling_link_2'] . '</a></td></tr>
+				<tr><td class="tvalignm tdalignl tw8px"><img src="' . $images['menu_sep'] . '" alt="" /></td>
+				<td class="genmed tdalignl"><a href="activity.' . PHP_EXT . '?page=top">' . $lang['top_five_10'] . '</a></td></tr>';
 		}
-	$links .= '<tr><td width="8" align="left" valign="middle"><img src="' . $images['menu_sep'] . '" alt="" /></td>
-				<td class="genmed" align="left"><a href="activity.' . PHP_EXT . '?page=search">' . $lang['search_link'] . '</a></td></tr>';
-	$links .= '<tr><td width="8" align="left" valign="middle"><img src="' . $images['menu_sep'] . '" alt="" /></td>
-				<td class="genmed" align="left"><a href="activity.' . PHP_EXT . '?page=services">' . $lang['services_page_title'] . '</a></td></tr>';
-	$links .= '<tr><td width="8" align="left" valign="middle"><img src="' . $images['menu_sep'] . '" alt="" /></td>
-				<td class="genmed" align="left"><a href="activity.' . PHP_EXT . '?page=hof">' . $lang['hof_link'] . '</a></td></tr>';
-	$links .= '<tr><td width="8" align="left" valign="middle"><img src="' . $images['menu_sep'] . '" alt="" /></td>
-				<td class="genmed" align="left"><a href="activity.' . PHP_EXT . '?page=settings">' . $lang['games_settings_link'] . '</a></td></tr>';
-	$links .= '<tr><td width="8" align="left" valign="middle"><img src="' . $images['menu_sep'] . '" alt="" /></td>
-				<td class="genmed" align="left"><a href="activity_char.' . PHP_EXT . '">' . $lang['amp_char_link_back'] . '</a></td></tr>';
+	$links .= '<tr><td class="tvalignm tdalignl tw8px"><img src="' . $images['menu_sep'] . '" alt="" /></td>
+				<td class="genmed tdalignl"><a href="activity.' . PHP_EXT . '?page=search">' . $lang['search_link'] . '</a></td></tr>';
+	$links .= '<tr><td class="tvalignm tdalignl tw8px"><img src="' . $images['menu_sep'] . '" alt="" /></td>
+				<td class="genmed tdalignl"><a href="activity.' . PHP_EXT . '?page=services">' . $lang['services_page_title'] . '</a></td></tr>';
+	$links .= '<tr><td class="tvalignm tdalignl tw8px"><img src="' . $images['menu_sep'] . '" alt="" /></td>
+				<td class="genmed tdalignl"><a href="activity.' . PHP_EXT . '?page=hof">' . $lang['hof_link'] . '</a></td></tr>';
+	$links .= '<tr><td class="tvalignm tdalignl tw8px"><img src="' . $images['menu_sep'] . '" alt="" /></td>
+				<td class="genmed tdalignl"><a href="activity.' . PHP_EXT . '?page=settings">' . $lang['games_settings_link'] . '</a></td></tr>';
+	$links .= '<tr><td class="tvalignm tdalignl tw8px"><img src="' . $images['menu_sep'] . '" alt="" /></td>
+				<td class="genmed tdalignl"><a href="activity_char.' . PHP_EXT . '">' . $lang['amp_char_link_back'] . '</a></td></tr>';
 	return $links;
 }
 

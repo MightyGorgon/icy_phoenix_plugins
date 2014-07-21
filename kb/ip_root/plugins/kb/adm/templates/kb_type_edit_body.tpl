@@ -2,7 +2,7 @@
 <p>{L_EDIT_DESCRIPTION}</p>
 
 <form action="{S_ACTION}" method="post">
-<table class="forumline" width="100%" cellspacing="0" cellpadding="0" border="0">
+<table class="forumline">
 <tr><th colspan="2">{L_CAT_SETTINGS}</th></tr>
 <tr>
 	<td class="row1">{L_CATEGORY}</td>
@@ -22,7 +22,7 @@
 	</select>
 </tr>
 <tr>
-	<td class="row1" width="50%">{L_FORUM_ID}<br /><span class="gensmall">{L_FORUM_ID_EXPLAIN}</span></td>
+	<td class="row1 tw50pct">{L_FORUM_ID}<br /><span class="gensmall">{L_FORUM_ID_EXPLAIN}</span></td>
 	<td class="row2" width="50%">{FORUM_LIST}</td>
 </tr>
 <!-- BEGIN switch_edit_category -->
@@ -32,7 +32,7 @@
 </tr>
 <!-- END switch_edit_category -->
 <!-- END switch_cat -->
-<tr><td class="cat" colspan="2" align="center">{S_HIDDEN}<input type="submit" name="submit" value="{L_CREATE}" class="mainoption" /></td></tr>
+<tr><td class="cat tdalignc" colspan="2">{S_HIDDEN}<input type="submit" name="submit" value="{L_CREATE}" class="mainoption" /></td></tr>
 </table>
 </form>
 

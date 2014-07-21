@@ -1,13 +1,13 @@
 <!-- BEGIN cat_rule -->
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_BOARDRULES}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_BOARDRULES}</span>{IMG_THR}<table class="forumlinenb">
 <tr><td class="row1"><br /><div class="post-text">{cat_rule.CAT_RULE}</div><br /></td></tr>
 </table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
 <br />
 <!-- END cat_rule -->
 
 <form action="{U_DL_TOP}" method="post" name="dl_mod">
-<div width="100%" style="text-align:left;">
-	<div style="float:right;text-align:right;">
+<div width="100%" style="text-align: left;">
+	<div style="float: right; text-align: right;">
 		<!-- BEGIN sort_options -->
 		<span class="genmed">{L_SORT_BY}&nbsp;{S_SORT_BY}&nbsp;&nbsp;&nbsp;{L_ORDER}&nbsp;{S_ORDER}</span>&nbsp;
 		<input type="submit" class="liteoption" value="{L_GO}" />
@@ -17,17 +17,17 @@
 </div>
 {SUBCAT_BOX}
 <!-- BEGIN download_rows -->
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_DOWNLOADS}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_DOWNLOADS}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
 	<th>{L_INFO}</th>
 	<th>{L_NAME}</th>
 	<th>{L_DESCRIPTION}</th>
 	<th>{L_SIZE}</th>
-	<th nowrap="nowrap">{L_KL_M_T}</th>
+	<th class="tdnw">{L_KL_M_T}</th>
 	<!-- BEGIN comment_header -->
 	<th >{download_rows.comment_header.L_COMMENTS}</th>
 	<!-- END comment_header -->
-	<th nowrap="nowrap">{L_RATING}</th>
+	<th class="tdnw">{L_RATING}</th>
 </tr>
 <!-- END download_rows -->
 <!-- BEGIN downloads -->
@@ -43,7 +43,7 @@
 	</span></td>
 	<!-- END comments -->
 	<td class="{downloads.ROW_CLASS} row-center" nowrap="nowrap">
-		<table width="100%" cellspacing="0" cellpadding="0" border="0">
+		<table>
 		<tr><td align="center" nowrap="nowrap">{downloads.RATING_IMG}&nbsp;<span class="postdetails">{downloads.RATINGS}</span></td></tr>
 		<tr><td align="center" nowrap="nowrap"><span class="postdetails">[&nbsp;<a href="{downloads.U_RATING}" class="gensmall">{downloads.L_RATING}</a>&nbsp;]</span></td></tr>
 		</table>
@@ -53,10 +53,10 @@
 <!-- BEGIN download_rows -->
 <tr>
 	<td class="cat" colspan="{COL_WIDTH}">
-		<table width="100%" cellspacing="0" cellpadding="0" border="0">
+		<table>
 		<tr>
 			<td><span class="gen">{PAGE_NUMBER}</span></td>
-			<td align="right"><span class="pagination">{PAGINATION}</span></td>
+			<td class="tdalignr"><span class="pagination">{PAGINATION}</span></td>
 		</tr>
 		</table>
 	</td>

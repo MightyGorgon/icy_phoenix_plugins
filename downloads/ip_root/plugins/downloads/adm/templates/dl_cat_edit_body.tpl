@@ -1,5 +1,5 @@
 <form action="{S_CATEGORY_ACTION}" method="post" name="dl_edit_cat">
-<table class="forumline" width="100%" cellspacing="0" cellpadding="0">
+<table class="forumline">
 <tr><th colspan="3">{L_DL_CAT_TITLE} :: {L_DL_CAT_MODE}</th></tr>
 <tr>
 	<td class="row1" width="49%"><span class="genmed"><strong>{L_DL_NAME}:</strong></span></td>
@@ -102,7 +102,7 @@
 <tr><td class="cat" colspan="6"><input type="submit" name="save_cat" value="{L_SUBMIT}" class="mainoption" />&nbsp;&nbsp;&nbsp;<input type="reset" name="reset" value="{L_RESET}" class="liteoption" /></td></tr>
 </table>
 
-<table class="forumline" width="100%" cellspacing="0" cellpadding="0">
+<table class="forumline">
 <tr><th colspan="6">{L_PERMISSIONS_ALL}</th></tr>
 <tr>
 	<td class="row1 row-center" width="15%"><span class="nav"><strong>{L_AUTH_VIEW}</strong></span></td>
@@ -124,7 +124,7 @@
 </table>
 
 <!-- BEGIN group_block -->
-<table class="forumline" width="100%" cellspacing="0" cellpadding="0">
+<table class="forumline">
 <tr><th colspan="5">{L_PERMISSIONS}</th></tr>
 <tr>
 	<td class="row3 row-center"><span class="genmed"><strong>{L_GROUP}</strong></span></td>
@@ -135,7 +135,7 @@
 </tr>
 <!-- BEGIN group_row -->
 <tr>
-	<td class="row1" width="20%"><span class="nav"><strong>{group_block.group_row.GROUP_NAME}</strong></span></td>
+	<td class="row1 tw20pct"><span class="nav"><strong>{group_block.group_row.GROUP_NAME}</strong></span></td>
 	<td class="row2 row-center"><input name="auth_view_set[{group_block.group_row.GROUP_ID}]" type="checkbox" value="1" {group_block.group_row.AUTH_VIEW_GROUP} /></td>
 	<td class="row1 row-center"><input name="auth_dl_set[{group_block.group_row.GROUP_ID}]" type="checkbox" value="1" {group_block.group_row.AUTH_DL_GROUP} /></td>
 	<td class="row2 row-center"><input name="auth_up_set[{group_block.group_row.GROUP_ID}]" type="checkbox" value="1" {group_block.group_row.AUTH_UP_GROUP} /></td>

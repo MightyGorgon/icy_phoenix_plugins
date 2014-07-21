@@ -1,4 +1,4 @@
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_BUG_TRACKER}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_BUG_TRACKER}</span>{IMG_THR}<table class="forumlinenb">
 <!-- BEGIN bug_tracker_list_head -->
 <tr>
 	<th colspan="2">{L_REPORT_TITLE}</th>
@@ -66,9 +66,9 @@
 <tr><td class="cat" {SPANINC} align="center">&nbsp;</td></tr>
 </table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
 
-<table width="100%" cellpadding="2" cellspacing="1" border="0">
+<table class="p2px">
 <tr>
-	<td align="center">
+	<td class="tdalignc">
 		<form action="{S_FORM_ACTION}" method="post" name="filter_report">
 		<table cellpadding="2" cellspacing="1" border="0" align="center">
 		<tr><td>{S_SELECT_FILTER}&nbsp;<input type="submit" name="submit" value="{L_REPORT_FILTER}" class="liteoption" /></td></tr>
@@ -76,7 +76,7 @@
 		</form>
 	</td>
 	<!-- BEGIN own_report -->
-	<td align="center">
+	<td class="tdalignc">
 
 		<form action="{S_FORM_OWN_ACTION}" method="post" name="filter_own_report">
 		<table cellpadding="2" cellspacing="1" border="0" align="center">
@@ -88,7 +88,7 @@
 	</td>
 	<!-- END own_report -->
 	<!-- BEGIN assign_report -->
-	<td align="center">
+	<td class="tdalignc">
 
 		<form action="{S_FORM_ASSIGN_ACTION}" method="post" name="filter_assign_report">
 		<table cellpadding="2" cellspacing="1" border="0" align="center">
@@ -98,7 +98,7 @@
 	</td>
 	<!-- END assign_report -->
 	<!-- BEGIN add_new_report -->
-	<td align="center">
+	<td class="tdalignc">
 
 		<form action="{S_FORM_ACTION}" method="post" name="add_new_report">
 		<table cellpadding="2" cellspacing="1" border="0" align="center">

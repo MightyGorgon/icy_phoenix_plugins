@@ -1,16 +1,16 @@
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_BUG_TRACKER}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_BUG_TRACKER}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
-	<td width="80%" valign="top">
-		<table width="100%" cellpadding="2" cellspacing="1" border="0">
+	<td class="tvalignm tw80pct">
+		<table class="p2px">
 		<tr><td class="row2"><span class="genmed">{L_REPORT_TITLE}:</span><br /><span class="topiclink">{REPORT_TITLE}</span></td></tr>
 		</table>
 		<br />
-		<table width="100%" cellpadding="2" cellspacing="1" border="0">
+		<table class="p2px">
 		<tr><td class="row1"><span class="genmed">{L_REPORT_TEXT}:</span><hr /><span class="postbody">{REPORT_TEXT}</span></td></tr>
 		</table>
 	</td>
-	<td width="20%" valign="top">
-		<table width="100%" cellpadding="2" cellspacing="1" border="0">
+	<td class="tvalignm tw20pct">
+		<table class="p2px">
 		<tr><td class="row1"><span class="genmed"><b>{L_REPORT_ID}:</b><br />{REPORT_ID}</span></td></tr>
 		<tr><td class="row1"><span class="genmed"><b>{L_REPORT_FILE}:</b><br /><a href="{U_DOWNLOAD_FILE}" class="genmed" target="_blank">{REPORT_FILE}</a></span></td></tr>
 		<tr><td class="row1"><span class="genmed"><b>{L_REPORT_FILE_VER}:</b><br />{REPORT_FILE_VER}</span></td></tr>
@@ -18,19 +18,19 @@
 		<tr><td class="row1"><span class="genmed"><b>{L_REPORT_AUTHOR}:</b><br /><a href="{U_AUTHOR_LINK}" class="genmed" target="_blank">{REPORT_AUTHOR}</a></span></td></tr>
 		</table>
 		<br />
-		<table width="100%" cellpadding="2" cellspacing="1" border="0">
+		<table class="p2px">
 		<tr><td class="row1"><span class="genmed"><b>{L_REPORT_PHP}:</b><br />{REPORT_PHP}</span></td></tr>
 		<tr><td class="row1"><span class="genmed"><b>{L_REPORT_DB}:</b><br />{REPORT_DB}</span></td></tr>
 		<tr><td class="row1"><span class="genmed"><b>{L_REPORT_FORUM}:</b><br />{REPORT_FORUM}</span></td></tr>
 		</table>
 		<br />
-		<table width="100%" cellpadding="2" cellspacing="1" border="0">
+		<table class="p2px">
 		<tr><td class="row1"><span class="genmed"><b>{L_STATUS}:</b><br />{REPORT_STATUS}</span></td></tr>
 		<tr><td class="row1"><span class="genmed"><b>{L_STATUS_DATE}:</b><br />{STATUS_DATE}</span></td></tr>
 		</table>
 		<br />
 		<form action="{S_FORM_ASSIGN_ACTION}" name="assign_user" method="post">
-		<table width="100%" cellpadding="2" cellspacing="1" border="0">
+		<table class="p2px">
 		<!-- BEGIN assign -->
 		<tr>
 			<td class="row1"><span class="genmed"><b>{assign.L_ASSIGN_TO}:</b><br />{assign.U_ASSIGN_TO}</span></td>
@@ -46,7 +46,7 @@
 		</table>
 		</form>
 		<!-- BEGIN delete -->
-		<table width="100%" cellpadding="2" cellspacing="1" border="0">
+		<table class="p2px">
 		<tr><td class="row1"><a href="{delete.U_DELETE}" class="genmed">{delete.L_DELETE}</a></td></tr>
 		</table>
 		<!-- END delete -->
@@ -59,11 +59,11 @@
 
 <!-- BEGIN status_select -->
 <form action="{status_select.S_FORM_STATUS_ACTION}" method="post" name="status_change">
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_STATUS}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_STATUS}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
 	<td width="95%" align="center">
-		<table width="100%" cellpadding="3" cellspacing="1" border="0">
-		<tr><td class="cat" align="center" colspan="2"><span class="nav">{L_STATUS}</span></td></tr>
+		<table>
+		<tr><td class="cat tdalignc" colspan="2"><span class="nav">{L_STATUS}</span></td></tr>
 		<tr>
 			<td class="row1" width="20%" valign="top"><span class="genmed">{L_STATUS}: </span>{status_select.S_SELECT_STATUS}<br /><br /><input type="submit" name="submit" value="{L_STATUS_UPDATE}" class="liteoption" /></td>
 			<td class="row2" width="80%"><span class="genmed">{L_STATUS_TEXT}:</span><br /><textarea cols="75" rows="3" class="post" name="new_status_text"></textarea></td>
@@ -77,11 +77,11 @@
 <!-- END status_select -->
 
 <!-- BEGIN history -->
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_REPORT_TITLE}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_REPORT_TITLE}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
 	<td width="95%" align="center">
-		<table width="100%" cellpadding="3" cellspacing="1" border="0">
-		<tr><td class="cat" align="center" colspan="2"><span class="nav">{history.L_REPORT_HISTORY}</span></td></tr>
+		<table>
+		<tr><td class="cat tdalignc" colspan="2"><span class="nav">{history.L_REPORT_HISTORY}</span></td></tr>
 		<!-- BEGIN history_row -->
 		<tr>
 			<td class="row1" width="20%" valign="top"><span class="nav">{history.history_row.VALUE}</span><br /><span class="gensmall">{history.history_row.DATE}</span></td>

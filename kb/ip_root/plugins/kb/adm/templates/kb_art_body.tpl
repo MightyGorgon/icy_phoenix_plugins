@@ -1,14 +1,14 @@
 <h1>{L_KB_ART_TITLE}</h1>
 <p>{L_KB_ART_DESCRIPTION}</p>
 
-<table class="forumline" width="100%" cellspacing="0" cellpadding="0" border="0">
+<table class="forumline">
 <tr><th colspan="5"><span class="cattitle">{L_EDITED}</span></th></tr>
 <tr>
-	<th nowrap="nowrap">{L_ARTICLE}</th>
-	<th nowrap="nowrap">{L_ARTICLE_CAT}</th>
-	<th nowrap="nowrap">{L_ARTICLE_TYPE}</th>
-	<th nowrap="nowrap">{L_ARTICLE_AUTHOR}</th>
-	<th nowrap="nowrap">{L_ACTION}</th>
+	<th class="tdnw">{L_ARTICLE}</th>
+	<th class="tdnw">{L_ARTICLE_CAT}</th>
+	<th class="tdnw">{L_ARTICLE_TYPE}</th>
+	<th class="tdnw">{L_ARTICLE_AUTHOR}</th>
+	<th class="tdnw">{L_ACTION}</th>
 </tr>
 <!-- BEGIN editrow -->
 <tr>
@@ -22,14 +22,14 @@
 </table>
 <br />
 
-<table class="forumline" width="100%" cellspacing="0" cellpadding="0" border="0">
+<table class="forumline">
 <tr><th colspan="5"><span class="cattitle">{L_NOT_APPROVED}</span></th></tr>
 <tr>
-	<th nowrap="nowrap">{L_ARTICLE}</th>
-	<th nowrap="nowrap">{L_ARTICLE_CAT}</th>
-	<th nowrap="nowrap">{L_ARTICLE_TYPE}</th>
-	<th nowrap="nowrap">{L_ARTICLE_AUTHOR}</th>
-	<th nowrap="nowrap">{L_ACTION}</th>
+	<th class="tdnw">{L_ARTICLE}</th>
+	<th class="tdnw">{L_ARTICLE_CAT}</th>
+	<th class="tdnw">{L_ARTICLE_TYPE}</th>
+	<th class="tdnw">{L_ARTICLE_AUTHOR}</th>
+	<th class="tdnw">{L_ACTION}</th>
 </tr>
 <!-- BEGIN notrow -->
 <tr>
@@ -43,14 +43,14 @@
 </table>
 <br />
 
-<table class="forumline" width="100%" cellspacing="0" cellpadding="0" border="0">
+<table class="forumline">
 <tr><th colspan="5"><span class="cattitle">{L_APPROVED}</span></th></tr>
 <tr>
-	<th nowrap="nowrap">{L_ARTICLE}</th>
-	<th nowrap="nowrap">{L_ARTICLE_CAT}</th>
-	<th nowrap="nowrap">{L_ARTICLE_TYPE}</th>
-	<th nowrap="nowrap">{L_ARTICLE_AUTHOR}</th>
-	<th nowrap="nowrap">{L_ACTION}</th>
+	<th class="tdnw">{L_ARTICLE}</th>
+	<th class="tdnw">{L_ARTICLE_CAT}</th>
+	<th class="tdnw">{L_ARTICLE_TYPE}</th>
+	<th class="tdnw">{L_ARTICLE_AUTHOR}</th>
+	<th class="tdnw">{L_ACTION}</th>
 </tr>
 <!-- BEGIN approverow -->
 <tr>
@@ -65,11 +65,11 @@
 </table>
 
 <!-- BEGIN pagination -->
-<table width="100%" cellspacing="2" cellpadding="0" border="0">
+<table>
 <tr>
-	<td valign="top" ><span class="gensmall">{PAGE_NUMBER}</span></td>
-	<td valign="top" align="{S_CONTENT_DIR_RIGHT}" ><span class="pagination">{PAGINATION}</span></td>
+	<td ><span class="gensmall">{PAGE_NUMBER}</span></td>
+	<td align="{S_CONTENT_DIR_RIGHT}" ><span class="pagination">{PAGINATION}</span></td>
 </tr>
 </table>
 <!-- END pagination -->
-<br clear="all" />
+<br class="clear" />

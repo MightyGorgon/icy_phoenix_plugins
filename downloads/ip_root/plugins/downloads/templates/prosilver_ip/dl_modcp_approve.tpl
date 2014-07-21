@@ -9,10 +9,10 @@ function select_switch(status)
 </script>
 
 <form method="post" name="dl_modcp" action="{S_DL_MODCP_ACTION}" >
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_NAV2}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_NAV2}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
-	<th nowrap="nowrap">&nbsp;{L_DL_CAT_NAME}&nbsp;</th>
-	<th nowrap="nowrap">&nbsp;{L_DOWNLOAD}&nbsp;</th>
+	<th class="tdnw">&nbsp;{L_DL_CAT_NAME}&nbsp;</th>
+	<th class="tdnw">&nbsp;{L_DOWNLOAD}&nbsp;</th>
 	<th colspan="2">&nbsp;{L_SET}&nbsp;</th>
 </tr>
 <!-- BEGIN approve_row -->
@@ -32,9 +32,9 @@ function select_switch(status)
 </tr>
 </table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
 
-<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<table>
 <tr>
-	<td align="right" valign="top" nowrap="nowrap"><span class="gensmall">
+	<td class="tdalignr tdnw"><span class="gensmall">
 		<a href="javascript:select_switch(true);" class="gensmall">{L_MARK_ALL}</a>&nbsp;&bull;&nbsp;<a href="javascript:select_switch(false);" class="gensmall">{L_UNMARK_ALL}</a>
 		</span><br /><br /><span class="pagination">{PAGINATION}</span>
 	</td>

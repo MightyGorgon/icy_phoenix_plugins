@@ -1,5 +1,5 @@
 <form action="{S_FORM_ACTION}" method="post" name="comments_view">
-{IMG_THL}{IMG_THC}<span class="forumlink">{DESCRIPTION}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{DESCRIPTION}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
 	<th>{L_POSTER}</th>
 	<th>{L_MESSAGE}</th>
@@ -24,8 +24,8 @@
 <!-- END comment_button -->
 </table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
 
-<table width="100%" cellspacing="0" cellpadding="0" border="0">
-<tr><td align="right" valign="top"><span class="pagination">{PAGINATION}</span></td></tr>
+<table>
+<tr><td class="tdalignr"><span class="pagination">{PAGINATION}</span></td></tr>
 </table>
 <br />
 {S_HIDDEN_FIELDS}

@@ -1,15 +1,15 @@
 <!-- BEGIN newest_only -->
 <div id="newest_games_h" style="display: none;">
-	{IMG_THL}{IMG_THC}<img class="max-min-right" style="padding-top: 3px;" src="{IMG_MAXIMISE}" onclick="ShowHide('newest_games','newest_games_h','newest_games');" alt="{L_SHOW}" /><span class="forumlink">{newest_only.NEWEST_TITLE}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+	{IMG_THL}{IMG_THC}<img class="max-min-right" style="padding-top: 3px;" src="{IMG_MAXIMISE}" onclick="ShowHide('newest_games','newest_games_h','newest_games');" alt="{L_SHOW}" /><span class="forumlink">{newest_only.NEWEST_TITLE}</span>{IMG_THR}<table class="forumlinenb">
 	<tr><td class="row1g row-center">&nbsp;</td></tr>
 	</table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
 </div>
 <div id="newest_games">
-	{IMG_THL}{IMG_THC}<img class="max-min-right" style="padding-top: 3px;" src="{IMG_MINIMISE}" onclick="ShowHide('newest_games','newest_games_h','newest_games');" alt="{L_HIDE}" /><span class="forumlink">{newest_only.NEWEST_TITLE}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+	{IMG_THL}{IMG_THC}<img class="max-min-right" style="padding-top: 3px;" src="{IMG_MINIMISE}" onclick="ShowHide('newest_games','newest_games_h','newest_games');" alt="{L_HIDE}" /><span class="forumlink">{newest_only.NEWEST_TITLE}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
 	<th width="20%" >{newest_only.L_GAMES}</th>
-	<th width="20%">{newest_only.L_T_HOLDER}</th>
-	<th width="20%">{newest_only.L_STATS}</th>
+	<th class="tw20pct">{newest_only.L_T_HOLDER}</th>
+	<th class="tw20pct">{newest_only.L_STATS}</th>
 	<th width="45%">{newest_only.L_INFO}</th>
 </tr>
 

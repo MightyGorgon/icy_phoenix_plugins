@@ -1,10 +1,10 @@
 <!-- INCLUDE overall_header.tpl -->
 
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_favorites_page_title}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_favorites_page_title}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
-	<th width="20%">{L_GAMES}</th>
-	<th width="15%">{L_T_HOLDER}</th>
-	<th width="20%">{L_STATS}</th>
+	<th class="tw20pct">{L_GAMES}</th>
+	<th class="tw15pct">{L_T_HOLDER}</th>
+	<th class="tw20pct">{L_STATS}</th>
 	<th width="45%">{L_INFO}</th>
 </tr>
 <!-- BEGIN game -->

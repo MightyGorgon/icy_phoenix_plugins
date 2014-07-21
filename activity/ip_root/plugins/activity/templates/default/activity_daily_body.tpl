@@ -1,15 +1,15 @@
 <!-- BEGIN daily_game -->
 <div id="daily_games_h" style="display: none;">
-	{IMG_THL}{IMG_THC}<img class="max-min-right" style="padding-top: 3px;" src="{IMG_MAXIMISE}" onclick="ShowHide('daily_games','daily_games_h','daily_games');" alt="{L_SHOW}" /><span class="forumlink">{daily_game.TITLE}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+	{IMG_THL}{IMG_THC}<img class="max-min-right" style="padding-top: 3px;" src="{IMG_MAXIMISE}" onclick="ShowHide('daily_games','daily_games_h','daily_games');" alt="{L_SHOW}" /><span class="forumlink">{daily_game.TITLE}</span>{IMG_THR}<table class="forumlinenb">
 	<tr><td class="row1g row-center">&nbsp;</td></tr>
 	</table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
 </div>
 <div id="daily_games">
-	{IMG_THL}{IMG_THC}<img class="max-min-right" style="padding-top: 3px;" src="{IMG_MINIMISE}" onclick="ShowHide('daily_games','daily_games_h','daily_games');" alt="{L_HIDE}" /><span class="forumlink">{daily_game.TITLE}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+	{IMG_THL}{IMG_THC}<img class="max-min-right" style="padding-top: 3px;" src="{IMG_MINIMISE}" onclick="ShowHide('daily_games','daily_games_h','daily_games');" alt="{L_HIDE}" /><span class="forumlink">{daily_game.TITLE}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
 	<th width="20%" >{L_GAMES}</th>
-	<th width="20%">{L_T_HOLDER}</th>
-	<th width="20%">{L_STATS}</th>
+	<th class="tw20pct">{L_T_HOLDER}</th>
+	<th class="tw20pct">{L_STATS}</th>
 	<th width="45%">{L_INFO}</th>
 </tr>
 <tr>

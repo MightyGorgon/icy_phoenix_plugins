@@ -1,7 +1,7 @@
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_DL_TOP}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_DL_TOP}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
 	<td colspan="2" width="50%" valign="top">
-		<table class="forumline" width="100%" cellspacing="0" cellpadding="0">
+		<table class="forumline">
 		<th colspan="3">{L_LATEST_DOWNLOADS}</th>
 		<tr>
 			<td width="10%" class="cat"><span class="genmed"><b>{L_POSITION}</b></span></td>
@@ -18,7 +18,7 @@
 		</table>
 	</td>
 	<td colspan="2" width="50%" valign="top">
-		<table class="forumline" width="100%" cellspacing="0" cellpadding="0">
+		<table class="forumline">
 		<th colspan="3">{L_LATEST_UPLOADS}</th>
 		<tr>
 			<td width="10%" class="cat"><span class="genmed"><b>{L_POSITION}</b></span></td>
@@ -37,7 +37,7 @@
 </tr>
 <tr>
 	<td colspan="2" width="50%" valign="top">
-		<table class="forumline" width="100%" cellspacing="0" cellpadding="0">
+		<table class="forumline">
 		<th colspan="3">{L_DOWNLOADS_CUR_MONTH}</th>
 		<tr>
 			<td width="10%" class="cat"><span class="genmed"><b>{L_POSITION}</b></span></td>
@@ -54,7 +54,7 @@
 		</table>
 	</td>
 	<td colspan="2" width="50%" valign="top">
-		<table class="forumline" width="100%" cellspacing="0" cellpadding="0">
+		<table class="forumline">
 		<th colspan="3">{L_DOWNLOADS_OVERALL}</th>
 		<tr>
 			<td width="10%" class="cat"><span class="genmed"><b>{L_POSITION}</b></span></td>
@@ -73,7 +73,7 @@
 </tr>
 <tr>
 	<td colspan="2" width="50%" valign="top">
-		<table class="forumline" width="100%" cellspacing="0" cellpadding="0">
+		<table class="forumline">
 		<th colspan="3">{L_TRAFFIC_CUR_MONTH}</th>
 		<tr>
 			<td width="10%" class="cat"><span class="genmed"><b>{L_POSITION}</b></span></td>
@@ -90,7 +90,7 @@
 		</table>
 	</td>
 	<td colspan="2" width="50%" valign="top">
-		<table class="forumline" width="100%" cellspacing="0" cellpadding="0">
+		<table class="forumline">
 		<th colspan="3">{L_TRAFFIC_OVERALL}</th>
 		<tr>
 			<td width="10%" class="cat"><span class="genmed"><b>{L_POSITION}</b></span></td>
@@ -108,7 +108,7 @@
 	</td>
 </tr>
 	<td colspan="2" width="50%" valign="top">
-		<table class="forumline" width="100%" cellspacing="0" cellpadding="0">
+		<table class="forumline">
 		<th colspan="3">{L_DOWNLOADS_DOWNLOADS_COUNT}</th>
 		<tr>
 			<td width="10%" class="cat"><span class="genmed"><b>{L_POSITION}</b></span></td>
@@ -125,7 +125,7 @@
 		</table>
 	</td>
 	<td colspan="2" width="50%" valign="top">
-		<table class="forumline" width="100%" cellspacing="0" cellpadding="0">
+		<table class="forumline">
 		<th colspan="3">{L_DOWNLOADS_DOWNLOADS_TRAFFIC}</th>
 		<tr>
 			<td width="10%" class="cat"><span class="genmed"><b>{L_POSITION}</b></span></td>
@@ -144,7 +144,7 @@
 </tr>
 <tr>
 	<td colspan="2" width="50%" valign="top">
-		<table class="forumline" width="100%" cellspacing="0" cellpadding="0">
+		<table class="forumline">
 		<th colspan="3">{L_DOWNLOADS_UPLOADS_COUNT}</th>
 		<tr>
 			<td width="10%" class="cat"><span class="genmed"><b>{L_POSITION}</b></span></td>
@@ -161,7 +161,7 @@
 		</table>
 	</td>
 	<td colspan="2" width="50%" valign="top">
-		<table class="forumline" width="100%" cellspacing="0" cellpadding="0">
+		<table class="forumline">
 		<th colspan="3">{L_DOWNLOADS_UPLOADS_TRAFFIC}</th>
 		<tr>
 			<td width="10%" class="cat"><span class="genmed"><b>{L_POSITION}</b></span></td>

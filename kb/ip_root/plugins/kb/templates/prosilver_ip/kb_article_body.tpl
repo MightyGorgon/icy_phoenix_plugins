@@ -1,4 +1,4 @@
-{IMG_THL}{IMG_THC}<span class="forumlink">{ARTICLE_TITLE}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{ARTICLE_TITLE}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
 	<td class="row-post">
 		<span class="post-text">
@@ -48,17 +48,17 @@
 	</td>
 </tr>
 <!-- END switch_pages -->
-<tr><td class="cat" valign="middle" align="center">&nbsp;</td></tr>
+<tr><td class="cat tvalignm" align="center">&nbsp;</td></tr>
 </table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
 
 <!-- BEGIN switch_comments_show -->
 <br />
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_COMMENTS}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_COMMENTS}</span>{IMG_THR}<table class="forumlinenb">
 <!-- END switch_comments_show -->
 <!-- BEGIN postrow -->
 <tr >
-	<td class="row-post-author" nowrap="nowrap">
-		<span class="post-name"><a name="p{postrow.U_POST_ID}"></a>{postrow.POSTER_NAME}</span><br />
+	<td class="row-post-author tdnw">
+		<span class="post-name"><a id="p{postrow.U_POST_ID}"></a>{postrow.POSTER_NAME}</span><br />
 		{postrow.RANK_IMAGE}
 		<span class="post-images">{postrow.POSTER_AVATAR}</span>
 		<div class="post-details">
@@ -68,7 +68,7 @@
 		</div><br />
 		<img src="{SPACER}" width="150" height="1" alt="" />
 	</td>
-	<td class="row-post" width="100%" height="100%">
+	<td class="row-post tw100pct th100pct">
 		<div class="post-subject"><a href="{postrow.U_MINI_POST}"><img src="{postrow.MINI_POST_IMG}" alt="{postrow.L_MINI_POST_ALT}" title="{postrow.L_MINI_POST_ALT}" /></a> {postrow.POST_SUBJECT}&nbsp;</div>
 		<div class="post-text post-text-hide-flow">
 			{postrow.MESSAGE}<br />
@@ -88,18 +88,18 @@
 </table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
 
 <!-- BEGIN comments_pag -->
-<table class="empty-table" width="100%" cellspacing="0" cellpadding="0" border="0">
+<table>
 <tr>
 	<td><span class="gensmall">{PAGE_NUMBER}</span></td>
-	<td align="right"><span class="pagination">{PAGINATION}</span></td>
+	<td class="tdalignr"><span class="pagination">{PAGINATION}</span></td>
 </tr>
 </table>
 <!-- END comments_pag -->
 <!-- END switch_comments_show -->
 
-<table width="100%" cellspacing="2" border="0" align="center">
+<table class="s2px p2px">
 <tr>
-	<td valign="top" align="left">
+	<td>
 		<!-- BEGIN switch_comments -->
 		<span class="gensmall"><b>{COMMENTS}:</b> {COMMENTS_NUM} {COMMENTS_URL}</span><br />
 		<!-- END switch_comments -->

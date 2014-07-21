@@ -1,23 +1,23 @@
 {LOCBAR}
 <br />
 <!-- BEGIN ip_check -->
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_RATE}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_RATE}</span>{IMG_THR}<table class="forumlinenb">
 <tr><th>{L_RATE}</th></tr>
 </table>
 <!-- END ip_check -->
 
 <!-- BEGIN do_rate -->
-<table class="forumline" width="100%" cellspacing="0">
+<table class="forumline">
 <tr><td class="row-header"><span>{L_RATE}</span></td></tr>
 <tr><th>{L_RATE}</th></tr>
 </table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
 <!-- END do_rate -->
 
 <!-- BEGIN rate -->
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_RATE}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_RATE}</span>{IMG_THR}<table class="forumlinenb">
 <tr><th colspan="4">&nbsp;{L_RATE}</th></tr>
 <tr>
-	<td class="row1" width="90%"><span class="genmed">{RATEINFO}</span></td>
+	<td class="row1 tw90pct"><span class="genmed">{RATEINFO}</span></td>
 	<td class="row2"><form action="{S_RATE_ACTION}" method="post">
 		<select size="1" name="rating" class="forminput">
 			<option value="1">{L_R1}</option>

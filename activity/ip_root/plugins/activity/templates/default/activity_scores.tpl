@@ -10,7 +10,7 @@
 	</div>
 </div>
 
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_HIGHSCORE} {DASH} {TITLE}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_HIGHSCORE} {DASH} {TITLE}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
 	<th width="40">#</th>
 	<th align="center" width="{WIDTH1}">{L_HIGHSCORE} {DASH} {TITLE}</th>
@@ -30,5 +30,5 @@
 <!-- BEGIN scores_stats -->
 <tr><td class="{scores.ROW_CLASS}" align="left" colspan="4"><span class="gen">{scores.scores_stats.STATS}</span></td></tr>
 <!-- END scores_stats -->
-<tr><th width="100%" colspan="4">&nbsp;</th></tr>
+<tr><th colspan="4">&nbsp;</th></tr>
 </table>{IMG_TFL}{IMG_TFC}{IMG_TFR}

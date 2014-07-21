@@ -220,7 +220,7 @@ switch ($mode)
 				'LINK_DESC' => $row['link_desc'],
 				'LINK_URL' => $row['link_url'],
 				'LINK_LOGO_SRC' => $row['link_logo_src'],
-				'LINK_LOGO_IMG' => '<img src="' . ((substr($link_logo_src, 0, 4) == 'http') ? $link_logo_src : ($server_url . $link_logo_src)) . '" vspace="10" hspace="10" />',
+				'LINK_LOGO_IMG' => '<img class="vhs10px" src="' . ((substr($link_logo_src, 0, 4) == 'http') ? $link_logo_src : ($server_url . $link_logo_src)) . '" />',
 
 				'LINK_ACTIVE_YES' => ($row['link_active'] ? 'checked="checked"' : ''),
 				'LINK_ACTIVE_NO' => (!$row['link_active'] ? 'checked="checked"' : ''),

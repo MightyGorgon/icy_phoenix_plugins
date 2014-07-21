@@ -10,9 +10,9 @@
 </head>
 
 <body>
-<a name="top" id="top"></a>
+<a id="top"></a>
 
-<table class="forumline" width="100%" cellspacing="0">
+<table class="forumline">
 <tr>
 	<td class="row1" style="border-width: 0px;">
 		<span class="gensmall"><b>{L_ARTICLE_AUTHOR}</b></span>
@@ -64,15 +64,15 @@
 </table>
 <br />
 <!-- BEGIN switch_comments_show -->
-<table class="forumline" width="100%" cellspacing="0">
+<table class="forumline">
 <tr><td class="cattitle">{L_COMMENTS}&nbsp;</td></tr>
 <!-- END switch_comments_show -->
 <!-- BEGIN postrow -->
 <tr>
-	<td class="row1" width="100%" valign="top" style="border-width: 0px;">
-	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	<td class="row1" style="border-width: 0px;">
+	<table>
 	<tr>
-		<td width="100%">
+		<td class="tw100pct">
 			<span class="genmed"><b>{postrow.POSTER_NAME}</b></span>
 			<span class="postdetails">&nbsp;{L_POSTED}:&nbsp;{postrow.POST_DATE}&nbsp;&nbsp;&nbsp;{L_POST_SUBJECT}&nbsp;{postrow.POST_SUBJECT}</span>
 			<br />

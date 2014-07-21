@@ -1,5 +1,5 @@
 <!-- BEGIN admin -->
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_DELETE}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_DELETE}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
 	<td class="row1"><div class="post-text">{L_DELETE_SPECIFIC}</div></td>
 	<td class="row1 row-center">{GAMES}</td>
@@ -11,7 +11,7 @@
 	</td>
 </tr>
 <tr>
-	<td colspan="2" class="row1"><span class="post-text">{L_DELETE_ALL}</span></td>
+	<td class="row1" colspan="2"><span class="post-text">{L_DELETE_ALL}</span></td>
 	<td class="row1 row-center">
 		<form method="post" name="del_all" action="U_T_LINK">
 			<input class="mainoption" type="hidden" name="action" value="delete_all_scores" />
@@ -22,12 +22,12 @@
 </table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
 <!-- END admin -->
 
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_T_LINK}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_T_LINK}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
-	<th width="20%">{HEADER_ONE}</th>
-	<th width="20%">{HEADER_TWO}</th>
-	<th width="20%">{HEADER_THREE}</th>
-	<th width="20%">{HEADER_FOUR}</th>
+	<th class="tw20pct">{HEADER_ONE}</th>
+	<th class="tw20pct">{HEADER_TWO}</th>
+	<th class="tw20pct">{HEADER_THREE}</th>
+	<th class="tw20pct">{HEADER_FOUR}</th>
 </tr>
 <!-- BEGIN top_scores_rows -->
 <tr>
@@ -41,9 +41,9 @@
 <tr><td class="cat" colspan="4">&nbsp;</td></tr>
 </table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
 
-<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<table>
 <tr>
-	<td width="50%" align="left"><span class="gen">{PAGE_NUMBER}</span></td>
-	<td width="50%" align="right"><span class="pagination">{PAGINATION}</span></td>
+	<td class="tw50pct"><span class="gen">{PAGE_NUMBER}</span></td>
+	<td class="tw50pct tdalignr"><span class="pagination">{PAGINATION}</span></td>
 </tr>
 </table>

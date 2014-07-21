@@ -7,7 +7,7 @@
 </div>
 </form>
 
-<table class="forumline" width="100%" cellspacing="0" cellpadding="0" border="0">
+<table class="forumline">
 <tr>
 	<th nowrap="nowrap">{L_CATEGORY}</th>
 	<th nowrap="nowrap">{L_ARTICLES}</th>

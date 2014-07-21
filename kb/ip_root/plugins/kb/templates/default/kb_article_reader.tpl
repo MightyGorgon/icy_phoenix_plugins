@@ -1,4 +1,4 @@
-<table class="forumline" width="100%" cellspacing="0">
+<table class="forumline">
 <tr>
 	<td class="row1" wrap="wrap"><span class="maintitle"style="font-size: 9pt;">{ARTICLE_TITLE}</span></td>
 	<td class="row1" align="right" class="nav"><a href="{U_PRINT}" class="nav">{L_PRINT}</a></td>
@@ -56,14 +56,14 @@
 
 <!-- BEGIN switch_comments_show -->
 <br />
-{IMG_THL}{IMG_THC}<span class="forumlink">&nbsp;{L_COMMENTS}&nbsp;</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">&nbsp;{L_COMMENTS}&nbsp;</span>{IMG_THR}<table class="forumlinenb">
 <!-- END switch_comments_show -->
 <!-- BEGIN postrow -->
 <tr>
-	<td class="row1" width="100%" height="28" valign="top" colspan="2">
-		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	<td class="row1" colspan="2">
+		<table>
 		<tr>
-			<td width="100%">
+			<td class="tw100pct">
 				<span class="genmed"><b>{postrow.POSTER_NAME}</b></span>
 				<span class="postdetails">{L_POSTED}:&nbsp;{postrow.POST_DATE}&nbsp;&nbsp;&nbsp;{L_POST_SUBJECT}&nbsp;{postrow.POST_SUBJECT}</span>
 			</td>
@@ -76,15 +76,15 @@
 <!-- END postrow -->
 <!-- BEGIN switch_comments_show -->
 </table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
-<table class="empty-table" width="100%" cellspacing="0" cellpadding="0" border="0">
+<table>
 <tr>
 	<td><span class="gensmall">{PAGE_NUMBER}</span></td>
-	<td align="right"><span class="gensmall">{S_TIMEZONE}</span><br /><span class="pagination">{PAGINATION}</span></td>
+	<td class="tdalignr"><span class="gensmall">{S_TIMEZONE}</span><br /><span class="pagination">{PAGINATION}</span></td>
 </tr>
 </table>
 <!-- END switch_comments_show -->
 
-<table class="empty-table" width="100%" cellspacing="0" cellpadding="0" border="0">
+<table>
 <tr>
 	<td colspan="2">
 		<!-- BEGIN switch_comments -->

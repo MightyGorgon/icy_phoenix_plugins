@@ -1,34 +1,34 @@
 <br />
-<table class="forumline" width="100%" cellspacing="0" cellpadding="0">
+<table class="forumline">
 <tr><th>{L_DL_FILES_TITLE}</th></tr>
 <tr><td class="row1 row-center"><span class="genmed">{L_DL_FILES_TEXT}</span></td></tr>
 </table>
 
 <form action="{S_DOWNLOADS_ACTION}" method="post" name="cat_id" onsubmit="if(this.options[this.selectedIndex].value == -1){ return false; }">
-<table class="forumline" width="100%" cellpadding="0" cellspacing="0" border="0">
+<table class="forumline">
 <tr>
-	<th width="20%"><span class="genmed">{CATEGORIES}</span></th>
-	<th width="60%"><span class="genmed"><b>{DL_COUNT}</b></span></th>
-	<th width="20%"><span class="genmed"><b><a href="{U_DOWNLOAD_ORDER_ALL}">{L_SORT}</a></b></span></th>
+	<th class="tw20pct"><span class="genmed">{CATEGORIES}</span></th>
+	<th class="tw60pct"><span class="genmed"><b>{DL_COUNT}</b></span></th>
+	<th class="tw20pct"><span class="genmed"><b><a href="{U_DOWNLOAD_ORDER_ALL}">{L_SORT}</a></b></span></th>
 </tr>
 </table>
 </form>
 
 <form method="post" action="{S_DOWNLOADS_ACTION}" name="add_dl">
-<table class="forumline" width="100%" cellpadding="0" cellspacing="0" border="0">
+<table class="forumline">
 <tr><th><input type="submit" class="mainoption" name="submit" value="{L_ADD_DOWNLOAD}" />&nbsp;<input type="hidden" name="action" value="add" /></th></tr>
 </table>
 </form>
 
-<table class="forumline" width="100%" cellspacing="0" cellpadding="0">
+<table class="forumline">
 <tr>
-	<th nowrap="nowrap">#</th>
-	<th nowrap="nowrap" colspan="3">{L_DL_NAME} / {L_DL_FILE_NAME}</th>
-	<th nowrap="nowrap">{L_DL_FILE_SIZE}</th>
-	<th nowrap="nowrap">{L_DL_IS_FREE}</th>
-	<th nowrap="nowrap">{L_DL_EXTERN}</th>
-	<th nowrap="nowrap">{L_DL_FILE_KLICKS}<br />{L_DL_FILE_OVERALL_KLICKS}</th>
-	<th nowrap="nowrap">{L_DL_FILE_TRAFFIC}</th>
+	<th class="tdnw">#</th>
+	<th class="tdnw" colspan="3">{L_DL_NAME} / {L_DL_FILE_NAME}</th>
+	<th class="tdnw">{L_DL_FILE_SIZE}</th>
+	<th class="tdnw">{L_DL_IS_FREE}</th>
+	<th class="tdnw">{L_DL_EXTERN}</th>
+	<th class="tdnw">{L_DL_FILE_KLICKS}<br />{L_DL_FILE_OVERALL_KLICKS}</th>
+	<th class="tdnw">{L_DL_FILE_TRAFFIC}</th>
 	<th>{L_DL_HACKLIST}</th>
 	<th colspan="2">{L_ACTION}</th>
 </tr>

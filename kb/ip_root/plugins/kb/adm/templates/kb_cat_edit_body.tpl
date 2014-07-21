@@ -1,6 +1,6 @@
 <h1>{L_EDIT_TITLE}</h1>
 <p>{L_EDIT_DESCRIPTION}</p>
-<table class="forumline" width="100%" cellspacing="0" cellpadding="0" border="0">
+<table class="forumline">
 <form action="{S_ACTION}" method="post">
 <tr><th colspan="2">{L_CAT_SETTINGS}</th></tr>
 <tr>
@@ -22,7 +22,7 @@
 	</td>
 </tr>
 <tr>
-	<td class="row1" width="50%">{L_FORUM_ID}<br /><span class="gensmall">{L_FORUM_ID_EXPLAIN}</span></td>
+	<td class="row1 tw50pct">{L_FORUM_ID}<br /><span class="gensmall">{L_FORUM_ID_EXPLAIN}</span></td>
 	<td class="row2" width="50%">{FORUM_LIST}</td>
 </tr>
 <!-- BEGIN switch_edit_category -->
@@ -66,7 +66,7 @@
 	<td class="row1"><span class="gen">{L_APPROVAL_EDIT_LEVEL}:</span></td>
 	<td class="row2"><select name="auth_approval_edit"><option {APPROVAL_DISABLED} value="{S_GUEST}">{L_DISABLED}</option><option {APPROVAL_MOD} value="{S_MOD}">{L_MOD}</option><option {APPROVAL_ADMIN} value="{S_ADMIN}">{L_ADMIN}</option></select></td>
 </tr>
-<tr><td class="cat" colspan="2" align="center">{S_HIDDEN}<input type="submit" name="submit" value="{L_CREATE}" class="mainoption" /></td></tr>
+<tr><td class="cat tdalignc" colspan="2">{S_HIDDEN}<input type="submit" name="submit" value="{L_CREATE}" class="mainoption" /></td></tr>
 </table>
 </form>
 

@@ -39,8 +39,8 @@ function checkForm()
 <!-- INCLUDE overall_header.tpl -->
 
 <!-- INCLUDE ../../plugins/links/templates/default/links_leftblock.tpl -->
-	<td width="100%" valign="top">
-		{IMG_THL}{IMG_THC}<span class="forumlink">{LINK_CATEGORY}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+	<td class="tw100pct">
+		{IMG_THL}{IMG_THC}<span class="forumlink">{LINK_CATEGORY}</span>{IMG_THR}<table class="forumlinenb">
 		<tr>
 			<th>{L_LOGO}</th>
 			<th>{L_SITE}</th>
@@ -49,13 +49,13 @@ function checkForm()
 		</tr>
 		<!-- BEGIN linkrow -->
 		<tr>
-			<td valign="top" align="right" class="row1">&nbsp;{linkrow.LINK_LOGO}&nbsp;</td>
+			<td align="right" class="row1">&nbsp;{linkrow.LINK_LOGO}&nbsp;</td>
 			<td class="row1h{catrow.forumrow.XS_NEW} row-forum">
 				<span class="forumlink"><a href="{linkrow.LINK_URL}" class="forumlink">{linkrow.LINK_TITLE}</a></span>
 				<br /><span class="genmed">{linkrow.LINK_DESC}</span>
 			</td>
-			<td class="row1 row-center" nowrap="nowrap"><span class="genmed">{linkrow.LINK_HITS}</span></td>
-			<td class="row1 row-center" nowrap="nowrap"><span class="genmed">{linkrow.LINK_JOINED}</span></td>
+			<td class="row1 row-center tdnw"><span class="genmed">{linkrow.LINK_HITS}</span></td>
+			<td class="row1 row-center tdnw"><span class="genmed">{linkrow.LINK_JOINED}</span></td>
 		</tr>
 		<!-- END linkrow -->
 		<tr>
@@ -70,10 +70,10 @@ function checkForm()
 		</tr>
 		</table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
 		<br />
-		<table class="empty-table" width="100%" cellspacing="0" cellpadding="0" border="0">
+		<table>
 		<tr>
-			<td align="left" valign="top"><span class="gensmall">{PAGE_NUMBER}</span></td>
-			<td align="right"><span class="gensmall">{S_TIMEZONE}</span><br /><span class="pagination">{PAGINATION}</span></td>
+			<td><span class="gensmall">{PAGE_NUMBER}</span></td>
+			<td class="tdalignr"><span class="gensmall">{S_TIMEZONE}</span><br /><span class="pagination">{PAGINATION}</span></td>
 		</tr>
 		</table>
 	</td>

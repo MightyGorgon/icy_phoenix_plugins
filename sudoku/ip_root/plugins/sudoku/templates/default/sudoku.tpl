@@ -1,23 +1,23 @@
 <!-- INCLUDE overall_header.tpl -->
 
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_SUDOKU}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_SUDOKU}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
 	<th>{HOW_TO}</th>
 	<th>{STATS}</th>
 </tr>
 <tr>
-	<td class="row2" valign="top"><span class="gen">{INSTRUCTIONS}<br />&nbsp;</span></td>
-	<td class="row1" valign="top"><span class="gen">{STATISTICS}<br />&nbsp;</span></td>
+	<td class="row2"><span class="gen">{INSTRUCTIONS}<br />&nbsp;</span></td>
+	<td class="row1"><span class="gen">{STATISTICS}<br />&nbsp;</span></td>
 </tr>
 <tr>
-	<td class="row1" width="50%">
-		<div style="text-align: center; width: 100%; margin: 0 auto; clear: both;"><span class="gen"><a name="grid" href="#grid">{GAME_INFO}</a></span></div><br />
+	<td class="row1 tw50pct">
+		<div style="text-align: center; width: 100%; margin: 0 auto; clear: both;"><span class="gen"><a id="grid" href="#grid">{GAME_INFO}</a></span></div><br />
 		<form id="sudoku_frm" action="{S_SUDOKU_FILE}" method="post">
 		<center>
-		<table class="forumline-no2" cellspacing="0" cellpadding="0" border="0">
+		<table class="forumline-no2">
 		<tr>
 			<td>
-				<table class="forumline-no" cellspacing="0" cellpadding="0" border="0">
+				<table class="forumline-no">
 					<tr>
 						<td class="row1">{TILE1_1}</td>
 						<td class="row1">{TILE1_2}</td>
@@ -36,7 +36,7 @@
 				</table>
 			</td>
 			<td>
-				<table class="forumline-no" cellspacing="0" cellpadding="0" border="0">
+				<table class="forumline-no">
 					<tr>
 						<td class="row2">{TILE2_1}</td>
 						<td class="row2">{TILE2_2}</td>
@@ -55,7 +55,7 @@
 				</table>
 			</td>
 			<td>
-				<table class="forumline-no" cellspacing="0" cellpadding="0" border="0">
+				<table class="forumline-no">
 					<tr>
 						<td class="row1">{TILE3_1}</td>
 						<td class="row1">{TILE3_2}</td>
@@ -76,7 +76,7 @@
 		</tr>
 		<tr>
 			<td>
-				<table class="forumline-no" cellspacing="0" cellpadding="0" border="0">
+				<table class="forumline-no">
 					<tr>
 						<td class="row2">{TILE4_1}</td>
 						<td class="row2">{TILE4_2}</td>
@@ -95,7 +95,7 @@
 				</table>
 			</td>
 			<td>
-				<table class="forumline-no" cellspacing="0" cellpadding="0" border="0">
+				<table class="forumline-no">
 					<tr>
 						<td class="row1">{TILE5_1}</td>
 						<td class="row1">{TILE5_2}</td>
@@ -114,7 +114,7 @@
 				</table>
 			</td>
 			<td>
-				<table class="forumline-no" cellspacing="0" cellpadding="0" border="0">
+				<table class="forumline-no">
 					<tr>
 						<td class="row2">{TILE6_1}</td>
 						<td class="row2">{TILE6_2}</td>
@@ -135,7 +135,7 @@
 		</tr>
 		<tr>
 			<td>
-				<table class="forumline-no" cellspacing="0" cellpadding="0" border="0">
+				<table class="forumline-no">
 					<tr>
 						<td class="row1">{TILE7_1}</td>
 						<td class="row1">{TILE7_2}</td>
@@ -154,7 +154,7 @@
 				</table>
 			</td>
 			<td>
-				<table class="forumline-no" cellspacing="0" cellpadding="0" border="0">
+				<table class="forumline-no">
 					<tr>
 						<td class="row2">{TILE8_1}</td>
 						<td class="row2">{TILE8_2}</td>
@@ -173,7 +173,7 @@
 				</table>
 			</td>
 			<td>
-				<table class="forumline-no" cellspacing="0" cellpadding="0" border="0">
+				<table class="forumline-no">
 					<tr>
 						<td class="row1">{TILE9_1}</td>
 						<td class="row1">{TILE9_2}</td>
@@ -226,21 +226,21 @@
 		<div style="text-align: center;"><span class="gen"><u>{L_OPTIONS}</u></span><br /><br /><span class="genmed">{RESET} || {BUY_NUMBER} {ADMIN_TOOLS}</span></div>
 	</td>
 	<td align="center" valign="top" class="row2" width="50%">
-		<table class="empty-table" width="100%" cellspacing="0" cellpadding="0" border="0">
+		<table>
 		<tr>
 			<td>
-				<table class="forumline" width="100%" cellspacing="0">
-					<tr><th colspan="2" nowrap="nowrap">{PLAYER_STATS}</th></tr>
+				<table class="forumline">
+					<tr><th class="tdnw" colspan="2">{PLAYER_STATS}</th></tr>
 					<tr>
-						<td width="50%" class="row1"><span class="gen"><b>{PLAYED}:</b></span></td>
+						<td class="row1 tw50pct"><span class="gen"><b>{PLAYED}:</b></span></td>
 						<td width="50%" class="row2"><span class="gen">{PLAYED_VALUE}</span></td>
 					</tr>
 					<tr>
-						<td width="50%" class="row1"><span class="gen"><b>{POINTS}:</b></span></td>
+						<td class="row1 tw50pct"><span class="gen"><b>{POINTS}:</b></span></td>
 						<td width="50%" class="row2"><span class="gen">{POINTS_VALUE}</span></td>
 					</tr>
 					<tr>
-						<td width="50%" class="row1"><span class="gen"><b>{THESE_POINTS}:</b></span></td>
+						<td class="row1 tw50pct"><span class="gen"><b>{THESE_POINTS}:</b></span></td>
 						<td width="50%" class="row2"><span class="gen">{THESE_POINTS_VALUE}</span></td>
 					</tr>
 					<tr><td class="cat" colspan="2">&nbsp;</td></tr>
@@ -249,22 +249,22 @@
 		</tr>
 		<tr>
 			<td>
-				<table class="forumline" width="100%" cellspacing="0">
+				<table class="forumline">
 					<tr><th colspan="5" nowrap="nowrap">{LEADERBOARD}</th></tr>
 					<tr>
-						<th nowrap="nowrap">#</th>
-						<th nowrap="nowrap">{USERNAME}</th>
-						<th nowrap="nowrap">{LEAD_PLAYED}</th>
-						<th nowrap="nowrap">{LEAD_POINTS}</th>
-						<th nowrap="nowrap">{LEAD_CURRENT_GAME}</th>
+						<th class="tdnw">#</th>
+						<th class="tdnw">{USERNAME}</th>
+						<th class="tdnw">{LEAD_PLAYED}</th>
+						<th class="tdnw">{LEAD_POINTS}</th>
+						<th class="tdnw">{LEAD_CURRENT_GAME}</th>
 					</tr>
 					<!-- BEGIN leaderboard -->
 					<tr>
-						<td class="{leaderboard.ROW_CLASS} row-center" valign="middle"><span class="gen"><b>{leaderboard.POS}</b></span></td>
-						<td class="{leaderboard.ROW_CLASS}" valign="middle"><span class="gen">{leaderboard.USERNAME}</span></td>
-						<td class="{leaderboard.ROW_CLASS} row-center" valign="middle"><span class="gen">{leaderboard.PLAYED}</span></td>
-						<td class="{leaderboard.ROW_CLASS} row-center" valign="middle"><span class="gen">{leaderboard.POINTS}</span></td>
-						<td class="{leaderboard.ROW_CLASS} row-center" valign="middle"><span class="gen">{leaderboard.CURRENT_GAME}</span></td>
+						<td class="{leaderboard.ROW_CLASS} row-center tvalignm"><span class="gen"><b>{leaderboard.POS}</b></span></td>
+						<td class="{leaderboard.ROW_CLASS} tvalignm"><span class="gen">{leaderboard.USERNAME}</span></td>
+						<td class="{leaderboard.ROW_CLASS} row-center tvalignm"><span class="gen">{leaderboard.PLAYED}</span></td>
+						<td class="{leaderboard.ROW_CLASS} row-center tvalignm"><span class="gen">{leaderboard.POINTS}</span></td>
+						<td class="{leaderboard.ROW_CLASS} row-center tvalignm"><span class="gen">{leaderboard.CURRENT_GAME}</span></td>
 					</tr>
 					<!-- END leaderboard -->
 					<tr>
@@ -279,9 +279,9 @@
 <tr><td class="cat" colspan="2">&nbsp;</td></tr>
 </table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
 
-{IMG_THL}{IMG_THC}<span class="forumlink">{WHO_IS_ONLINE}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{WHO_IS_ONLINE}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
-	<td class="row1 row-center" valign="middle" rowspan="3"><img src="images/sudoku.gif" alt="{WHO_IS_ONLINE}" title="{WHO_IS_ONLINE}" /></td>
+	<td class="row1 row-center tvalignm" rowspan="3"><img src="images/sudoku.gif" alt="{WHO_IS_ONLINE}" title="{WHO_IS_ONLINE}" /></td>
 	<td class="row1"><span class="gensmall">{SUDOKU_GAME_STATS}</span></td>
 </tr>
 <tr><td class="row1" colspan="2"><div class="gensmall">{L_TOTAL_USERS_ONLINE}<br />{L_TODAY_USER_LIST}</div></td></tr>

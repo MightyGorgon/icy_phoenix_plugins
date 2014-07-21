@@ -1,5 +1,5 @@
 <form method="post" action="{S_GAME_ACTION}" name="add_game">
-<table class="forumline" width="100%" cellpadding="0" cellspacing="0" border="0">
+<table class="forumline">
 <tr>
 	<td class="row1">
 		<span class="genmed">{L_NAME}</span><br />
@@ -204,7 +204,7 @@
 </tr>
 
 <tr>
-	<td class="cat" colspan="2" align="center">
+	<td class="cat tdalignc" colspan="2">
 		{S_HIDDEN_FIELDS}
 		<input class="mainoption" type="submit" value="{L_SUBMIT}" onclick="document.add_game.submit()" />
 		<input class="liteoption" type="reset" value="{L_RESET}" />

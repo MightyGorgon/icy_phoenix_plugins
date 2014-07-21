@@ -13,7 +13,7 @@ function select_switch(status)
 <p><b>{L_DL_BANLIST_EXPLAIN}</b></p>
 
 <form action="{S_DOWNLOADS_ACTION}" method="post" name="add_ban">
-<table class="forumline" width="100%" cellspacing="0" cellpadding="0">
+<table class="forumline">
 <tr><th colspan="5">{L_DL_BANLIST}</th></tr>
 <tr>
 	<td class="row1 row-center"><span class="nav">{L_DL_USER_ID}</span><br /><input type="text" size="5" maxlength="8" class="post" name="user_id" value="{DL_USER_ID}" /></td>
@@ -27,7 +27,7 @@ function select_switch(status)
 </form>
 
 <form action="{S_DOWNLOADS_ACTION}" method="post" name="banlist">
-<table class="forumline" width="100%" cellspacing="0" cellpadding="0">
+<table class="forumline">
 <tr>
 	<th>{L_DL_USER_ID}</th>
 	<th>{L_DL_USER_IP}</th>
@@ -50,9 +50,9 @@ function select_switch(status)
 	<td colspan="6" class="cat" align="right"><input type="submit" name="edit_banlist" class="mainoption" value="{L_DL_EDIT}" />&nbsp;<input type="submit" name="delete_banlist" class="mainoption" value="{L_DL_DELETE}" /></td>
 </tr>
 </table>
-<table width="100%" cellpadding="3" cellspacing="1" border="0">
+<table>
 <tr>
-	<td align="right" valign="top" nowrap="nowrap">
+	<td class="tdalignr tdnw">
 		<a href="javascript:select_switch(true);" class="gensmall">{L_MARK_ALL}</a>&nbsp;&bull;&nbsp;<a href="javascript:select_switch(false);" class="gensmall">{L_UNMARK_ALL}</a>
 	</td>
 </tr>

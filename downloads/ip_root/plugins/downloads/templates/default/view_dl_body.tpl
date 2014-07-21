@@ -1,8 +1,8 @@
 <!-- BEGIN downloads -->
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_DOWNLOADS}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_DOWNLOADS}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
 	<th width="20%" nowrap="nowrap">{L_DESCRIPTION}</th>
-	<th colspan="2" nowrap="nowrap">{L_DETAILS}</th>
+	<th class="tdnw" colspan="2">{L_DETAILS}</th>
 <!-- BEGIN thumbnail -->
 	<th width="20%" colspan="2" nowrap="nowrap">{downloads.thumbnail.L_THUMBNAIL}</th>
 <!-- END thumbnail -->
@@ -76,7 +76,7 @@
 <!-- BEGIN download_button -->
 <form action="{download_button.U_DOWNLOAD}" method="post" name="download">
 <!-- END download_button -->
-{IMG_TBL}<table class="forumline" width="100%" cellspacing="0" cellpadding="0">
+{IMG_TBL}<table class="forumline">
 <!-- BEGIN allow_trafficfree_download -->
 <tr><td class="row1 row-center"><span class="gensmall"><b class="text_red">{allow_trafficfree_download.L_YOU_CAN_DOWNLOAD}</b></span><br /><br /></td></tr>
 <!-- END allow_trafficfree_download -->
@@ -84,7 +84,7 @@
 <tr>
 	<td class="row1 row-center">
 		<!-- BEGIN vc -->
-		<img src="{download_button.vc.VC}" style="vertical-align:bottom;" alt="" title="" />&nbsp;
+		<img src="{download_button.vc.VC}" style="vertical-align: bottom;" alt="" title="" />&nbsp;
 		<input type="text" value="" name="code" class="post" size="5" maxlength="5" />&nbsp;
 		<!-- END vc -->
 		<input type="submit" value="{L_DOWNLOAD}" class="mainoption" />
@@ -97,10 +97,10 @@
 </form>
 <!-- END download_button -->
 
-{IMG_TBL}<table class="forumline" width="100%" cellspacing="0" cellpadding="0">
+{IMG_TBL}<table class="forumline">
 <tr>
 	<td class="row1">
-		<div style="float:right;text-align:right;">
+		<div style="float: right; text-align: right;">
 		<span class="gensmall">
 		<!-- BEGIN report_broken_dl -->
 		<a href="{report_broken_dl.U_BROKEN_DOWNLOAD}" class="gensmall">{report_broken_dl.L_BROKEN_DOWNLOAD}</a>
@@ -129,11 +129,11 @@
 <!-- BEGIN rating -->
 <br />
 <form action="{S_ACTION}" method="post" name="rating">
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_RATING_TITLE}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_RATING_TITLE}</span>{IMG_THR}<table class="forumlinenb">
 <tr><td class="row3" nowrap="nowrap" colspan="2" align="center"><span class="topiclink">{L_RATING_TITLE}</span></td></tr>
 <tr><td class="{ROW_CLASS2} row-center"><span class="gen">{rating.RATING}</span></td></tr>
 <tr>
-	<td class="cat" align="center">
+	<td class="cat tdalignc">
 		<input type="submit" name="submit" value="{L_SUBMIT}" class="mainoption"/>&nbsp;&nbsp;&nbsp;
 		<input type="submit" name="cancel" value="{L_CANCEL}" class="liteoption"/>{S_HIDDEN_FIELDS_RATE}
 	</td>
@@ -145,9 +145,9 @@
 <!-- BEGIN comment_block -->
 <!-- BEGIN complete -->
 <form action="{comment_block.complete.S_COMMENT_ACTION}" method="post" name="comments">
-{IMG_THL}{IMG_THC}<span class="forumlink">&nbsp;</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">&nbsp;</span>{IMG_THR}<table class="forumlinenb">
 <!-- BEGIN comments_on -->
-<tr><th nowrap="nowrap" colspan="2">{comment_block.complete.L_LAST_COMMENT}</th></tr>
+<tr><th class="tdnw" colspan="2">{comment_block.complete.L_LAST_COMMENT}</th></tr>
 <!-- END comments_on -->
 <!-- BEGIN comment_row -->
 <tr>
@@ -156,7 +156,7 @@
 </tr>
 <!-- END comment_row -->
 <!-- BEGIN view_comments -->
-<tr><td class="cat" align="center" colspan="2"><input type="submit" name="show" value="{comment_block.complete.view_comments.L_SHOW_COMMENTS}" class="liteoption" /></td></tr>
+<tr><td class="cat tdalignc" colspan="2"><input type="submit" name="show" value="{comment_block.complete.view_comments.L_SHOW_COMMENTS}" class="liteoption" /></td></tr>
 <!-- END view_comments -->
 </table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
 {comment_block.complete.S_HIDDEN_FIELDS}
@@ -166,7 +166,7 @@
 <!-- BEGIN post -->
 <form action="{comment_block.post.S_COMMENT_ACTION}" method="post" name="comments_post">
 <table cellpadding="3" cellspacing="1" border="0" align="center">
-<tr><td align="center"><input type="submit" name="post" value="{comment_block.post.L_POST_COMMENT}" class="mainoption"/>{comment_block.post.S_HIDDEN_FIELDS}</td></tr>
+<tr><td class="tdalignc"><input type="submit" name="post" value="{comment_block.post.L_POST_COMMENT}" class="mainoption"/>{comment_block.post.S_HIDDEN_FIELDS}</td></tr>
 </table>
 </form>
 <!-- END post -->
@@ -174,7 +174,7 @@
 
 <!-- BEGIN mod_list -->
 <br />
-{IMG_THL}{IMG_THC}<span class="forumlink">&nbsp;</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">&nbsp;</span>{IMG_THR}<table class="forumlinenb">
 <!-- END mod_list -->
 <!-- BEGIN modlisttest -->
 <tr>

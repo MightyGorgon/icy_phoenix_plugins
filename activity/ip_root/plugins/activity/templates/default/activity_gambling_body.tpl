@@ -1,13 +1,13 @@
 <form method="post" name="gambling" action="activity.php?page=gambling">
 <!-- BEGIN stats -->
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_gambling_link_3}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_gambling_link_3}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
-	<th width="5%"> {stats.L_TITLE_1}</th>
-	<th width="20%">{stats.L_TITLE_2}</th>
-	<th width="20%">{stats.L_TITLE_3}</th>
-	<th width="15%">{stats.L_TITLE_4}</th>
-	<th width="20%">{stats.L_TITLE_5}</th>
-	<th width="20%">{stats.L_TITLE_6}</th>
+	<th class="tw5pct"> {stats.L_TITLE_1}</th>
+	<th class="tw20pct">{stats.L_TITLE_2}</th>
+	<th class="tw20pct">{stats.L_TITLE_3}</th>
+	<th class="tw15pct">{stats.L_TITLE_4}</th>
+	<th class="tw20pct">{stats.L_TITLE_5}</th>
+	<th class="tw20pct">{stats.L_TITLE_6}</th>
 </tr>
 <!-- END stats -->
 <!-- BEGIN stats_rows -->
@@ -22,14 +22,14 @@
 </tr>
 <!-- END stats_rows -->
 <!-- BEGIN stats -->
-<tr><th width="100%" colspan="6">&nbsp;</th></tr>
+<tr><th colspan="6">&nbsp;</th></tr>
 </table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
 <!-- END stats -->
 
 <!-- BEGIN user_selection -->
-<table class="forumline" width="100%" cellspacing="0" cellpadding="0" border="0">
-<tr><td class="row-header" width="100%" colspan="4"><span>{L_gambling_link_2}</span></td></tr>
-<tr><th width="100%" colspan="4">{user_selection.L_USER_SELECTION_TITLE}</th></tr>
+<table class="forumline">
+<tr><td class="row-header" colspan="4"><span>{L_gambling_link_2}</span></td></tr>
+<tr><th colspan="4">{user_selection.L_USER_SELECTION_TITLE}</th></tr>
 <tr>
 	<td class="row2 row-center" colspan="4" width="100%">
 		<select name="user_option_one">
@@ -46,9 +46,9 @@
 <!-- END user_selection -->
 <!-- BEGIN game_selection -->
 <tr>
-	<th width="5%">#</th>
-	<th width="10%">{game_selection.L_GAME_RADIO}</th>
-	<th width="35%">{game_selection.L_GAME_IMAGE}</th>
+	<th class="tw5pct">#</th>
+	<th class="tw10pct">{game_selection.L_GAME_RADIO}</th>
+	<th class="tw35pct">{game_selection.L_GAME_IMAGE}</th>
 	<th width="50%">{game_selection.L_GAME_DESC}</th>
 </tr>
 <!-- END game_selection -->
@@ -65,28 +65,28 @@
 <tr><th width="80%" colspan="4">{bet_selection.L_BET_TITLE}</th></tr>
 <tr>
 	<td align="left" valign="middle" width="80%" class="row2" colspan="3"><span class="genmed">{bet_selection.L_BET_FOR_FUN}</span></td>
-	<td class="row2 row-center" valign="middle" width="20%"><span class="genmed"><input type="radio" name="bet_selection" value="1" /></span></td>
+	<td class="row2 row-center tvalignm" width="20%"><span class="genmed"><input type="radio" name="bet_selection" value="1" /></span></td>
 </tr>
 <tr>
 	<td align="left" valign="middle" width="80%" class="row1" colspan="3"><span class="genmed">{bet_selection.L_BET_FOR_FEE}</span></td>
-	<td class="row1 row-center" valign="middle" width="20%"><span class="genmed"><input type="radio" name="bet_selection" value="2" /></span></td>
+	<td class="row1 row-center tvalignm" width="20%"><span class="genmed"><input type="radio" name="bet_selection" value="2" /></span></td>
 </tr>
 <tr>
 	<td align="left" valign="middle" width="80%" class="row2" colspan="3">
 		<span class="genmed">{bet_selection.L_BET_DESC}</span>
 		<span class="gensmall"><i>({bet_selection.L_MAX_BET_DESC})</i>{bet_selection.L_POINTS_OFF}</span>
 	</td>
-	<td class="row2 row-center" valign="middle" width="20%"><span class="genmed"><input type="text" name="bet_amount" value="" size="10" /></span></td>
+	<td class="row2 row-center tvalignm" width="20%"><span class="genmed"><input type="text" name="bet_amount" value="" size="10" /></span></td>
 </tr>
 
-<tr><th width="100%" colspan="4">{bet_selection.L_SUBMIT_TITLE}</th></tr>
+<tr><th colspan="4">{bet_selection.L_SUBMIT_TITLE}</th></tr>
 <tr>
-	<td class="cat" valign="middle" width="100%" colspan="4">
+	<td class="cat tvalignm" colspan="4">
 		<input class="mainoption" type="hidden" name="mode" value="submit_gamble" />
 		<input class="mainoption" type="submit" value="{bet_selection.L_GAME_SUBMIT}" onchange="document.gambling.submit()" />
 	</td>
 </tr>
-<tr><th width="100%" colspan="4">&nbsp;</th></tr>
+<tr><th colspan="4">&nbsp;</th></tr>
 </table>
 </form>
 	<!-- END bet_selection -->

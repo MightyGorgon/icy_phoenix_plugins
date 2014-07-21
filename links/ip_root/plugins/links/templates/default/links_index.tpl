@@ -39,7 +39,7 @@ function checkForm()
 </script>
 <!-- INCLUDE ../../plugins/links/templates/default/links_leftblock.tpl -->
 	<td width="100%" nowrap="nowrap" valign="top">
-		{IMG_THL}{IMG_THC}<span class="forumlink">{L_SITE_LINKS}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+		{IMG_THL}{IMG_THC}<span class="forumlink">{L_SITE_LINKS}</span>{IMG_THR}<table class="forumlinenb">
 		<tr>
 			<th colspan="2" width="75%">{L_LINK_CATEGORY}</th>
 			<th>{L_SITE_LINKS}</th>
@@ -47,7 +47,7 @@ function checkForm()
 		<!-- BEGIN linkrow -->
 		<tr>
 			<td class="{linkrow.ROW_CLASS} row-center" width="30" style="padding-right:5px;" nowrap="nowrap"><img src="{FOLDER_IMG}" alt="{linkrow.LINK_TITLE}" title="{linkrow.LINK_TITLE}" /></td>
-			<td class="{linkrow.ROW_CLASS} row-forum" width="100%" data-href="{linkrow.LINK_URL}"><span class="forumlink"><a href="{linkrow.LINK_URL}" class="forumlink">{linkrow.LINK_TITLE}</a></span></td>
+			<td class="{linkrow.ROW_CLASS} row-forum tw100pct" data-href="{linkrow.LINK_URL}"><span class="forumlink"><a href="{linkrow.LINK_URL}" class="forumlink">{linkrow.LINK_TITLE}</a></span></td>
 			<td class="{linkrow.ROW_CLASS} row-center-small"><span class="genmed">{linkrow.LINK_NUMBER}</span></td>
 		</tr>
 		<!-- END linkrow -->

@@ -1,4 +1,4 @@
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_DL_TODO}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_DL_TODO}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
 	<th>{L_DESCRIPTION}</th>
 	<th>{L_DL_TODO}</th>

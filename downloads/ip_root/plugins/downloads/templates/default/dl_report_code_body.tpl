@@ -1,5 +1,5 @@
 <form action="{S_CONFIRM_ACTION}" method="post" name="confirm_broken_dl">
-{IMG_THL}{IMG_THC}<span class="forumlink">{MESSAGE_TITLE}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{MESSAGE_TITLE}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
 	<td class="row1 row-center">
 		<span class="gen"><br />{MESSAGE_TEXT}

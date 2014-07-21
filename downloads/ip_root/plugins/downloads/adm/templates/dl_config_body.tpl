@@ -1,5 +1,5 @@
 <form action="{S_CONFIG_ACTION}" method="post">
-<table class="forumline" width="100%" cellspacing="0" cellpadding="0">
+<table class="forumline">
 <tr><th colspan="3">{L_CONFIGURATION_TITLE}</th></tr>
 <tr><td class="row3 row-center" colspan="3"><span class="gensmall">{L_CONFIGURATION_EXPLAIN}</span></td></tr>
 <tr>
@@ -263,6 +263,6 @@
 	<td class="row1" width="2%">&nbsp;[<a href="javascript:void(0)" onclick="help_popup('{L_DL_USE_EXT_BLACKLIST_EXPLAIN}')" class="nav">?</a>]&nbsp;</td>
 	<td class="row2" width="30%"><input type="radio" name="use_ext_blacklist" value="1" {USE_EXT_BLACKLIST_YES} /> {L_YES}&nbsp;&nbsp;<input type="radio" name="use_ext_blacklist" value="0" {USE_EXT_BLACKLIST_NO} /> {L_NO}</td>
 </tr>
-<tr><td class="cat" colspan="3" align="center">{S_HIDDEN_FIELDS}<input type="submit" name="submit" value="{L_SUBMIT}" class="mainoption" />&nbsp;&nbsp;<input type="reset" value="{L_RESET}" class="liteoption" /></td></tr>
+<tr><td class="cat tdalignc" colspan="3">{S_HIDDEN_FIELDS}<input type="submit" name="submit" value="{L_SUBMIT}" class="mainoption" />&nbsp;&nbsp;<input type="reset" value="{L_RESET}" class="liteoption" /></td></tr>
 </table>
 </form>

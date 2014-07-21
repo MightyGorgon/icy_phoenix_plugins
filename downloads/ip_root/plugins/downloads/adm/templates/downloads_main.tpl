@@ -1,8 +1,8 @@
 <h1>{DL_MANAGEMENT_TITLE}</h1>
 
-<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<table>
 <tr>
-	<td valign="top">
+	<td>
 		<span class="genmed">{DL_MANAGEMENT_EXPLAIN}</span>
 		<hr />
 		<span class="gensmall">
@@ -17,7 +17,7 @@
 		<!-- END total_stat -->
 		</span>
 	</td>
-	<td valign="top" align="right">
+	<td class="tdalignr">
 		<span class="genmed">&nbsp;<br />&nbsp;</span>
 		<hr />
 		<a href="{U_BANLIST}" class="mainmenu">{L_BANLIST}&nbsp;<img src="{BANLIST_IMG}" border="0" alt="" /></a>
@@ -30,11 +30,11 @@
 	</td>
 </tr>
 </table>
-<table class="forumline" cellpadding="0" cellspacing="0" border="0" width="100%">
+<table class="forumline">
 <tr><th colspan="6">{DL_MANAGEMENT_TITLE}</th></tr>
 <tr>
 	<!-- BEGIN management_menu_row -->
-	<td class="row1 row-center" width="{ROW_WIDTH}%" valign="top">
+	<td class="row1 row-center" width="{ROW_WIDTH}%">
 	<span class="genmed">
 	<br />
 	<a href="{management_menu_row.U_MODULE_URL}" class="mainmenu"><img src="{management_menu_row.I_MODULE_IMG}" border="0" alt="{management_menu_row.L_MODULE_TITLE}" title="{management_menu_row.L_MODULE_TITLE}" /></a>

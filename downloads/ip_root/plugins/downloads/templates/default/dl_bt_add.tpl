@@ -1,11 +1,11 @@
 <form action="{S_FORM_ACTION}" method="post" name="add_new_report">
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_ADD_REPORT}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_ADD_REPORT}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
-	<td class="row1" width="20%"><span class="gen"><b>{L_REPORT_FILE}</b></span></td>
+	<td class="row1 tw20pct"><span class="gen"><b>{L_REPORT_FILE}</b></span></td>
 	<td class="row2" width="80%"><span class="gen">{S_SELECT_DOWNLOAD}</span>&nbsp;<span class="genmed">{L_REPORT_FILE_VER}</span>&nbsp;<input type="text" size="20" maxlength="50" class="post" name="report_file_ver" /></td>
 </tr>
 <tr>
-	<td class="row1" width="20%"><span class="gen"><b>{L_REPORT_TITLE}</b></span></td>
+	<td class="row1 tw20pct"><span class="gen"><b>{L_REPORT_TITLE}</b></span></td>
 	<td class="row2" width="80%"><input type="text" size="50" maxlength="255" class="post" name="report_title" /></td>
 </tr>
 <tr>
@@ -54,19 +54,19 @@
 	<td class="row2" width="80%"><textarea cols="75" rows="10" name="report_text" class="post"></textarea></td>
 </tr>
 <tr>
-	<td class="row1" width="20%"><span class="gen"><b>{L_REPORT_PHP}</b></span></td>
+	<td class="row1 tw20pct"><span class="gen"><b>{L_REPORT_PHP}</b></span></td>
 	<td class="row2" width="80%"><input type="text" size="50" maxlength="255" class="post" name="report_php" /></td>
 </tr>
 <tr>
-	<td class="row1" width="20%"><span class="gen"><b>{L_REPORT_DB}</b></span></td>
+	<td class="row1 tw20pct"><span class="gen"><b>{L_REPORT_DB}</b></span></td>
 	<td class="row2" width="80%"><input type="text" size="50" maxlength="255" class="post" name="report_db" /></td>
 </tr>
 <tr>
-	<td class="row1" width="20%"><span class="gen"><b>{L_REPORT_FORUM}</b></span></td>
+	<td class="row1 tw20pct"><span class="gen"><b>{L_REPORT_FORUM}</b></span></td>
 	<td class="row2" width="80%"><input type="text" size="50" maxlength="255" class="post" name="report_forum" /></td>
 </tr>
 <tr>
-	<td class="cat" colspan="2" align="center"><input type="submit" name="submit" value="{L_SUBMIT}" class="mainoption" /></td>
+	<td class="cat tdalignc" colspan="2"><input type="submit" name="submit" value="{L_SUBMIT}" class="mainoption" /></td>
 </tr>
 </table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
 

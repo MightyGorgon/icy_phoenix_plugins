@@ -1,7 +1,7 @@
 <!-- INCLUDE simple_header.tpl -->
 
 <form name="select_all">
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_LINK_US}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_LINK_US}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
 	<td class="row1g row-center">
 		<br /><div class="center-block"><img src="{U_SITE_LOGO}" alt="{SITENAME}" title="{SITENAME}" /></div><br />

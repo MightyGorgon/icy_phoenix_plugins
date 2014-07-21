@@ -2,7 +2,7 @@
 <p>{L_LINK_CAT_EXPLAIN}</p>
 
 <form action="{S_LINK_ACTION}" method="post">
-<table class="forumline" width="100%" cellspacing="0" cellpadding="0" border="0">
+<table class="forumline">
 <tr><th colspan="3">{L_LINK_CAT_TITLE}</th></tr>
 <!-- BEGIN catrow -->
 <tr>

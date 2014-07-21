@@ -1,7 +1,7 @@
-<table class="empty-table" width="100%" cellspacing="0" cellpadding="0" border="0">
+<table>
 <tr>
 	<td width="190" valign="top">
-	{IMG_THL}{IMG_THC}<span class="forumlink">{L_LINKS}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+	{IMG_THL}{IMG_THC}<span class="forumlink">{L_LINKS}</span>{IMG_THR}<table class="forumlinenb">
 	<tr>
 		<td class="row1g row-center">
 		<form name="select_all" action="">
@@ -14,7 +14,7 @@
 	</table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
 	<!-- BEGIN lock -->
 	<!-- BEGIN logout -->
-	{IMG_THL}{IMG_THC}<span class="forumlink">{L_LOGIN}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+	{IMG_THL}{IMG_THC}<span class="forumlink">{L_LOGIN}</span>{IMG_THR}<table class="forumlinenb">
 	<tr>
 		<td class="row1g-left" width="190">
 		<form method="post" action="{S_LOGIN_ACTION}">
@@ -33,7 +33,7 @@
 
 	<!-- BEGIN submit -->
 	<form name="linkdata" method="post" action="{U_LINK_REG}">
-	{IMG_THL}{IMG_THC}<span class="forumlink">{L_LINK_REGISTER}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+	{IMG_THL}{IMG_THC}<span class="forumlink">{L_LINK_REGISTER}</span>{IMG_THR}<table class="forumlinenb">
 	<tr>
 		<td class="row1g-left" style="padding: 2px;">
 			{L_LINK_REGISTER_RULE}<br /><br />

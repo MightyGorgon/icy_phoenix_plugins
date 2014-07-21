@@ -7,9 +7,9 @@
 </div>
 </form>
 
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_MG_FEEDBACK}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_MG_FEEDBACK}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
-	<th width="30">#</th>
+	<th class="tw30px">#</th>
 	<th>{L_DATE}</th>
 	<th>{L_USERNAME_FROM}</th>
 	<th>{L_USERNAME_TO}</th>
@@ -46,7 +46,7 @@
 <tr><td class="cat" colspan="8">&nbsp;</td></tr>
 </table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
 
-<div style="float:right;text-align:right;">
+<div style="float: right; text-align: right;">
 	<span class="pagination">{PAGINATION}</span><br />
 	<span class="gensmall">{PAGE_NUMBER}</span>
 </div>

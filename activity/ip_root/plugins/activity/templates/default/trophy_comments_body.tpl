@@ -1,5 +1,5 @@
 <!-- BEGIN main -->
-<table width="100%" align="center" cellspacing="0" cellpadding="0" border="0">
+<table>
 <tr>
 	<th width="25%" align="center">{main.MAIN_NAME}</th>
 	<th width="15%" align="center">{main.MAIN_LEFT}</th>
@@ -31,11 +31,11 @@
 
 <!-- BEGIN post_comment -->
 <form method="post" action="{post_comment.POST_LINK}">
-<table class="forumline" width="100%" cellspacing="0" cellpadding="0" border="0"><tr><th width="100%">{post_comment.POST_TITLE}</th></tr></table>
+<table class="forumline"><tr><th class="tw100pct">{post_comment.POST_TITLE}</th></tr></table>
 <br />
-<table width="100%" align="center" border="0"><tr><td align="center">{post_comment.POST_IMAGE}</td></tr></table>
+<table><tr><td class="tdalignc">{post_comment.POST_IMAGE}</td></tr></table>
 <br />
-<table class="forumline" width="100%" cellspacing="0" cellpadding="0" border="0">
+<table class="forumline">
 <tr>
 	<td class="row2 row-center">
 		<span class="genmed">{post_comment.POST_LENGTH}</span><br />

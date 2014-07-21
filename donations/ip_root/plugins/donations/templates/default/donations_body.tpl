@@ -11,8 +11,8 @@
 
 <!-- IF NO_DONATIONS -->
 
-<br clear="all" />
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_MG_DONATIONS}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+<br class="clear" />
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_MG_DONATIONS}</span>{IMG_THR}<table class="forumlinenb">
 <tr><th>{L_MG_DONATIONS}</th></tr>
 <tr><td class="row1 row-center">{L_NO_DONATIONS}</td></tr>
 <tr><td class="cat">&nbsp;</td></tr>
@@ -26,11 +26,11 @@
 	{S_HIDDEN_FIELDS}<input type="submit" name="submit" value="{L_SUBMIT}" class="liteoption" />
 </div>
 </form>
-<br clear="all" />
+<br class="clear" />
 
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_MG_DONATIONS}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_MG_DONATIONS}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
-	<th width="30">#</th>
+	<th class="tw30px">#</th>
 	<th>{L_DATE}</th>
 	<th>{L_USERNAME}</th>
 	<th>{L_WEBSITE}</th>
@@ -42,21 +42,21 @@
 </tr>
 <!-- BEGIN donations -->
 <tr class="{donations.CLASS} {donations.CLASS}h" style="background-image: none;">
-	<td class="{donations.CLASS} row-center" style="background: none; line-height: 150%;" nowrap="nowrap">{donations.ROW_NUMBER}</td>
-	<td class="{donations.CLASS} row-center" style="background: none;" nowrap="nowrap">{donations.DATE}</td>
-	<td class="{donations.CLASS} row-center" style="background: none;" nowrap="nowrap">{donations.USERNAME}</td>
+	<td class="{donations.CLASS} row-center tdnw" style="background: none; line-height: 150%;">{donations.ROW_NUMBER}</td>
+	<td class="{donations.CLASS} row-center tdnw" style="background: none;">{donations.DATE}</td>
+	<td class="{donations.CLASS} row-center tdnw" style="background: none;">{donations.USERNAME}</td>
 	<!-- IF IS_PROSILVER -->
 	<td class="{donations.CLASS} row-center" style="background: none;"><!-- IF donations.TEXT_LINK -->{donations.WEBSITE}<!-- ELSE --><!-- IF donations.U_WEBSITE --><ul class="profile-icons" style="padding-left: 10px;"><li class="web-icon"><a href="{donations.U_WEBSITE}" rel="nofollow" target="_blank"><span>{L_WEBSITE}</span></a></li></ul><!-- ELSE -->&nbsp;<!-- ENDIF --><!-- ENDIF --></td>
 	<!-- ELSE -->
-	<td class="{donations.CLASS} row-center" style="background: none;" nowrap="nowrap"><span class="post-buttons-single"><!-- IF donations.WEBSITE -->{donations.WEBSITE}<!-- ELSE -->&nbsp;<!-- ENDIF --></span></td>
+	<td class="{donations.CLASS} row-center tdnw" style="background: none;"><span class="post-buttons-single"><!-- IF donations.WEBSITE -->{donations.WEBSITE}<!-- ELSE -->&nbsp;<!-- ENDIF --></span></td>
 	<!-- ENDIF -->
 	<!-- IF S_ADMIN_ALLOWED -->
 	<!-- IF IS_PROSILVER -->
-	<td class="{donations.CLASS} row-center" style="background: none;" nowrap="nowrap"><!-- IF donations.U_EMAIL --><ul class="profile-icons" style="padding-left: 10px;"><li class="email-icon"><a href="{donations.U_EMAIL}" rel="nofollow"><span>{L_EMAIL}</span></a></li></ul><!-- ELSE -->&nbsp;<!-- ENDIF --></td>
+	<td class="{donations.CLASS} row-center tdnw" style="background: none;"><!-- IF donations.U_EMAIL --><ul class="profile-icons" style="padding-left: 10px;"><li class="email-icon"><a href="{donations.U_EMAIL}" rel="nofollow"><span>{L_EMAIL}</span></a></li></ul><!-- ELSE -->&nbsp;<!-- ENDIF --></td>
 	<!-- ELSE -->
-	<td class="{donations.CLASS} row-center" style="background: none;" nowrap="nowrap"><span class="post-buttons-single">{donations.EMAIL}</span></td>
+	<td class="{donations.CLASS} row-center tdnw" style="background: none;"><span class="post-buttons-single">{donations.EMAIL}</span></td>
 	<!-- ENDIF -->
-	<td class="{donations.CLASS} row-center" style="background: none;" nowrap="nowrap">{donations.AMOUNT}</td>
+	<td class="{donations.CLASS} row-center tdnw" style="background: none;">{donations.AMOUNT}</td>
 	<td class="{donations.CLASS} row-center" style="background: none;">{donations.S_VIEW}&nbsp;{donations.S_EDIT}&nbsp;{donations.S_DELETE}</td>
 	<!-- ENDIF -->
 </tr>
@@ -81,7 +81,7 @@
 
 </div>
 
-<br clear="all" />
+<br class="clear" />
 <br /><br />
 
 <!-- ENDIF -->

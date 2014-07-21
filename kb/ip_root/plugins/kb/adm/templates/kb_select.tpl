@@ -2,7 +2,7 @@
 <p>{L_FIELD_EXPLAIN}</p>
 
 <form action="{S_FIELD_ACTION}" method="post">
-<table class="forumline" width="100%" cellspacing="0" cellpadding="0" border="0">
+<table class="forumline">
 <tr><th>{L_SELECT_TITLE}</b></th></tr>
 <tr>
 	<td class="cat">

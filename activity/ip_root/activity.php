@@ -1456,8 +1456,8 @@ function copyright()
 	var winpops = window.open(popurl, "", "width=400, height=400,");
 }
 </script>
-<table width="100%" cellspacing="0" cellpadding="0" border="0">
-<tr><td align="left" valign="top"><a style="text-decoration:none;" href="javascript:copyright();" class="gensmall">&copy; Activity Mod Plus</a></td></tr>
+<table>
+<tr><td><a style="text-decoration:none;" href="javascript:copyright();" class="gensmall">&copy; Activity Mod Plus</a></td></tr>
 </table>
 ');
 

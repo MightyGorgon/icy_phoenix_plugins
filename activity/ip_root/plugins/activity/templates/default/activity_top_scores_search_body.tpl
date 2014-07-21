@@ -11,7 +11,7 @@
 	</div>
 </div>
 
-{IMG_THL}{IMG_THC}<span class="forumlink">{search_player.L_LINK_DESC}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{search_player.L_LINK_DESC}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
 	<th>{L_USERNAME}</th>
 	<th>{search_player.TOP_ONE}</th>
@@ -39,5 +39,5 @@
 	<td class="row1 row-center" width="25%" colspan="3"><div class="post-text">{L_scored}{search_player_games.SCORE_DATE}</div></td>
 </tr>
 <!-- END search_player_games -->
-<tr><th width="100%" colspan="6">&nbsp;</th></tr>
+<tr><th colspan="6">&nbsp;</th></tr>
 </table>{IMG_TFL}{IMG_TFC}{IMG_TFR}

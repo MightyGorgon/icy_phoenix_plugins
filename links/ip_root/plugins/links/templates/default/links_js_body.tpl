@@ -12,7 +12,7 @@ var linkrow = new Array({LINKS_LOGO});
 var interval = {DISPLAY_INTERVAL};
 var link_start = 0;
 var link_num = {DISPLAY_LOGO_NUM};
-document.write('<table width="100%" cellspacing="0" cellpadding="0" border="0"><tr><td><div id="links"><\/div><\/td><\/tr><\/table>');
+document.write('<table><tr><td><div id="links"><\/div><\/td><\/tr><\/table>');
 function writeDiv()
 {
 	var link_innerHTML = '';

@@ -2,20 +2,20 @@
 <p>{PAGE_EXPLAIN}</p>
 <br />
 <form method="post" action="{PAGE_ACTION}">
-<table class="forumline" width="100%" cellpadding="0" cellspacing="0" border="0">
+<table class="forumline">
 <tr><th><span class="genmed"><strong>{L_SEARCH_SITE}</strong></span></th></tr>
 <tr><td class="row1 row-center"><span class="genmed">{L_SEARCH_SITE_TITLE}&nbsp;&nbsp;</span><input type="text" style="width: 200px" class="post" name="search_keywords" size="30" />&nbsp;<input type="submit" name="submit" value="{L_SUBMIT}" class="mainoption" />&nbsp;&nbsp;</td></tr>
 </table>
 <br /><br />
-<table class="forumline" width="100%" cellpadding="0" cellspacing="0" border="0">
+<table class="forumline">
 <tr>
-	<th nowrap="nowrap">{L_LINK_TITLE}</th>
-	<th nowrap="nowrap">{L_LINK_CATEGORY}</th>
-	<th nowrap="nowrap">{L_LINK_USER}</th>
-	<th nowrap="nowrap">{L_LINK_JOINED}</th>
-	<th nowrap="nowrap">{L_LINK_USER_IP}</th>
-	<th nowrap="nowrap">{L_LINK_ACTIVE}</th>
-	<th nowrap="nowrap">{L_LINK_HITS}</th>
+	<th class="tdnw">{L_LINK_TITLE}</th>
+	<th class="tdnw">{L_LINK_CATEGORY}</th>
+	<th class="tdnw">{L_LINK_USER}</th>
+	<th class="tdnw">{L_LINK_JOINED}</th>
+	<th class="tdnw">{L_LINK_USER_IP}</th>
+	<th class="tdnw">{L_LINK_ACTIVE}</th>
+	<th class="tdnw">{L_LINK_HITS}</th>
 	<th>{L_ACTION}</th>
 </tr>
 <!-- BEGIN linkrow -->
@@ -34,12 +34,12 @@
 </table>
 </form>
 <br />
-<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<table>
 <tr>
-	<td valign="top"><span class="gensmall">{PAGE_NUMBER}</span></td>
-	<td align="right"><span class="pagination">{PAGINATION}</span></td>
+	<td><span class="gensmall">{PAGE_NUMBER}</span></td>
+	<td class="tdalignr"><span class="pagination">{PAGINATION}</span></td>
 </tr>
 </table>
-<br clear="all" />
+<br class="clear" />
 <div align="center"><span class="copyright">Links MOD v1.2.1 by <a href="http://www.phpbb2.de" target="_blank">phpBB2.de</a> and OOHOO and CRLin</span></div>
-<br clear="all" />
+<br class="clear" />

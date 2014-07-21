@@ -234,7 +234,7 @@ function AMP_Profile_Char($target_user, $char_profile)
 			}
 
 			$profile .= '<br clear="all" />';
-			$profile .= '<table class="forumline" width="100%" cellspacing="0" cellpadding="0">';
+			$profile .= '<table class="forumline">';
 			$profile .= '<tr>';
 			$profile .= '	<td class="row-header" colspan="2"><span>' . $lang['char'] . '</span>';
 			$profile .= '</tr>';
@@ -242,7 +242,7 @@ function AMP_Profile_Char($target_user, $char_profile)
 			$profile .= '	<th align="center" width="40%">';
 			$profile .= '		'. $char_name;
 			$profile .= '	</th>';
-			$profile .= '	<td width="60%" class="row2" align="left" valign="top" rowspan="2">';
+			$profile .= '	<td class="row2" align="left" valign="top" rowspan="2" style="width: 60%;">';
 			$profile .= '		<span class="genmed">';
 			$profile .= '			'. $lang['amp_char_cp_gender'] .': '. $char_gender .'<br /><br />';
 			$profile .= '			'. $lang['amp_char_cp_age'] .': '. $char_age .'<br /><br />';

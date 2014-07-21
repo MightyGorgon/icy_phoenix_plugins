@@ -1,5 +1,5 @@
 <form action="{S_SEARCH_ACTION}" method="post">
-{IMG_THL}{IMG_THC}<span class="forumlink">{L_SEARCH}</span>{IMG_THR}<table class="forumlinenb" width="100%" cellspacing="0" cellpadding="0">
+{IMG_THL}{IMG_THC}<span class="forumlink">{L_SEARCH}</span>{IMG_THR}<table class="forumlinenb">
 <tr><th colspan="4">{L_SEARCH_QUERY}</th></tr>
 <tr>
 	<td class="row1" colspan="2" width="50%">
@@ -17,7 +17,7 @@
 <tr><td class="cat" colspan="4">{S_HIDDEN_FIELDS}<input class="liteoption" type="submit" value="{S_SEARCH}" /></td></tr>
 </table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
 
-<table class="empty-table" width="100%" align="center" cellspacing="0">
+<table>
 <tr><td align="right" valign="middle"><span class="gensmall">{S_TIMEZONE}</span></td></tr>
 </table>
 </form>

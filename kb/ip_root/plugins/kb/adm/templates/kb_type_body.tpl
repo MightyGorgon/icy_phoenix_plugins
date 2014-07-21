@@ -7,7 +7,7 @@
 </div>
 </form>
 
-<table class="forumline" width="100%" cellspacing="0" cellpadding="0" border="0">
+<table class="forumline">
 <tr>
 	<th nowrap="nowrap">{L_TYPE}</th>
 	<th nowrap="nowrap">{L_ACTION}</th>
@@ -18,6 +18,6 @@
 	<td width="15%" nowrap="nowrap" class="{typerow.ROW_CLASS} row-center"><span class="post-buttons">{typerow.U_EDIT} | {typerow.U_DELETE}</span></td>
 </tr>
 <!-- END typerow -->
-<tr><td colspan="2" class="cat">&nbsp;</td></tr>
+<tr><td class="cat" colspan="2">&nbsp;</td></tr>
 </table>
 <br clear="all" />

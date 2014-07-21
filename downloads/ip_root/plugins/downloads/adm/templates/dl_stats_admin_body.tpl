@@ -11,7 +11,7 @@
 </script>
 
 <form action="{S_FORM_ACTION}" method="post" name="dl_stats">
-<table class="forumline" width="100%" cellspacing="0" cellpadding="0">
+<table class="forumline">
 <tr><th colspan="9">{L_DL_STATS}</th></tr>
 <tr>
 	<td class="row1 row-center"><span class="genmed"><b>{L_USERNAME}</b></span></td>
@@ -43,36 +43,36 @@
 <!-- END dl_stat_row -->
 <!-- BEGIN no_dl_stat_row -->
 <tr><td class="row1 row-center" colspan="9" height="25"><span class="genmed">{no_dl_stat_row.L_NO_STAT}</span></td></tr>
-<tr><td class="cat" align="center" colspan="9" height="25">&nbsp;</td></tr>
+<tr><td class="cat tdalignc" colspan="9" height="25">&nbsp;</td></tr>
 <!-- END no_dl_stat_row -->
 <!-- BEGIN filled_footer -->
 <tr>
 	<td class="cat" colspan="8" align="right">{L_GUESTS_DELETE}:&nbsp;<input type="checkbox" name="del_id" value="-1" />&nbsp;&nbsp;&nbsp;</td>
-	<td class="cat" align="center"><input type="submit" name="delete" value="{L_DELETE}" class="liteoption" /></td>
+	<td class="cat tdalignc"><input type="submit" name="delete" value="{L_DELETE}" class="liteoption" /></td>
 </tr>
 </table>
-<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<table>
 <tr>
-	<td align="right">
+	<td class="tdalignr">
 		<a href="javascript:select_switch(true);" class="gensmall">{L_MARK_ALL}</a>&nbsp;&bull;&nbsp;<a href="javascript:select_switch(false);" class="gensmall">{L_UNMARK_ALL}</a>
 	</td>
 </tr>
 <tr>
-	<td align="right"><span class="genmed">
+	<td class="tdalignr"><span class="genmed">
 		{L_SORT_BY}:&nbsp;{S_SORT_ORDER}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		{L_SORT_DIR}:&nbsp;{S_SORT_DIR}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<input type="submit" name="submit" value="{L_SORT}" class="mainoption" />
 	</span></td>
 </tr>
 <tr>
-	<td align="right"><span class="genmed">
+	<td class="tdalignr"><span class="genmed">
 		{S_FILTER}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<input type="text" name="filter_string" value="{FILTER_STRING}" size="30" maxlength="50" />&nbsp;({L_FILTER_STRING})&nbsp;&nbsp;&nbsp;
 		{L_SHOW_GUESTS}:&nbsp;<input type="checkbox" name="show_guests" value="1" {S_SHOW_GUESTS} />&nbsp;&nbsp;&nbsp;
 		<input type="submit" name="submit" value="{L_FILTER}" class="mainoption" />
 	</span></td>
 </tr>
-<tr><td align="right"><br /><span class="nav">{PAGINATION}</span></td></tr>
+<tr><td class="tdalignr"><br /><span class="nav">{PAGINATION}</span></td></tr>
 <!-- END filled_footer -->
 </table>
 </form>

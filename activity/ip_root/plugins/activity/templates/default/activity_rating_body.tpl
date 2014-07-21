@@ -1,8 +1,8 @@
 <form method="post" name="sub_rate" action="activity_rating.php{CAT_RATE}">
-<table width="100%" border="0" align="center" valign="middle"><tr><th width="100%">{TITLE}</th></tr></table>
-<table width="100%" border="0" align="center" valign="middle" class="forumline">
+<table><tr><th class="tw100pct">{TITLE}</th></tr></table>
+<table class="forumline">
 	<tr>
-		<td align="left" width="50%" class="row2"><span class="genmed">{CHOICES}</span></td>
+		<td class="tw50pct" class="row2"><span class="genmed">{CHOICES}</span></td>
 		<td align="center" valign="middle" width="50%" class="row2">
 			<select name="rating">
 				<option selected value="">{DEFAULT_RATE}</option>
