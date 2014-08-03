@@ -13,7 +13,7 @@
 <form name="save" method="post" action="{RETURN}">
 <table class="forumline talignc">
 <tr>
-	<th width="65%">&nbsp;</th>
+	<th class="tw65pct">&nbsp;</th>
 	<th class="tw35pct">&nbsp;</th>
 </tr>
 <tr>
