@@ -179,8 +179,6 @@ if ($total_favorites)
 	$template->assign_block_vars('fav_block', array(
 		'L_DOWNLOAD' => $lang['Dl_favorite'],
 		'L_DELETE' => $lang['Dl_delete'],
-		'L_MARK_ALL' => $lang['Dl_mark_all'],
-		'L_UNMARK_ALL' => $lang['Dl_unmark'],
 
 		'S_FORM_ACTION' => append_sid('downloads.' . PHP_EXT . '?view=user_config')
 		)

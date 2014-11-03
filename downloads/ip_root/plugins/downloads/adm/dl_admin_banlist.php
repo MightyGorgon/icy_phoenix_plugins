@@ -194,8 +194,6 @@ if ($action == '' || $action == 'edit')
 		'L_DL_DELETE' => $lang['Dl_delete'],
 		'L_DL_YES' => $lang['Yes'],
 		'L_DL_NO' => $lang['No'],
-		'L_MARK_ALL' => $lang['Mark_all'],
-		'L_UNMARK_ALL' => $lang['Unmark_all'],
 		'L_DL_EDIT' => $lang['Edit'],
 
 		'DL_USER_ID' => $user_id,

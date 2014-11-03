@@ -136,8 +136,6 @@ if ($action == '')
 		'L_DL_EXTENTIONS' => $lang['Dl_extentions'],
 		'L_DL_ADD_EXTENTION' => $lang['Dl_add_extention'],
 		'L_DL_DEL_EXTENTIONS' => $lang['Dl_delete'],
-		'L_MARK_ALL' => $lang['Mark_all'],
-		'L_UNMARK_ALL' => $lang['Unmark_all'],
 
 		'S_DOWNLOADS_ACTION' => append_sid('admin_downloads.' . PHP_EXT . '?submod=ext_blacklist')
 		)

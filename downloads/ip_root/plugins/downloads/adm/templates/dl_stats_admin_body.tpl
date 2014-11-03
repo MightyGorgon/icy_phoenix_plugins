@@ -1,15 +1,3 @@
-<script language="JavaScript" type="text/javascript">
-<!--
-	function select_switch(status)
-	{
-		for (i = 0; i < document.dl_stats.length-9; i++)
-		{
-			document.dl_stats.elements[i].checked = status;
-		}
-	}
-//-->
-</script>
-
 <form action="{S_FORM_ACTION}" method="post" name="dl_stats">
 <table class="forumline">
 <tr><th colspan="9">{L_DL_STATS}</th></tr>
@@ -54,7 +42,7 @@
 <table>
 <tr>
 	<td class="tdalignr">
-		<a href="javascript:select_switch(true);" class="gensmall">{L_MARK_ALL}</a>&nbsp;&bull;&nbsp;<a href="javascript:select_switch(false);" class="gensmall">{L_UNMARK_ALL}</a>
+		<a href="#" onclick="setCheckboxes('dl_stats', 'del_id[]', true); return false;" class="gensmall">{L_MARK_ALL}</a>&nbsp;&bull;&nbsp;<a href="#" onclick="setCheckboxes('dl_stats', 'del_id[]', false); return false;" class="gensmall">{L_UNMARK_ALL}</a><br class="mb5" />
 	</td>
 </tr>
 <tr>

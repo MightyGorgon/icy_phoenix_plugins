@@ -1,15 +1,3 @@
-<script language="Javascript" type="text/javascript">
-<!--
-function select_switch(status)
-{
-	for (i = 0; i < document.user_dl_favorites.length; i++)
-	{
-		document.user_dl_favorites.elements[i].checked = status;
-	}
-}
-//-->
-</script>
-
 <form action="{S_CONFIG_ACTION}" method="post" name="user_dl_settings">
 {IMG_THL}{IMG_THC}<span class="forumlink">{L_CONFIGURATION_TITLE}</span>{IMG_THR}<table class="forumlinenb">
 <!-- BEGIN no_dl_popup_notify -->
@@ -92,13 +80,15 @@ function select_switch(status)
 <tr><td colspan="2" class="cat" align="right"><input type="submit" name="submit" value="{fav_block.L_DELETE}" class="mainoption" /></td></tr>
 </table>{IMG_TFL}{IMG_TFC}{IMG_TFR}
 
-<table border="0" width="100%">
+<table>
 <tr>
 	<td class="tdalignr tdnw">
-		<a href="javascript:select_switch(true);" class="gensmall">{fav_block.L_MARK_ALL}</a>&nbsp;&bull;&nbsp;<a href="javascript:select_switch(false);" class="gensmall">{fav_block.L_UNMARK_ALL}</a>
+		<span class="gensmall"><a href="#" onclick="setCheckboxes('user_dl_favorites', 'fav_id[]', true); return false;" class="gensmall">{L_MARK_ALL}</a>&nbsp;&bull;&nbsp;<a href="#" onclick="setCheckboxes('user_dl_favorites', 'fav_id[]', false); return false;" class="gensmall">{L_UNMARK_ALL}</a></span><br class="mb5" />
+		<span class="pagination">{PAGINATION}</span>
 	</td>
 </tr>
 </table>
+
 <input type="hidden" name="action" value="drop" />
 </form>
 <br />

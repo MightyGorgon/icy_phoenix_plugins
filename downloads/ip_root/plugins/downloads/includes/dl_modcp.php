@@ -969,8 +969,6 @@ if ($action == 'approve')
 
 	$template->assign_vars(array(
 		'L_APPROVE' => $lang['Dl_approve'],
-		'L_MARK_ALL' => $lang['Dl_mark_all'],
-		'L_UNMARK_ALL' => $lang['Dl_unmark'],
 		'L_DL_CAT_NAME' => $lang['Dl_cat_name'],
 		'L_DOWNLOAD' => $lang['Dl_download'],
 		'L_SET' => $lang['Dl_edit'],
@@ -1089,8 +1087,6 @@ if ($action == 'capprove')
 
 	$template->assign_vars(array(
 		'L_APPROVE' => $lang['Dl_approve'],
-		'L_MARK_ALL' => $lang['Dl_mark_all'],
-		'L_UNMARK_ALL' => $lang['Dl_unmark'],
 		'L_DL_CAT_NAME' => $lang['Dl_cat_name'],
 		'L_DOWNLOAD' => $lang['Dl_download'],
 		'L_COMMENT' => $lang['Dl_comment'],
@@ -1210,8 +1206,6 @@ if (($action == 'manage') && $cat_id)
 	$template->assign_vars(array(
 		'L_SUBMIT' => $lang['Submit'],
 		'L_RESET' => $lang['Reset'],
-		'L_MARK_ALL' => $lang['Dl_mark_all'],
-		'L_UNMARK_ALL' => $lang['Dl_unmark'],
 		'L_MOVE' => $lang['Dl_move'],
 		'L_DELETE' => $lang['Dl_delete'],
 		'L_LOCK' => $lang['Dl_lock'],

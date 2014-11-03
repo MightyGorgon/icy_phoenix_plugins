@@ -1,16 +1,3 @@
-<script language="Javascript" type="text/javascript">
-<!--
-function select_switch(status)
-{
-	doc_length = document.thumbnails.length;
-	for (i = 0; i < doc_length; i++)
-	{
-		document.thumbnails.elements[i].checked = status;
-	}
-}
-//-->
-</script>
-
 <form action="{S_MANAGE_ACTION}" method="post" name="thumbnails">
 <table class="forumline">
 <tr><th colspan="3">{L_DL_THUMBNAILS}</th></tr>
@@ -25,6 +12,6 @@ function select_switch(status)
 </table>
 
 <table class="talignc tw50pct">
-<tr><td nowrap="nowrap" align="right"><span class="gensmall"><a href="javascript:select_switch(true);" class="gensmall">{L_MARK_ALL}</a>&nbsp;&bull;&nbsp;<a href="javascript:select_switch(false);" class="gensmall">{L_UNMARK_ALL}</a></span></td></tr>
+<tr><td nowrap="nowrap" align="right"><span class="gensmall"><a href="#" onclick="setCheckboxes('thumbnails', 'thumb[]', true); return false;" class="gensmall">{L_MARK_ALL}</a>&nbsp;&bull;&nbsp;<a href="#" onclick="setCheckboxes('thumbnails', 'thumb[]', false); return false;" class="gensmall">{L_UNMARK_ALL}</a><br class="mb5" /></span></td></tr>
 </table>
 </form>

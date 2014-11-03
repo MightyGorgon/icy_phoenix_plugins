@@ -138,14 +138,14 @@ if(GetCookie(tmp) == '2')
 <div id="games">
 	{IMG_THL}{IMG_THC}<img class="max-min-right" style="padding-top: 3px;" src="{IMG_MINIMISE}" onclick="ShowHide('games','games_h','games');" alt="{L_HIDE}" /><span class="forumlink">{L_GAMES}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
-	<th class="th" width="20%">{L_GAMES}</th>
-	<th class="th" width="15%">{L_T_HOLDER}</th>
-	<th class="th" width="20%">{L_STATS}</th>
-	<th class="th" width="45%">{L_INFO}</th>
+	<th class="tw20pct">{L_GAMES}</th>
+	<th class="tw15pct">{L_T_HOLDER}</th>
+	<th class="tw20pct">{L_STATS}</th>
+	<th class="tw45pct">{L_INFO}</th>
 </tr>
 <!-- BEGIN game -->
 <tr>
-	<td class="row-post-author" valign="top" width="100%">
+	<td class="row-post-author">
 		<div class="post-text">
 			<b>{games_on.game.PROPER_NAME}</b><br />
 			<div class="post-text">

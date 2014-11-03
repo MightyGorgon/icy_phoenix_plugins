@@ -1,15 +1,3 @@
-<script language="Javascript" type="text/javascript">
-<!--
-function select_switch(status)
-{
-	for (i = 0; i < document.banlist.length; i++)
-	{
-		document.banlist.elements[i].checked = status;
-	}
-}
-// -->
-</script>
-
 <p><b>{L_DL_BANLIST_EXPLAIN}</b></p>
 
 <form action="{S_DOWNLOADS_ACTION}" method="post" name="add_ban">
@@ -53,7 +41,7 @@ function select_switch(status)
 <table>
 <tr>
 	<td class="tdalignr tdnw">
-		<a href="javascript:select_switch(true);" class="gensmall">{L_MARK_ALL}</a>&nbsp;&bull;&nbsp;<a href="javascript:select_switch(false);" class="gensmall">{L_UNMARK_ALL}</a>
+		<a href="#" onclick="setCheckboxes('banlist', 'ban_id[]', true); return false;" class="gensmall">{L_MARK_ALL}</a>&nbsp;&bull;&nbsp;<a href="#" onclick="setCheckboxes('banlist', 'ban_id[]', false); return false;" class="gensmall">{L_UNMARK_ALL}</a><br class="mb5" />
 	</td>
 </tr>
 </table>

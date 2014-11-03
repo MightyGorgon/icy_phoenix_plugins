@@ -212,8 +212,6 @@ if ($action == 'check_thumbnails')
 		$template->assign_vars(array(
 			'L_DELETE' => $lang['Delete'],
 			'L_DL_THUMBNAILS' => $lang['Dl_thumb'],
-			'L_MARK_ALL' => $lang['Dl_mark_all'],
-			'L_UNMARK_ALL' => $lang['Dl_unmark'],
 			'S_MANAGE_ACTION' => append_sid('admin_downloads.' . PHP_EXT . '?submod=toolbox&amp;action=check_thumbnails'))
 		);
 
@@ -391,8 +389,6 @@ if ($action == 'browse' || $action == '' || $action == 'unassigned')
 		'L_DOWNLOADS_CHECK_THUMBS' => $lang['Dl_check_thumbnails'],
 
 		'L_GO' => $lang['Dl_go'],
-		'L_MARK_ALL' => $lang['Dl_mark_all'],
-		'L_UNMARK_ALL' => $lang['Dl_unmark'],
 
 		'DL_NAVI' => $dl_navi,
 

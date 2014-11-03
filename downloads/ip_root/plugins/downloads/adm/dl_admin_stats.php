@@ -259,8 +259,6 @@ $template->assign_vars(array(
 	'L_TIME_STAMP' => $lang['Time'],
 	'L_SORT_BY' => $lang['Sort'],
 	'L_SORT_DIR' => $lang['Order'],
-	'L_MARK_ALL' => $lang['Mark_all'],
-	'L_UNMARK_ALL' => $lang['Unmark_all'],
 	'L_DELETE' => $lang['Delete'],
 	'L_SORT' => $lang['Sort'],
 	'L_SHOW_GUESTS' => $lang['Dl_guest_stats_admin'],

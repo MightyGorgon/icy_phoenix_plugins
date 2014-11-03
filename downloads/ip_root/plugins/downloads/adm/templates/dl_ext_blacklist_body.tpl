@@ -1,15 +1,3 @@
-<script language="Javascript" type="text/javascript">
-<!--
-function select_switch(status)
-{
-	for (i = 0; i < document.extention.length; i++)
-	{
-		document.extention.elements[i].checked = status;
-	}
-}
-// -->
-</script>
-
 <p><b>{L_DL_EXT_BLACKLIST_EXPLAIN}</b></p>
 
 <form action="{S_DOWNLOADS_ACTION}" method="post" name="add_ext">
@@ -23,7 +11,7 @@ function select_switch(status)
 <input type="hidden" name="action" value="add" />
 </form>
 
-<form action="{S_DOWNLOADS_ACTION}" method="post" name="extention">
+<form action="{S_DOWNLOADS_ACTION}" method="post" name="extention_form">
 <table class="forumline">
 <tr>
 	<th width="50%">{L_DL_EXTENTIONS}</th>
@@ -43,7 +31,7 @@ function select_switch(status)
 <table>
 <tr>
 	<td class="tdalignr tdnw" colspan="2">
-		<a href="javascript:select_switch(true);" class="gensmall">{L_MARK_ALL}</a>&nbsp;&bull;&nbsp;<a href="javascript:select_switch(false);" class="gensmall">{L_UNMARK_ALL}</a>
+		<a href="#" onclick="setCheckboxes('extention_form', 'extention[]', true); return false;" class="gensmall">{L_MARK_ALL}</a>&nbsp;&bull;&nbsp;<a href="#" onclick="setCheckboxes('extention_form', 'extention[]', false); return false;" class="gensmall">{L_UNMARK_ALL}</a><br class="mb5" />
 	</td>
 </tr>
 </table>

@@ -1,14 +1,3 @@
-<script type="text/javascript">
-function select_switch(status)
-{
-	doc_length = document.dl_modcp.length;
-	for (i = 0; i < doc_length; i++)
-	{
-		document.dl_modcp.elements[i].checked = status;
-	}
-}
-</script>
-
 <form method="post" name="dl_modcp" action="{S_DL_MODCP_ACTION}" >
 {IMG_THL}{IMG_THC}<span class="forumlink">{L_NAV3}</span>{IMG_THR}<table class="forumlinenb">
 <tr>
@@ -44,9 +33,9 @@ function select_switch(status)
 
 <table>
 <tr>
-	<td class="tdalignr tdnw"><span class="gensmall">
-		<!-- BEGIN sort_asc --><a href="{U_SORT_ASC}" class="gensmall">{L_DL_ABC}</a>&nbsp;&bull;&nbsp;<!-- END sort_asc --><a href="javascript:select_switch(true);" class="gensmall">{L_MARK_ALL}</a>&nbsp;&bull;&nbsp;<a href="javascript:select_switch(false);" class="gensmall">{L_UNMARK_ALL}</a>
-		</span><br /><br /><span class="pagination">{PAGINATION}</span>
+	<td class="tdalignr tdnw">
+		<span class="gensmall"><!-- BEGIN sort_asc --><a href="{U_SORT_ASC}" class="gensmall">{L_DL_ABC}</a>&nbsp;&bull;&nbsp;<!-- END sort_asc --><a href="#" onclick="setCheckboxes('dl_modcp', 'dlo_id[]', true); return false;" class="gensmall">{L_MARK_ALL}</a>&nbsp;&bull;&nbsp;<a href="#" onclick="setCheckboxes('dl_modcp', 'dlo_id[]', false); return false;" class="gensmall">{L_UNMARK_ALL}</a></span><br class="mb5" />
+		<span class="pagination">{PAGINATION}</span>
 	</td>
 </tr>
 </table>

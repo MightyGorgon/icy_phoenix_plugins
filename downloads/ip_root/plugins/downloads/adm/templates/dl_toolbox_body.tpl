@@ -1,16 +1,3 @@
-<script language="Javascript" type="text/javascript">
-<!--
-function select_switch(status)
-{
-	doc_length = document.create_dir.length;
-	for (i = 0; i < doc_length; i++)
-	{
-		document.create_dir.elements[i].checked = status;
-	}
-}
-//-->
-</script>
-
 <form action="{S_MANAGE_ACTION}" method="post" name="create_dir">
 <table class="forumline">
 <tr><th colspan="2">{L_DL_MANAGE}</th></tr>
@@ -70,13 +57,8 @@ function select_switch(status)
 </table>
 
 <!-- BEGIN overall_size -->
-<table border="0" cellpadding="3" cellspacing="1" align="center" width="50%">
-<tr>
-	<td nowrap="nowrap"><span class="gensmall">
-		<a href="javascript:select_switch(true);" class="gensmall">{L_MARK_ALL}</a>&nbsp;&bull;&nbsp;<a href="javascript:select_switch(false);" class="gensmall">{L_UNMARK_ALL}</a>
-		</span>
-	</td>
-</tr>
+<table class="talignc tw50pct">
+<tr><td nowrap="nowrap"><span class="gensmall"><a href="#" onclick="setCheckboxes('create_dir', 'files[]', true); return false;" class="gensmall">{L_MARK_ALL}</a>&nbsp;&bull;&nbsp;<a href="#" onclick="setCheckboxes('create_dir', 'files[]', false); return false;" class="gensmall">{L_UNMARK_ALL}</a><br class="mb5" /></span></td></tr>
 </table>
 <!-- END overall_size -->
 </form>
