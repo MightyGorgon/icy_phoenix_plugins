@@ -317,7 +317,14 @@ switch ($mode)
 			$cat_desc = request_var('catdesc', '', true);
 			$number_articles = request_var('number_articles', 0);
 			$parent = request_var('parent', 0);
-			$comments_forum_id = request_var('forum_id', 0);
+			$comments_forum = request_var('forum_id', '');
+			$comments_forum_type = substr($comments_forum, 0, 1);
+			$comments_forum_id = substr($comments_forum, 1);
+
+			if ($comments_forum_type != 'f' || !is_numeric($comments_forum_id) || $comments_forum_id == 0)
+			{
+				mx_message_die(GENERAL_MESSAGE , 'Select a Forum');
+			}
 
 			$view_level = request_var('auth_view', 0);
 			$post_level = request_var('auth_post', 0);
