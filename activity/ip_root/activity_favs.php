@@ -237,8 +237,8 @@ else
 		'C_DEFAULT_ALL_L' => $lang['category_default_2'],
 		'C_CAT_PAGE' => append_sid('activity.' . PHP_EXT . '?mode=category_play'),
 		'GAMELIB_LINK' => $gamelib_link,
-		'U_TROPHY'		 => append_sid('activity_top_scores.' . PHP_EXT),
-		'U_GAMBLING' => '<a href='activity_gambling.' . PHP_EXT . '?sid=' . $user->data['session_id'] . '' class='nav'>' . $lang['gambling_link_2'] . '</a>',
+		'U_TROPHY' => append_sid("activity_top_scores." . PHP_EXT),
+		'U_GAMBLING' => '<a href="activity_gambling.' . PHP_EXT . '?sid=' . $user->data['session_id'] . '" class="nav">' . $lang['gambling_link_2'] . '</a>',
 
 		'L_TROPHY' => $lang['trophy_page'],
 		'L_STATS' => $lang['stats'],
