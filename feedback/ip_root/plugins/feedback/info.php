@@ -20,5 +20,8 @@ $plugin_details['config'] = 'feedback';
 $plugin_details['name'] = $lang['PLUGIN_FEEDBACK'];
 $plugin_details['description'] = $lang['PLUGIN_FEEDBACK_EXPLAIN'];
 $plugin_details['version'] = '1.0.1';
+$plugin_details['constants'] = 0;
+$plugin_details['common'] = 0;
+$plugin_details['functions'] = 0;
 
 ?>

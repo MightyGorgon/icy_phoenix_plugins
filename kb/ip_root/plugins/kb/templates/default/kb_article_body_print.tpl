@@ -10,7 +10,7 @@
 </head>
 
 <body>
-<a id="top"></a>
+<a id="top">&nbsp;</a>
 
 <table class="forumline">
 <tr>

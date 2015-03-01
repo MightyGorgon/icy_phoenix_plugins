@@ -20,5 +20,8 @@ $plugin_details['config'] = 'chat';
 $plugin_details['name'] = $lang['PLUGIN_CHAT'];
 $plugin_details['description'] = $lang['PLUGIN_CHAT_EXPLAIN'];
 $plugin_details['version'] = '1.0.0';
+$plugin_details['constants'] = 0;
+$plugin_details['common'] = 0;
+$plugin_details['functions'] = 0;
 
 ?>

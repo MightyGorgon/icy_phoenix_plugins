@@ -20,5 +20,8 @@ $plugin_details['config'] = 'donations';
 $plugin_details['name'] = $lang['PLUGIN_DONATIONS'];
 $plugin_details['description'] = $lang['PLUGIN_DONATIONS_EXPLAIN'];
 $plugin_details['version'] = '1.0.3';
+$plugin_details['constants'] = 0;
+$plugin_details['common'] = 0;
+$plugin_details['functions'] = 0;
 
 ?>

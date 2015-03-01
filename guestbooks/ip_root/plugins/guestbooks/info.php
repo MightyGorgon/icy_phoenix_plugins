@@ -20,5 +20,8 @@ $plugin_details['config'] = 'guestbooks';
 $plugin_details['name'] = $lang['PLUGIN_GUESTBOOKS'];
 $plugin_details['description'] = $lang['PLUGIN_GUESTBOOKS_EXPLAIN'];
 $plugin_details['version'] = '1.0.1';
+$plugin_details['constants'] = 0;
+$plugin_details['common'] = 0;
+$plugin_details['functions'] = 0;
 
 ?>

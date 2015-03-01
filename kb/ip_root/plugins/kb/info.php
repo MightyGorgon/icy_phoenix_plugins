@@ -20,5 +20,8 @@ $plugin_details['config'] = 'kb';
 $plugin_details['name'] = $lang['PLUGIN_KB'];
 $plugin_details['description'] = $lang['PLUGIN_KB_EXPLAIN'];
 $plugin_details['version'] = '1.0.0';
+$plugin_details['constants'] = 0;
+$plugin_details['common'] = 0;
+$plugin_details['functions'] = 0;
 
 ?>
