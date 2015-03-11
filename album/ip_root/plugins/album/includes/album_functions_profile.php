@@ -20,8 +20,8 @@ function album_profile_last_pictures($profiledata)
 {
 	global $db, $cache, $config, $user, $lang, $template, $images, $cms_config_layouts, $album_config;
 
-	include(IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['album']['dir'] . 'includes/album_functions.' . PHP_EXT);
-	include(IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['album']['dir'] . 'includes/album_hierarchy_functions.' . PHP_EXT);
+	@include_once(IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['album']['dir'] . 'includes/album_functions.' . PHP_EXT);
+	@include_once(IP_ROOT_PATH . PLUGINS_PATH . $config['plugins']['album']['dir'] . 'includes/album_hierarchy_functions.' . PHP_EXT);
 	$cms_page_id_tmp = 'album';
 	$cms_auth_level_tmp = (isset($cms_config_layouts[$cms_page_id_tmp]['view']) ? $cms_config_layouts[$cms_page_id_tmp]['view'] : AUTH_ALL);
 	$show_latest_pics = check_page_auth($cms_page_id_tmp, $cms_auth_level_tmp, true);

@@ -118,6 +118,7 @@ $install_data = array(
 
 			"INSERT INTO `" . $table_prefix . "album_cat` (`cat_id`, `cat_title`, `cat_desc`, `cat_wm`, `cat_order`, `cat_view_level`, `cat_upload_level`, `cat_rate_level`, `cat_comment_level`, `cat_edit_level`, `cat_delete_level`, `cat_view_groups`, `cat_upload_groups`, `cat_rate_groups`, `cat_comment_groups`, `cat_edit_groups`, `cat_delete_groups`, `cat_moderator_groups`, `cat_approval`, `cat_parent`, `cat_user_id`) VALUES (1, 'Test Cat 1', 'Test Cat 1', '', 10, -1, 0, 0, 0, 0, 2, '', '', '', '', '', '', '', 0, 0, 0);",
 
+			"INSERT INTO `" . $table_prefix . "album_config` (`config_name`, `config_value`) VALUES ('fap_version', '1.5.0');",
 			"INSERT INTO `" . $table_prefix . "album_config` (`config_name`, `config_value`) VALUES ('max_pics', '1024');",
 			"INSERT INTO `" . $table_prefix . "album_config` (`config_name`, `config_value`) VALUES ('user_pics_limit', '-1');",
 			"INSERT INTO `" . $table_prefix . "album_config` (`config_name`, `config_value`) VALUES ('mod_pics_limit', '-1');",
