@@ -54,7 +54,7 @@ if(!function_exists('cms_block_album'))
 		echo($cms_config_vars[$block_id . '_' . 'plugin_album_pics_all']);
 		exit;
 		*/
-		include_once(ALBUM_MOD_PATH . 'album_common.' . PHP_EXT);
+		include_once(IP_ROOT_PATH . PLUGINS_PATH . $config['plugins'][$plugin_name]['dir'] . 'common.' . PHP_EXT);
 		global $album_config;
 
 		$sql = "SELECT c.*, COUNT(p.pic_id) AS count
