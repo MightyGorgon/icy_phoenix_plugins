@@ -1,0 +1,11 @@
+Before going on, make sure that you have a backup of both db and files.
+
+Here are the instructions on what you have to do to install the Album on Icy Phoenix.
+
+
+* Upload all the files included in the package (you have both default and aphrodite, and even the Italian Lang if you need it)
+
+* Go in ACP and install Album in Plugins section, then reload ACP and configure Album from its own section
+
+
+
