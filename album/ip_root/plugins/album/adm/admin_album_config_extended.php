@@ -54,7 +54,7 @@ require_once(ALBUM_MOD_PATH . 'album_acp_functions.' . PHP_EXT);
 // then comment out the first define and remove the
 // comment from the second one
 // This will enable a virtical layout of the acp....
-define('ALBUM_ACP_TEMPLATE', ALBUM_ADM_TPL_PATH . 'album_config_body_extended.tpl' );
+define('ALBUM_ACP_TEMPLATE', ALBUM_ADM_TPL_PATH . 'album_config_body_extended.tpl');
 //define('ALBUM_ACP_TEMPLATE', ALBUM_ADM_TPL_PATH . 'album_config_body_extended_vert.tpl');
 //------------------------------------------------------------------------
 
@@ -195,7 +195,7 @@ elseif (isset($_GET['tab']))
 //------------------------------------------------------------------------
 // get the selected sub tab selection from the submitted form
 // NOTE : a sub tab, is a tab in the left or right side of a configuration
-// for alittle hint see the template file ADM_TPL . 'album_config_sub_body.tpl'
+// for alittle hint see the template file ALBUM_ADM_TPL_PATH . 'album_config_sub_body.tpl'
 //------------------------------------------------------------------------
 if (isset($_POST['subtab']))
 {
@@ -357,7 +357,7 @@ if(strcmp($_POST['save_config'], 'true') == 0)
 			$result = $db->sql_query($sql);
 		}
 		$message = $lang['Album_config_updated'] . '<br /><br />' . sprintf($lang['Click_return_album_config'], '<a href="' . append_sid(basename(__FILE__) . '?tab=' . $selected_tab . '&amp;subtab=' . $selected_subtab) . '">', '</a>');
-		$message .= '<br /><br />' . sprintf($lang['Click_return_admin_index'], '<a href="' . append_sid('index.' . PHP_EXT . '?pane=right') . '">', '</a>');
+		$message .= '<br /><br />' . sprintf($lang['Click_return_admin_index'], '<a href="' . append_sid(IP_ROOT_PATH . ADM . '/index.' . PHP_EXT . '?pane=right') . '">', '</a>');
 		message_die(GENERAL_MESSAGE, $message);
 	}
 

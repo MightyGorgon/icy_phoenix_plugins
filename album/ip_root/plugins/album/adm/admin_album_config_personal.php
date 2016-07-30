@@ -38,7 +38,7 @@ $album_config_tabs[] =  array(
 	),
 	'config_table_name' => ALBUM_CONFIG_TABLE,
 	'generate_function' => 'album_generate_config_personal_box',
-	'template_file' => ADM_TPL . 'album_config_personal_body.tpl'
+	'template_file' => ALBUM_ADM_TPL_PATH . 'album_config_personal_body.tpl'
 	);
 
 function album_generate_config_personal_box($config_data)

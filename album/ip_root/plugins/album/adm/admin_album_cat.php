@@ -56,8 +56,8 @@ if(!isset($_POST['mode']))
 
 		/*
 		if we still get layout issues then replace the template file with this
-		ADM_TPL . 'album_cat_body_debug.tpl', BUT ONLY FOR DEBUGGING PURPOSE, and send me a screenshot of it
-		then go back to this template file ADM_TPL . 'album_cat_body.tpl'.
+		ALBUM_ADM_TPL_PATH . 'album_cat_body_debug.tpl', BUT ONLY FOR DEBUGGING PURPOSE, and send me a screenshot of it
+		then go back to this template file ALBUM_ADM_TPL_PATH . 'album_cat_body.tpl'.
 		*/
 		$template->set_filenames(array('body' => ALBUM_ADM_TPL_PATH . 'album_cat_body.tpl'));
 

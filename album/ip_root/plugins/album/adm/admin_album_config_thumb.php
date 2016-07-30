@@ -39,7 +39,7 @@ $album_config_tabs[] =  array(
 	),
 	'config_table_name' => ALBUM_CONFIG_TABLE,
 	'generate_function' => 'album_generate_config_thumb_box',
-	'template_file' => ADM_TPL . 'album_config_thumb_body.tpl'
+	'template_file' => ALBUM_ADM_TPL_PATH . 'album_config_thumb_body.tpl'
 );
 
 function album_generate_config_thumb_box($config_data)

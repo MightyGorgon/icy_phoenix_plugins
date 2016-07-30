@@ -42,7 +42,7 @@ if ($album_config['enable_sepia_bw'] == 1)
 	);
 }
 
-$template->set_filenames(array('nuffimage_box' => 'album_nuffimage_box.tpl'));
+$template->set_filenames(array('nuffimage_box' => $class_plugins->get_tpl_file(ALBUM_TPL_PATH, 'album_nuffimage_box.tpl')));
 
 $template->assign_vars(array(
 	'L_NUFF_TITLE' => $lang['Nuff_Title'],
