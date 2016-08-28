@@ -43,7 +43,9 @@ if (!defined('ALBUM_CONSTANTS_INCLUDED'))
 include_once(ALBUM_ROOT_PATH . 'includes/album_functions.' . PHP_EXT);
 include_once(ALBUM_ROOT_PATH . 'includes/album_hierarchy_functions.' . PHP_EXT);
 
-$plugin_name = empty($plugin_name) ? 'album' : $plugin_name;
+//$plugin_name = empty($plugin_name) ? 'album' : $plugin_name;
+$plugin_name = 'album';
+
 // constants have already been included in IP's constants.php
 
 if (!class_exists('class_plugins')) include(IP_ROOT_PATH . 'includes/class_plugins.' . PHP_EXT);

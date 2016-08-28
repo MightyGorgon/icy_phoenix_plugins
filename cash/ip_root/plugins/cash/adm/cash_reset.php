@@ -108,7 +108,7 @@ switch ($mode)
 								)
 							);
 							$template->pparse('confirm_body');
-							include('page_footer_admin.' . PHP_EXT);
+							include(IP_ROOT_PATH . ADM . 'page_footer_admin.' . PHP_EXT);
 						}
 					}
 					break;
@@ -135,7 +135,7 @@ switch ($mode)
 							'S_HIDDEN_FIELDS' => $s_hidden_fields)
 						);
 						$template->pparse('confirm_body');
-						include('page_footer_admin.' . PHP_EXT);
+						include(IP_ROOT_PATH . ADM . 'page_footer_admin.' . PHP_EXT);
 					}
 					break;
 			}

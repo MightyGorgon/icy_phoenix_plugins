@@ -67,14 +67,14 @@ function CheckReturnPath($id)
 		{
 			if($config['use_point_system'])
 			{
-				include(IP_ROOT_PATH . 'includes/functions_points.' . PHP_EXT);
+				include_once(IP_ROOT_PATH . 'includes/functions_points.' . PHP_EXT);
 				$points_name = $config['points_name'];
 				add_points($user->data['user_id'], $config['ina_rating_reward']);
 				$msg = str_replace("%P%", $config['ina_rating_reward'] .'&nbsp;'. $points_name, $lang['rating_payout_message']);
 			}
 			if($config['use_cash_system'] || $config['use_allowance_system'])
 			{
-				include(IP_ROOT_PATH . 'includes/rewards_api.' . PHP_EXT);
+				include_once(ACTIVITY_ROOT_PATH . 'includes/rewards_api.' . PHP_EXT);
 				$points_name = $config['ina_cash_name'];
 				add_reward($user->data['user_id'], $config['ina_rating_reward']);
 				$msg = str_replace("%P%", $config['ina_rating_reward'] .'&nbsp;'. $points_name, $lang['rating_payout_message']);

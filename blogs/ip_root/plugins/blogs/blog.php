@@ -53,6 +53,7 @@ if (empty($blog_id) || empty($blog_data))
 
 $inputs_array = array();
 $is_owner = ($user->data['user_id'] == $blog_data['blog_owner']) ? true : false;
+$user->data['user_id_plugin_owner'] = !empty($is_owner) ? $user->data['user_id'] : 0;
 $admin_allowed = (check_auth_level(AUTH_ADMIN) || $is_owner) ? true : false;
 $input_allowed = (check_auth_level($blog_data['blog_auth_post']) || $is_owner) ? true : false;
 $edit_allowed = (check_auth_level(AUTH_ADMIN) || $is_owner) ? true : false;

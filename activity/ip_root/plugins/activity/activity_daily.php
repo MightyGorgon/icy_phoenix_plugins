@@ -344,7 +344,7 @@ for ($x = 0; $x < $games_c; $x++)
 			$challenge_link = '<br />'. $lang['separator'] .'&nbsp;'. $lang['challenge_link_key'];
 
 		if ($user->data['user_level'] == ADMIN)
-			$admin_edit = '<br />' . $lang['separator'] . '&nbsp;<a href="#" onclick="popup_open(\'' . ADM . '/admin_activity.' . PHP_EXT . '?mode=edit_games&amp;action=edit&amp;game=' . $game_id . '&amp;sid=' . $user->data['session_id'] . '\', \'New_Window\', \'550\', \'300\', \'yes\'); return false;">' . $lang['admin_edit_link'] . '</a>';
+			$admin_edit = '<br />' . $lang['separator'] . '&nbsp;<a href="#" onclick="popup_open(\'' . ACTIVITY_ADM_PATH . 'admin_activity.' . PHP_EXT . '?mode=edit_games&amp;action=edit&amp;game=' . $game_id . '&amp;sid=' . $user->data['session_id'] . '\', \'New_Window\', \'550\', \'300\', \'yes\'); return false;">' . $lang['admin_edit_link'] . '</a>';
 
 		if ($user->data['user_level'] != ADMIN)
 			$admin_edit = '';

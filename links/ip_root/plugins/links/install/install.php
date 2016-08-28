@@ -53,6 +53,8 @@ $install_data = array(
 			"INSERT INTO `" . $table_prefix . "link_categories` (`cat_id`, `cat_title`, `cat_order`) VALUES (6, 'Health', 6);",
 			"INSERT INTO `" . $table_prefix . "link_categories` (`cat_id`, `cat_title`, `cat_order`) VALUES (7, 'Home', 7);",
 			"INSERT INTO `" . $table_prefix . "link_categories` (`cat_id`, `cat_title`, `cat_order`) VALUES (8, 'News', 8);",
+			"INSERT INTO `" . $table_prefix . "link_config` (`config_name`, `config_value`) VALUES ('site_logo', 'http://www.icyphoenix.com/images/links/banner_ip.gif');",
+			"INSERT INTO `" . $table_prefix . "link_config` (`config_name`, `config_value`) VALUES ('site_url', 'http://www.icyphoenix.com/');",
 			"INSERT INTO `" . $table_prefix . "link_config` (`config_name`, `config_value`) VALUES ('width', '88');",
 			"INSERT INTO `" . $table_prefix . "link_config` (`config_name`, `config_value`) VALUES ('height', '31');",
 			"INSERT INTO `" . $table_prefix . "link_config` (`config_name`, `config_value`) VALUES ('linkspp', '10');",

@@ -1,3 +1,5 @@
+<!-- INCLUDE overall_header.tpl -->
+
 <div class="text_cont_center" style="width:400px;"><div class="text_yellow_cont"><span class="text_red">((¯`·._*. {TITLE} .*_.·´¯))</span></div></div><br />
 <table class="forumline">
 <tr>
@@ -33,3 +35,5 @@
 	</tr>
 </table>
 <br clear="all" />
+
+<!-- INCLUDE overall_footer.tpl -->

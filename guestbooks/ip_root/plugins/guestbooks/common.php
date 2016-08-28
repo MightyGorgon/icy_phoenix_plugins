@@ -13,7 +13,8 @@ if (!defined('IN_ICYPHOENIX'))
 	die('Hacking attempt');
 }
 
-$plugin_name = empty($plugin_name) ? 'guestbooks' : $plugin_name;
+//$plugin_name = empty($plugin_name) ? 'guestbooks' : $plugin_name;
+$plugin_name = 'guestbooks';
 if (empty($skip_page_auth))
 {
 	$cms_page['page_id'] = (!empty($cms_page['page_id']) ? $cms_page['page_id'] : $plugin_name);

@@ -32,18 +32,18 @@ if (!defined('IN_ICYPHOENIX'))
 /* End Restriction Checks */
 
 	if($config['use_rewards_mod'])
-		{
+	{
 		if($config['use_point_system'])
-			{
-		include_once(IP_ROOT_PATH . 'includes/functions_points.' . PHP_EXT);
-		$points_name = $config['points_name'];
-			}
-		if($config['use_cash_system'] || $config['use_allowance_system'])
-			{
-		include_once(IP_ROOT_PATH . 'includes/rewards_api.' . PHP_EXT);
-		$points_name = $config['ina_cash_name'];
-			}
+		{
+			include_once(IP_ROOT_PATH . 'includes/functions_points.' . PHP_EXT);
+			$points_name = $config['points_name'];
 		}
+		if($config['use_cash_system'] || $config['use_allowance_system'])
+		{
+			include_once(ACTIVITY_ROOT_PATH . 'includes/rewards_api.' . PHP_EXT);
+			$points_name = $config['ina_cash_name'];
+		}
+	}
 
 		$template_to_parse = $class_plugins->get_tpl_file(ACTIVITY_TPL_PATH, 'activity_gambling_body.tpl');
 		$template->set_filenames(array('body' => $template_to_parse));

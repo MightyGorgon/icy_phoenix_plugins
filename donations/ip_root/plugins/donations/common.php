@@ -13,7 +13,8 @@ if (!defined('IN_ICYPHOENIX'))
 	die('Hacking attempt');
 }
 
-$plugin_name = empty($plugin_name) ? 'donations' : $plugin_name;
+//$plugin_name = empty($plugin_name) ? 'donations' : $plugin_name;
+$plugin_name = 'donations';
 $cms_page['page_id'] = (!empty($cms_page['page_id']) ? $cms_page['page_id'] : $plugin_name);
 $cms_page['page_nav'] = (!isset($cms_config_layouts[$cms_page['page_id']]['page_nav']) ? true : (!empty($cms_config_layouts[$cms_page['page_id']]['page_nav']) ? true : false));
 $cms_page['global_blocks'] = (!empty($cms_config_layouts[$cms_page['page_id']]['global_blocks']) ? true : false);

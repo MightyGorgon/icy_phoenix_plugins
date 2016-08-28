@@ -15,6 +15,7 @@
 
 <br />
 
+<!-- 
 <div align="center">
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" style="display: inline;">
 <input type="hidden" name="cmd" value="_xclick" />
@@ -26,5 +27,5 @@
 <input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but04.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!" />
 </form>
 </div>
-
+ -->
 <br />

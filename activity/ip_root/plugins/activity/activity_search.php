@@ -43,12 +43,12 @@ if($config['use_rewards_mod'])
 {
 	if ($config['use_point_system'])
 	{
-		include(IP_ROOT_PATH . 'includes/functions_points.' . PHP_EXT);
+		include_once(IP_ROOT_PATH . 'includes/functions_points.' . PHP_EXT);
 	}
 
 	if ($config['use_cash_system'] || $config['use_allowance_system'])
 	{
-		include(IP_ROOT_PATH . 'includes/rewards_api.' . PHP_EXT);
+		include_once(ACTIVITY_ROOT_PATH . 'includes/rewards_api.' . PHP_EXT);
 	}
 }
 

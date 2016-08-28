@@ -25,24 +25,27 @@ if (!defined('IN_ICYPHOENIX'))
 // give rewards to the user
 function add_reward($user_id,$amount)
 {
-	global $user, $db;
+	global $user, $db, $config, $cache;
 	$dbfield = get_db_reward();
-	if ( $user->data['user_id'] == $user_id )
+	if (!empty($dbfield))
 	{
-		$user->data[$dbfield] += $amount;
+		if ($user->data['user_id'] == $user_id)
+		{
+			$user->data[$dbfield] += $amount;
+		}
+		$sql = "UPDATE " . USERS_TABLE . "
+			SET $dbfield = $dbfield + $amount
+			WHERE user_id = $user_id";
+		$result = $db->sql_query($sql);
 	}
-	$sql = "UPDATE " . USERS_TABLE . "
-		SET $dbfield = $dbfield + $amount
-		WHERE user_id = $user_id";
-	$result = $db->sql_query($sql);
 }
 
 // subdtract rewards from the user
 function subtract_reward($user_id,$amount)
 {
-	global $user, $db;
+	global $user, $db, $config, $cache;
 	$dbfield = get_db_reward();
-	if ( $user->data['user_id'] == $user_id )
+	if ($user->data['user_id'] == $user_id)
 	{
 		$user->data[$dbfield] -= $amount;
 	}
@@ -55,9 +58,9 @@ function subtract_reward($user_id,$amount)
 // set the user's rewards
 function set_reward($user_id,$amount)
 {
-	global $user, $db;
+	global $user, $db, $config, $cache;
 	$dbfield = get_db_reward();
-	if ( $user->data['user_id'] == $user_id )
+	if ($user->data['user_id'] == $user_id)
 	{
 		$user->data[$dbfield] = $amount;
 	}
@@ -70,9 +73,9 @@ function set_reward($user_id,$amount)
 // get the user's reward amounts
 function get_reward($user_id)
 {
-	global $user, $db;
+	global $user, $db, $config, $cache;
 	$dbfield = get_db_reward();
-	if ( $user->data['user_id'] == $user_id )
+	if ($user->data['user_id'] == $user_id)
 	{
 		return $user->data[$dbfield];
 	}

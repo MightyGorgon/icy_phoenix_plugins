@@ -114,7 +114,7 @@ if (!empty($setmodules) && defined('IN_ICYPHOENIX'))
 		{
 			for ($j = 0; $j < $menu[$i]->num(); $j++)
 			{
-				$module['3100_CASH'][$menu[$i]->items[$j]->title] = $menu[$i]->items[$j]->linkage();
+				$module['3100_CASH'][$menu[$i]->items[$j]->title] = CASH_ADM_PATH . $menu[$i]->items[$j]->linkage();
 				if (($j == $menu[$i]->num() - 1) && !($i == sizeof($menu) - 1))
 				{
 					$lang[$menu[$i]->items[$j]->title] = $lang[$menu[$i]->items[$j]->title] . '</a></span></td></tr><tr><td class="row2" height="7"><span class="genmed"><a id="cm' . $menu[$i]->num() . '">';
@@ -148,13 +148,13 @@ if (empty($config['plugins']['cash']['enabled']))
 if ($config['cash_adminnavbar'])
 {
 	$navbar = 1;
-	include('./admin_cash.' . PHP_EXT);
+	include(CASH_ADM_PATH . 'admin_cash.' . PHP_EXT);
 }
 
 //$menu = array();
 admin_menu($menu);
 
-$template->set_filenames(array('body' => ADM_TPL . 'cash_menu.tpl'));
+$template->set_filenames(array('body' => CASH_ADM_TPL_PATH . 'cash_menu.tpl'));
 
 for ($i = 0; $i < sizeof($menu); $i++)
 {
