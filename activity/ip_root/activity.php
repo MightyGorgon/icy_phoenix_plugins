@@ -1022,7 +1022,7 @@ else
 			else
 			{
 				$game_rating = 0;
-				$rating_votes_cast = str_replace('%V%', $total_votes_given, $lang['game_rating_votes_one']);
+				$rating_votes_cast = str_replace('%V%', $lang['no_votes_cast'], $lang['game_rating_votes_one']);
 				$game_rating_image = '<img src="' . ACTIVITY_IMAGES_PATH . 'ratings/'. $game_rating . '.gif" alt="' . $game_rating . '" />';
 				$rating_title = $game_proper ."'s ". $lang['game_rating_title'];
 				$rating_submit = '<a href="#" onclick="popup_open(\'' . append_sid('activity_popup.' . PHP_EXT .'?mode=rate&amp;game='. $game_rows[$i]['game_id']) .'\', \'New_Window\', \'450\', \'300\', \'yes\')' . '; return false;">'. $lang['game_rating_submit'] .'</a>';
