@@ -381,7 +381,7 @@ if ($action == 'view')
 		{
 			$game_id = $games_data[$a]['game_id'];
 			$game_name = $games_data[$a]['proper_name'];
-			$game_image = '<img src="'. IP_ROOT_PATH . $config['ina_default_g_path'] .'/'. $games_data[$a]['game_name'] .'/'. $games_data[$a]['game_name'] .'.gif" border="0">';
+			$game_image = '<img src="'. ACTIVITY_ROOT_PATH . $config['ina_default_g_path'] .'/'. $games_data[$a]['game_name'] .'/'. $games_data[$a]['game_name'] .'.gif" border="0">';
 			if (!$game_image)
 				$game_image = $lang['admin_edit_title_r'];
 

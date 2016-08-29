@@ -15,11 +15,6 @@
 *
 */
 
-if (!defined('IN_ICYPHOENIX'))
-{
-	die('Hacking Attempt');
-}
-
 function copyright()
 {
 	$img_link = "http://phpbb-amod.com/amod_files/arrow.gif";
