@@ -26,6 +26,11 @@ if (empty($bbcode)) $bbcode = new bbcode();
 if (!class_exists('class_plugins')) include(IP_ROOT_PATH . 'includes/class_plugins.' . PHP_EXT);
 if (empty($class_plugins)) $class_plugins = new class_plugins();
 
+if (empty($config['plugins']['kb']['enabled']))
+{
+	message_die(GENERAL_MESSAGE, 'PLUGIN_DISABLED');
+}
+
 include_once(IP_ROOT_PATH . 'includes/functions_post.' . PHP_EXT);
 include_once(IP_ROOT_PATH . 'includes/functions_search.' . PHP_EXT);
 

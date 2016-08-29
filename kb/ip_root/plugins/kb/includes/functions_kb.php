@@ -967,18 +967,16 @@ function get_kb_cat_subs_admin($parent, $select = 1, $indent, $ss)
 		$category2 = '<a href="' . $temp_url . '" class="gen">' . $category_name2 . '</a>';
 
 		$temp_url = append_sid('admin_kb_cat.' . PHP_EXT . '?mode=edit&amp;cat=' . $category_id2);
-		//$edit2 = '<a href="' . $temp_url . '"><img src="' . $server_url . $images['icon_edit'] . '" alt="' . $lang['Edit'] . '"></a>';
-		$edit2 = '<a href="' . $temp_url . '">' . $lang['Edit'] . '</a>';
+		$edit2 = '<a href="' . $temp_url . '"><img src="' . IP_ROOT_PATH . $images['cms_icon_edit'] . '" alt="' . $lang['Edit'] . '"></a>';
 
 		$temp_url = append_sid('admin_kb_cat.' . PHP_EXT . '?mode=delete&amp;cat=' . $category_id2);
-		//$delete2 = '<a href="' . $temp_url . '" class="gen"><img src="' . $server_url . $images['icon_delpost'] . '" alt="' . $lang['Delete'] . '"></a>';
-		$delete2 = '<a href="' . $temp_url . '" class="gen">' . $lang['Delete'] . '</a>';
+		$delete2 = '<a href="' . $temp_url . '"><img src="' . IP_ROOT_PATH . $images['cms_icon_delete'] . '" alt="' . $lang['Delete'] . '"></a>';
 
 		$temp_url = append_sid('admin_kb_cat.' . PHP_EXT . '?mode=up&amp;cat=' . $category_id2);
-		$up2 = '<a href="' . $temp_url . '" class="gen">' . $lang['MOVE_UP'] . '</a>';
+		$up2 = '<a href="' . $temp_url . '"><img src="' . IP_ROOT_PATH . $images['cms_arrow_up'] . '" alt="' . $lang['MOVE_UP'] . '"></a>';
 
 		$temp_url = append_sid(IP_ROOT_PATH . ADM . '/admin_kb_cat.' . PHP_EXT . '?mode=down&amp;cat=' . $category_id2);
-		$down2 = '<a href="' . $temp_url . '" class="gen">' . $lang['MOVE_DOWN'] . '</a>';
+		$down2 = '<a href="' . $temp_url . '"><img src="' . IP_ROOT_PATH . $images['cms_arrow_down'] . '" alt="' . $lang['MOVE_DOWN'] . '"></a>';
 
 		$row_class = ip_zebra_rows($row_class);
 		$template->assign_block_vars('catrow.subrow', array(
@@ -1006,7 +1004,7 @@ function get_kb_cat_subs_admin($parent, $select = 1, $indent, $ss)
 	return $ss;
 }
 
-function get_kb_cat_subs_list($auth_type, $parent, $select = 1, $selected = false, $is_admin = false, $kb_is_auth_all, $indent)
+function get_kb_cat_subs_list($auth_type, $parent, $select = 1, $selected = false, $is_admin = false, $kb_is_auth_all, $indent, $current_id = 0)
 {
 	global $db;
 
@@ -1015,7 +1013,8 @@ function get_kb_cat_subs_list($auth_type, $parent, $select = 1, $selected = fals
 
 	$sql = "SELECT *
 			FROM " . KB_CATEGORIES_TABLE . "
-			WHERE parent = " . $parent;
+			WHERE parent = " . $parent . "
+			AND " . $idfield . " != " . intval($current_id);
 
 	if ($select == 0)
 	{
@@ -1051,7 +1050,7 @@ function get_kb_cat_subs_list($auth_type, $parent, $select = 1, $selected = fals
 
 // get category list for adding and editing articles
 
-function get_kb_cat_list($auth_type, $id = 0, $select = 1, $selected = false, $kb_is_auth_all = false, $is_admin = false)
+function get_kb_cat_list($auth_type, $id = 0, $select = 1, $selected = false, $kb_is_auth_all = false, $is_admin = false, $current_id = 0)
 {
 	global $db, $user;
 
@@ -1060,7 +1059,8 @@ function get_kb_cat_list($auth_type, $id = 0, $select = 1, $selected = false, $k
 
 	$sql = "SELECT *
 		FROM " . KB_CATEGORIES_TABLE . "
-		WHERE parent = 0 ";
+		WHERE parent = 0
+		AND $idfield != " . intval($current_id);
 
 	if ($select == 0)
 	{
@@ -1094,7 +1094,7 @@ function get_kb_cat_list($auth_type, $id = 0, $select = 1, $selected = false, $k
 		if ((ns_auth_cat($category[$idfield]) && $kb_is_auth_all[$category[$idfield]][$auth_type]) || $is_admin)
 		{
 			$catlist .= "<option value=\"$category[$idfield]\" $status>" . $category[$namefield] . "</option>\n";
-			$catlist .= get_kb_cat_subs_list($auth_type, $category[$idfield], $select, $selected, $is_admin, $kb_is_auth_all, '&nbsp;&nbsp;');
+			$catlist .= get_kb_cat_subs_list($auth_type, $category[$idfield], $select, $selected, $is_admin, $kb_is_auth_all, '&nbsp;&nbsp;', $current_id);
 		}
 	}
 

@@ -233,7 +233,7 @@ switch ($mode)
 				'L_PARENT' => $lang['Parent'],
 				'L_NONE' => $lang['None'],
 
-				'PARENT_LIST' => get_kb_cat_list('', $parent, $parent, true, 0, true),
+				'PARENT_LIST' => get_kb_cat_list('', $parent, $parent, true, 0, true, $cat_id),
 
 				'S_ACTION' => append_sid('admin_kb_cat.' . PHP_EXT . '?mode=edit'),
 				'CAT_NAME' => $cat_name,
