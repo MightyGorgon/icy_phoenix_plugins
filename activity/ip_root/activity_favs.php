@@ -97,7 +97,6 @@ if ($config['use_gamelib'] == 0)
 if($_GET['mode'] == 'add_fav')
 {
 	$game = $_GET['game'];
-	$user = $user->data['user_id'];
 
 	$q = "SELECT *
 			FROM ". iNA_GAMES ."
@@ -111,7 +110,7 @@ if($_GET['mode'] == 'add_fav')
 
 	$q = "SELECT *
 			FROM ". INA_FAVORITES ."
-			WHERE user = '". $user ."'";
+			WHERE user = '". $user_id ."'";
 	$r = $db->sql_query($q);
 	$favorite_data = $db->sql_fetchrowset($r);
 
@@ -135,13 +134,13 @@ if($_GET['mode'] == 'add_fav')
 	{
 		$q = "UPDATE ". INA_FAVORITES ."
 				SET games = '". $new_game_info ."'
-				WHERE user = '". $user ."'";
+				WHERE user = '". $user_id ."'";
 		$r = $db->sql_query($q);
 	}
 	else
 	{
 		$q = "INSERT INTO ". INA_FAVORITES ."
-				VALUES ('". $user ."', 'S". $game ."E')";
+				VALUES ('". $user_id ."', 'S". $game ."E')";
 		$r = $db->sql_query($q);
 	}
 	message_die(GENERAL_MESSAGE, 'Game added to your favorites list!<br /><br />Click <a href="activity_favs.' . PHP_EXT . '?sid=' . $user->data['session_id'] . '" class="nav"><i>here</i></a> to view your favorites.', 'Success');
@@ -149,7 +148,6 @@ if($_GET['mode'] == 'add_fav')
 elseif($_GET['mode'] == 'del_fav')
 {
 	$game = $_GET['game'];
-	$user = $user->data['user_id'];
 
 	$q = "SELECT *
 			FROM ". iNA_GAMES ."
@@ -163,7 +161,7 @@ elseif($_GET['mode'] == 'del_fav')
 
 	$q = "SELECT *
 			FROM ". INA_FAVORITES ."
-			WHERE user = '". $user ."'";
+			WHERE user = '". $user_id ."'";
 	$r = $db->sql_query($q);
 	$favorite_data = $db->sql_fetchrowset($r);
 
@@ -176,7 +174,7 @@ elseif($_GET['mode'] == 'del_fav')
 			$new_list = str_replace("S". $game ."E", "", $games);
 			$q = "UPDATE ". INA_FAVORITES ."
 					SET games = '". $new_list ."'
-					WHERE user = '". $user ."'";
+					WHERE user = '". $user_id ."'";
 			$r = $db->sql_query($q);
 			message_die(GENERAL_MESSAGE, 'Game Removed<br /><br />Click <a href="activity_favs.' . PHP_EXT . '?sid=' . $user->data['session_id'] . '" class="nav"><i>here</i></a> to view your favorites..', 'Success');
 		}
