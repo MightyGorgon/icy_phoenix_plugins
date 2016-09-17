@@ -22,11 +22,8 @@ if (!defined('IP_ROOT_PATH')) define('IP_ROOT_PATH', './../../../');
 if (!defined('PHP_EXT')) define('PHP_EXT', substr(strrchr(__FILE__, '.'), 1));
 require(IP_ROOT_PATH . 'adm/pagestart.' . PHP_EXT);
 
-if ($config['cash_adminnavbar'])
-{
-	$navbar = 1;
-	include('admin_cash.' . PHP_EXT);
-}
+$navbar = $config['cash_adminnavbar'];
+include('./admin_cash.' . PHP_EXT);
 
 if (!$cash->currency_count())
 {

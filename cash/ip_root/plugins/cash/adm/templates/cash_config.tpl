@@ -11,10 +11,6 @@
 	<td class="row2"><input type="radio" name="cash_disable" value="1" {DISABLE_CASH_YES} /> {L_YES}&nbsp;&nbsp;<input type="radio" name="cash_disable" value="0" {DISABLE_CASH_NO} /> {L_NO}</td>
 </tr>
 <tr>
-	<td class="row1">{L_CASH_ADMINCP}</td>
-	<td class="row2"><input type="radio" name="cash_adminbig" value="1" {ADMIN_BIG} /> {L_SIDEBAR}&nbsp;&nbsp;<input type="radio" name="cash_adminbig" value="0" {ADMIN_SMALL} /> {L_MENU}</td>
-</tr>
-<tr>
 	<td class="row1">{L_CASH_ADMINNAVBAR}</td>
 	<td class="row2"><input type="radio" name="cash_adminnavbar" value="1" {ADMINNAVBAR_YES} /> {L_YES}&nbsp;&nbsp;<input type="radio" name="cash_adminnavbar" value="0" {ADMINNAVBAR_NO} /> {L_NO}</td>
 </tr>
