@@ -967,16 +967,16 @@ function get_kb_cat_subs_admin($parent, $select = 1, $indent, $ss)
 		$category2 = '<a href="' . $temp_url . '" class="gen">' . $category_name2 . '</a>';
 
 		$temp_url = append_sid('admin_kb_cat.' . PHP_EXT . '?mode=edit&amp;cat=' . $category_id2);
-		$edit2 = '<a href="' . $temp_url . '"><img src="' . IP_ROOT_PATH . $images['cms_icon_edit'] . '" alt="' . $lang['Edit'] . '"></a>';
+		$edit2 = '<a href="' . $temp_url . '"><img src="' . $images['cms_icon_edit'] . '" alt="' . $lang['Edit'] . '"></a>';
 
 		$temp_url = append_sid('admin_kb_cat.' . PHP_EXT . '?mode=delete&amp;cat=' . $category_id2);
-		$delete2 = '<a href="' . $temp_url . '"><img src="' . IP_ROOT_PATH . $images['cms_icon_delete'] . '" alt="' . $lang['Delete'] . '"></a>';
+		$delete2 = '<a href="' . $temp_url . '"><img src="' . $images['cms_icon_delete'] . '" alt="' . $lang['Delete'] . '"></a>';
 
 		$temp_url = append_sid('admin_kb_cat.' . PHP_EXT . '?mode=up&amp;cat=' . $category_id2);
-		$up2 = '<a href="' . $temp_url . '"><img src="' . IP_ROOT_PATH . $images['cms_arrow_up'] . '" alt="' . $lang['MOVE_UP'] . '"></a>';
+		$up2 = '<a href="' . $temp_url . '"><img src="' . $images['cms_arrow_up'] . '" alt="' . $lang['MOVE_UP'] . '"></a>';
 
 		$temp_url = append_sid(IP_ROOT_PATH . ADM . '/admin_kb_cat.' . PHP_EXT . '?mode=down&amp;cat=' . $category_id2);
-		$down2 = '<a href="' . $temp_url . '"><img src="' . IP_ROOT_PATH . $images['cms_arrow_down'] . '" alt="' . $lang['MOVE_DOWN'] . '"></a>';
+		$down2 = '<a href="' . $temp_url . '"><img src="' . $images['cms_arrow_down'] . '" alt="' . $lang['MOVE_DOWN'] . '"></a>';
 
 		$row_class = ip_zebra_rows($row_class);
 		$template->assign_block_vars('catrow.subrow', array(
@@ -1041,7 +1041,7 @@ function get_kb_cat_subs_list($auth_type, $parent, $select = 1, $selected = fals
 		{
 			$catlist .= "<option value=\"$category2[$idfield]\" $status>" . $indent . '--&raquo;'. $category2[$namefield] . "</option>\n";
 			$temp = $indent . '&nbsp;&nbsp;';
-			$catlist .= get_kb_cat_subs_list($auth_type, $category2[$idfield], $select, $selected, $is_admin, $kb_is_auth_all, $temp);
+			$catlist .= get_kb_cat_subs_list($auth_type, $category2[$idfield], $select, $selected, $is_admin, $kb_is_auth_all, $temp, $current_id);
 		}
 	}
 
