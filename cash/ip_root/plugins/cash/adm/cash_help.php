@@ -28,11 +28,8 @@ if (empty($config['plugins']['cash']['enabled']))
 	message_die(GENERAL_MESSAGE, 'PLUGIN_DISABLED');
 }
 
-if ($config['cash_adminnavbar'])
-{
-	$navbar = 1;
-	include('./admin_cash.' . PHP_EXT);
-}
+$navbar = $config['cash_adminnavbar'];
+include('./admin_cash.' . PHP_EXT);
 
 // Start page proper
 $template->set_filenames(array('body' => CASH_ADM_TPL_PATH . 'cash_menu.tpl'));

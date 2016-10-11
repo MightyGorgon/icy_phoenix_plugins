@@ -28,11 +28,8 @@ if (empty($config['plugins']['cash']['enabled']))
 	message_die(GENERAL_MESSAGE, 'PLUGIN_DISABLED');
 }
 
-if ($config['cash_adminnavbar'])
-{
-	$navbar = 1;
-	include('./admin_cash.' . PHP_EXT);
-}
+$navbar = $config['cash_adminnavbar'];
+include('./admin_cash.' . PHP_EXT);
 
 if (!$cash->currency_count())
 {
