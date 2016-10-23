@@ -229,7 +229,6 @@ if ($mode == 'chat')
 			$userlink = '<a href="' . append_sid(CMS_PAGE_PROFILE . '?mode=viewprofile&amp;' . POST_USERS_URL . '=' . $user->data['user_id']) . '">' . $colorized_username . '</a>';
 			$new_session = '%S%<b>' . $userlink . '</b>: ' . $message . '%E%';
 			$new_session .= $chat_session;
-			$new_session = addslashes(stripslashes($new_session));
 
 			$q = "UPDATE ". INA_CHAT ."
 				SET chat_text = '" . $db->sql_escape($new_session) . "'
@@ -242,7 +241,6 @@ if ($mode == 'chat')
 			$message = str_replace('%S%', '%s%', $message);
 			$message = str_replace('%E%', '%e%', $message);
 			$new_session = '%S%[b]' . $user->data['username'] . '[/b]: ' . $message . '%E%';
-			$new_session = addslashes(stripslashes($new_session));
 
 			$q = "INSERT INTO ". INA_CHAT ."
 				VALUES ('". gmdate('Y-m-d') ."', '" . $db->sql_escape($new_session) . "')";
@@ -273,20 +271,8 @@ if ($mode == 'chat')
 		$todays_chat = $db->sql_fetchrow($r);
 		$chat_session = $todays_chat['chat_text'];
 
-		$message = $chat_session;
+		//$message = $chat_session;
 
-		$message = censor_text($message);
-
-		global $bbcode;
-		$html_on = ($user->data['user_allowhtml'] && $config['allow_html']) ? 1 : 0 ;
-		$bbcode_on = ($user->data['user_allowbbcode'] && $config['allow_bbcode']) ? 1 : 0 ;
-		$smilies_on = ($user->data['user_allowsmile'] && $config['allow_smilies']) ? 1 : 0 ;
-
-		$bbcode->allow_html = $html_on;
-		$bbcode->allow_bbcode = $bbcode_on;
-		$bbcode->allow_smilies = $smilies_on;
-
-		$chat_session = $bbcode->parse($message);
 
 		$start = str_replace('%S%', '<tr><td class="row2" colspan="2"><span class="genmed">', $chat_session);
 		$end = str_replace('%E%', '</span></td></tr>', $start);
@@ -374,7 +360,7 @@ if ($mode == 'rate')
 	if (!$action)
 	{
 		$cat_var_id = ($_GET['id']) ? $_GET['id'] : $_GET['id'];
-		$game = ($_GET['game']) ? $_GET['game'] : $_GET['game'];
+		$game = intval($_GET['game'] ? $_GET['game'] : $_GET['game']);
 
 		if ($cat_var_id)
 		{
@@ -390,16 +376,24 @@ if ($mode == 'rate')
 
 		$q = "SELECT *
 				FROM ". INA_RATINGS ."
+<<<<<<< HEAD
 				WHERE game_id = '" . $db->sql_escape($game) . "'
 				AND player = '" . $user->data['user_id'] . "'";
 		$r = $db -> sql_query($q);
 		$row = $db -> sql_fetchrow($r);
+=======
+				WHERE game_id = '". $game ."'
+				AND player = '". $user->data['user_id'] ."'";
+		$r = $db->sql_query($q);
+		$row = $db->sql_fetchrow($r);
+>>>>>>> Fix some activity popup SQL (#53) and chat (#20)
 
 		if ($row['player'])
 			message_die(GENERAL_MESSAGE, $lang['rating_page_error_exists'], $lang['rating_page_error']);
 
 		$q = "SELECT *
 				FROM ". iNA_GAMES ."
+<<<<<<< HEAD
 				WHERE game_id = '" . $db->sql_escape($game) . "'";
 		$r = $db -> sql_query($q);
 		$row = $db -> sql_fetchrow($r);
@@ -429,6 +423,37 @@ if ($mode == 'rate')
 			message_die(GENERAL_MESSAGE, str_replace("%G%", $row['proper_name'], $lang['rate_game_error']), $lang['error_message']);
 
 			$q = "SELECT *
+=======
+				WHERE game_id = '". $game ."'";
+    $r = $db->sql_query($q);
+    $row = $db->sql_fetchrow($r);
+
+    $template->assign_block_vars('rate.main', array(
+      'TITLE' => str_replace('%g%', $row['proper_name'], $lang['rating_page_3']),
+      'CAT_RATE' => $cat_var,
+      'DEFAULT_RATE' => $lang['rate_game_default'],
+      'CHOICES' => $lang['rating_page_4'],
+      'GAME' => $row['game_id'],
+      'SUBMIT' => $lang['rating_page_5'])
+    );
+  }
+
+  if($action == 'submit_rating')
+  {
+    $rating = intval($_POST['rating'] ? $_POST['rating'] : $_POST['rating']);
+    $game = intval($_POST['game'] ? $_POST['game'] : $_POST['game']);
+
+    $q = "SELECT *
+      FROM ". iNA_GAMES ."
+          WHERE game_id = '". $game ."'";
+      $r = $db -> sql_query($q);
+      $row = $db -> sql_fetchrow($r);
+
+    if (!$rating)
+      message_die(GENERAL_MESSAGE, str_replace("%G%", $row['proper_name'], $lang['rate_game_error']), $lang['error_message']);
+
+      $q = "SELECT *
+>>>>>>> Fix some activity popup SQL (#53) and chat (#20)
 					FROM ". INA_RATINGS ."
 					WHERE game_id = '" . $db->sql_escape($game) . "'
 					AND player = '". $user->data['user_id'] ."'";
@@ -438,14 +463,14 @@ if ($mode == 'rate')
 				message_die(GENERAL_ERROR, $lang['rating_page_error_exists'], $lang['rating_page_error']);
 
 
-			if (!$rating || !$game)
+      if (!$rating || !$game)
 				message_die(GENERAL_ERROR, $lang['rating_page_7'], $lang['rating_page_error']);
 
 			$q = "INSERT INTO ". INA_RATINGS ."
 					VALUES ('". $db->sql_escape($game) ."', '". $db->sql_escape($rating) ."', '". time() ."', '". $user->data['user_id'] ."')";
 			$r = $db -> sql_query($q);
 
-	CheckReturnPath($cat_var_id);
+      CheckReturnPath($cat_var_id);
 		}
 	}
 
@@ -458,16 +483,13 @@ if ($mode == 'comments')
 
 	$meta_content['page_title'] = $lang['comments_link_key'];
 	$template->assign_block_vars('comments', array());
-	$game_comment = ($_GET['game']) ? $_GET['game'] : $_GET['game'];
+	$game_comment = intval($_GET['game'] ? $_GET['game'] : $_GET['game']);
 	$comment = ($_GET['user']) ? $_GET['user'] : $_GET['user'];
-	$action = ($_GET['action']) ? $_GET['action'] : $_GET['action'];
-	if (!$action)
-	{
-		$action = ($_POST['action']) ? $_POST['action'] : $_POST['action'];
-	}
+	$action = ($_GET['action']) ? $_GET['action'] : $_POST['action'];
 
 	if($action == 'posting_comment')
 	{
+<<<<<<< HEAD
 		$comment_left = ($_POST['comment']) ? $_POST['comment'] : $_POST['comment'];
 		$game_for_comment = ($_POST['comment_game_name']) ? $_POST['comment_game_name'] : $_POST['comment_game_name'];
 
@@ -582,15 +604,131 @@ if ($mode == 'comments')
 	{
 		message_die(GENERAL_ERROR, "Error Selecting Comments.", "", __LINE__, __FILE__, $sql);
 	}
+=======
+    $comment_left = ($_POST['comment']) ? $_POST['comment'] : $_POST['comment'];
+    $game_for_comment = ($_POST['comment_game_name']) ? $_POST['comment_game_name'] : $_POST['comment_game_name'];
 
-	$trophy_comments = $db->sql_fetchrowset($result);
-	$total_comments = $db->sql_numrows($result);
-	$db->sql_freeresult($result);
+    $q = "SELECT score
+      FROM ". iNA_SCORES ."
+      WHERE game_name = '". $db->sql_escape($game_for_comment) ."'
+      AND player = '". $user->data['username'] ."'";
+    $r = $db->sql_query($q);
+    $row = $db->sql_fetchrow($r);
+    $score = $row['score'];
 
-	if (!$total_comments)
-	{
-		message_die(GENERAL_MESSAGE, $lang['trophy_comment_10'], $lang['trophy_comment_6']);
-	}
+    if (strlen($comment_left) > 200)
+    {
+      $difference = strlen($comment_left) - 200;
+      message_die(GENERAL_ERROR, $lang['trophy_comment_2'] . $difference . $lang['trophy_comment_3'], $lang['ban_error']);
+    }
+
+    if (strlen($comment_left) < 2)
+    {
+      message_die(GENERAL_ERROR, $lang['trophy_comment_4'], $lang['ban_error']);
+    }
+
+    $q = "SELECT * FROM " . WORDS_TABLE;
+    if (!$r = $db -> sql_query($q))
+    {
+      message_die(GENERAL_ERROR, "Error Selecting Censored Word List.", "", __LINE__, __FILE__, $q);
+    }
+
+    while ($row = $db -> sql_fetchrow($r))
+    {
+      if (eregi(quotemeta($row['word']), $comment_left))
+      {
+        $comment_left = str_replace($row['word'], $row['replacement'], $comment_left);
+      }
+    }
+
+    $comment_left = addslashes(stripslashes($comment_left));
+
+    $sql = "INSERT INTO ". INA_TROPHY_COMMENTS ."
+      VALUES ('" . $db->sql_escape($game_for_comment) . "', '" . $user->data['user_id'] . "', '" . $comment_left . "', '" . time() . "', '" . $score . "')";
+    if (!$result = $db -> sql_query($sql))
+    {
+      message_die(GENERAL_ERROR, "Error Inserting Comment Information.", "", __LINE__, __FILE__, $sql);
+    }
+
+    redirect('activity_popup.' . PHP_EXT . '?mode=comments&game=' . $game_for_comment, true);
+  }
+}
+>>>>>>> Fix some activity popup SQL (#53) and chat (#20)
+
+if (($action == 'leave_comment') && ($comment > '0') && ($game_comment))
+{
+  $game_link = CheckGameImages($game_comment, '');
+
+  $template->assign_block_vars('comments.post_comment', array(
+    'POST_TITLE' => $lang['trophy_comment_7'],
+    'POST_LENGTH' => $lang['trophy_comment_8'],
+    'POST_SUBMIT' => $lang['trophy_comment_9'],
+    'POST_GAME' => $game_comment,
+    'POST_LINK' => IP_ROOT_PATH . 'activity_popup.' . PHP_EXT .'?mode=comments',
+    'POST_IMAGE' => $game_link
+  )
+);
+}
+
+if ((!$action) && ($game_comment))
+{
+  $check_comments = ($_GET['game']) ? $_GET['game'] : $_GET['game'];
+
+  #==== Trophy Holder ===================================== |
+  $sql = "SELECT *
+    FROM " . INA_TROPHY . "
+    WHERE game_name = '" . $db->sql_escape($check_comments) . "'";
+  if (!$result = $db -> sql_query($sql))
+  {
+    message_die(GENERAL_ERROR, "Error Retrieving Current Trophy Holder.", "", __LINE__, __FILE__, $sql);
+  }
+
+  $trophy_row = $db -> sql_fetchrow($result);
+  $current_holder_id = $trophy_row['player'];
+  $current_holder_date = $trophy_row['date'];
+  $current_holder_score = $trophy_row['score'];
+
+  #==== Game Data ========================================= |
+  $sql = "SELECT *
+    FROM " . iNA_GAMES . "
+    WHERE game_name = '" . $db->sql_escape($check_comments) . "'";
+  if (!$result = $db -> sql_query($sql))
+  {
+    message_die(GENERAL_ERROR, $lang['no_game_data'], "", __LINE__, __FILE__, $sql);
+  }
+
+  $row = $db->sql_fetchrow($result);
+  $game_link = $row['proper_name'];
+  $game_image = CheckGameImages($check_comments, $row['proper_name']);
+
+  if ($row['reverse_list'])
+  {
+    $list_type = 'ASC';
+  }
+  else
+  {
+    $list_type = 'DESC';
+  }
+  $db->sql_freeresult($result);
+
+  #==== Comments Array ==================================== |
+  $sql = "SELECT *
+    FROM ". INA_TROPHY_COMMENTS ."
+    WHERE game = '" . $db->sql_escape($check_comments) . "'
+    ORDER BY score $list_type";
+  if (!$result = $db -> sql_query($sql))
+  {
+    message_die(GENERAL_ERROR, "Error Selecting Comments.", "", __LINE__, __FILE__, $sql);
+  }
+
+  $trophy_comments = $db->sql_fetchrowset($result);
+  $total_comments = $db->sql_numrows($result);
+  $db->sql_freeresult($result);
+
+  if (!$total_comments)
+  {
+    message_die(GENERAL_MESSAGE, $lang['trophy_comment_10'], $lang['trophy_comment_6']);
+  }
 
 #==== User Array ======================================== |
 	$sql = "SELECT user_id, username
@@ -611,68 +749,67 @@ if ($mode == 'comments')
 		}
 	}
 
-	for ($a = 0; $a < $total_comments; $a++)
-	{
-		if ($trophy_comments[$a]['player'] == $current_holder_id)
-		{
-			$current_holder_comment = htmlspecialchars($trophy_comments[$a]['comment']);
-			break;
-		}
-	}
+  for ($a = 0; $a < $total_comments; $a++)
+  {
+    if ($trophy_comments[$a]['player'] == $current_holder_id)
+    {
+      $current_holder_comment = htmlspecialchars($trophy_comments[$a]['comment']);
+      break;
+    }
+  }
 
-	$current_holder_score = ($user->data['user_level'] == ADMIN) ? '<a href="'. append_sid('activity_popup.' . PHP_EXT .'?mode=comments&amp;action=delete_comment&amp;game=' . $game_comment . '&amp;player=' . $current_holder_id) . '">' . FormatScores($current_holder_score) . '</a>' : FormatScores($current_holder_score);
+  $current_holder_score = ($user->data['user_level'] == ADMIN) ? '<a href="'. append_sid('activity_popup.' . PHP_EXT .'?mode=comments&amp;action=delete_comment&amp;game=' . $game_comment . '&amp;player=' . $current_holder_id) . '">' . FormatScores($current_holder_score) . '</a>' : FormatScores($current_holder_score);
 
-	$template->assign_block_vars('comments.main', array(
-		'MAIN_LEFT' => $lang['trophy_comment_11'],
-		'MAIN_CENTER1' => $lang['trophy_comment_12'],
-		'MAIN_CENTER2' => $lang['trophy_comment_13'],
-		'MAIN_RIGHT' => $lang['trophy_comment_14'],
-		'MAIN_IMAGE' => $game_image,
-		'MAIN_NAME' => $game_link,
-		'TROPHY_HOLDER' => colorize_username($current_holder_id),
-		'TROPHY_DATE' => create_date($config['default_dateformat'], $current_holder_date, $config['board_timezone']),
-		'TROPHY_SCORE' => $current_holder_score,
-		'TROPHY_COMMENT' => $current_holder_comment
-		)
-	);
+  $template->assign_block_vars('comments.main', array(
+    'MAIN_LEFT' => $lang['trophy_comment_11'],
+    'MAIN_CENTER1' => $lang['trophy_comment_12'],
+    'MAIN_CENTER2' => $lang['trophy_comment_13'],
+    'MAIN_RIGHT' => $lang['trophy_comment_14'],
+    'MAIN_IMAGE' => $game_image,
+    'MAIN_NAME' => $game_link,
+    'TROPHY_HOLDER' => colorize_username($current_holder_id),
+    'TROPHY_DATE' => create_date($config['default_dateformat'], $current_holder_date, $config['board_timezone']),
+    'TROPHY_SCORE' => $current_holder_score,
+    'TROPHY_COMMENT' => $current_holder_comment
+  ));
 
-		$i = 0;
-		$pos = 2;
-		for ($a = 0; $a < $total_comments; $a++)
-		{
-			#==== Skip the trophy holder, as its already shown from above.
-			if ((htmlspecialchars($trophy_comments[$a]['comment']) != $current_holder_comment) && ($trophy_comments[$a]['date'] != $current_holder_date))
-				{
-			$row_class = (!($i % 2)) ? 'row1' : 'row2';
-			$comment_left_text = htmlspecialchars($trophy_comments[$a]['comment']);
-			$comment_left_date = create_date($config['default_dateformat'], $trophy_comments[$a]['date'], $config['board_timezone']);
-			$comment_left_score = FormatScores($trophy_comments[$a]['score']);
-			$comment_left_id = $trophy_comments[$a]['player'];
-			$i++;
+  $i = 0;
+  $pos = 2;
+  for ($a = 0; $a < $total_comments; $a++)
+  {
+    #==== Skip the trophy holder, as its already shown from above.
+    if ((htmlspecialchars($trophy_comments[$a]['comment']) != $current_holder_comment) && ($trophy_comments[$a]['date'] != $current_holder_date))
+    {
+      $row_class = (!($i % 2)) ? 'row1' : 'row2';
+      $comment_left_text = htmlspecialchars($trophy_comments[$a]['comment']);
+      $comment_left_date = create_date($config['default_dateformat'], $trophy_comments[$a]['date'], $config['board_timezone']);
+      $comment_left_score = FormatScores($trophy_comments[$a]['score']);
+      $comment_left_id = $trophy_comments[$a]['player'];
+      $i++;
 
-				for ($b = 0; $b < sizeof($users_data); $b++)
-				{
-					if ($comment_left_id == $users_data[$b]['user_id'])
-					{
-						$comment_left_name = $users_data[$b]['username'];
-						break;
-					}
-				}
-			$comment_left_score = ($user->data['user_level'] == ADMIN) ? '<a href="' . append_sid('activity_popup.' . PHP_EXT . '?mode=comments&amp;action=delete_comment&amp;game=' . $game_comment . '&amp;player=' . $comment_left_id) . '">' . $comment_left_score . '</a>' : $comment_left_score;
+      for ($b = 0; $b < sizeof($users_data); $b++)
+      {
+        if ($comment_left_id == $users_data[$b]['user_id'])
+        {
+          $comment_left_name = $users_data[$b]['username'];
+          break;
+        }
+      }
+      $comment_left_score = ($user->data['user_level'] == ADMIN) ? '<a href="' . append_sid('activity_popup.' . PHP_EXT . '?mode=comments&amp;action=delete_comment&amp;game=' . $game_comment . '&amp;player=' . $comment_left_id) . '">' . $comment_left_score . '</a>' : $comment_left_score;
 
-			$template->assign_block_vars('comments.comment', array(
-				'TROPHY_HOLDER' => '<a href="'. append_sid(CMS_PAGE_PROFILE . '?mode=viewprofile&amp;' . POST_USERS_URL . '=' . $comment_left_id) . '">' . $comment_left_name . '</a>',
-				'TROPHY_DATE' => $comment_left_date,
-				'TROPHY_SCORE' => $comment_left_score,
-				'TROPHY_COMMENT' => $comment_left_text,
-				'ROW' => $row_class,
-				'POS' => $pos
-				)
-			);
-			$pos++;
-				}
-			}
-		}
+      $template->assign_block_vars('comments.comment', array(
+        'TROPHY_HOLDER' => '<a href="'. append_sid(CMS_PAGE_PROFILE . '?mode=viewprofile&amp;' . POST_USERS_URL . '=' . $comment_left_id) . '">' . $comment_left_name . '</a>',
+        'TROPHY_DATE' => $comment_left_date,
+        'TROPHY_SCORE' => $comment_left_score,
+        'TROPHY_COMMENT' => $comment_left_text,
+        'ROW' => $row_class,
+        'POS' => $pos
+      )
+    );
+      $pos++;
+    }
+  }
+}
 
 if (($action == 'delete_comment') && ($user->data['user_level'] == ADMIN))
 	{
