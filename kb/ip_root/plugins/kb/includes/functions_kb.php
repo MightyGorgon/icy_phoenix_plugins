@@ -1041,6 +1041,7 @@ function get_kb_cat_subs_list($auth_type, $parent, $select = 1, $selected = fals
 		{
 			$catlist .= "<option value=\"$category2[$idfield]\" $status>" . $indent . '--&raquo;'. $category2[$namefield] . "</option>\n";
 			$temp = $indent . '&nbsp;&nbsp;';
+			//$catlist .= get_kb_cat_subs_list($auth_type, $category2[$idfield], $select, $selected, $is_admin, $kb_is_auth_all, $temp);
 			$catlist .= get_kb_cat_subs_list($auth_type, $category2[$idfield], $select, $selected, $is_admin, $kb_is_auth_all, $temp, $current_id);
 		}
 	}

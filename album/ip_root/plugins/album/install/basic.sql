@@ -30,7 +30,7 @@ INSERT INTO `phpbb_album_config` (`config_name`, `config_value`) VALUES ('png_al
 INSERT INTO `phpbb_album_config` (`config_name`, `config_value`) VALUES ('gif_allowed', '1');
 INSERT INTO `phpbb_album_config` (`config_name`, `config_value`) VALUES ('desc_length', '512');
 INSERT INTO `phpbb_album_config` (`config_name`, `config_value`) VALUES ('hotlink_prevent', '0');
-INSERT INTO `phpbb_album_config` (`config_name`, `config_value`) VALUES ('hotlink_allowed', 'mightygorgon.com,icyphoenix.com');
+INSERT INTO `phpbb_album_config` (`config_name`, `config_value`) VALUES ('hotlink_allowed', 'icyphoenix.com,lucalibralato.com,mightygorgon.com');
 INSERT INTO `phpbb_album_config` (`config_name`, `config_value`) VALUES ('personal_gallery', '0');
 INSERT INTO `phpbb_album_config` (`config_name`, `config_value`) VALUES ('personal_gallery_private', '0');
 INSERT INTO `phpbb_album_config` (`config_name`, `config_value`) VALUES ('personal_gallery_limit', '-1');

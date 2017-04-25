@@ -198,7 +198,7 @@ else
 			FROM ". USERS_TABLE ."";
 	$r3 = $db->sql_query($q3);
 	$user_data = $db->sql_fetchrowset($r3);
-	$user_c	 = $db->sql_numrows($r3);
+	$user_c = $db->sql_numrows($r3);
 
 	// Setup Favorites Array ------------------------------------------------------------ |
 	$q = "SELECT *

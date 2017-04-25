@@ -190,6 +190,7 @@ if ($mode == 'save')
 		redirect(append_sid($cms_redirect . ((strpos($cms_redirect, '?') !== false) ? '&' : '?') . $class_guestbooks->post_id_var . '=' . $post_id . '#' . $class_guestbooks->post_id_var . $post_id, true));
 	}
 
+	$message .= '<br /><br />' . sprintf($lang['GUESTBOOK_MESSAGE_SUCCESS']);
 	$message .= '<br /><br />' . sprintf($lang['CLICK_RETURN_POST'], '<a href="' . append_sid(THIS_FILE . '?' . $class_guestbooks->guestbook_id_var . '=' . $guestbook_id . '&amp;' . $class_guestbooks->post_id_var . '=' . $post_id . '#' . $class_guestbooks->post_id_var . $post_id) . '">', '</a>');
 	$message .= '<br /><br />' . sprintf($lang['CLICK_RETURN_GUESTBOOK'], '<a href="' . append_sid(THIS_FILE . '?' . $class_guestbooks->guestbook_id_var . '=' . $guestbook_id) . '">', '</a>');
 

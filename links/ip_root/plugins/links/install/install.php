@@ -66,7 +66,7 @@ $install_data = array(
 			"INSERT INTO `" . $table_prefix . "link_config` (`config_name`, `config_value`) VALUES ('lock_submit_site', '0');",
 			"INSERT INTO `" . $table_prefix . "link_config` (`config_name`, `config_value`) VALUES ('allow_no_logo', '0');",
 			"INSERT INTO `" . $table_prefix . "links` (`link_id`, `link_title`, `link_desc`, `link_category`, `link_url`, `link_logo_src`, `link_joined`, `link_active`, `link_hits`, `user_id`, `user_ip`, `last_user_ip`) VALUES (1, 'Icy Phoenix Official Website', 'Icy Phoenix', 4, 'http://www.icyphoenix.com/', 'images/links/banner_ip.gif', 1241136000, 1, 0, 2, '', '');",
-			"INSERT INTO `" . $table_prefix . "links` (`link_id`, `link_title`, `link_desc`, `link_category`, `link_url`, `link_logo_src`, `link_joined`, `link_active`, `link_hits`, `user_id`, `user_ip`, `last_user_ip`) VALUES (2, 'Mighty Gorgon Community', 'Mighty Gorgon Community', 4, 'http://www.mightygorgon.com/', 'images/links/banner_mightygorgon.gif', 1241136000, 1, 0, 2, '', '');",
+			"INSERT INTO `" . $table_prefix . "links` (`link_id`, `link_title`, `link_desc`, `link_category`, `link_url`, `link_logo_src`, `link_joined`, `link_active`, `link_hits`, `user_id`, `user_ip`, `last_user_ip`) VALUES (2, 'Luca Libralato', 'Luca Libralato', 4, 'http://www.lucalibralato.com/', 'images/links/banner_mightygorgon.gif', 1241136000, 1, 0, 2, '', '');",
 			"INSERT INTO `" . $table_prefix . "links` (`link_id`, `link_title`, `link_desc`, `link_category`, `link_url`, `link_logo_src`, `link_joined`, `link_active`, `link_hits`, `user_id`, `user_ip`, `last_user_ip`) VALUES (3, 'phpBB Official Website', 'Official phpBB Website', 4, 'http://www.phpbb.com/', 'images/links/banner_phpbb88a.gif', 1241136000, 1, 0, 2, '', '');",
 		),
 		'functions' => array(),

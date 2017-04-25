@@ -28,8 +28,16 @@ if (empty($config['plugins']['cash']['enabled']))
 	message_die(GENERAL_MESSAGE, 'PLUGIN_DISABLED');
 }
 
+/*
+if ($config['cash_adminnavbar'])
+{
+	$navbar = 1;
+	include('./admin_cash.' . PHP_EXT);
+}
+*/
 $navbar = $config['cash_adminnavbar'];
 include('./admin_cash.' . PHP_EXT);
+
 $new = array();
 $new_cash = array();
 $num_currencies = 0;
@@ -42,6 +50,7 @@ $result = $db->sql_query($sql);
 
 $allowed_array = array(
 	'cash_disable' => true,
+	//'cash_adminbig' => true,
 	'cash_adminnavbar' => true,
 	'cash_display_after_posts' => true,
 	'cash_post_message' => true,
@@ -60,6 +69,12 @@ while ($row = $db->sql_fetchrow($result))
 
 	if ($allowed_array[$config_name] && isset($_POST['submit']) && isset($_POST['set']) && ($_POST['set'] == 'general') && isset($_POST[$config_name]))
 	{
+		/*
+		if (($config_name == 'cash_adminbig') && ($new[$config_name] != stripslashes($_POST[$config_name])))
+		{
+			$reset_navbar = "\n<script language=\"JavaScript\" type=\"text/javascript\">\n<!--\nparent.nav.location.reload();\n//-->\n</script>";
+		}
+		*/
 		set_config($config_name, $new[$config_name]);
 	}
 }
@@ -70,6 +85,11 @@ if (isset($_POST['submit']))
 
 	message_die(GENERAL_MESSAGE, $message);
 }
+
+/*
+$admin_big = ($new['cash_adminbig']) ? 'checked="checked"' : '';
+$admin_small = (!$new['cash_adminbig']) ? 'checked="checked"' : '';
+*/
 
 $adminnavbar_yes = ($new['cash_adminnavbar']) ? 'checked="checked"' : '';
 $adminnavbar_no = (!$new['cash_adminnavbar']) ? 'checked="checked"' : '';
@@ -119,6 +139,10 @@ $template->assign_vars(array(
 	'DISABLE_SPAM_TIME' => $new['cash_disable_spam_time'],
 	'DISABLE_SPAM_MESSAGE' => $new['cash_disable_spam_message'],
 
+	/*
+	'ADMIN_BIG' => $admin_big,
+	'ADMIN_SMALL' => $admin_small,
+	*/
 	'ADMINNAVBAR_YES' => $adminnavbar_yes,
 	'ADMINNAVBAR_NO' => $adminnavbar_no
 	)

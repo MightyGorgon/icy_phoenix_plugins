@@ -232,7 +232,7 @@ if ($mode == 'clear_scores')
 	$result = $db->sql_query($sql);
 
 	$message = $lang['admin_score_reset'];
-	$message .= sprintf($lang['admin_return_activity'], '<a href="' . append_sid('admin_activity.' . PHP_EXT) . '">', '</a>') . '<br /><br />' . sprintf($lang['Click_return_admin_index'], '<a href="' . append_sid('index.' . PHP_EXT . '?pane=right') . '">', '</a>');
+	$message .= sprintf($lang['admin_return_activity'], '<a href="' . append_sid('admin_activity.' . PHP_EXT) . '">', '</a>') . '<br /><br />' . sprintf($lang['Click_return_admin_index'], '<a href="' . append_sid(IP_ROOT_PATH . ADM . '/index.' . PHP_EXT . '?pane=right') . '">', '</a>');
 	message_die(GENERAL_MESSAGE, $message, '', __LINE__, __FILE__, $sql);
 }
 
@@ -282,13 +282,13 @@ function DeleteGame($game_id)
 		$result = $db->sql_query($sql);
 
 		$message = $lang['admin_game_deleted'];
-		$message .= sprintf($lang['admin_return_activity'], '<a href="' . append_sid('admin_activity.' . PHP_EXT) . '">', '</a>') . '<br /><br />' . sprintf($lang['Click_return_admin_index'], '<a href="' . append_sid('index.' . PHP_EXT . '?pane=right') . '">', '</a>');
+		$message .= sprintf($lang['admin_return_activity'], '<a href="' . append_sid('admin_activity.' . PHP_EXT) . '">', '</a>') . '<br /><br />' . sprintf($lang['Click_return_admin_index'], '<a href="' . append_sid(IP_ROOT_PATH . ADM . '/index.' . PHP_EXT . '?pane=right') . '">', '</a>');
 		message_die(GENERAL_MESSAGE, $message, '', __LINE__, __FILE__, $sql);
 	}
 	else
 	{
 		$message = $lang['admin_game_not_deleted'];
-		$message .= sprintf($lang['admin_return_activity'], '<a href="' . append_sid('admin_activity.' . PHP_EXT) . '">', '</a>') . '<br /><br />' . sprintf($lang['Click_return_admin_index'], '<a href="' . append_sid('index.' . PHP_EXT . '?pane=right') . '">', '</a>');
+		$message .= sprintf($lang['admin_return_activity'], '<a href="' . append_sid('admin_activity.' . PHP_EXT) . '">', '</a>') . '<br /><br />' . sprintf($lang['Click_return_admin_index'], '<a href="' . append_sid(IP_ROOT_PATH . ADM . '/index.' . PHP_EXT . '?pane=right') . '">', '</a>');
 		message_die(GENERAL_MESSAGE, $message, '', __LINE__, __FILE__, $sql);
 	}
 }
@@ -381,7 +381,7 @@ if ($action == 'view')
 		{
 			$game_id = $games_data[$a]['game_id'];
 			$game_name = $games_data[$a]['proper_name'];
-			$game_image = '<img src="'. ACTIVITY_ROOT_PATH . $config['ina_default_g_path'] .'/'. $games_data[$a]['game_name'] .'/'. $games_data[$a]['game_name'] .'.gif" border="0">';
+			$game_image = '<img src="' . ACTIVITY_ROOT_PATH . $config['ina_default_g_path'] .'/'. $games_data[$a]['game_name'] .'/'. $games_data[$a]['game_name'] .'.gif" border="0">';
 			if (!$game_image)
 				$game_image = $lang['admin_edit_title_r'];
 
@@ -700,7 +700,7 @@ if ($action == 'save')
 		$db->sql_query($q);
 
 		$message = $lang['admin_game_saved'];
-		$message .= sprintf($lang['admin_return_activity'], '<a href="' . append_sid('admin_activity.' . PHP_EXT) . '">', '</a>') . '<br /><br />' . sprintf($lang['Click_return_admin_index'], '<a href="' . append_sid('index.' . PHP_EXT . '?pane=right') . '">', '</a>');
+		$message .= sprintf($lang['admin_return_activity'], '<a href="' . append_sid('admin_activity.' . PHP_EXT) . '">', '</a>') . '<br /><br />' . sprintf($lang['Click_return_admin_index'], '<a href="' . append_sid(IP_ROOT_PATH . ADM . '/index.' . PHP_EXT . '?pane=right') . '">', '</a>');
 		message_die(GENERAL_MESSAGE, $message);
 	}
 }
@@ -749,7 +749,7 @@ if ((!$mode) && (!$action))
 	if (isset($_POST['submit']))
 	{
 		$message = $lang['admin_config_updated'];
-		$message .= sprintf($lang['admin_return_activity'], '<a href="' . append_sid('admin_activity.' . PHP_EXT) . '">', '</a>') . '<br /><br />' . sprintf($lang['Click_return_admin_index'], '<a href="' . append_sid('index.' . PHP_EXT . '?pane=right') . '">', '</a>');
+		$message .= sprintf($lang['admin_return_activity'], '<a href="' . append_sid('admin_activity.' . PHP_EXT) . '">', '</a>') . '<br /><br />' . sprintf($lang['Click_return_admin_index'], '<a href="' . append_sid(IP_ROOT_PATH . ADM . '/index.' . PHP_EXT . '?pane=right') . '">', '</a>');
 		message_die(GENERAL_MESSAGE, $message, '', __LINE__, __FILE__, $sql);
 	}
 

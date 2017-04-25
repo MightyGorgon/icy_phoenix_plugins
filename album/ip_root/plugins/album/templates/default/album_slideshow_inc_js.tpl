@@ -20,7 +20,7 @@
 // DOM scripting by brothercake - http://www.brothercake.com/
 //******************************************************
 // *****************************************************
-// Edited by Mighty Gorgon - http://www.mightygorgon.com/
+// Edited by Mighty Gorgon - http://www.lucalibralato.com/
 //******************************************************
 
 // Usage
