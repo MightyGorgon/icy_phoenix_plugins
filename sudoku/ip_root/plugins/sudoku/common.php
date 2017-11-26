@@ -25,8 +25,8 @@ $cms_page['global_blocks'] = (!empty($cms_config_layouts[$cms_page['page_id']]['
 $cms_auth_level = (isset($cms_config_layouts[$cms_page['page_id']]['view']) ? $cms_config_layouts[$cms_page['page_id']]['view'] : AUTH_ALL);
 check_page_auth($cms_page['page_id'], $cms_auth_level);
 
-include(IP_ROOT_PATH . 'includes/class_plugins.' . PHP_EXT);
-$class_plugins = new class_plugins();
+if (!class_exists('class_plugins')) include(IP_ROOT_PATH . 'includes/class_plugins.' . PHP_EXT);
+if (empty($class_plugins)) $class_plugins = new class_plugins();
 $class_plugins->setup_lang($config['plugins'][$plugin_name]['dir']);
 
 $sudoku_config = $class_plugins->get_config(basename($config['plugins'][$plugin_name]['dir']));

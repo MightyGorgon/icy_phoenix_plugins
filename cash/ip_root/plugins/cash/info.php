@@ -23,5 +23,6 @@ $plugin_details['version'] = '1.0.1';
 $plugin_details['constants'] = 0;
 $plugin_details['common'] = 0;
 $plugin_details['functions'] = 1;
+$plugin_details['class'] = 0;
 
 ?>

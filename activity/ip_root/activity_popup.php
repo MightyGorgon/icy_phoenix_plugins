@@ -114,7 +114,7 @@ if ($mode == 'chat')
 
 		$q = "SELECT *
 				FROM ". INA_CHAT ."
-				WHERE chat_date = '". $what_day ."'";
+				WHERE chat_date = '" . $db->sql_escape($what_day) . "'";
 		$r = $db->sql_query($q);
 		$past_chat = $db->sql_fetchrow($r);
 		$chat_session = $past_chat['chat_text'];
@@ -147,7 +147,7 @@ if ($mode == 'chat')
 
 		$q = "SELECT chat_date
 				FROM ". INA_CHAT ."
-				WHERE chat_date <> '". $what_day ."'";
+				WHERE chat_date <> '" . $db->sql_escape($what_day) . "'";
 		$r  = $db->sql_query($q);
 		$n = $db->sql_numrows($r);
 		while ($past_days = $db->sql_fetchrow($r))
@@ -206,6 +206,7 @@ if ($mode == 'chat')
 		$message = $to_add;
 
 		global $bbcode;
+		$message = censor_text($message);
 		$html_on = ($user->data['user_allowhtml'] && $config['allow_html']) ? 1 : 0 ;
 		$bbcode_on = ($user->data['user_allowbbcode'] && $config['allow_bbcode']) ? 1 : 0 ;
 		$smilies_on = ($user->data['user_allowsmile'] && $config['allow_smilies']) ? 1 : 0 ;
@@ -215,19 +216,23 @@ if ($mode == 'chat')
 		$bbcode->allow_smilies = $smilies_on;
 		$message = $bbcode->parse($message);
 		$message = prepare_message(trim($to_add), $html_on, $bbcode_on, $smilies_on);
+		//$message = $bbcode->parse($message);
 
 		#==== Same day chat or new days chat?
 		if ($chat_session)
 		{
+
 			$message = addslashes(stripslashes($message));
 			$message = str_replace('%S%', '%s%', $message);
 			$message = str_replace('%E%', '%e%', $message);
-			$new_session = '%S%[b]' . $user->data['username'] . '[/b]: ' . $message . '%E%';
+			$colorized_username = colorize_username($user->data['user_id'], $user->data['username'], $user->data['user_color'], $user->data['user_active']);
+			$userlink = '<a href="' . append_sid(CMS_PAGE_PROFILE . '?mode=viewprofile&amp;' . POST_USERS_URL . '=' . $user->data['user_id']) . '">' . $colorized_username . '</a>';
+			$new_session = '%S%<b>' . $userlink . '</b>: ' . $message . '%E%';
 			$new_session .= $chat_session;
 			$new_session = addslashes(stripslashes($new_session));
 
 			$q = "UPDATE ". INA_CHAT ."
-				SET chat_text = '" . $new_session . "'
+				SET chat_text = '" . $db->sql_escape($new_session) . "'
 				WHERE chat_date = '" . gmdate('Y-m-d') . "'";
 			$db->sql_query($q);
 		}
@@ -240,7 +245,7 @@ if ($mode == 'chat')
 			$new_session = addslashes(stripslashes($new_session));
 
 			$q = "INSERT INTO ". INA_CHAT ."
-				VALUES ('". gmdate('Y-m-d') ."', '". $new_session ."')";
+				VALUES ('". gmdate('Y-m-d') ."', '" . $db->sql_escape($new_session) . "')";
 			$db->sql_query($q);
 		}
 
@@ -263,7 +268,7 @@ if ($mode == 'chat')
 	{
 		$q = "SELECT *
 				FROM ". INA_CHAT ."
-				WHERE chat_date = '". gmdate('y-m-d') ."'";
+				WHERE chat_date = '" . gmdate('y-m-d') . "'";
 		$r = $db->sql_query($q);
 		$todays_chat = $db->sql_fetchrow($r);
 		$chat_session = $todays_chat['chat_text'];
@@ -297,7 +302,7 @@ if ($mode == 'chat')
 
 		$q = "SELECT chat_date
 				FROM ". INA_CHAT ."
-				WHERE chat_date <> '". gmdate('Y-m-d') ."'";
+				WHERE chat_date <> '" . gmdate('Y-m-d') . "'";
 		$r  = $db->sql_query($q);
 		$n = $db->sql_numrows($r);
 		while ($past_days = $db->sql_fetchrow($r))
@@ -385,8 +390,8 @@ if ($mode == 'rate')
 
 		$q = "SELECT *
 				FROM ". INA_RATINGS ."
-				WHERE game_id = '". $game ."'
-				AND player = '". $user->data['user_id'] ."'";
+				WHERE game_id = '" . $db->sql_escape($game) . "'
+				AND player = '" . $user->data['user_id'] . "'";
 		$r = $db -> sql_query($q);
 		$row = $db -> sql_fetchrow($r);
 
@@ -395,7 +400,7 @@ if ($mode == 'rate')
 
 		$q = "SELECT *
 				FROM ". iNA_GAMES ."
-				WHERE game_id = '". $game ."'";
+				WHERE game_id = '" . $db->sql_escape($game) . "'";
 		$r = $db -> sql_query($q);
 		$row = $db -> sql_fetchrow($r);
 
@@ -416,7 +421,7 @@ if ($mode == 'rate')
 
 			$q = "SELECT *
 					FROM ". iNA_GAMES ."
-					WHERE game_id = '". $game ."'";
+					WHERE game_id = '" . $db->sql_escape($game) . "'";
 			$r = $db -> sql_query($q);
 			$row = $db -> sql_fetchrow($r);
 
@@ -425,7 +430,7 @@ if ($mode == 'rate')
 
 			$q = "SELECT *
 					FROM ". INA_RATINGS ."
-					WHERE game_id = '". $game ."'
+					WHERE game_id = '" . $db->sql_escape($game) . "'
 					AND player = '". $user->data['user_id'] ."'";
 			$r = $db -> sql_query($q);
 			$row = $db -> sql_fetchrow($r);
@@ -437,7 +442,7 @@ if ($mode == 'rate')
 				message_die(GENERAL_ERROR, $lang['rating_page_7'], $lang['rating_page_error']);
 
 			$q = "INSERT INTO ". INA_RATINGS ."
-					VALUES ('". $game ."', '". $rating ."', '". time() ."', '". $user->data['user_id'] ."')";
+					VALUES ('". $db->sql_escape($game) ."', '". $db->sql_escape($rating) ."', '". time() ."', '". $user->data['user_id'] ."')";
 			$r = $db -> sql_query($q);
 
 	CheckReturnPath($cat_var_id);
@@ -468,7 +473,7 @@ if ($mode == 'comments')
 
 		$q = "SELECT score
 				FROM ". iNA_SCORES ."
-				WHERE game_name = '". $game_for_comment ."'
+				WHERE game_name = '". $db->sql_escape($game_for_comment) ."'
 				AND player = '". $user->data['username'] ."'";
 		$r = $db->sql_query($q);
 		$row = $db->sql_fetchrow($r);
@@ -502,7 +507,7 @@ if ($mode == 'comments')
 	$comment_left = addslashes(stripslashes($comment_left));
 
 	$sql = "INSERT INTO ". INA_TROPHY_COMMENTS ."
-			VALUES ('" . $game_for_comment . "', '" . $user->data['user_id'] . "', '" . $comment_left . "', '" . time() . "', '" . $score . "')";
+			VALUES ('" . $db->sql_escape($game_for_comment) . "', '" . $user->data['user_id'] . "', '" . $db->sql_escape($comment_left) . "', '" . time() . "', '" . $db->sql_escape($score) . "')";
 		if (!$result = $db -> sql_query($sql))
 		{
 			message_die(GENERAL_ERROR, "Error Inserting Comment Information.", "", __LINE__, __FILE__, $sql);
@@ -534,7 +539,7 @@ if ($mode == 'comments')
 #==== Trophy Holder ===================================== |
 		$sql = "SELECT *
 			FROM " . INA_TROPHY . "
-			WHERE game_name = '" . $check_comments . "'";
+			WHERE game_name = '" . $db->sql_escape($check_comments) . "'";
 		if (!$result = $db -> sql_query($sql))
 		{
 			message_die(GENERAL_ERROR, "Error Retrieving Current Trophy Holder.", "", __LINE__, __FILE__, $sql);
@@ -548,7 +553,7 @@ if ($mode == 'comments')
 #==== Game Data ========================================= |
 		$sql = "SELECT *
 			FROM " . iNA_GAMES . "
-			WHERE game_name = '" . $check_comments . "'";
+			WHERE game_name = '" . $db->sql_escape($check_comments) . "'";
 		if (!$result = $db -> sql_query($sql))
 		{
 			message_die(GENERAL_ERROR, $lang['no_game_data'], "", __LINE__, __FILE__, $sql);
@@ -571,7 +576,7 @@ if ($mode == 'comments')
 #==== Comments Array ==================================== |
 	$sql = "SELECT *
 		FROM ". INA_TROPHY_COMMENTS ."
-		WHERE game = '" . $check_comments . "'
+		WHERE game = '" . $db->sql_escape($check_comments) . "'
 		ORDER BY score $list_type";
 	if (!$result = $db -> sql_query($sql))
 	{
@@ -675,7 +680,7 @@ if (($action == 'delete_comment') && ($user->data['user_level'] == ADMIN))
 	$n = ($_GET['player']) ? $_GET['player'] : $_GET['player'];
 
 			$q = "DELETE FROM ". INA_TROPHY_COMMENTS ."
-						WHERE player = '". $n ."'
+						WHERE player = '" . $db->sql_escape($n) . "'
 			AND game = '". $g ."'";
 	if (!$r = $db -> sql_query($q))
 		message_die(GENERAL_ERROR, "Error Deleting Comment.", "", __LINE__, __FILE__, $q);
@@ -689,14 +694,14 @@ $game_id = (isset($_GET['g'])) ? intval($_GET['g']) : 0;
 
 	$sql = "SELECT *
 			FROM ". iNA_GAMES ."
-			WHERE game_id = '". $game_id ."'";
+			WHERE game_id = '". $db->sql_escape($game_id) ."'";
 	$result = $db->sql_query($sql);
 
 	$game_info = $db->sql_fetchrow($result);
 
 	$sql = "SELECT *
 			FROM ". INA_CATEGORY ."
-			WHERE cat_id = '". $game_info['cat_id'] ."'";
+			WHERE cat_id = '". $db->sql_escape($game_info['cat_id']) ."'";
 	$result = $db->sql_query($sql);
 	$cat_info = $db->sql_fetchrow($result);
 
@@ -707,7 +712,7 @@ $game_id = (isset($_GET['g'])) ? intval($_GET['g']) : 0;
 
 	$sql = "SELECT *
 			FROM ". INA_TROPHY ."
-			WHERE game_name = '". $game_info['game_name'] ."'";
+			WHERE game_name = '". $db->sql_escape($game_info['game_name']) ."'";
 	$result = $db->sql_query($sql);
 	$score_info = $db->sql_fetchrow($result);
 
@@ -717,7 +722,7 @@ $game_id = (isset($_GET['g'])) ? intval($_GET['g']) : 0;
 
 	$sql = "SELECT username
 			FROM ". USERS_TABLE ."
-			WHERE user_id = '". $best_player ."'";
+			WHERE user_id = '". $db->sql_escape($best_player) ."'";
 	$result = $db->sql_query($sql);
 	$user_info = $db->sql_fetchrow($result);
 
@@ -738,7 +743,7 @@ $game_id = (isset($_GET['g'])) ? intval($_GET['g']) : 0;
 
 	$q = "SELECT MAX(date) AS last_date
 			FROM ". iNA_SCORES ."
-			WHERE game_name = '". $game_info['game_name'] ."'";
+			WHERE game_name = '". $db->sql_escape($game_info['game_name']) ."'";
 	$r = $db->sql_query($q);
 	$date = $db->sql_fetchrow($r);
 

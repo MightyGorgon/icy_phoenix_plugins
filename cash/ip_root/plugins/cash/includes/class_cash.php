@@ -59,11 +59,11 @@ class Template_plus extends Template
 		$this->files_cache = &$template->files_cache;
 		$this->files_cache2 = &$template->files_cache2;
 		$this->vars = &$template->vars;
-	  $this->cachedir = &$template->cachedir;
-	  $this->tpl = &$template->tpl;
-	  $this->tpldir_len = &$template->tpldir_len;
-	  $this->tpldir = &$template->tpldir;
-	  $this->subtemplates = &$template->subtemplates;
+		$this->cachedir = &$template->cachedir;
+		$this->tpl = &$template->tpl;
+		$this->tpldir_len = &$template->tpldir_len;
+		$this->tpldir = &$template->tpldir;
+		$this->subtemplates = &$template->subtemplates;
 	}
 
 	/**
