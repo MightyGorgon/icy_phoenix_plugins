@@ -6,9 +6,9 @@ function links_me()
 }
 //-->
 </script>
-<table>
+<table class="empty-table" width="100%" cellspacing="0" cellpadding="0" border="0">
 <!-- BEGIN links_own1 -->
-<tr><td class="tdalignc"><a href="javascript:links_me()"><img src="{U_SITE_LOGO}" alt="{SITENAME}" title="{SITENAME}"/></a><br /><br /></td></tr>
+<tr><td align="center"><a href="javascript:links_me()"><img src="{U_SITE_LOGO}" alt="{SITENAME}" title="{SITENAME}"/></a><br /><br /></td></tr>
 <!-- END links_own1 -->
 <!-- BEGIN links_scroll -->
 <tr>
@@ -18,7 +18,7 @@ function links_me()
 			<div class="gen">
 			<br />
 			<!-- BEGIN links_row -->
-			<a href="{static.links_row.LINK_HREF}" target="_blank" onmouseover="document.all.links_block.stop()" onmouseout="document.all.links_block.start()"><img class="vs10px" src="{scroll.links_row.LINK_LOGO_SRC}" alt="{scroll.links_row.LINK_TITLE}" title="{scroll.links_row.LINK_TITLE}" width="{SITE_LOGO_WIDTH}" height="{SITE_LOGO_HEIGHT}" border="0" /></a><br /><br />
+			<a href="{static.links_row.LINK_HREF}" target="_blank" onmouseover="document.all.links_block.stop()" onmouseout="document.all.links_block.start()"><img src="{scroll.links_row.LINK_LOGO_SRC}" alt="{scroll.links_row.LINK_TITLE}" title="{scroll.links_row.LINK_TITLE}" width="{SITE_LOGO_WIDTH}" height="{SITE_LOGO_HEIGHT}" border="0" vspace="3" /></a><br /><br />
 			<!-- END links_row -->
 			<br />
 			</div>
@@ -31,12 +31,13 @@ function links_me()
 <tr>
 	<td>
 	<!-- BEGIN links_row -->
-	<div class="genmed" style="text-align: center;"><a href="{static.links_row.LINK_HREF}" target="_blank"><img class="vs10px" src="{static.links_row.LINK_LOGO_SRC}" alt="{static.links_row.LINK_TITLE}" title="{static.links_row.LINK_TITLE}" width="{SITE_LOGO_WIDTH}" height="{SITE_LOGO_HEIGHT}" border="0" /></a></div><br />
+	<div class="genmed" style="text-align: center;"><a href="{static.links_row.LINK_HREF}" target="_blank"><img src="{static.links_row.LINK_LOGO_SRC}" alt="{static.links_row.LINK_TITLE}" title="{static.links_row.LINK_TITLE}" width="{SITE_LOGO_WIDTH}" height="{SITE_LOGO_HEIGHT}" border="0" vspace="3" /></a></div><br />
 	<!-- END links_row -->
 	</td>
 </tr>
 <!-- END links_static -->
 <!-- BEGIN links_own2 -->
-<tr><td class="tdalignc"><a href="javascript:links_me()"><img src="{U_SITE_LOGO}" alt="{SITENAME}" title="{SITENAME}"/></a><br /></td></tr>
+<tr><td align="center"><a href="javascript:links_me()"><img src="{U_SITE_LOGO}" alt="{SITENAME}" title="{SITENAME}"/></a><br /></td></tr>
 <!-- END links_own2 -->
 </table>
+
