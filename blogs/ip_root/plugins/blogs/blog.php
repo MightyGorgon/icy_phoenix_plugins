@@ -60,6 +60,7 @@ $edit_allowed = (check_auth_level(AUTH_ADMIN) || $is_owner) ? true : false;
 $input_comment_allowed = ($admin_allowed || (($post_type == 'comment') && check_auth_level($blog_data['blog_auth_reply']))) ? true : false;
 $edit_comment_allowed = ($admin_allowed || (($post_type == 'comment') && check_auth_level($blog_data['blog_auth_edit']))) ? true : false;
 
+$common_no_auth_check = true; // we do auth checking ourselves, no need for common_forms to
 include(IP_ROOT_PATH . 'includes/common_forms.' . PHP_EXT);
 
 $is_auth = true;
@@ -527,7 +528,7 @@ elseif ($mode == 'view')
 		);
 	}
 
-	$comment_post_allowed = ($admin_allowed || check_auth_level($blog_data['blog_auth_post'])) ? true : false;
+	$comment_post_allowed = ($admin_allowed || check_auth_level($blog_data['blog_auth_reply'])) ? true : false;
 	if ($comment_post_allowed)
 	{
 		$items_row = array();
