@@ -17,7 +17,7 @@ class AJAXChatMySQLQuery {
 	var $_error = '';
 
 	// Constructor:
-	function AJAXChatMySQLQuery($sql, $connectionID = null) {
+	function __construct($sql, $connectionID = null) {
 		$this->_sql = trim($sql);
 		$this->_connectionID = $connectionID;
 		if($this->_connectionID) {
@@ -31,7 +31,7 @@ class AJAXChatMySQLQuery {
 			if(!$this->_result) {
 				$this->_errno = mysql_errno();
 				$this->_error = mysql_error();
-			}	
+			}
 		}
 	}
 
@@ -84,6 +84,6 @@ class AJAXChatMySQLQuery {
 	function free() {
 		@mysql_free_result($this->_result);
 	}
-	
+
 }
 ?>

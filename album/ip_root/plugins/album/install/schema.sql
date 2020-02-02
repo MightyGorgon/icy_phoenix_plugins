@@ -106,7 +106,7 @@ CREATE TABLE `phpbb_album_comment_watch` (
 ## `phpbb_album_config`
 
 CREATE TABLE `phpbb_album_config` (
-	`config_name` VARCHAR(255) NOT NULL DEFAULT '',
+	`config_name` VARCHAR(190) NOT NULL DEFAULT '',
 	`config_value` VARCHAR(255) NOT NULL DEFAULT '',
 	PRIMARY KEY (`config_name`)
 );

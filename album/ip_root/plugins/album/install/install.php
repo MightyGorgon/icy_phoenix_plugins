@@ -96,7 +96,7 @@ $install_data = array(
 			);",
 
 			"CREATE TABLE `" . $table_prefix . "album_config` (
-				`config_name` VARCHAR(255) NOT NULL DEFAULT '',
+				`config_name` VARCHAR(190) NOT NULL DEFAULT '',
 				`config_value` VARCHAR(255) NOT NULL DEFAULT '',
 				PRIMARY KEY (`config_name`)
 			);",

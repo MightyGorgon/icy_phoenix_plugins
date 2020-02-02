@@ -15,7 +15,7 @@ class AJAXChatLanguage {
 	var $_strictMode;
 	var $_langCode;
 
-	function AJAXChatLanguage($availableLangCodes, $defaultLangCode, $langCode=null, $strictMode=false) {
+	function __construct($availableLangCodes, $defaultLangCode, $langCode=null, $strictMode=false) {
 		$this->_regExpAcceptLangCode = '/^([a-z]{1,8}(?:-[a-z]{1,8})*)(?:;\s*q=(0(?:\.[0-9]{1,3})?|1(?:\.0{1,3})?))?$/i';
 		$this->_availableLangCodes = $availableLangCodes;
 		$this->_defaultLangCode = $defaultLangCode;
@@ -24,7 +24,7 @@ class AJAXChatLanguage {
 		}
 		$this->_strictMode = $strictMode;
 	}
-	
+
 	// Method to detect the language code from the HTTP_ACCEPT_LANGUAGE header:
 	function detectLangCode() {
 		// If HTTP_ACCEPT_LANGUAGE is empty use defaultLangCode:
@@ -35,10 +35,10 @@ class AJAXChatLanguage {
 
 		// Split up the HTTP_ACCEPT_LANGUAGE header:
 		$acceptedLanguages = preg_split('/,\s*/', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
-		
+
 		$currentLangCode = $this->_defaultLangCode;
 		$currentLangQuality = 0.0;
-		
+
 		foreach($acceptedLanguages as $acceptedLanguage) {
 			// Parse the language string:
 			$match = preg_match($this->_regExpAcceptLangCode, $acceptedLanguage, $matches);
@@ -46,10 +46,10 @@ class AJAXChatLanguage {
 			if(!$match) {
 				continue;
 			}
-			
-			// Get and split the language code:	
+
+			// Get and split the language code:
 			$langCodeParts = explode ('-', $matches[1]);
-			
+
 			// Get the language quality given as float value:
 			if(isset($matches[2])) {
 				$langQuality = (float)$matches[2];
@@ -79,7 +79,7 @@ class AJAXChatLanguage {
 				array_pop($langCodeParts);
 			}
 		}
-		
+
 		$this->_langCode = $currentLangCode;
 	}
 
@@ -89,7 +89,7 @@ class AJAXChatLanguage {
 		}
 		return $this->_langCode;
 	}
-	
+
 	function setLangCode($langCode) {
 		$this->_langCode = $langCode;
 	}
@@ -97,6 +97,6 @@ class AJAXChatLanguage {
 	function getLangCodes() {
 		return $this->_availableLangCodes;
 	}
-	
+
 }
 ?>

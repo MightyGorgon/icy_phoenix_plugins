@@ -227,7 +227,7 @@ if (defined('CM_EVENT'))
 	{
 		var $events;
 
-		function cash_events()
+		function __construct()
 		{
 			global $db;
 			$this->events = array();

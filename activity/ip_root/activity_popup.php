@@ -253,13 +253,13 @@ if ($mode == 'chat')
 		if ($is_playing)
 		{
 			$q = "UPDATE ". USERS_TABLE ."
-					SET user_session_page = '". CMS_PAGE_ACTIVITY_GAME ."', ina_cheat_fix = '". $is_playing_g ."', playing_time = '". $is_playing_t ."'
-					WHERE user_id = '". $user->data['user_id'] ."'";
+					SET user_session_page = '" . CMS_PAGE_ACTIVITY_GAME . "', ina_cheat_fix = '". $is_playing_g ."', playing_time = '" . $is_playing_t . "'
+					WHERE user_id = '" . $user->data['user_id'] . "'";
 			$db->sql_query($q);
 
 			$q = "UPDATE ". SESSIONS_TABLE ."
-					SET session_page = '". CMS_PAGE_ACTIVITY_GAME ."'
-					WHERE session_user_id = '". $user->data['user_id'] ."'";
+					SET session_page = '" . CMS_PAGE_ACTIVITY_GAME . "'
+					WHERE session_user_id = '" . $user->data['user_id'] . "'";
 			$db->sql_query($q);
 		}
 	}

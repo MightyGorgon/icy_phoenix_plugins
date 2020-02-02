@@ -25,7 +25,7 @@ $install_data = array(
 				KEY `cat_order` (`cat_order`)
 			);",
 			"CREATE TABLE `" . $table_prefix . "link_config` (
-				`config_name` VARCHAR(255) NOT NULL DEFAULT '',
+				`config_name` VARCHAR(190) NOT NULL DEFAULT '',
 				`config_value` VARCHAR(255) NOT NULL DEFAULT ''
 			);",
 			"CREATE TABLE `" . $table_prefix . "links` (

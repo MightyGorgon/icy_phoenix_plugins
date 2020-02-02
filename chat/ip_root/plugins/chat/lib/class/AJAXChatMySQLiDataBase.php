@@ -15,11 +15,11 @@ class AJAXChatDataBaseMySQLi {
 	var $_error = '';
 	var $_dbName;
 
-	function AJAXChatDataBaseMySQLi(&$dbConnectionConfig) {
+	function __construct(&$dbConnectionConfig) {
 		$this->_connectionID = $dbConnectionConfig['link'];
 		$this->_dbName = $dbConnectionConfig['name'];
 	}
-	
+
 	// Method to connect to the DataBase server:
 	function connect(&$dbConnectionConfig) {
 		$this->_connectionID = new mysqli(
@@ -34,7 +34,7 @@ class AJAXChatDataBaseMySQLi {
 		}
 		return true;
 	}
-	
+
 	// Method to select the DataBase:
 	function select($dbName) {
 		if(!$this->_connectionID->select_db($dbName)) {
@@ -43,14 +43,14 @@ class AJAXChatDataBaseMySQLi {
 			return false;
 		}
 		$this->_dbName = $dbName;
-		return true;	
+		return true;
 	}
-	
+
 	// Method to determine if an error has occured:
 	function error() {
 		return (bool)$this->_error;
 	}
-	
+
 	// Method to return the error report:
 	function getError() {
 		if($this->error()) {
@@ -59,14 +59,14 @@ class AJAXChatDataBaseMySQLi {
 		} else {
 			$str = 'No errors.'."\n";
 		}
-		return $str;		
+		return $str;
 	}
-	
+
 	// Method to return the connection identifier:
 	function &getConnectionID() {
 		return $this->_connectionID;
 	}
-	
+
 	// Method to prevent SQL injections:
 	function makeSafe($value) {
 		return "'".$this->_connectionID->escape_string($value)."'";

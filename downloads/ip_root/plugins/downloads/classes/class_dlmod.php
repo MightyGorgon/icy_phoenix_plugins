@@ -84,7 +84,7 @@ class dlmod
 	/*
 	* run the class constructor
 	*/
-	function dlmod()
+	function __construct()
 	{
 		global $db, $config, $user, $enable_desc, $enable_rule;
 
