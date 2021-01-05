@@ -61,7 +61,7 @@ switch ($mode)
 			stopwords_synonyms_init();
 
 			$split_search = array();
-			$split_search = (!strstr($multibyte_charset, $lang['ENCODING'])) ? split_words(clean_words('search', stripslashes($search_keywords), $stopwords_array, $synonyms_array), 'search') : split(' ', $search_keywords);
+			$split_search = (!strstr($multibyte_charset, $lang['ENCODING'])) ? split_words(clean_words('search', stripslashes($search_keywords), $stopwords_array, $synonyms_array), 'search') : explode(' ', $search_keywords);
 
 			$search_msg_only = (!$search_fields) ? "AND m.title_match = 0" : ((strstr($multibyte_charset, $lang['ENCODING'])) ? '' : '');
 
@@ -294,7 +294,7 @@ switch ($mode)
 
 				for ($k = 0; $k < sizeof($synonyms_array); $k++)
 				{
-					list($replace_synonym, $match_synonym) = split(' ', trim(strtolower($synonyms_array[$k])));
+					list($replace_synonym, $match_synonym) = explode(' ', trim(strtolower($synonyms_array[$k])));
 
 					if ($replace_synonym == $split_word)
 					{

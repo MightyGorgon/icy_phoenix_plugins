@@ -109,7 +109,7 @@ if (sizeof($index))
 	{
 		$read_files = $dl_mod->read_dl_files($dl_config['dl_path']);
 		$read_files = substr($read_files, 0, strlen($read_files) - 1 );
-		$files = split('[\|]', $read_files);
+		$files = preg_split('[\|]', $read_files);
 		for ($i = 0; $i < sizeof($files); $i++)
 		{
 			$temp = strrpos($files[$i], '/');
@@ -316,7 +316,7 @@ if ($action == 'browse' || $action == '' || $action == 'unassigned')
 		if ($path)
 		{
 			$path = ($path{0} == '/') ? substr($path, 1) : $path;
-			$temp_dir = split('[/]', $path);
+			$temp_dir = preg_split('[/]', $path);
 			if (sizeof($temp_dir) > 0)
 			{
 				for ($i = 0; $i < sizeof($temp_dir); $i++)

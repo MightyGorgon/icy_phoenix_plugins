@@ -446,7 +446,7 @@ if ($action == 'detail' && $fav_id)
 			if ($report_his_type == 'assign')
 			{
 				$output_value = $lang['Dl_bug_report_assign'];
-				$output_data = split(':', $report_his_value);
+				$output_data = explode(':', $report_his_value);
 
 				//$output_text = $lang['Dl_bug_report_assigned'] . ' -> <a href="' . append_sid(CMS_PAGE_PROFILE . '?mode=viewprofile&amp;' . POST_USERS_URL . '=' . $output_data[0]) . '" target="_blank">' . $output_data[1] . '</a>';
 				$output_text = $lang['Dl_bug_report_assigned'] . '&nbsp;&raquo;&nbsp;' . colorize_username($output_data[0]);
@@ -454,7 +454,7 @@ if ($action == 'detail' && $fav_id)
 			elseif ($report_his_type == 'status')
 			{
 				$output_value = $lang['Dl_bug_report_status'];
-				$output_data = split(":", $report_his_value);
+				$output_data = explode(':', $report_his_value);
 
 				$output_status = intval($output_data[0]);
 				$output_text = $lang['Dl_report_status'][$output_status] . '&nbsp;&raquo;&nbsp;' . $output_data[1];

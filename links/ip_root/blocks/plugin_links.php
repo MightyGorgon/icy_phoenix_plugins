@@ -56,18 +56,18 @@ if(!function_exists('cms_plugin_links'))
 
 		if($cms_config_vars['plugin_links_own1'][$block_id])
 		{
-			$template->assign_block_vars('links_own1','');
+			$template->assign_block_vars('links_own1', array());
 		}
 		if($cms_config_vars['plugin_links_own2'][$block_id])
 		{
-			$template->assign_block_vars('links_own2','');
+			$template->assign_block_vars('links_own2', array());
 		}
 		if($cms_config_vars['plugin_links_code'][$block_id])
 		{
-			$template->assign_block_vars('links_code','');
+			$template->assign_block_vars('links_code', array());
 		}
 
-		$template->assign_block_vars($style_row, '');
+		$template->assign_block_vars($style_row, array());
 
 		$template->assign_vars(array(
 			'SITE_LOGO_WIDTH' => $links_config['width'],
