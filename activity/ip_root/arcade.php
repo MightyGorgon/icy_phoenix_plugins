@@ -60,7 +60,7 @@ if ($v3_session != '')
 			$game = trim(addslashes(stripslashes($data[1])));
 			$score = $data[0];
 
-		echo '<form method="post" name="v3arcade" action="' . append_sid('newscore.' . PHP_EXT . '">';
+		echo '<form method="post" name="v3arcade" action="' . append_sid('newscore.' . PHP_EXT) . '">';
 		echo '<input type="hidden" name="score" value="' . $score . '" />';
 		echo '<input type="hidden" name="game_name" value="' . $game . '" />';
 		echo '</form>';

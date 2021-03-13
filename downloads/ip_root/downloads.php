@@ -64,7 +64,7 @@ $params = array(
 );
 while(list($var, $param) = @each($params))
 {
-	$$var = request_var($param, '');
+	${$var} = request_var($param, '');
 }
 
 $params = array(
@@ -84,7 +84,7 @@ $params = array(
 );
 while(list($var, $param) = @each($params))
 {
-	$$var = request_var($param, 0);
+	${$var} = request_var($param, 0);
 }
 
 $df_id = ($df_id < 0) ? 0 : $df_id;

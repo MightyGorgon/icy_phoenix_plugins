@@ -26,10 +26,10 @@ if ($cancel)
 	$action = '';
 }
 
-$action_test = request_var('edit_banlist', '')
+$action_test = request_var('edit_banlist', '');
 $action = ($action_test == 'edit') ? 'edit' : $action;
 
-$action_test = request_var('delete_banlist', '')
+$action_test = request_var('delete_banlist', '');
 $action = ($action_test == 'delete') ? 'delete' : $action;
 
 if($action == 'add')

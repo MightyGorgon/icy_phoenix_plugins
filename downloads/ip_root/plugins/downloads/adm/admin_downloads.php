@@ -255,11 +255,11 @@ while( list($var, $param) = @each($params) )
 {
 	if ( !empty($_POST[$param]) || !empty($_GET[$param]) )
 	{
-		$$var = ( !empty($_POST[$param]) ) ? htmlspecialchars($_POST[$param]) : htmlspecialchars($_GET[$param]);
+		${$var} = ( !empty($_POST[$param]) ) ? htmlspecialchars($_POST[$param]) : htmlspecialchars($_GET[$param]);
 	}
 	else
 	{
-		$$var = '';
+		${$var} = '';
 	}
 }
 
@@ -285,11 +285,11 @@ while( list($var, $param) = @each($params) )
 {
 	if ( !empty($_POST[$param]) || !empty($_GET[$param]) )
 	{
-		$$var = ( !empty($_POST[$param]) ) ? intval($_POST[$param]) : intval($_GET[$param]);
+		${$var} = ( !empty($_POST[$param]) ) ? intval($_POST[$param]) : intval($_GET[$param]);
 	}
 	else
 	{
-		$$var = 0;
+		${$var} = 0;
 	}
 }
 

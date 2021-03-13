@@ -190,7 +190,7 @@ switch ($mode)
 
 			for($i = 0; $i < sizeof($store_vars); $i++)
 			{
-				$store_search_data[$store_vars[$i]] = $$store_vars[$i];
+				$store_search_data[$store_vars[$i]] = ${$store_vars[$i]};
 			}
 
 			$result_array = serialize($store_search_data);
@@ -229,7 +229,7 @@ switch ($mode)
 					$search_data = unserialize($kb_row['search_array']);
 					for($i = 0; $i < sizeof($store_vars); $i++)
 					{
-						$$store_vars[$i] = $search_data[$store_vars[$i]];
+						${$store_vars[$i]} = $search_data[$store_vars[$i]];
 					}
 				}
 			}

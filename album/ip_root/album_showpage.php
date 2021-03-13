@@ -674,7 +674,7 @@ if(empty($comment_text) && !isset($_POST['rating']))
 				$user_info = generate_user_info($commentrow[$i]);
 				foreach ($user_info as $k => $v)
 				{
-					$$k = $v;
+					${$k} = $v;
 				}
 
 				$poster_avatar = $user_info['avatar'];
@@ -999,7 +999,7 @@ if(empty($comment_text) && !isset($_POST['rating']))
 	$user_info = generate_user_info($thispic);
 	foreach ($user_info as $k => $v)
 	{
-		$$k = $v;
+		${$k} = $v;
 	}
 
 	$poster_avatar = $user_info['avatar'];
