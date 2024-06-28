@@ -15,8 +15,6 @@
 *
 */
 
-define('IN_ICYPHOENIX', true);
-
 if (!empty($setmodules))
 {
 	if (empty($config['plugins']['activity']['enabled']))
@@ -29,6 +27,7 @@ if (!empty($setmodules))
 	$module['3200_ACTIVITY']['230_Check_Games'] = $file . '?mode=check_game_listing';
 	return;
 }
+define('IN_ICYPHOENIX', true);
 
 // Load default Header
 if (!defined('IP_ROOT_PATH')) define('IP_ROOT_PATH', './../../../');

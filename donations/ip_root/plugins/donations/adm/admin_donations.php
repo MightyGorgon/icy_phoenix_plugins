@@ -8,8 +8,6 @@
 *
 */
 
-define('IN_ICYPHOENIX', true);
-
 $plugin_name = 'donations';
 
 if(!empty($setmodules))
@@ -24,6 +22,7 @@ if(!empty($setmodules))
 	$module['9000_DONATIONS']['9110_DONATIONS_CONFIG'] = $acp_file;
 	return;
 }
+define('IN_ICYPHOENIX', true);
 
 // Load default Header
 if (!defined('IP_ROOT_PATH')) define('IP_ROOT_PATH', './../../../');

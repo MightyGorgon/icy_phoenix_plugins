@@ -8,8 +8,6 @@
 *
 */
 
-define('IN_ICYPHOENIX', true);
-
 $plugin_name = 'guestbooks';
 
 if(!empty($setmodules))
@@ -24,6 +22,7 @@ if(!empty($setmodules))
 	$module['9000_GUESTBOOKS']['9110_GUESTBOOKS_CONFIG'] = $acp_file;
 	return;
 }
+define('IN_ICYPHOENIX', true);
 
 // Load default Header
 if (!defined('IP_ROOT_PATH')) define('IP_ROOT_PATH', './../../../');

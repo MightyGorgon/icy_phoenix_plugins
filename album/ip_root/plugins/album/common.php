@@ -28,12 +28,15 @@ if (empty($config['plugins']['album']['enabled']))
 define('IN_ALBUM', true);
 define('CMS_PAGE_ALBUM', 'album.' . PHP_EXT);
 
-define('ALBUM_PLUGIN_PATH', PLUGINS_PATH . $config['plugins']['album']['dir']);
-define('ALBUM_ROOT_PATH', IP_ROOT_PATH . ALBUM_PLUGIN_PATH);
-define('ALBUM_TPL_PATH', '../../' . ALBUM_PLUGIN_PATH . 'templates/');
-define('ALBUM_ADM_PATH', ALBUM_ROOT_PATH . ADM . '/');
-define('ALBUM_ADM_TPL_PATH', '../../' . ALBUM_PLUGIN_PATH . ADM . '/templates/');
-define('ALBUM_MOD_PATH', ALBUM_ROOT_PATH . 'includes/');
+if (!defined('ALBUM_PLUGIN_PATH'))
+{
+	define('ALBUM_PLUGIN_PATH', PLUGINS_PATH . $config['plugins']['album']['dir']);
+	define('ALBUM_ROOT_PATH', IP_ROOT_PATH . ALBUM_PLUGIN_PATH);
+	define('ALBUM_TPL_PATH', '../../' . ALBUM_PLUGIN_PATH . 'templates/');
+	define('ALBUM_ADM_PATH', ALBUM_ROOT_PATH . ADM . '/');
+	define('ALBUM_ADM_TPL_PATH', '../../' . ALBUM_PLUGIN_PATH . ADM . '/templates/');
+	define('ALBUM_MOD_PATH', ALBUM_ROOT_PATH . 'includes/');
+}
 
 if (!defined('ALBUM_CONSTANTS_INCLUDED'))
 {

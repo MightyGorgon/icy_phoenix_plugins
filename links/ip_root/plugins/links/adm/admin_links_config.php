@@ -17,8 +17,6 @@
 *
 */
 
-define('IN_ICYPHOENIX', true);
-
 $plugin_name = 'links';
 if(!empty($setmodules))
 {
@@ -31,6 +29,7 @@ if(!empty($setmodules))
 	$module['2100_Links']['100_Configuration'] = $filename;
 	return;
 }
+define('IN_ICYPHOENIX', true);
 
 // Load default Header
 if (!defined('IP_ROOT_PATH')) define('IP_ROOT_PATH', './../../../');

@@ -26,6 +26,15 @@ if (empty($config['plugins']['album']['enabled']))
 }
 
 define('ALBUM_CONSTANTS_INCLUDED', true);
+if (!defined('ALBUM_PLUGIN_PATH'))
+{
+	define('ALBUM_PLUGIN_PATH', PLUGINS_PATH . $config['plugins']['album']['dir']);
+	define('ALBUM_ROOT_PATH', IP_ROOT_PATH . ALBUM_PLUGIN_PATH);
+	define('ALBUM_TPL_PATH', '../../' . ALBUM_PLUGIN_PATH . 'templates/');
+	define('ALBUM_ADM_PATH', ALBUM_ROOT_PATH . ADM . '/');
+	define('ALBUM_ADM_TPL_PATH', '../../' . ALBUM_PLUGIN_PATH . ADM . '/templates/');
+	define('ALBUM_MOD_PATH', ALBUM_ROOT_PATH . 'includes/');
+}
 
 // Paths (trailing slash required)
 define('USERS_SUBFOLDERS_ALBUM', true); // Creates users subfolders for images in album

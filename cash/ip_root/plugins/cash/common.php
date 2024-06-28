@@ -19,5 +19,7 @@ if (!defined('CASH_ROOT_PATH')) define('CASH_ROOT_PATH', IP_ROOT_PATH . CASH_PLU
 if (!defined('CASH_TPL_PATH')) define('CASH_TPL_PATH', '../../' . CASH_PLUGIN_PATH . 'templates/');
 if (!defined('CASH_ADM_PATH')) define('CASH_ADM_PATH', IP_ROOT_PATH . CASH_PLUGIN_PATH . ADM . '/');
 if (!defined('CASH_ADM_TPL_PATH')) define('CASH_ADM_TPL_PATH', '../../' . CASH_PLUGIN_PATH . ADM . '/templates/');
+setup_extra_lang(array('lang_cash'));
+setup_extra_lang(array('lang_info'), CASH_ROOT_PATH . 'language/');
 
 ?>
