@@ -62,7 +62,8 @@ $action_types = array(
 );
 
 $action_users = array('user' => array(), 'admin' => array());
-while (list($type,$user) = each ($action_types))
+//while (list($type,$user) = each ($action_types))
+foreach ($action_types as $type => $user)
 {
 	$action_users[$user][] = lt($type);
 }
@@ -180,7 +181,8 @@ $template->assign_vars(array(
 // (it looks nice now that it's not hardcoded :P)
 //
 $i = 0;
-while (list($key,) = each ($ar_action))
+//while (list($key,) = each ($ar_action))
+foreach ($ar_action as $key => $val)
 {
 	$template->assign_block_vars('actionfilter', array(
 		'ROW_CLASS' => ((!($i % 2)) ? $theme['td_class1'] : $theme['td_class2']),
@@ -201,7 +203,8 @@ while (list($key,) = each ($ar_action))
 	$i++;
 }
 reset ($ar_action);
-while (list($key,) = each ($ar_time))
+//while (list($key,) = each ($ar_time))
+foreach ($ar_time as $key => $val)
 {
 	$template->assign_block_vars('timefilter', array(
 		'ROW_CLASS' => ((!($i % 2)) ? $theme['td_class1'] : $theme['td_class2']),
@@ -220,7 +223,8 @@ while (list($key,) = each ($ar_time))
 	$i++;
 }
 reset ($ar_time);
-while (list($key,$number) = each ($ar_count))
+//while (list($key,$number) = each ($ar_count))
+foreach ($ar_count as $key => $number)
 {
 	$template->assign_block_vars("countfilter",array('NAME' => $number, 'LINK' => append_sid('cash_log.' . PHP_EXT . '?saction=' . $saction . '&amp;stime=' . $stime . '&amp;scount=' . $key . '&sindex=0')));
 	if ($key != $scount)

@@ -19,6 +19,8 @@ if(!function_exists('cms_plugin_guestbook_form'))
 	{
 		global $db, $cache, $config, $template, $images, $lang, $user, $bbcode, $table_prefix, $block_id, $cms_config_vars;
 
+		$block_key = 'b' . strval($block_id);
+
 		$plugin_name = 'guestbooks';
 		if (empty($config['plugins'][$plugin_name]['enabled']) || empty($config['plugins'][$plugin_name]['dir']))
 		{
@@ -49,7 +51,7 @@ if(!function_exists('cms_plugin_guestbook_form'))
 			{
 				global $ip_cms;
 
-				$guestbook_owner = (int) $cms_config_vars['owner'];
+				$guestbook_owner = (int) $cms_config_vars['blocks'][$block_key]['owner'];
 
 				$sql = "SELECT g.guestbook_id
 								FROM " . $class_guestbooks->guestbooks_list_table . " g
@@ -61,11 +63,11 @@ if(!function_exists('cms_plugin_guestbook_form'))
 
 				$guestbook_id = (!empty($guestbook_data) ? $guestbook_data['guestbook_id'] : 0);
 				$ip_root_path = ('../../');
-				$current_file = (!empty($page_array['page_dir']) ? (str_replace('//', '/', $page_array['page_dir'] . '/' . $cms_config_vars['folder'] . '/')) : '') . $current_file;
+				$current_file = (!empty($page_array['page_dir']) ? (str_replace('//', '/', $page_array['page_dir'] . '/' . $cms_config_vars['blocks'][$block_key]['folder'] . '/')) : '') . $current_file;
 			}
 			else
 			{
-				$guestbook_id = $cms_config_vars['plugin_guestbook_id'][$block_id];
+				$guestbook_id = $cms_config_vars['blocks'][$block_key]['plugin_guestbook_id'];
 				$ip_root_path = (IP_ROOT_PATH);
 			}
 			$class_guestbooks->guestbook_id = $guestbook_id;

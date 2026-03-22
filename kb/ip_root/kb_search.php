@@ -135,8 +135,11 @@ switch ($mode)
 
 						if ($current_match_type == 'and' && $word_count)
 						{
+							/*
 							@reset($result_list);
 							while (list($article_id, $match_count) = @each($result_list))
+							*/
+							foreach ($result_list as $article_id => $match_count)
 							{
 								if (!$kb_row[$post_id])
 								{
@@ -144,17 +147,17 @@ switch ($mode)
 								}
 							}
 						}
-
 						$word_count++;
-
 						$db->sql_freeresult($result);
 				}
 			}
 
-			@reset($result_list);
-
 			$search_ids = array();
+			/*
+			@reset($result_list);
 			while (list($article_id, $matches) = each($result_list))
+			*/
+			foreach ($result_list as $article_id => $matches)
 			{
 				if ($matches)
 				{

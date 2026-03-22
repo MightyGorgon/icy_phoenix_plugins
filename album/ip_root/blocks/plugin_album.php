@@ -26,6 +26,8 @@ if(!function_exists('cms_block_album'))
 	{
 		global $db, $cache, $config, $template, $theme, $images, $user, $lang, $table_prefix, $block_id, $cms_config_vars, $cms_config_layouts, $cms_page, $album_config;
 
+		$block_key = 'b' . strval($block_id);
+
 		$plugin_name = 'album';
 		if (empty($config['plugins'][$plugin_name]['enabled']))
 		{
@@ -50,8 +52,8 @@ if(!function_exists('cms_block_album'))
 		$template->_tpldata['no_pics'] = array();
 
 		/*
-		echo($cms_config_vars['plugin_album_pics_all'][$block_id] . '<br />');
-		echo($cms_config_vars[$block_id . '_' . 'plugin_album_pics_all']);
+		echo($cms_config_vars['blocks'][$block_key]['plugin_album_pics_all'] . '<br />');
+		echo($cms_config_vars['blocks'][$block_key][$block_id . '_' . 'plugin_album_pics_all']);
 		exit;
 		*/
 		include_once(IP_ROOT_PATH . PLUGINS_PATH . $config['plugins'][$plugin_name]['dir'] . 'common.' . PHP_EXT);
@@ -60,7 +62,7 @@ if(!function_exists('cms_block_album'))
 		$sql = "SELECT c.*, COUNT(p.pic_id) AS count
 				FROM " . ALBUM_CAT_TABLE . " AS c
 					LEFT JOIN " . ALBUM_TABLE . " AS p ON c.cat_id = p.pic_cat_id
-				" . (($cms_config_vars['plugin_album_pics_all'][$block_id] == '1') ? '' : 'WHERE cat_user_id = 0') . "
+				" . (($cms_config_vars['blocks'][$block_key]['plugin_album_pics_all'] == '1') ? '' : 'WHERE cat_user_id = 0') . "
 				GROUP BY cat_id
 				ORDER BY cat_order ASC";
 		$result = $db->sql_query($sql);
@@ -75,7 +77,7 @@ if(!function_exists('cms_block_album'))
 			}
 		}
 		$db->sql_freeresult($result);
-		if ($cms_config_vars['plugin_album_pics_all'][$block_id] == '1')
+		if ($cms_config_vars['blocks'][$block_key]['plugin_album_pics_all'] == '1')
 		{
 			$allowed_cat = '0'; // For Recent Public Pics below
 		}
@@ -114,7 +116,7 @@ if(!function_exists('cms_block_album'))
 			}
 		}
 
-		if ($cms_config_vars['plugin_album_pics_all'][$block_id] == '1')
+		if ($cms_config_vars['blocks'][$block_key]['plugin_album_pics_all'] == '1')
 		{
 			$pics_allowed = '0';
 		}
@@ -126,9 +128,9 @@ if(!function_exists('cms_block_album'))
 		$no_pics = false;
 		if ($allowed_cat != $pics_allowed)
 		{
-			$category_id = $cms_config_vars['plugin_album_cat_id'][$block_id];
+			$category_id = $cms_config_vars['blocks'][$block_key]['plugin_album_cat_id'];
 
-			if ($cms_config_vars['plugin_album_pics_sort'][$block_id] == '1')
+			if ($cms_config_vars['blocks'][$block_key]['plugin_album_pics_sort'] == '1')
 			{
 				if ($category_id != 0)
 				{
@@ -141,7 +143,7 @@ if(!function_exists('cms_block_album'))
 						WHERE p.pic_cat_id IN ($allowed_cat) AND (p.pic_approval = 1 OR ct.cat_approval = 0) AND pic_cat_id IN ($category_id)
 						GROUP BY p.pic_id
 						ORDER BY RAND()
-						LIMIT " . $cms_config_vars['plugin_album_pics_number'][$block_id];
+						LIMIT " . $cms_config_vars['blocks'][$block_key]['plugin_album_pics_number'];
 				}
 				else
 				{
@@ -154,10 +156,10 @@ if(!function_exists('cms_block_album'))
 						WHERE p.pic_cat_id IN ($allowed_cat) AND (p.pic_approval = 1 OR ct.cat_approval = 0)
 						GROUP BY p.pic_id
 						ORDER BY RAND()
-						LIMIT " . $cms_config_vars['plugin_album_pics_number'][$block_id];
+						LIMIT " . $cms_config_vars['blocks'][$block_key]['plugin_album_pics_number'];
 					}
 			}
-			elseif ($cms_config_vars['plugin_album_pics_sort'][$block_id] == '0')
+			elseif ($cms_config_vars['blocks'][$block_key]['plugin_album_pics_sort'] == '0')
 			{
 				if ($category_id != 0)
 				{
@@ -170,7 +172,7 @@ if(!function_exists('cms_block_album'))
 						WHERE p.pic_cat_id IN ($allowed_cat) AND (p.pic_approval = 1 OR ct.cat_approval = 0) AND pic_cat_id IN ($category_id)
 						GROUP BY p.pic_id
 						ORDER BY pic_time DESC
-						LIMIT " . $cms_config_vars['plugin_album_pics_number'][$block_id];
+						LIMIT " . $cms_config_vars['blocks'][$block_key]['plugin_album_pics_number'];
 				}
 				else
 				{
@@ -183,7 +185,7 @@ if(!function_exists('cms_block_album'))
 						WHERE p.pic_cat_id IN ($allowed_cat) AND (p.pic_approval = 1 OR ct.cat_approval = 0)
 						GROUP BY p.pic_id
 						ORDER BY pic_time DESC
-						LIMIT " . $cms_config_vars['plugin_album_pics_number'][$block_id];
+						LIMIT " . $cms_config_vars['blocks'][$block_key]['plugin_album_pics_number'];
 				}
 			}
 			$result = $db->sql_query($sql);
@@ -198,17 +200,17 @@ if(!function_exists('cms_block_album'))
 			$total_pics = sizeof($recentrow);
 			if ($total_pics > 0)
 			{
-				$total_rows = ceil($total_pics / $cms_config_vars['plugin_album_pics_rows_number'][$block_id]);
-				$total_cols = ceil($total_pics / $cms_config_vars['plugin_album_pics_cols_number'][$block_id]);
+				$total_rows = ceil($total_pics / $cms_config_vars['blocks'][$block_key]['plugin_album_pics_rows_number']);
+				$total_cols = ceil($total_pics / $cms_config_vars['blocks'][$block_key]['plugin_album_pics_cols_number']);
 				$image_counter = 0;
 
 				while($image_counter < $total_pics)
 				{
-					for ($i = 0; $i < $cms_config_vars['plugin_album_pics_rows_number'][$block_id]; $i++)
+					for ($i = 0; $i < $cms_config_vars['blocks'][$block_key]['plugin_album_pics_rows_number']; $i++)
 					{
 						$template->assign_block_vars('recent_pics', array());
 
-						for ($j = 0; $j < $cms_config_vars['plugin_album_pics_cols_number'][$block_id]; $j++)
+						for ($j = 0; $j < $cms_config_vars['blocks'][$block_key]['plugin_album_pics_cols_number']; $j++)
 						{
 							if ($image_counter >= $total_pics)
 							{
@@ -294,15 +296,15 @@ if(!function_exists('cms_block_album'))
 		}
 
 		$template->assign_vars(array(
-			//'S_COL_WIDTH' => (100 / $cms_config_vars['plugin_album_pics_number'][$block_id]) . '%',
-			'S_COL_WIDTH' => (100 / (($cms_config_vars['plugin_album_pics_cols_number'][$block_id] == 0) ? 4 : $cms_config_vars['plugin_album_pics_cols_number'][$block_id])) . '%',
+			//'S_COL_WIDTH' => (100 / $cms_config_vars['blocks'][$block_key]['plugin_album_pics_number']) . '%',
+			'S_COL_WIDTH' => (100 / (($cms_config_vars['blocks'][$block_key]['plugin_album_pics_cols_number'] == 0) ? 4 : $cms_config_vars['blocks'][$block_key]['plugin_album_pics_cols_number'])) . '%',
 			'S_THUMBNAIL_SIZE' => $album_config['thumbnail_size'],
 
 			'TARGET_BLANK' => ($album_config['fullpic_popup']) ? 'target="_blank"' : '',
 
 			'S_HIGHSLIDE' => (!empty($config['thumbnail_highslide']) ? true : false),
-			'S_HIGHSLIDER' => (!empty($cms_config_vars['plugin_album_pics_slider'][$block_id]) ? true : false),
-			'S_JQ_NIVO_SLIDER' => (!empty($cms_config_vars['plugin_album_pics_slider'][$block_id]) ? true : false),
+			'S_HIGHSLIDER' => (!empty($cms_config_vars['blocks'][$block_key]['plugin_album_pics_slider']) ? true : false),
+			'S_JQ_NIVO_SLIDER' => (!empty($cms_config_vars['blocks'][$block_key]['plugin_album_pics_slider']) ? true : false),
 			'S_SLIDER_ID' => 'cms_slider_' . $block_id,
 			'S_NO_PICS' => (!empty($no_pics) ? true : false),
 

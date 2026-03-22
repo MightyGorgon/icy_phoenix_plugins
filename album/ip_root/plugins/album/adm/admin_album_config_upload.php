@@ -20,6 +20,11 @@ if (!defined('IN_ICYPHOENIX'))
 	die('Hacking attempt');
 }
 
+if(!empty($setmodules))
+{
+	return;
+}
+
 $album_config_tabs[] = array(
 	'order' => 3,
 	'selection' => 'upload',

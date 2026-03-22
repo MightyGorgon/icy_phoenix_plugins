@@ -176,7 +176,8 @@ switch ($mode)
 				if (isset($_POST['submit']) && isset($_POST[$varname]) && is_array($_POST[$varname]))
 				{
 					$updates = array();
-					while (list($key,$type) = each ($update_set))
+					//while (list($key,$type) = each ($update_set))
+					foreach ($update_set as $key => $type)
 					{
 						if (isset($_POST[$varname][$key]))
 						{
@@ -285,11 +286,11 @@ switch ($mode)
 
 				'L_CASH_ALLOWANCE_ENABLED' => $lang['Cash_allowance_enabled'],
 				'L_CASH_ALLOWANCE_AMOUNT' => $lang['Cash_allowance_amount'],
-				'L_CASH_ALLOWANCE_FREQUNECY' => $lang['Cash_allownace_frequency'],
-				'L_CASH_ALLOWANCE_FREQUNECIES_DAY' => $lang['Cash_allownace_frequencies'][CASH_ALLOW_DAY],
-				'L_CASH_ALLOWANCE_FREQUNECIES_WEEK' => $lang['Cash_allownace_frequencies'][CASH_ALLOW_WEEK],
-				'L_CASH_ALLOWANCE_FREQUNECIES_MONTH' => $lang['Cash_allownace_frequencies'][CASH_ALLOW_MONTH],
-				'L_CASH_ALLOWANCE_FREQUNECIES_YEAR' => $lang['Cash_allownace_frequencies'][CASH_ALLOW_YEAR],
+				'L_CASH_ALLOWANCE_FREQUNECY' => $lang['Cash_allowance_frequency'],
+				'L_CASH_ALLOWANCE_FREQUNECIES_DAY' => $lang['Cash_allowance_frequencies'][CASH_ALLOW_DAY],
+				'L_CASH_ALLOWANCE_FREQUNECIES_WEEK' => $lang['Cash_allowance_frequencies'][CASH_ALLOW_WEEK],
+				'L_CASH_ALLOWANCE_FREQUNECIES_MONTH' => $lang['Cash_allowance_frequencies'][CASH_ALLOW_MONTH],
+				'L_CASH_ALLOWANCE_FREQUNECIES_YEAR' => $lang['Cash_allowance_frequencies'][CASH_ALLOW_YEAR],
 				'L_CASH_ALLOWANCE_NEXT' => $lang['Cash_allowance_next'],
 
 				'L_SUBMIT' => $lang['Submit'],

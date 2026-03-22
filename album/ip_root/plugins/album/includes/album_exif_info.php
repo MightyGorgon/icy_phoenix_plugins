@@ -278,13 +278,15 @@ $i = 0;
 $xkey = array();
 $xval = array();
 
-while (list($xk1,$xv1) = each($xif))
+//while (list($xk1,$xv1) = each($xif))
+foreach($xif as $xk1 => $xv1)
 {
 	$xkey[$i] = $xk1;
 	$xval[$i] = $xv1;
 	if (is_array($xif[$xk1]))
 	{
-		while (list($xk2,$xv2) = each($xif[$xk1]))
+		//while (list($xk2,$xv2) = each($xif[$xk1]))
+		foreach ($xif[$xk1] as $xk2 => $xv2)
 		{
 			$xkey[$i] = $xk1.'_'.$xk2;
 			$xval[$i] = $xv2;
@@ -302,7 +304,8 @@ $i = 0;
 $key = array();
 $val = array();
 
-while (list($k1,$v1) = each($exif))
+//while (list($k1,$v1) = each($exif))
+foreach ($exif as $k1 => $v1)
 {
 	$key[$i] = $k1;
 	$val[$i] = $v1;

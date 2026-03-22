@@ -157,7 +157,7 @@ function get_kb_nav($parent)
 	$result = $db->sql_query($sql);
 	$row = $db->sql_fetchrow($result);
 
-	if (ereg('-kbc', $_SERVER['REQUEST_URI']) || ereg('mode=cat', $_SERVER['REQUEST_URI']))
+	if (preg_match('/-kbc/', $_SERVER['REQUEST_URI']) || preg_match('/mode=cat/', $_SERVER['REQUEST_URI']))
 	{
 		$temp_url = append_sid(this_kb_mxurl('mode=cat&amp;cat=' . $row['category_id']));
 		$path_kb_array[] .= $lang['Nav_Separator'] . '<a href="' . $temp_url . '" class="nav">' . $row['category_name'] . '</a>';
@@ -1696,8 +1696,8 @@ function kb_magic_url($url)
 
 		$url = preg_replace($match, $replace, $url);
 		// Also fix already tagged links
-		$url = preg_replace("/<a href=(.*?)>(.*?)<\/a>/ie", "(strlen(\"\\2\") > 25 && !eregi(\"<\", \"\\2\")) ? '<a href='.stripslashes(\"\\1\").'>'.substr(str_replace(\"http://\",\"\",\"\\2\"), 0, 17) . '...</a>' : '<a href='.stripslashes(\"\\1\").'>'.\"\\2\".'</a>'", $url);
-		// $url = preg_replace("/<a href=(.*?)>(.*?)<\/a>/ie", "(strlen(\"\\2\") > 25 && !eregi(\"<\", \"\\2\")) ? '<a href='.stripslashes(\"\\1\").'>'.substr(str_replace(\"http://\",\"\",\"\\2\"), 0, 12) . ' ... ' . substr(\"\\2\", -3).'</a>' : '<a href='.stripslashes(\"\\1\").'>'.\"\\2\".'</a>'", $url);
+		$url = preg_replace("/<a href=(.*?)>(.*?)<\/a>/ie", "(strlen(\"\\2\") > 25 && !preg_match(\"/</\", \"\\2\")) ? '<a href='.stripslashes(\"\\1\").'>'.substr(str_replace(\"http://\",\"\",\"\\2\"), 0, 17) . '...</a>' : '<a href='.stripslashes(\"\\1\").'>'.\"\\2\".'</a>'", $url);
+		// $url = preg_replace("/<a href=(.*?)>(.*?)<\/a>/ie", "(strlen(\"\\2\") > 25 && !preg_match(\"/</\", \"\\2\")) ? '<a href='.stripslashes(\"\\1\").'>'.substr(str_replace(\"http://\",\"\",\"\\2\"), 0, 12) . ' ... ' . substr(\"\\2\", -3).'</a>' : '<a href='.stripslashes(\"\\1\").'>'.\"\\2\".'</a>'", $url);
 		return $url;
 	}
 	return $url;

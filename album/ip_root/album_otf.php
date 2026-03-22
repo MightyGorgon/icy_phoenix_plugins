@@ -106,12 +106,14 @@ while(false !== ($file = readdir($dir)))
 
 if(empty($pic_cat))
 {
-	list($pic_cat) = each($pic_images);
+	//list($pic_cat) = each($pic_images);
+	$pic_cat = key($pic_images);
 }
 @reset($pic_images);
 
 $s_categories = '<select name="pic_cat">';
-while(list($key) = each($pic_images))
+//while(list($key) = each($pic_images))
+foreach($pic_images as $key => $val)
 {
 	$selected = ($key == $pic_cat) ? ' selected="selected"' : '';
 	if(sizeof($pic_images[$key]))

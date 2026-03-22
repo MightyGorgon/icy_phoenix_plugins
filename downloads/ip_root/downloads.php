@@ -62,7 +62,8 @@ $params = array(
 	'sort' => 'sort',
 	'code' => 'code'
 );
-while(list($var, $param) = @each($params))
+//while(list($var, $param) = @each($params))
+foreach ($params as $var => $param)
 {
 	${$var} = request_var($param, '');
 }
@@ -82,7 +83,8 @@ $params = array(
 	'bt_filter' => 'bt_filter',
 	'modcp' => 'modcp'
 );
-while(list($var, $param) = @each($params))
+//while(list($var, $param) = @each($params))
+foreach ($params as $var => $param)
 {
 	${$var} = request_var($param, 0);
 }

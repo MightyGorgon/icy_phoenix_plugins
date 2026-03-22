@@ -632,25 +632,6 @@ function fix_magic_quotes ($var = NULL, $sybase = NULL)
 	// if no var is specified, fix all affected superglobals
 	if (!isset ($var))
 	{
-		// if magic quotes is enabled
-		if (get_magic_quotes_gpc ())
-		{
-			// workaround because magic_quotes does not change $_SERVER['argv']
-			$argv = isset($_SERVER['argv']) ? $_SERVER['argv'] : NULL;
-
-			// fix all affected arrays
-			foreach (array('_ENV', '_REQUEST', '_GET', '_POST', '_COOKIE', '_SERVER') as $var)
-			{
-				$GLOBALS[$var] = fix_magic_quotes ($GLOBALS[$var], $sybase);
-			}
-
-			$_SERVER['argv'] = $argv;
-
-			// turn off magic quotes, this is so scripts which
-			// are sensitive to the setting will work correctly
-			ini_set ('magic_quotes_gpc', 0);
-		}
-
 		// disable magic_quotes_sybase
 		if ($sybase)
 		{

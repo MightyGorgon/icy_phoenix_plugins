@@ -251,11 +251,12 @@ $params = array(
 	'y' => 'y',
 	'z' => 'z'
 );
-while( list($var, $param) = @each($params) )
+//while(list($var, $param) = @each($params))
+foreach ($params as $var => $param)
 {
-	if ( !empty($_POST[$param]) || !empty($_GET[$param]) )
+	if (!empty($_POST[$param]) || !empty($_GET[$param]))
 	{
-		${$var} = ( !empty($_POST[$param]) ) ? htmlspecialchars($_POST[$param]) : htmlspecialchars($_GET[$param]);
+		${$var} = (!empty($_POST[$param])) ? htmlspecialchars($_POST[$param]) : htmlspecialchars($_GET[$param]);
 	}
 	else
 	{
@@ -281,11 +282,12 @@ $params = array(
 	'auth_mod' => 'auth_mod',
 	'del_file' => 'del_file'
 );
-while( list($var, $param) = @each($params) )
+//while(list($var, $param) = @each($params))
+foreach ($params as $var => $param)
 {
-	if ( !empty($_POST[$param]) || !empty($_GET[$param]) )
+	if (!empty($_POST[$param]) || !empty($_GET[$param]))
 	{
-		${$var} = ( !empty($_POST[$param]) ) ? intval($_POST[$param]) : intval($_GET[$param]);
+		${$var} = (!empty($_POST[$param])) ? intval($_POST[$param]) : intval($_GET[$param]);
 	}
 	else
 	{

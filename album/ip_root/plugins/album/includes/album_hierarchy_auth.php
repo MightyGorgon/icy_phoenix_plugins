@@ -57,7 +57,8 @@ function album_create_user_auth($user_id)
 			if (!empty ($album_user_access))
 			{
 				reset($album_user_access);
-				while (list ($key, $data) = each($album_user_access))
+				//while (list ($key, $data) = each($album_user_access))
+				foreach ($album_user_access as $key => $data)
 				{
 					$album_data['auth'][$cat_id][$key] = $data;
 				}

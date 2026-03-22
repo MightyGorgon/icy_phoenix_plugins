@@ -601,14 +601,17 @@ function album_build_tree(&$cats, &$parents, $level = ALBUM_ROOT_CATEGORY, $pare
 	$album_data_level = array();
 
 	// add the categories of this level
-	for ($i = 0; $i < sizeof($parents[$parent]); $i++)
+	if (!empty($parents[$parent]))
 	{
-		$idx = $parents[$parent][$i];
-
-		$album_data_level['id'][] = $cats[$idx]['cat_id'];
-		$album_data_level['sort'][] = $cats[$idx][ $album_config['album_category_sorting'] ];
-		$album_data_level['data'][] = $cats[$idx];
-		$album_data_level['personal'][] = ($cats[$idx]['cat_user_id'] == 0) ? 0 : 1;
+		for ($i = 0; $i < sizeof($parents[$parent]); $i++)
+		{
+			$idx = $parents[$parent][$i];
+	
+			$album_data_level['id'][] = $cats[$idx]['cat_id'];
+			$album_data_level['sort'][] = $cats[$idx][ $album_config['album_category_sorting'] ];
+			$album_data_level['data'][] = $cats[$idx];
+			$album_data_level['personal'][] = ($cats[$idx]['cat_user_id'] == 0) ? 0 : 1;
+		}
 	}
 
 	// sort the tree level acordingly to the desired category sort
@@ -633,19 +636,22 @@ function album_build_tree(&$cats, &$parents, $level = ALBUM_ROOT_CATEGORY, $pare
 
 	// add the tree_level to the tree
 	$level++;
-	for ($i = 0; $i < sizeof($album_data_level['data']); $i++)
+	if (!empty($album_data_level['data']))
 	{
-		$AH_this = sizeof($album_data['data']);
-		$key = $album_data_level['id'][$i];
-		$album_data['sub'][$parent][] = $key;
-		$album_data['keys'][$key]     = $AH_this;
-		$album_data['parent'][]       = $parent;
-		$album_data['id'][]           = $album_data_level['id'][$i];
-		$album_data['data'][]         = $album_data_level['data'][$i];
-		$album_data['personal'][$key] = $album_data_level['personal'][$i];
-
-		// add sub levels
-		album_build_tree($cats, $parents, $level, $key);
+		for ($i = 0; $i < sizeof($album_data_level['data']); $i++)
+		{
+			$AH_this = !empty($album_data['data']) ? sizeof($album_data['data']) : 0;
+			$key = $album_data_level['id'][$i];
+			$album_data['sub'][$parent][] = $key;
+			$album_data['keys'][$key]     = $AH_this;
+			$album_data['parent'][]       = $parent;
+			$album_data['id'][]           = $album_data_level['id'][$i];
+			$album_data['data'][]         = $album_data_level['data'][$i];
+			$album_data['personal'][$key] = $album_data_level['personal'][$i];
+	
+			// add sub levels
+			album_build_tree($cats, $parents, $level, $key);
+		}
 	}
 
 	return;
@@ -1251,7 +1257,8 @@ function album_build_url_parameters($parameters)
 	$url_parameters = '';
 	reset($parameters);
 
-	while (list($key, $value) = each($parameters))
+	//while (list($key, $value) = each($parameters))
+	foreach ($parameters as $key => $value)
 	{
 		$url_parameters .= "$url_prefix$key=$value";
 		$url_prefix = '&';

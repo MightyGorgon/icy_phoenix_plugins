@@ -769,6 +769,7 @@ function album_comment_notify($pic_id)
 		// Sixty second limit
 		@set_time_limit(60);
 
+		$update_watched_sql = '';
 		do
 		{
 			if ($row['user_email'] != '')
@@ -802,7 +803,8 @@ function album_comment_notify($pic_id)
 			$album_showpage_url = $server_url . 'album_showpage.' . PHP_EXT;
 
 			@reset($bcc_list_ary);
-			while (list($user_lang, $bcc_list) = each($bcc_list_ary))
+			//while (list($user_lang, $bcc_list) = each($bcc_list_ary))
+			foreach ($bcc_list_ary as $user_lang => $bcc_list)
 			{
 				$emailer->use_template('album_comment_notify', $user_lang);
 
@@ -1035,9 +1037,9 @@ function album_build_detail_vars(&$result, $data, $page_params = '', $auth_right
 	album_build_column_vars($result, $data, $page_params);
 
 	$rating = '';
-	if ($album_config['rate'] == 1)
+	if (($album_config['rate'] == 1))
 	{
-		$image_rating = ImageRating($data['rating']);
+		$image_rating = empty($data['rating']) ? $lang['Not_rated'] : ImageRating($data['rating']);
 		$image_rating_link_class = ($image_rating == $lang['Not_rated']) ? '' : 'class="rated"';
 		$rating = $lang['Rating'] . ' : <a href="' . append_sid(album_append_uid('album_showpage.' . PHP_EXT . '?pic_id=' . $data['pic_id'] . $page_params)) . '" ' . $image_rating_link_class . '>' . $image_rating . '</a>';
 	}
@@ -1045,7 +1047,7 @@ function album_build_detail_vars(&$result, $data, $page_params = '', $auth_right
 	$comments = '';
 	if ($album_config['comment'] == 1)
 	{
-		$image_comment = ($data['comments'] == 0) ? $lang['Not_commented'] : $data['comments'];
+		$image_comment = empty($data['comments']) ? $lang['Not_commented'] : $data['comments'];
 		$image_comment_link_class = ($image_comment == $lang['Not_commented']) ? '' : 'class="commented"';
 		$comments = $lang['Comments'] . ' : <a href="' . append_sid(album_append_uid('album_showpage.' . PHP_EXT . '?pic_id=' . $data['pic_id'] . $page_params)) . '" ' . $image_comment_link_class . '>' . $image_comment . '</a>';
 	}

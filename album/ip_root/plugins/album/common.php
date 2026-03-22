@@ -26,7 +26,6 @@ if (empty($config['plugins']['album']['enabled']))
 }
 
 define('IN_ALBUM', true);
-define('CMS_PAGE_ALBUM', 'album.' . PHP_EXT);
 
 define('ALBUM_PLUGIN_PATH', PLUGINS_PATH . $config['plugins']['album']['dir']);
 define('ALBUM_ROOT_PATH', IP_ROOT_PATH . ALBUM_PLUGIN_PATH);

@@ -169,7 +169,8 @@ else
 		album_get_sub_cat_ids(album_get_personal_root_id($album_user_id), $tmp_array, ALBUM_AUTH_VIEW, true);
 
 		reset($tmp_array);
-		while (list($key, $id) = each($tmp_array))
+		//while (list($key, $id) = each($tmp_array))
+		foreach ($tmp_array as $key => $id)
 		{
 			if ($id != $cat_id)
 			{

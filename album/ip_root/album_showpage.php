@@ -724,7 +724,7 @@ if(empty($comment_text) && !isset($_POST['rating']))
 					'PROFILE_IMG' => ($commentrow[$i]['user_id'] != ANONYMOUS) ? '<a href="' . $profile_url . '"><img src="' . $images['icon_profile'] . '" alt="' . $lang['Read_profile'] . '" title="' . $lang['Read_profile'] . '" /></a>' : '',
 					'PM_IMG' => ($commentrow[$i]['user_id'] != ANONYMOUS) ? '<a href="' . $pm_url . '"><img src="' . $images['icon_pm'] . '" alt="' . $lang['Send_private_message'] . '" title="' . $lang['Send_private_message'] . '" /></a>' : '',
 					'EMAIL_IMG' => (($commentrow[$i]['user_id'] != ANONYMOUS) && ($email_url != '')) ? '<a href="' . $email_url . '"><img src="' . $images['icon_email'] . '" alt="' . $lang['Send_email'] . '" title="' . $lang['Send_email'] . '" /></a>' : '',
-					'WWW_IMG' => ($commentrow[$i]['user_id'] != ANONYMOUS) ? ($commentrow[$i]['user_website']) ? '<a href="' . $commentrow[$i]['user_website'] . '" target="_blank"><img src="' . $images['icon_www'] . '" alt="' . $lang['Visit_website'] . '" title="' . $lang['Visit_website'] . '" /></a>' : '' : '',
+					'WWW_IMG' => (($commentrow[$i]['user_id'] != ANONYMOUS) ? (($commentrow[$i]['user_website']) ? ('<a href="' . $commentrow[$i]['user_website'] . '" target="_blank"><img src="' . $images['icon_www'] . '" alt="' . $lang['Visit_website'] . '" title="' . $lang['Visit_website'] . '" /></a>') : '') : ''),
 					'AIM_IMG' => ($commentrow[$i]['user_id'] != ANONYMOUS) ? $aim_img : '',
 					'SKYPE_IMG' => ($commentrow[$i]['user_id'] != ANONYMOUS) ? $skype_img : '',
 					'ICQ_IMG' => ($commentrow[$i]['user_id'] != ANONYMOUS) ? $icq_img : '',
@@ -937,7 +937,7 @@ if(empty($comment_text) && !isset($_POST['rating']))
 	{
 		//echo(function_exists(exif_read_data));
 		$xif = @exif_read_data($pic_fullpath, 0, true);
-		if (!empty($xif[IFD0]) || !empty($xif[EXIF]))
+		if (!empty($xif['IFD0']) || !empty($xif['EXIF']))
 		{
 			$template->assign_block_vars('switch_exif_enabled', array());
 			include_once(ALBUM_MOD_PATH . 'album_exif_info.' . PHP_EXT);

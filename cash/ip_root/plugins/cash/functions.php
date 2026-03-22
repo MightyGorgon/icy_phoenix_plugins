@@ -54,6 +54,7 @@ if (!defined('CASH_INCLUDE'))
 	define('CASH_GROUPS_LEVEL', 1);
 	define('CASH_GROUPS_RANK', 2);
 	define('CASH_GROUPS_USERGROUP', 3);
+
 	// Cash groups status
 	define('CASH_GROUPS_DEFAULT', 1);
 	define('CASH_GROUPS_CUSTOM', 2);
@@ -214,7 +215,8 @@ function cash_array_merge($array1, $array2)
 {
 	if (preversion('4.3'))
 	{
-		while (list($k,$v) = each ($array2))
+		//while (list($k,$v) = each ($array2))
+		foreach ($array2 as $k => $v)
 		{
 			if(is_int($k) && isset($array1[$k]))
 			{
@@ -523,6 +525,7 @@ class cash_table
 	var $currencies;
 	var $ordered_list;
 	var $id_list;
+	var $count_cache;
 
 	function __construct()
 	{
@@ -1044,7 +1047,7 @@ class cash_group extends cash_currency
 
 	function __construct($rows)
 	{
-		$this->cash_currency($rows,true);
+		//$this->cash_currency($rows, true);
 		$this->group_type = $rows['group_type'];
 		$this->group_id = $rows['group_id'];
 		$this->cash_id = $rows['cash_id'];

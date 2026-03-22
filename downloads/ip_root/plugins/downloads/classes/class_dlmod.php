@@ -420,9 +420,9 @@ class dlmod
 			$count_edit = ($change_time != $add_time && ((time() - $change_time) / 86400) <= $this->dl_config['dl_edit_time'] && $this->dl_config['dl_edit_time'] > 0) ? 1 : 0;
 
 			$this->dl_file_icon['new'][$row['cat']][$row['id']] = $count_new;
-			$this->dl_file_icon['new_sum'][$row['cat']] += $count_new;
+			$this->dl_file_icon['new_sum'][$row['cat']] = (empty($this->dl_file_icon['new_sum'][$row['cat']]) ? 0 : $this->dl_file_icon['new_sum'][$row['cat']]) + $count_new;
 			$this->dl_file_icon['edit'][$row['cat']][$row['id']] = $count_edit;
-			$this->dl_file_icon['edit_sum'][$row['cat']] += $count_edit;
+			$this->dl_file_icon['edit_sum'][$row['cat']] = (empty($this->dl_file_icon['edit_sum'][$row['cat']]) ? 0 : $this->dl_file_icon['edit_sum'][$row['cat']]) + $count_edit;
 			$this->dl_file[$row['id']] = $row;
 		}
 		$db->sql_freeresult($result);
@@ -430,7 +430,7 @@ class dlmod
 		/*
 		* get ban status for current user
 		*/
-		$sql_guests = (!$this_>user_logged_in) ? " OR guests = 1 " : '';
+		$sql_guests = (!$this->user_logged_in) ? " OR guests = 1 " : '';
 		$sql = "SELECT ban_id FROM " . DL_BANLIST_TABLE . "
 			WHERE user_id = " . $this->user_id . "
 				OR user_ip = '" . $this->user_ip . "'

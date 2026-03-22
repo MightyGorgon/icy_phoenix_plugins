@@ -441,7 +441,8 @@ else
 	{
 		if (is_array($_POST['addcategory']))
 		{
-			list($cat_id) = each($_POST['addcategory']);
+			//list($cat_id) = each($_POST['addcategory']);
+			$cat_id = key($_POST['addcategory']);
 			$cat_title = stripslashes($_POST['name'][$cat_id]);
 			$cat_parent = $cat_id;
 			$cat_id = -1;

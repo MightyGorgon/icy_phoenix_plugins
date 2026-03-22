@@ -263,7 +263,8 @@ else
 	{
 		if (is_array($_POST['addcategory']))
 		{
-			list($cat_id) = each($_POST['addcategory']);
+			//list($cat_id) = each($_POST['addcategory']);
+			$cat_id = key($_POST['addcategory']);
 			$cat_title = stripslashes($_POST['name'][$cat_id]);
 			$cat_parent = $cat_id;
 			$cat_id = -1;
@@ -330,16 +331,8 @@ else
 		}
 		else
 		{
-			if(!get_magic_quotes_gpc())
-			{
-				$cat_title = addslashes(htmlspecialchars(trim($_POST['cat_title'])));
-				$cat_desc = addslashes(trim($_POST['cat_desc']));
-			}
-			else
-			{
-				$cat_title = htmlspecialchars(trim($_POST['cat_title']));
-				$cat_desc = trim($_POST['cat_desc']);
-			}
+			$cat_title = addslashes(htmlspecialchars(trim($_POST['cat_title'])));
+			$cat_desc = addslashes(trim($_POST['cat_desc']));
 			$cat_wm = trim($_POST['cat_wm']);
 			$view_level = intval($_POST['cat_view_level']);
 			$upload_level = intval($_POST['cat_upload_level']);
@@ -373,16 +366,8 @@ else
 	{
 		// Get posting variables
 		$cat_id = intval($_GET['cat_id']);
-		if( !get_magic_quotes_gpc() )
-		{
-			$cat_title = addslashes(htmlspecialchars(trim($_POST['cat_title'])));
-			$cat_desc = addslashes(trim($_POST['cat_desc']));
-		}
-		else
-		{
-			$cat_title = htmlspecialchars(trim($_POST['cat_title']));
-			$cat_desc = trim($_POST['cat_desc']);
-		}
+		$cat_title = addslashes(htmlspecialchars(trim($_POST['cat_title'])));
+		$cat_desc = addslashes(trim($_POST['cat_desc']));
 		$cat_wm = trim($_POST['cat_wm']);
 		$view_level = intval($_POST['cat_view_level']);
 		$upload_level = intval($_POST['cat_upload_level']);

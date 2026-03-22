@@ -27,6 +27,8 @@ if(!function_exists('cms_plugin_links'))
 		global $db, $config, $template, $lang, $block_id, $cms_config_vars;
 		global $links_config;
 
+		$block_key = 'b' . strval($block_id);
+
 		$plugin_name = 'links';
 		if (empty($config['plugins'][$plugin_name]['enabled']))
 		{
@@ -45,7 +47,7 @@ if(!function_exists('cms_plugin_links'))
 			$links_config = get_links_config(true);
 		}
 
-		if($cms_config_vars['plugin_links_style'][$block_id])
+		if($cms_config_vars['blocks'][$block_key]['plugin_links_style'])
 		{
 			$style_row = 'links_scroll';
 		}
@@ -54,15 +56,15 @@ if(!function_exists('cms_plugin_links'))
 			$style_row = 'links_static';
 		}
 
-		if($cms_config_vars['plugin_links_own1'][$block_id])
+		if($cms_config_vars['blocks'][$block_key]['plugin_links_own1'])
 		{
 			$template->assign_block_vars('links_own1', array());
 		}
-		if($cms_config_vars['plugin_links_own2'][$block_id])
+		if($cms_config_vars['blocks'][$block_key]['plugin_links_own2'])
 		{
 			$template->assign_block_vars('links_own2', array());
 		}
-		if($cms_config_vars['plugin_links_code'][$block_id])
+		if($cms_config_vars['blocks'][$block_key]['plugin_links_code'])
 		{
 			$template->assign_block_vars('links_code', array());
 		}
@@ -77,9 +79,9 @@ if(!function_exists('cms_plugin_links'))
 		);
 
 		$sql_extra = '';
-		if (!empty($cms_config_vars['plugin_links_cat_id'][$block_id]))
+		if (!empty($cms_config_vars['blocks'][$block_key]['plugin_links_cat_id']))
 		{
-			$links_cats_array = explode(',', $cms_config_vars['plugin_links_cat_id'][$block_id]);
+			$links_cats_array = explode(',', $cms_config_vars['blocks'][$block_key]['plugin_links_cat_id']);
 			$sql_extra = " AND " . $db->sql_in_set('link_category', $links_cats_array);
 		}
 

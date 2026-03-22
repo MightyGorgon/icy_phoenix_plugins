@@ -94,7 +94,7 @@ if ($album_user_id != ALBUM_PUBLIC_GALLERY)
 }
 
 $catrows = array();
-$options = ($album_view_mode == ALBUM_VIEW_LIST) ? ALBUM_READ_ALL_CATEGORIES | ALBUM_AUTH_VIEW : ALBUM_AUTH_VIEW;
+$options = (!empty($album_view_mode) ? (($album_view_mode == ALBUM_VIEW_LIST) ? ALBUM_READ_ALL_CATEGORIES | ALBUM_AUTH_VIEW : ALBUM_AUTH_VIEW) : ALBUM_AUTH_VIEW);
 $catrows = album_read_tree($album_user_id, $options);
 
 // Mighty Gorgon: is this really needed? Maybe not... let's keep it commented until someone complains!!!
