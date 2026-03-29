@@ -15,8 +15,6 @@
 *
 */
 
-define('IN_ICYPHOENIX', true);
-
 if(!empty($setmodules))
 {
 	if (empty($config['plugins']['album']))
@@ -28,6 +26,7 @@ if(!empty($setmodules))
 	$module['3300_Photo_Album']['140_Personal_Galleries'] = $filename;
 	return;
 }
+define('IN_ICYPHOENIX', true);
 
 // Load default Header
 if (!defined('IP_ROOT_PATH')) define('IP_ROOT_PATH', './../../../');

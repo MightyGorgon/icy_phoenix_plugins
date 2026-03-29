@@ -15,7 +15,6 @@
 *
 */
 
-define('IN_ICYPHOENIX', true);
 if (!defined('IN_ADMIN'))
 {
 	define('IN_ADMIN', true);
@@ -35,6 +34,7 @@ if(!empty($setmodules))
 	$module['3300_Photo_Album']['110_Album_Config'] = $file;
 	return;
 }
+define('IN_ICYPHOENIX', true);
 //------------------------------------------------------------------------
 
 if (!defined('IP_ROOT_PATH')) define('IP_ROOT_PATH', './../../../');

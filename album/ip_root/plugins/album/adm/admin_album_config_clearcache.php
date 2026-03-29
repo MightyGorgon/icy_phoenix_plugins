@@ -12,6 +12,10 @@ if (!defined('IN_ICYPHOENIX'))
 {
 	die('Hacking attempt');
 }
+if (!empty($setmodules))
+{
+	return;
+}
 
 if(!empty($setmodules))
 {

@@ -15,8 +15,6 @@
 *
 */
 
-define('IN_ICYPHOENIX', true);
-
 if (!empty($setmodules))
 {
 	if (empty($config['plugins']['activity']['enabled']))
@@ -30,6 +28,8 @@ if (!empty($setmodules))
 	$module['3200_ACTIVITY']['130_Edit_Games'] = $file . '?mode=edit_games';
 	return;
 }
+define('IN_ICYPHOENIX', true);
+
 
 // Load default Header
 if (!defined('IP_ROOT_PATH')) define('IP_ROOT_PATH', './../../../');

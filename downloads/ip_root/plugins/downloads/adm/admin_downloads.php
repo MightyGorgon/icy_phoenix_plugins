@@ -16,8 +16,6 @@
 *
 */
 
-define('IN_ICYPHOENIX', true);
-
 if (!empty($setmodules))
 {
 	if (empty($config['plugins']['downloads']['enabled']))
@@ -29,6 +27,7 @@ if (!empty($setmodules))
 	$module['2050_Downloads']['100_DL_Settings'] = $file;
 	return;
 }
+define('IN_ICYPHOENIX', true);
 
 // Load default Header
 if (!defined('IP_ROOT_PATH')) define('IP_ROOT_PATH', './../../../');
